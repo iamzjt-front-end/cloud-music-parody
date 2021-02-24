@@ -18,12 +18,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//@import "../../assets/css/variable.scss";
+@import "assets/css/variable.scss";
 
 #login {
-  //background-color: $color-theme-bgc-d;
   width: 200px;
   height: 200px;
-  background-color: #c93d2d;
+  background-color: $color-theme-bgc-d;
 }
 </style>
