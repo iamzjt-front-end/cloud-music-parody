@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    Hello World!
+    <p>
+      Hello World!
+    </p>
     <i class="iconfont icon-settings"></i>
+    <i class="iconfont icon-logo"></i>
   </div>
 </template>
 
@@ -9,6 +12,17 @@
 @import "~assets/css/variable.scss";
 
 #app {
-  color: $color-theme;
+  p {
+    color: $color-theme-bgc-d;
+  }
+
+  .icon-settings {
+    color: $color-theme;
+  }
+
+  .icon-logo {
+    color: $color-theme-bgc-d;
+    font-size: 60px;
+  }
 }
 </style>
