@@ -1,3 +1,4 @@
+// 文件夹别名设置
 const path = require('path')
 
 function resolve (dir) {
