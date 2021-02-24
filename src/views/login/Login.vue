@@ -6,7 +6,7 @@
     <div class="to-login">一键登录</div>
     <div class="experience">立即体验</div>
     <div class="agreement">
-      <van-checkbox v-model="checked" checked-color="#d7766b" icon-size="12px">
+      <van-checkbox v-model="checked" checked-color="#d7766b" icon-size="14px">
         <i class="agree">同意</i>
         <i class="agree-content">
           《服务条款》《隐私条款》《儿童隐私政策》
