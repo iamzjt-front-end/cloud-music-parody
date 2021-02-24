@@ -56,8 +56,7 @@ export default {
   }
 
   .to-login, .experience {
-    height: 2.7rem;
-    margin: 0 5rem 0 5rem;
+    margin: 0 4rem 0 4rem;
     border-radius: 2.7 * 0.5rem;
     font-size: $font-size-l;
     font-weight: bold;
@@ -66,20 +65,22 @@ export default {
   }
 
   .to-login {
+    height: 2.7rem;
     background-color: $color-bgc;
     margin-top: 36rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.1rem;
     color: $color-theme-bgc-d;
   }
 
   .experience {
+    height: calc(2.7rem - 2px);
     background-color: $color-theme-bgc-d;
     border: 1px solid $color-bgc;
   }
 
   .agreement {
     height: 2.7rem;
-    margin: 2.2rem 5rem 0 5rem;
+    margin: 2.2rem 3rem 0 4.5rem;
     i {
       font-style: normal;
       font-size: $font-size-s;
