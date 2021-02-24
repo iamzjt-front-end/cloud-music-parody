@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <router-link to="/login"></router-link>
+    <router-view/>
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import "./assets/scss/variable";
-
-#app {
-
+<script>
+export default {
+  name: 'App'
 }
+</script>
+
+<style lang="scss" scoped>
+@import "../node_modules/vant/lib/index.css";
 </style>

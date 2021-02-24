@@ -10,5 +10,9 @@ module.exports = {
             .set('assets', resolve('src/assets'))
             .set('views', resolve('src/views'))
             .set('components', resolve('src/components'))
+    },
+    devServer: {
+        host: '192.168.31.30', // 原为: host: 'localhost'
+        port: '8080',
     }
 }
