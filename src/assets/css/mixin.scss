@@ -1,0 +1,17 @@
+// 通过 @include single-line-ellipsis; 来引入
+// 通过 @include multi-line-ellipsis(3); 来引入
+
+// 单行超出省略
+@mixin single-line-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 多行超出省略 - 可自定义参数
+@mixin multi-line-ellipsis($line) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+}
