@@ -5,8 +5,9 @@
 </template>
 
 <style lang="scss" scoped>
-@import "assets/css/variable.scss";
+@import "./assets/scss/variable";
 
 #app {
+
 }
 </style>
