@@ -13,6 +13,9 @@
         </i>
       </van-checkbox>
     </div>
+    <div class="copyright">
+      MIT Licensed | Copyright © 2021-present IamZJT
+    </div>
   </div>
 </template>
 
@@ -81,16 +84,26 @@ export default {
   .agreement {
     height: 2.7rem;
     margin: 2.2rem 3rem 0 4.5rem;
+
     i {
       font-style: normal;
       font-size: $font-size-s;
     }
+
     .agree {
       color: $color-text-l;
     }
+
     .agree-content {
       color: $color-text-ll;
     }
+  }
+
+  .copyright {
+    font-size: $font-size-xxs;
+    color: $color-text-ll;
+    text-align: center;
+    margin-top: 1rem;
   }
 }
 </style>
