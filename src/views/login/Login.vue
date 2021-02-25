@@ -79,13 +79,13 @@ export default {
         opacity: 0.1;
       }
       50% {
-        transform: scale(3);
-        border-radius: $logo-width * 3 * 0.5;
+        transform: scale(4);
+        border-radius: $logo-width * 4 * 0.5;
         opacity: 0.05;
       }
       100% {
-        transform: scale(6);
-        border-radius: $logo-width * 6 * 0.5;
+        transform: scale(8);
+        border-radius: $logo-width * 8 * 0.5;
         opacity: 0;
       }
     }
@@ -106,7 +106,7 @@ export default {
     &::after {
       left: 0;
       opacity: 0;
-      animation: scale 6s linear 3s infinite;
+      animation: scale 6s linear 2s infinite;
     }
 
     .icon-logo {
