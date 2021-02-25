@@ -3,10 +3,10 @@
       <div class="login-logo">
         <i class="iconfont icon-logo"></i>
       </div>
-    <div class="to-login">立即登录</div>
-    <div class="experience">游客体验</div>
-    <div class="agreement">
-      <van-checkbox v-model="checked" checked-color="#d7766b" icon-size="14px">
+    <div class="to-login" @click="login(isChecked)">立即登录</div>
+    <div class="experience" @click="experience(isChecked)">游客体验</div>
+    <div class="agreement animate__animated" :class="{'animate__shakeX': isShake}">
+      <van-checkbox v-model="isChecked" checked-color="#d7766b" icon-size="14px">
         <i class="agree">同意</i>
         <i class="agree-content">
           《服务条款》《隐私条款》《儿童隐私政策》
@@ -24,9 +24,28 @@ export default {
   name: "Login",
   data() {
     return {
-      checked: true,
+      isChecked: false,
+      isShake: false,
     };
   },
+  methods: {
+    // 登陆
+    login (flag) {
+      if (flag) {
+        console.log(1);
+      } else {
+        this.isShake = true;
+      }
+    },
+    // 体验
+    experience (flag) {
+      if (flag) {
+        console.log(2)
+      } else {
+        this.isShake = true;
+      }
+    }
+  }
 }
 </script>
 

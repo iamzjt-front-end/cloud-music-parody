@@ -21,7 +21,6 @@ export default {
   },
   mounted() {
     this.touchstart();
-    console.log(this.touchstart(), 1);
   },
 }
 </script>
