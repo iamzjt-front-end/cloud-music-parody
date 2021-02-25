@@ -1,6 +1,17 @@
 <template>
   <div id="passwordLogin">
-    <!-- <top-bar></top-bar> -->
+    <van-nav-bar
+        title="手机号登录"
+        left-text=""
+        right-text=""
+        left-arrow
+        @click-left="onClickLeft"
+    >
+      <template #left>
+        <van-icon name="cross" size="18" />
+      </template>
+    </van-nav-bar>>
+
     <div class="cue">
       <p>登录体验更多精彩</p>
       <i>未注册手机号登陆后将自动创建账号</i>
@@ -38,9 +49,13 @@ export default {
     };
   },
   methods: {
+    onClickLeft() {
+      this.$router.push({path: '/login'});
+    },
     onSubmit(values) {
       console.log('submit', values);
     },
+
   },
 }
 </script>
