@@ -1,8 +1,8 @@
 <template>
   <div id="login">
-      <div class="login-logo">
-        <i class="iconfont icon-logo"></i>
-      </div>
+    <div class="login-logo">
+      <i class="iconfont icon-logo"></i>
+    </div>
     <div class="to-login" @click="judge(isChecked, 'login')">立即登录</div>
     <div class="experience" @click="judge(isChecked, 'experience')">游客体验</div>
     <div class="agreement animate__animated" ref="agreement">
@@ -30,14 +30,14 @@ export default {
   },
   methods: {
     // 判断时否同意协议，同意以后再通过传值判断下一步做什么
-    judge (val1, val2) {
+    judge(val1, val2) {
       if (val1) { // 点击同意协议
         if (val2 == 'login') {
           // console.log('登陆')
-          this.$router.push({ path:'/passwordlogin'})
+          this.$router.push({path: '/passwordlogin'})
         } else {
           // console.log('体验')
-          this.$router.push({ path:'/found'})
+          this.$router.push({path: '/found'})
         }
       } else { // 未点击同意协议
         this.$refs.agreement.classList.add('animate__shakeX')
@@ -160,7 +160,6 @@ export default {
     margin: 2.2rem 3rem 0 4.5rem;
 
     i {
-      font-style: normal;
       font-size: $font-size-s;
     }
 
