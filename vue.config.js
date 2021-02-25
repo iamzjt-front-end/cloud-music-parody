@@ -15,5 +15,8 @@ module.exports = {
     // devServer: {
     //     host: '192.168.31.30', // 原为: host: 'localhost'
     //     port: '8080',
-    // }
+    // },
+    publicPath: process.env.NODE_ENV === 'production'
+        ? '/cloud-music-parody/'
+        : '/'
 }
