@@ -94,7 +94,7 @@ export default {
   }
 
   .to-login:active::before, .experience:active::before {
-    opacity: 0.05;
+    opacity: 0.06;
   }
 
   .agreement {
