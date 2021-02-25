@@ -3,9 +3,9 @@
       <div class="login-logo">
         <i class="iconfont icon-logo"></i>
       </div>
-    <div class="to-login" @click="login(isChecked)">立即登录</div>
-    <div class="experience" @click="experience(isChecked)">游客体验</div>
-    <div class="agreement animate__animated" :class="{'animate__shakeX': isShake}">
+    <div class="to-login" @click="judge(isChecked, 'login')">立即登录</div>
+    <div class="experience" @click="judge(isChecked, 'experience')">游客体验</div>
+    <div class="agreement animate__animated" ref="agreement">
       <van-checkbox v-model="isChecked" checked-color="#d7766b" icon-size="14px">
         <i class="agree">同意</i>
         <i class="agree-content">
@@ -29,22 +29,22 @@ export default {
     };
   },
   methods: {
-    // 登陆
-    login (flag) {
-      if (flag) {
-        console.log(1);
-      } else {
-        this.isShake = true;
+    // 判断时否同意协议，同意以后再通过传值判断下一步做什么
+    judge (val1, val2) {
+      if (val1) { // 点击同意协议
+        if (val2 == 'login') {
+          console.log('登陆')
+        } else {
+          console.log('体验')
+        }
+      } else { // 未点击同意协议
+        this.$refs.agreement.classList.add('animate__shakeX')
+        let that = this
+        setTimeout(function () {
+          that.$refs.agreement.classList.remove('animate__shakeX')
+        }, 500)
       }
     },
-    // 体验
-    experience (flag) {
-      if (flag) {
-        console.log(2)
-      } else {
-        this.isShake = true;
-      }
-    }
   }
 }
 </script>
