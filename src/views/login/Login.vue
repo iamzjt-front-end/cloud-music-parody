@@ -3,8 +3,8 @@
       <div class="login-logo">
         <i class="iconfont icon-logo"></i>
       </div>
-    <div class="to-login">一键登录</div>
-    <div class="experience">立即体验</div>
+    <div class="to-login">立即登录</div>
+    <div class="experience">游客体验</div>
     <div class="agreement">
       <van-checkbox v-model="checked" checked-color="#d7766b" icon-size="14px">
         <i class="agree">同意</i>
@@ -67,7 +67,7 @@ export default {
   .to-login {
     height: 2.7rem;
     background-color: $color-bgc;
-    margin-top: 36rem;
+    margin-top: 100vh * 0.7;
     margin-bottom: 1.1rem;
     color: $color-theme-bgc-d;
   }
