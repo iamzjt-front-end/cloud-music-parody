@@ -7,11 +7,13 @@ import { Checkbox } from 'vant';
 import { Form } from 'vant';
 
 import 'vant/lib/index.css'
+
 Vue.use(Checkbox);
 Vue.use(Form);
 
 // 引入animate.css动画库
 import animated from 'animate.css'
+
 Vue.use(animated)
 
 // 引入基础样式
