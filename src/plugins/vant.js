@@ -7,6 +7,7 @@ import {
     Form,
     Field,
     Button,
+    NavBar,
 } from 'vant';
 
 // 3.注册组件
@@ -14,3 +15,4 @@ Vue.use(Checkbox);
 Vue.use(Form);
 Vue.use(Field);
 Vue.use(Button);
+Vue.use(NavBar);

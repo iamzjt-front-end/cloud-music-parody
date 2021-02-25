@@ -57,7 +57,7 @@ export default {
   .cue {
     width: 100%;
     height: 3rem;
-    padding: 1rem 0.5rem;
+    padding: 0.8rem 1rem;
 
     p {
       color: black;
