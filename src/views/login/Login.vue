@@ -59,7 +59,7 @@ export default {
   }
 
   .to-login, .experience {
-    margin: 0 4rem 0 4rem;
+    margin: 0 4rem;
     border-radius: 2.7 * 0.5rem;
     font-size: $font-size-l;
     font-weight: bold;
@@ -79,6 +79,22 @@ export default {
     height: calc(2.7rem - 2px);
     background-color: $color-theme-bgc-d;
     border: 1px solid $color-bgc;
+  }
+
+  .to-login::before, .experience::before {
+    content: '';
+    width: calc(100% - 8rem);
+    height: 2.7rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    border-radius: inherit;
+    opacity: 0;
+  }
+
+  .to-login:active::before, .experience:active::before {
+    opacity: 0.05;
   }
 
   .agreement {
