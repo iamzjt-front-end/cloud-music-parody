@@ -1,17 +1,10 @@
 <template>
   <div id="passwordLogin">
-    <van-nav-bar
-        title="手机号登录"
-        left-text=""
-        right-text=""
-        left-arrow
-        @click-left="onClickLeft"
-    >
+    <van-nav-bar title="手机号登录" right-text="" left-arrow @click-left="onClickLeft">
       <template #left>
-        <van-icon name="cross" size="18" />
+        <van-icon name="cross" size="24" color="#333739" />
       </template>
     </van-nav-bar>>
-
     <div class="cue">
       <p>登录体验更多精彩</p>
       <i>未注册手机号登陆后将自动创建账号</i>
@@ -55,7 +48,6 @@ export default {
     onSubmit(values) {
       console.log('submit', values);
     },
-
   },
 }
 </script>
@@ -72,11 +64,12 @@ export default {
   .cue {
     width: 100%;
     height: 3rem;
-    padding: 0.8rem 1rem;
+    padding: 1rem;
 
     p {
       color: black;
       font-size: $font-size-xl;
+      font-weight: bold;
       margin-bottom: 0.5rem;
     }
 
