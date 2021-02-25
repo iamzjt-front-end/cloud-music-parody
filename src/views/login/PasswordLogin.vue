@@ -29,6 +29,9 @@
         <van-button round block type="info" color="#333739" :disabled="!phoneNumber || !password" native-type="submit">立即登录</van-button>
       </div>
     </van-form>
+    <a class="verification-code" @click="toVerCodeLogin">
+      验证码登录
+    </a>
   </div>
 </template>
 
@@ -48,6 +51,9 @@ export default {
     onSubmit(values) {
       console.log('submit', values);
     },
+    toVerCodeLogin() {
+      console.log('验证码登录');
+    }
   },
 }
 </script>
@@ -67,7 +73,7 @@ export default {
     padding: 1rem;
 
     p {
-      color: black;
+      color: $color-text-dd;
       font-size: $font-size-xl;
       font-weight: bold;
       margin-bottom: 0.5rem;
@@ -76,6 +82,18 @@ export default {
     i {
       color: $color-text-ld;
       font-size: $font-size-s;
+    }
+  }
+
+  .verification-code {
+    display: block;
+    color: $color-text-ld;
+    text-align: right;
+    padding: 1.3rem 1.5rem;
+    font-size: $font-size-m;
+
+    &:active {
+      color: $color-text-d;
     }
   }
 }
