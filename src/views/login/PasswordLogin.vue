@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
+
 export default {
   name: "PasswordLogin",
   data() {
@@ -52,7 +54,7 @@ export default {
       console.log('submit', values);
     },
     toVerCodeLogin() {
-      console.log('验证码登录');
+      Toast('正在开发中...');
     }
   },
 }
