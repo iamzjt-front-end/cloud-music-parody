@@ -70,6 +70,43 @@ export default {
     top: 25%;
     transform: translateX(-50%);
 
+    @keyframes scale {
+      0% {
+        transform: scale(1);
+        border-radius: $logo-width * 1 * 0.5;
+        opacity: 0.1;
+      }
+      50% {
+        transform: scale(3);
+        border-radius: $logo-width * 3 * 0.5;
+        opacity: 0.05;
+      }
+      100% {
+        transform: scale(6);
+        border-radius: $logo-width * 6 * 0.5;
+        opacity: 0;
+      }
+    }
+
+    &::before, &::after {
+      content: '';
+      width: $logo-width;
+      height: $logo-width;
+      border-radius: $logo-width * 0.5;
+      border: 0.01rem solid $color-text-ll;
+      position: absolute;
+    }
+
+    &::before {
+      animation: scale 6s linear 0s infinite;
+    }
+
+    &::after {
+      left: 0;
+      opacity: 0;
+      animation: scale 6s linear 3s infinite;
+    }
+
     .icon-logo {
       display: inline-block;
       font-size: $logo-width * 0.6;
