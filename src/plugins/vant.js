@@ -5,8 +5,12 @@ import Vue from 'vue'
 import {
     Checkbox,
     Form,
+    Field,
+    Button,
 } from 'vant';
 
 // 3.注册组件
-Vue.use(Checkbox)
-   .use(Form);
+Vue.use(Checkbox);
+Vue.use(Form);
+Vue.use(Field);
+Vue.use(Button);
