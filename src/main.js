@@ -3,11 +3,16 @@ import App from './App.vue'
 import router from './router'
 
 // 引入Vant-UI
-import 'plugins/vant'
+import { Checkbox } from 'vant';
+import { Form } from 'vant';
+
 import 'vant/lib/index.css'
+Vue.use(Checkbox);
+Vue.use(Form);
 
 // 引入animate.css动画库
-import 'plugins/animate'
+import animated from 'animate.css'
+Vue.use(animated)
 
 // 引入基础样式
 import 'assets/scss/index.scss'
