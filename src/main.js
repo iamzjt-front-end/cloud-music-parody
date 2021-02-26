@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import api from './api'
+
+Vue.prototype.$api = api; // 将api挂载到vue的原型上
 
 // 引入Vant-UI
 import 'plugins/vant'
