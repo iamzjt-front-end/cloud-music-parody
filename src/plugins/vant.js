@@ -9,6 +9,8 @@ import {
     Button,
     NavBar,
     Icon,
+    Tabbar,
+    TabbarItem,
 } from 'vant';
 
 // 3.注册组件
@@ -18,3 +20,5 @@ Vue.use(Field);
 Vue.use(Button);
 Vue.use(NavBar);
 Vue.use(Icon);
+Vue.use(Tabbar);
+Vue.use(TabbarItem);
