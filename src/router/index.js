@@ -27,8 +27,11 @@ export default new Router({
         {
             path: '/home',
             component: Home,
-            redirect: '/found',
             children: [
+                {
+                    path: '/',
+                    redirect: '/found',
+                },
                 {
                     path: '/found',
                     component: Found,
