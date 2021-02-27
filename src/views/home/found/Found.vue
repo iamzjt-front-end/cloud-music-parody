@@ -1,6 +1,16 @@
 <template>
   <div id="found">
-    发现
+    <van-nav-bar>
+      <template #left>
+        <i class="iconfont icon-settings"></i>
+      </template>
+      <template #title>
+        <van-icon name="search" size="18"/>
+      </template>
+      <template #right>
+        <i class="iconfont icon-distinguish"></i>
+      </template>
+    </van-nav-bar>
   </div>
 </template>
 
