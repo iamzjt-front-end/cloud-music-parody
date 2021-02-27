@@ -23,11 +23,6 @@
       </div>
     </nav-bar>
     <div class="swiper">
-      <van-swipe :autoplay="5000" indicator-color="#fff">
-        <van-swipe-item v-for="(image, index) in images" :key="index">
-          <img v-lazy="image"/>
-        </van-swipe-item>
-      </van-swipe>
     </div>
   </div>
 </template>
@@ -35,11 +30,6 @@
 <script>
 import {Toast} from 'vant'
 import NavBar from "@/components/NavBar";
-
-import Vue from 'vue';
-import {Lazyload} from 'vant';
-
-Vue.use(Lazyload);
 
 export default {
   name: "found",
