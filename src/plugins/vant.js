@@ -12,6 +12,8 @@ import {
     Tabbar,
     TabbarItem,
     Search,
+    Swipe,
+    SwipeItem,
 } from 'vant';
 
 // 3.注册组件
@@ -24,3 +26,5 @@ Vue.use(Icon);
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
 Vue.use(Search);
+Vue.use(Swipe);
+Vue.use(SwipeItem);
