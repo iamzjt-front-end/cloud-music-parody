@@ -5,7 +5,6 @@
         <van-icon name="cross" size="24" color="#333739"/>
       </template>
     </van-nav-bar>
-    >
     <div class="cue">
       <p>登录体验更多精彩</p>
       <i>未注册手机号登陆后将自动创建账号</i>
