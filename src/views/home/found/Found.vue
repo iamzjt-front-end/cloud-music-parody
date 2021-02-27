@@ -3,6 +3,7 @@
     <nav-bar>
       <div class="settings" slot="left">
         <i class="iconfont icon-settings"></i>
+        <!-- todo 点击进入设置 -->
       </div>
       <div class="search" slot="center">
         <form action="/">
@@ -18,6 +19,7 @@
       </div>
       <div class="distinguish" slot="right">
         <i class="iconfont icon-distinguish"></i>
+        <!-- todo 听歌识曲功能 -->
       </div>
     </nav-bar>
     <div class="swiper">
@@ -46,6 +48,7 @@ export default {
       Toast(val);
     },
     bannerImageQry() {
+      // todo 判断不同设备来请求不同的轮播图片
       // 0: pc
       // 1: android
       // 2: iphone

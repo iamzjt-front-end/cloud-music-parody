@@ -40,6 +40,7 @@ export default {
           this.$router.push({path: '/home'})
         }
       } else { // 未点击同意协议
+        // todo 未同意协议多次点击 防抖处理
         this.$refs.agreement.classList.add('animate__shakeX')
         let that = this
         setTimeout(function () {
