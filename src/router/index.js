@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Start from '@/views/login/Start'
-import PasswordLogin from "@/views/login/PasswordLogin"
-import Found from '@/views/found/Found'
+import Start from '@/views/start/Start'
+import PasswordLogin from '@/views/start/PasswordLogin'
+import Home from '@/views/home/Home'
+import Found from '@/views/home/found/Found'
+import Mine from '@/views/home/mine/Mine'
+import CloudVillage from '@/views/home/cloud-village/CloudVillage';
 
 Vue.use(Router);
 
@@ -22,8 +25,20 @@ export default new Router({
             component: PasswordLogin,
         },
         {
+            path: '/home',
+            component: Home,
+        },
+        {
             path: '/found',
             component: Found,
+        },
+        {
+            path: '/mine',
+            component: Mine,
+        },
+        {
+            path: '/cloud-village',
+            component: CloudVillage,
         }
     ]
 });
