@@ -128,7 +128,7 @@ export default {
   .to-login {
     height: 2.7rem;
     background-color: $color-bgc;
-    margin-top: 100vh * 0.7;
+    margin-top: 70vh;
     margin-bottom: 1.1rem;
     color: $color-theme-bgc-d;
   }
@@ -173,10 +173,14 @@ export default {
   }
 
   .copyright {
+    width: 18rem;
+    position: absolute;
+    bottom: 0.8rem;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: $font-size-xxs;
     color: $color-text-ll;
     text-align: center;
-    margin-top: 1rem;
   }
 }
 </style>
