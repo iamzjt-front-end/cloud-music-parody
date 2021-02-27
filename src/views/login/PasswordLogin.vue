@@ -98,8 +98,9 @@ export default {
 
   .verification-code {
     display: block;
+    float: right;
     color: $color-text-ld;
-    margin: 7% 0 0 75%;
+    margin: 1.5rem 2rem;
     font-size: $font-size-m;
 
     &:active {
