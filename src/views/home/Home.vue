@@ -1,6 +1,8 @@
 <template>
-  <div class="home">
-    <router-view/>
+  <div id="home">
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
     <tab-bar/>
   </div>
 </template>

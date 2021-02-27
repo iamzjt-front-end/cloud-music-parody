@@ -13,10 +13,10 @@ export default {
 <style lang="scss" scoped>
 @import '../../../assets/scss/variable';
 
-.found {
+#found {
   width: 100%;
   height: 100vh;
-  background-color: $color-theme-bgc-d;
+  background-color: $color-bgc;
   color: #333334;
 }
 </style>

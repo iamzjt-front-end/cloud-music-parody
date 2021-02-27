@@ -1,5 +1,5 @@
 <template>
-  <div class="cloud-village">
+  <div id="cloud-village">
     云村
   </div>
 </template>
@@ -10,6 +10,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../../../assets/scss/variable';
 
+#cloud-village {
+  width: 100%;
+  height: 100vh;
+  background-color: $color-bgc;
+  color: #333334;
+}
 </style>

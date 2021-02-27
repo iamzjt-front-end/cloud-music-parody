@@ -1,5 +1,5 @@
 <template>
-  <div class="mine">
+  <div id="mine">
     我的
   </div>
 </template>
@@ -10,6 +10,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../../../assets/scss/variable';
 
+#mine {
+  width: 100%;
+  height: 100vh;
+  background-color: $color-bgc;
+  color: #333334;
+}
 </style>
