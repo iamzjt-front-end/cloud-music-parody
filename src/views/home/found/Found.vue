@@ -5,7 +5,16 @@
         <i class="iconfont icon-settings"></i>
       </template>
       <template #title>
-        <van-icon name="search" size="18"/>
+        <form action="/">
+          <van-search
+              v-model="value"
+              shape="round"
+              input-align="center"
+              placeholder="请输入搜索关键词"
+              background="#fff"
+              @search="onSearch"
+          />
+        </form>
       </template>
       <template #right>
         <i class="iconfont icon-distinguish"></i>
@@ -15,8 +24,37 @@
 </template>
 
 <script>
+import {Toast} from 'vant'
+
 export default {
-  name: "found"
+  name: "found",
+  data() {
+    return {
+      value: '',
+      images: [],
+    };
+  },
+  methods: {
+    onSearch(val) {
+      Toast(val);
+    },
+    bannerImageQry() {
+      // 0: pc
+      // 1: android
+      // 2: iphone
+      // 3: ipad
+      this.$api.found.bannerImage('2').then(res => {
+        if (res) {
+          for (let item of res.data.banners) {
+            this.images.push(item.imageUrl);
+          }
+        }
+      })
+    }
+  },
+  mounted() {
+    this.bannerImageQry();
+  }
 }
 </script>
 
@@ -27,6 +65,10 @@ export default {
   width: 100%;
   height: 100vh;
   background-color: $color-bgc;
-  color: #333334;
+
+  .icon-settings, .icon-distinguish {
+    color: $color-text-ddd;
+    font-size: $font-size-xxxl;
+  }
 }
 </style>

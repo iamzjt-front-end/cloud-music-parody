@@ -11,6 +11,7 @@ import {
     Icon,
     Tabbar,
     TabbarItem,
+    Search,
 } from 'vant';
 
 // 3.注册组件
@@ -22,3 +23,4 @@ Vue.use(NavBar);
 Vue.use(Icon);
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
+Vue.use(Search);
