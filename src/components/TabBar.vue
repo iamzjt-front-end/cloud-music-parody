@@ -35,7 +35,4 @@ export default {
 </script>
 
 <style scoped>
-.tab-bar {
-
-}
 </style>

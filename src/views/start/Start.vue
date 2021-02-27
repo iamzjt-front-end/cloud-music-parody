@@ -37,7 +37,7 @@ export default {
           this.$router.push({path: '/passwordlogin'})
         } else {
           // console.log('体验')
-          this.$router.push({path: '/found'})
+          this.$router.push({path: '/home'})
         }
       } else { // 未点击同意协议
         this.$refs.agreement.classList.add('animate__shakeX')
