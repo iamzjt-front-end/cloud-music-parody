@@ -23,7 +23,11 @@
       </div>
     </nav-bar>
     <div class="swiper">
-
+      <van-swipe :autoplay="5000" indicator-color="#fff">
+        <van-swipe-item v-for="(image, index) in images" :key="index">
+          <img v-lazy="image"/>
+        </van-swipe-item>
+      </van-swipe>
     </div>
   </div>
 </template>
@@ -31,6 +35,11 @@
 <script>
 import {Toast} from 'vant'
 import NavBar from "@/components/NavBar";
+
+import Vue from 'vue';
+import {Lazyload} from 'vant';
+
+Vue.use(Lazyload);
 
 export default {
   name: "found",
@@ -80,6 +89,17 @@ export default {
   .icon-settings, .icon-distinguish {
     color: $color-text-ddd;
     font-size: $font-size-xxxl;
+  }
+
+  .swiper {
+    margin: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 </style>
