@@ -34,6 +34,9 @@
     <a class="verification-code" @click="toVerCodeLogin">
       验证码登录
     </a>
+    <a class="register" @click="toRegister">
+      立即注册
+    </a>
   </div>
 </template>
 
@@ -49,9 +52,11 @@ export default {
     };
   },
   methods: {
+    // 返回开始页面
     onClickLeft() {
-      this.$router.push({path: '/login'});
+      this.$router.push({path: '/start'});
     },
+    // 登录
     onSubmit(values) {
       console.log('登录', values);
       this.$api.login.passwordLogin(values).then(res => {
@@ -61,7 +66,12 @@ export default {
         }
       })
     },
+    // 验证码登录
     toVerCodeLogin() {
+      Toast('正在开发中...');
+    },
+    // 注册
+    toRegister() {
       Toast('正在开发中...');
     }
   },
@@ -76,6 +86,7 @@ export default {
   height: 100vh;
   background-color: $color-bgc;
   overflow: hidden; // 触发BFC，解决外边距塌陷
+  position: relative;
 
   .cue {
     width: 100%;
@@ -104,6 +115,19 @@ export default {
 
     &:active {
       color: $color-text-d;
+    }
+  }
+
+  .register {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: $color-text-lld;
+    font-size: $font-size-m;
+
+    &:active {
+      color: $color-text-ld;
     }
   }
 }
