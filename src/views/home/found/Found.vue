@@ -1,10 +1,10 @@
 <template>
   <div id="found">
-    <van-nav-bar>
-      <template #left>
+    <nav-bar>
+      <div class="settings" slot="left">
         <i class="iconfont icon-settings"></i>
-      </template>
-      <template #title>
+      </div>
+      <div class="search" slot="center">
         <form action="/">
           <van-search
               v-model="value"
@@ -15,19 +15,23 @@
               @search="onSearch"
           />
         </form>
-      </template>
-      <template #right>
+      </div>
+      <div class="distinguish" slot="right">
         <i class="iconfont icon-distinguish"></i>
-      </template>
-    </van-nav-bar>
+      </div>
+    </nav-bar>
   </div>
 </template>
 
 <script>
 import {Toast} from 'vant'
+import NavBar from "@/components/NavBar";
 
 export default {
   name: "found",
+  components: {
+    NavBar,
+  },
   data() {
     return {
       value: '',
