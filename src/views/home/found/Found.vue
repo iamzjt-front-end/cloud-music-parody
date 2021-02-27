@@ -20,6 +20,9 @@
         <i class="iconfont icon-distinguish"></i>
       </div>
     </nav-bar>
+    <div class="swiper">
+
+    </div>
   </div>
 </template>
 
@@ -36,7 +39,7 @@ export default {
     return {
       value: '',
       images: [],
-    };
+    }
   },
   methods: {
     onSearch(val) {
@@ -58,7 +61,7 @@ export default {
   },
   mounted() {
     this.bannerImageQry();
-  }
+  },
 }
 </script>
 
