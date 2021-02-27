@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     onSearch(val) {
+      // todo 搜索功能
       Toast(val);
     },
     bannerImageQry() {
