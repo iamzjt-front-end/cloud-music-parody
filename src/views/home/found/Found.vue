@@ -39,7 +39,9 @@
     <!-- 特色专栏 -->
     <column>
       <h1 slot="title">推荐歌单</h1>
-      <song-list-item slot="item"></song-list-item>
+      <div class="song-list" slot="item">
+        <song-list-item></song-list-item>
+      </div>
     </column>
   </div>
 </template>
