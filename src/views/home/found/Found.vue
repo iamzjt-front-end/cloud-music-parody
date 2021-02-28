@@ -1,6 +1,7 @@
 <template>
   <div id="found">
-    <nav-bar>
+    <!-- 顶栏 -->
+    <top-bar>
       <div class="settings" slot="left">
         <i class="iconfont icon-settings"></i>
         <!-- todo 点击进入设置 -->
@@ -21,7 +22,8 @@
         <i class="iconfont icon-distinguish"></i>
         <!-- todo 听歌识曲功能 -->
       </div>
-    </nav-bar>
+    </top-bar>
+    <!-- 轮播图 -->
     <div class="swiper">
       <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
         <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -29,6 +31,7 @@
         </van-swipe-item>
       </van-swipe>
     </div>
+    <!-- 快捷菜单 -->
     <div class="shortcut-menu">
       <shortcut-menu></shortcut-menu>
     </div>
@@ -37,7 +40,7 @@
 
 <script>
 import {Toast} from 'vant'
-import NavBar from "@/components/NavBar";
+import TopBar from "@/components/TopBar";
 import ShortcutMenu from "@/components/ShortcutMenu";
 
 import Vue from 'vue';
@@ -48,7 +51,7 @@ Vue.use(Lazyload);
 export default {
   name: "found",
   components: {
-    NavBar,
+    TopBar,
     ShortcutMenu,
   },
   data() {
