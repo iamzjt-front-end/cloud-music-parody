@@ -35,6 +35,11 @@
     <div class="shortcut-menu">
       <shortcut-menu></shortcut-menu>
     </div>
+    <!-- 特色专栏 -->
+    <column>
+      <h1 slot="title">推荐歌单</h1>
+
+    </column>
   </div>
 </template>
 
@@ -42,6 +47,7 @@
 import {Toast} from 'vant'
 import TopBar from "@/components/TopBar";
 import ShortcutMenu from "@/components/ShortcutMenu";
+import Column from "@/components/Column";
 
 import Vue from 'vue';
 import {Lazyload} from 'vant';
@@ -53,6 +59,7 @@ export default {
   components: {
     TopBar,
     ShortcutMenu,
+    Column,
   },
   data() {
     return {
