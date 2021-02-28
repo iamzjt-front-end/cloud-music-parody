@@ -23,11 +23,14 @@
       </div>
     </nav-bar>
     <div class="swiper">
-      <van-swipe :autoplay="5000" indicator-color="#fff">
+      <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
         <van-swipe-item v-for="(image, index) in images" :key="index">
           <img v-lazy="image"/>
         </van-swipe-item>
       </van-swipe>
+    </div>
+    <div class="shortcut-menu">
+      <shortcut-menu></shortcut-menu>
     </div>
   </div>
 </template>
@@ -35,6 +38,7 @@
 <script>
 import {Toast} from 'vant'
 import NavBar from "@/components/NavBar";
+import ShortcutMenu from "@/components/ShortcutMenu";
 
 import Vue from 'vue';
 import {Lazyload} from 'vant';
@@ -45,6 +49,7 @@ export default {
   name: "found",
   components: {
     NavBar,
+    ShortcutMenu,
   },
   data() {
     return {
@@ -73,6 +78,7 @@ export default {
     }
   },
   mounted() {
+    this.$refs.swipe.resize();
     this.bannerImageQry();
   },
 }
@@ -97,7 +103,6 @@ export default {
     overflow: hidden;
     img {
       width: 100%;
-      height: auto;
     }
   }
 }
