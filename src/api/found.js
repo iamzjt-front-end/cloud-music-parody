@@ -12,6 +12,11 @@ const found = {
             params: params
         });
     },
+    songListImg(params) {
+        return axios.get(`${base.baseURL}/user/playlist`, {
+            params: params
+        });
+    },
     // post提交
     // articleDetail1 (params) {
     //     return axios.post(`${base.baseURL}/accesstoken`, qs.stringify(params));

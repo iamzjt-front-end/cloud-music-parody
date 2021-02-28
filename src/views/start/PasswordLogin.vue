@@ -63,6 +63,12 @@ export default {
         if (res) {
           console.log('res:', res);
           Toast('登录成功！');
+          this.$api.login.userAccountQry().then(res => {
+            console.log('账号：', res)
+          });
+          this.$api.login.userSubcountQry().then(res => {
+            console.log('信息', res)
+          });
         }
       })
     },
