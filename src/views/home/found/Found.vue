@@ -98,9 +98,10 @@ export default {
   }
 
   .swiper {
-    margin: 0.5rem 1rem;
+    margin: 0.5rem 1rem 0.2rem 1rem;
     border-radius: 0.5rem;
     overflow: hidden;
+
     img {
       width: 100%;
     }
