@@ -35,10 +35,11 @@
     <div class="shortcut-menu">
       <shortcut-menu></shortcut-menu>
     </div>
+    <div class="line"></div>
     <!-- 特色专栏 -->
     <column>
       <h1 slot="title">推荐歌单</h1>
-
+      <song-list-item slot="item"></song-list-item>
     </column>
   </div>
 </template>
@@ -48,6 +49,7 @@ import {Toast} from 'vant'
 import TopBar from "@/components/TopBar";
 import ShortcutMenu from "@/components/ShortcutMenu";
 import Column from "@/components/Column";
+import SongListItem from "@/components/SongListItem";
 
 import Vue from 'vue';
 import {Lazyload} from 'vant';
@@ -60,6 +62,7 @@ export default {
     TopBar,
     ShortcutMenu,
     Column,
+    SongListItem,
   },
   data() {
     return {
@@ -114,7 +117,14 @@ export default {
 
     img {
       width: 100%;
+      height: 155px;
     }
+  }
+
+  .line {
+    height: 0.04rem;
+    background-color: #e5e5e5;
+    margin-top: 0.8rem;
   }
 }
 </style>

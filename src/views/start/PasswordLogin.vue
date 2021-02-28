@@ -90,7 +90,7 @@ export default {
 
   .cue {
     width: 100%;
-    height: 3rem;
+    height: 4rem;
     padding: 1rem;
 
     p {
