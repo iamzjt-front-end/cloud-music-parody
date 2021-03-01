@@ -58,10 +58,14 @@ export default {
     },
     // 登录
     onSubmit(values) {
+      let that = this;
       console.log('登录', values);
       this.$api.login.passwordLogin(values).then(res => {
         if (res) {
           console.log('res:', res);
+          // 将用户token保存到vuex中
+          that.$store.commit('AuthorizationUpdate', res.data.token);
+          that.$router.push('/home');
           Toast('登录成功！');
           this.$api.login.userAccountQry().then(res => {
             console.log('账号：', res)

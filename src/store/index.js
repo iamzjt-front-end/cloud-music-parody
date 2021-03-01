@@ -5,10 +5,13 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-
+        // 存储token
+        Authorization: ''
     },
     mutations: {
-
+        AuthorizationUpdate (state, token) {
+            state.Authorization = token;
+        }
     }
 })
 
