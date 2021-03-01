@@ -43,6 +43,8 @@ export default {
     border-radius: 0.8rem;
     border: 0.05rem solid #e3e5e5;
     position: relative;
+    // 让子元素呈现 3D 转换
+    transform-style: preserve-3d;
 
     &::before {
       content: '';
@@ -54,6 +56,8 @@ export default {
       position: absolute;
       top: -0.3rem;
       left: 0.5rem;
+      // 使用Z轴进行 3D 转换
+      transform: translateZ(-1px);
     }
   }
 
