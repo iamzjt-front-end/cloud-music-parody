@@ -30,7 +30,7 @@ export default {
 
   .top {
     height: 2rem;
-    background-color: #ccc;
+    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;

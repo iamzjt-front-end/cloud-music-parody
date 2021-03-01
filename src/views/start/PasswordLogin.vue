@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['changeLogin']),
+    ...mapMutations(['changeLogin', 'updateSongList']),
     // 返回开始页面
     onClickLeft() {
       this.$router.push({path: '/start'});
@@ -70,8 +70,8 @@ export default {
           that.changeLogin(res.data);
           Toast.success('登录成功');
           that.$router.push('/home');
-          this.$api.login.recSongListQry().then(res => {
-            console.log('每日推荐歌单：', res)
+          that.$api.login.recSongListQry().then(res => {
+            that.updateSongList(res.data.recommend);
           })
         }
       })

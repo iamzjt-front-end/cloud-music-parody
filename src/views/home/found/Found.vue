@@ -41,7 +41,10 @@
     <column>
       <h1 slot="title">推荐歌单</h1>
       <div class="song-list" slot="item">
-        <song-list-item></song-list-item>
+        <song-list-item v-for="(item, index) in this.songList" :key="index">
+          <img :src="item.picUrl" slot="img">
+          <p slot="description">{{ item.name }}</p>
+        </song-list-item>
       </div>
     </column>
   </div>
@@ -72,6 +75,7 @@ export default {
       value: '',
       images: [],
       imgHeight: window.innerWidth * 193 / 522,
+      songList: [],
     }
   },
   methods: {
@@ -98,6 +102,8 @@ export default {
   },
   mounted() {
     this.bannerImageQry();
+    this.songList = this.$store.state.songList.slice(0, 6);
+    console.log('歌单：', this.songList)
   },
   updated() {
     // this.$refs.swipe.resize();

@@ -1,9 +1,9 @@
 <template>
   <div class="song-list-item">
     <div class="img">
-      <img src="" alt="">
+      <slot name="img"></slot>
     </div>
-    <p>十秒沦陷手册 揽下全天的单曲循环</p>
+    <slot name="description"></slot>
   </div>
 </template>
 
@@ -33,18 +33,24 @@ export default {
 .song-list-item {
   width: 8rem;
   height: 11rem;
-  background-color: pink;
-  margin-top: 0.5rem;
+  background-color: #fff;
+  margin: 0.5rem 0.2rem;
+  display: inline-block;
 
   .img {
     width: 8rem;
     height: 8rem;
-    background-color: skyblue;
+    background-color: #fff;
     border-radius: 0.8rem;
     border: 0.05rem solid #e3e5e5;
     position: relative;
     // 让子元素呈现 3D 转换
     transform-style: preserve-3d;
+
+    img {
+      width: 100%;
+      border-radius: 0.8rem;
+    }
 
     &::before {
       content: '';
