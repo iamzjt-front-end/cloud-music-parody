@@ -6,11 +6,13 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         // 存储token
-        token: ''
+        token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : ''
     },
     mutations: {
-        tokenUpdate (state, token) {
-            state.token = token;
+        // 修改token，sessionStorage
+        changeLogin(state, user) {
+            state.token = user.token;
+            localStorage.setItem('token', user.token);
         }
     }
 })

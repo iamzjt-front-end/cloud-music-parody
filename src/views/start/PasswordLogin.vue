@@ -42,6 +42,7 @@
 
 <script>
 import {Toast} from 'vant';
+import {mapMutations} from 'vuex';
 
 export default {
   name: "PasswordLogin",
@@ -52,6 +53,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['changeLogin']),
     // 返回开始页面
     onClickLeft() {
       this.$router.push({path: '/start'});
@@ -64,9 +66,8 @@ export default {
           Toast(res.data.message);
           this.password = '';
         } else if (res.data.code == 200) { // 登录成功
-          console.log('res:', res);
-          // 将用户token保存到vuex中
-          that.$store.commit('tokenUpdate', res.data.cookie);
+          // 将用户token保存到sessionStorage和vuex中
+          that.changeLogin(res.data);
           Toast('登录成功！');
           that.$router.push('/home');
           this.$api.login.recSongListQry().then(res => {
