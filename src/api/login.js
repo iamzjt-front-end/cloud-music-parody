@@ -12,18 +12,13 @@ const login = {
             params: params
         });
     },
-    // 获取账号信息
-    userAccountQry(params) {
-        return axios.get(`${base.baseURL}/user/account`, {
+    // 获取每日推荐歌单
+    recSongListQry(params) {
+        return axios.get(`${base.baseURL}/recommend/resource`, {
             params: params
         })
     },
-    // 获取用户信息 , 歌单 , 收藏 , mv , dj 数量
-    userSubcountQry(params) {
-        return axios.get(`${base.baseURL}/user/subcount`, {
-            params: params
-        })
-    },
+
     // post提交
     // articleDetail1 (params) {
     //     return axios.post(`${base.baseURL}/accesstoken`, qs.stringify(params));
