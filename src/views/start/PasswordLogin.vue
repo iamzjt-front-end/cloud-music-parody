@@ -63,12 +63,12 @@ export default {
       let that = this;
       this.$api.login.passwordLogin(values).then(res => {
         if (res.data.code == 502) { // 密码错误
-          Toast(res.data.message);
+          Toast.fail(res.data.message);
           this.password = '';
         } else if (res.data.code == 200) { // 登录成功
           // 将用户token保存到sessionStorage和vuex中
           that.changeLogin(res.data);
-          Toast('登录成功！');
+          Toast.success('登录成功');
           that.$router.push('/home');
           this.$api.login.recSongListQry().then(res => {
             console.log('每日推荐歌单：', res)
