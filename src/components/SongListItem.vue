@@ -11,18 +11,18 @@
 export default {
   name: "SongListItem",
   created() {
-    this.songListImgQry();
+    // this.songListImgQry();
   },
   methods: {
-    songListImgQry() {
-      this.$api.found.songListImg({
-        uid: ''
-      }).then(res => {
-        if (res) {
-          //
-        }
-      })
-    },
+    // songListImgQry() {
+    //   this.$api.found.songListImg({
+    //     uid: ''
+    //   }).then(res => {
+    //     if (res) {
+    //       //
+    //     }
+    //   })
+    // },
   }
 }
 </script>

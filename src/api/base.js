@@ -4,6 +4,7 @@
  */
 const base = {
     baseURL: 'https://api.lk-lmusic.top',
+    // baseURL: 'http://lk-music.cn1.utools.club',
 }
 
 export default base;

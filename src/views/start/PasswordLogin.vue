@@ -59,21 +59,26 @@ export default {
     // 登录
     onSubmit(values) {
       let that = this;
-      console.log()
-      console.log('登录', values);
       this.$api.login.passwordLogin(values).then(res => {
-        if (res) {
+        if (res.data.code == 400) { // 账号错误
+          Toast('账号不存在，请重新输入！');
+          this.phone = '';
+          this.password = '';
+        } else if (res.data.code == 502) { // 密码错误
+          Toast(res.data.message);
+          this.password = '';
+        } else if (res.data.code == 200) { // 登陆成功
           console.log('res:', res);
           // 将用户token保存到vuex中
-          that.$store.commit('tokenUpdate', res.data.token);
-          that.$router.push('/home');
+          that.$store.commit('tokenUpdate', res.data.cookie);
           Toast('登录成功！');
-          this.$api.login.userAccountQry().then(res => {
-            console.log('账号：', res)
-          });
-          this.$api.login.userSubcountQry().then(res => {
-            console.log('信息', res)
-          });
+          that.$router.push('/home');
+          // this.$api.login.userAccountQry().then(res => {
+          //   console.log('账号：', res)
+          // });
+          // this.$api.login.userSubcountQry().then(res => {
+          //   console.log('信息', res)
+          // });
         }
       })
     },

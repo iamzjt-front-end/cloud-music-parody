@@ -12,6 +12,7 @@ const found = {
             params: params
         });
     },
+    // 获取歌单
     songListImg(params) {
         return axios.get(`${base.baseURL}/user/playlist`, {
             params: params
