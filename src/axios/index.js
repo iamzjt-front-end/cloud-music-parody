@@ -5,7 +5,7 @@
 import axios from 'axios';
 import router from '@/router';
 import store from '@/store';
-import { Toast } from 'vant';
+import {Toast} from 'vant';
 
 /**
  * 提示函数
@@ -59,12 +59,18 @@ const errorHandle = (status, other) => {
             break;
         default:
             console.log(other);
-    }}
+    }
+}
 
 // 创建axios实例
-var instance = axios.create({ timeout: 1000 * 12 });
+var instance = axios.create({timeout: 1000 * 12});
 // 设置post请求头
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+// axios配置允许跨域
+instance.defaults.withCredentials = true
+instance.defaults.crossDomain = true
+instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 /**
  * 请求拦截器
@@ -88,7 +94,7 @@ instance.interceptors.response.use(
     res => res.status === 200 ? Promise.resolve(res) : Promise.reject(res),
     // 请求失败
     error => {
-        const { response } = error;
+        const {response} = error;
         if (response) {
             // 请求已发出，但是不在2xx的范围
             errorHandle(response.status, response.data.message);

@@ -3,8 +3,9 @@
  * 可以自行定义多个
  */
 const base = {
-    baseURL: 'https://api.lk-lmusic.top',
+    // baseURL: 'https://api.lk-lmusic.top',
     // baseURL: 'http://lk-music.cn1.utools.club',
+    baseURL: ' http://localhost:8080/api',
 }
 
 export default base;
