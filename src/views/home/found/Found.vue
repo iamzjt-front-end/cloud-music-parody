@@ -31,6 +31,7 @@
         </van-swipe-item>
       </van-swipe>
     </div>
+    <!-- todo 图片最下方被覆盖了一部分 -->
     <!-- 快捷菜单 -->
     <div class="shortcut-menu">
       <shortcut-menu></shortcut-menu>
@@ -70,6 +71,7 @@ export default {
     return {
       value: '',
       images: [],
+      imgHeight: window.innerWidth * 193 / 522,
     }
   },
   methods: {
@@ -83,19 +85,29 @@ export default {
       // 1: android
       // 2: iphone
       // 3: ipad
-      this.$api.found.bannerImage('2').then(res => {
+      this.$api.found.bannerImage({
+        type: '2',
+      }).then(res => {
         if (res) {
           for (let item of res.data.banners) {
-            this.images.push(item.imageUrl);
+            this.images.push(item.pic);
           }
         }
       })
     }
   },
   mounted() {
-    this.$refs.swipe.resize();
     this.bannerImageQry();
   },
+  updated() {
+    // this.$refs.swipe.resize();
+    // 可能是我的用法不对, 官方提供的重绘方法还是不能正确计算出高度
+    // 解决 vant UI swipe 组件, 每次页面重绘的时候, 计算不出正确高度的bug
+    let img = document.querySelector('.swiper').querySelectorAll('img');
+    for (let item of img) {
+      item.style.height = this.imgHeight + 'px'
+    }
+  }
 }
 </script>
 
@@ -119,7 +131,6 @@ export default {
 
     img {
       width: 100%;
-      height: 155px;
     }
   }
 
