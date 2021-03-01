@@ -6,11 +6,11 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         // 存储token
-        Authorization: ''
+        token: ''
     },
     mutations: {
-        AuthorizationUpdate (state, token) {
-            state.Authorization = token;
+        tokenUpdate (state, token) {
+            state.token = token;
         }
     }
 })
