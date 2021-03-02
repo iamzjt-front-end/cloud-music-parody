@@ -12,12 +12,6 @@ const login = {
             params: params
         });
     },
-    // 获取每日推荐歌单
-    recSongListQry(params) {
-        return axios.get(`${base.baseURL}/recommend/resource`, {
-            params: params
-        })
-    },
 
     // post提交
     // articleDetail1 (params) {

@@ -6,17 +6,17 @@ import axios from '@/axios'; // 导入http中创建的axios实例
 // import qs from 'qs'; // 根据需求是否导入qs模块
 
 const found = {
-    // 轮播图图片获取
+    // 获取轮播图图片
     bannerImage(params) {
         return axios.get(`${base.baseURL}/banner`, {
             params: params
         });
     },
-    // 获取歌单
-    songListImg(params) {
-        return axios.get(`${base.baseURL}/user/playlist`, {
+    // 获取每日推荐歌单
+    recSongListQry(params) {
+        return axios.get(`${base.baseURL}/recommend/resource`, {
             params: params
-        });
+        })
     },
     // post提交
     // articleDetail1 (params) {

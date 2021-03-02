@@ -1,8 +1,10 @@
 <template>
   <div id="home">
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+    <div class="content">
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
+    </div>
     <tab-bar/>
   </div>
 </template>
@@ -18,6 +20,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.content {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 50px;
+}
 </style>

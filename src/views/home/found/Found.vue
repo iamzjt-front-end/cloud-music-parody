@@ -104,7 +104,7 @@ export default {
     },
     songListGet() {
       let that = this;
-      this.$api.login.recSongListQry().then(res => {
+      this.$api.found.recSongListQry().then(res => {
         if (res) {
           that.songList = res.data.recommend.slice(0, 6);
           that.updateSongList(res.data.recommend.slice(0, 6));
@@ -134,7 +134,7 @@ export default {
 
 #found {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: $color-bgc;
 
   .icon-settings, .icon-distinguish {

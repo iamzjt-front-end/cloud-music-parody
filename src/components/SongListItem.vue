@@ -31,15 +31,15 @@ export default {
 @import "../assets/scss/mixin";
 
 .song-list-item {
-  width: 8rem;
-  height: 11rem;
+  width: 7rem;
+  height: 10rem;
   background-color: #fff;
   margin: 0.5rem 0.2rem;
   display: inline-block;
 
   .img {
-    width: 8rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
     background-color: #fff;
     border-radius: 0.8rem;
     border: 0.05rem solid #e3e5e5;
@@ -55,8 +55,8 @@ export default {
     &::before {
       content: '';
       display: inline-block;
-      width: 7rem;
-      height: 7rem;
+      width: 6rem;
+      height: 6rem;
       background-color: #f3f3f3;
       border-radius: 0.6rem;
       position: absolute;

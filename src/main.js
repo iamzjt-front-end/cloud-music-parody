@@ -17,6 +17,10 @@ import 'plugins/animate'
 // 引入基础样式
 import 'assets/scss/index.scss'
 
+// 移动端调试
+import VConsole from 'vconsole';
+Vue.prototype.$vconsole = new VConsole();
+
 Vue.config.productionTip = false
 
 new Vue({
