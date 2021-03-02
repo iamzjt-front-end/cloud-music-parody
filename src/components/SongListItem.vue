@@ -68,6 +68,9 @@ export default {
   }
 
   p {
+    display: inline-block;
+    width: 100%;
+    height: 3rem;
     color: #333334;
     font-size: 0.8rem;
     line-height: 1.3rem;

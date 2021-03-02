@@ -27,6 +27,7 @@ export default {
   height: auto;
   padding: 0.5rem 1rem;
   background-color: #fff;
+  overflow: hidden;
 
   .top {
     height: 2rem;
@@ -61,6 +62,10 @@ export default {
         padding-top: 0.1rem;
       }
     }
+  }
+
+  .down {
+    width: 45.4rem;
   }
 }
 </style>
