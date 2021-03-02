@@ -37,7 +37,7 @@
       <shortcut-menu></shortcut-menu>
     </div>
     <div class="line"></div>
-    <!-- 特色专栏 -->
+    <!-- 推荐歌单专栏 -->
     <column>
       <h1 slot="title">推荐歌单</h1>
       <div class="song-list" slot="item">
@@ -45,6 +45,14 @@
           <img :src="item.picUrl" slot="img">
           <p slot="description">{{ item.name }}</p>
         </song-list-item>
+      </div>
+    </column>
+    <div class="wide-line"></div>
+    <!-- 排行榜专栏 -->
+    <column>
+      <h1 slot="title">排行榜</h1>
+      <div class="charts" slot="item">
+        <charts-item></charts-item>
       </div>
     </column>
   </div>
@@ -56,6 +64,7 @@ import TopBar from "@/components/TopBar";
 import ShortcutMenu from "@/components/ShortcutMenu";
 import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
+import ChartsItem from "@/components/ChartsItem";
 
 import Vue from 'vue';
 import {Lazyload} from 'vant';
@@ -71,6 +80,7 @@ export default {
     ShortcutMenu,
     Column,
     SongListItem,
+    ChartsItem,
   },
   data() {
     return {
@@ -156,6 +166,11 @@ export default {
     height: 0.04rem;
     background-color: #e5e5e5;
     margin-top: 0.8rem;
+  }
+
+  .wide-line {
+    height: 0.55rem;
+    background-color: #f8f8f8;
   }
 }
 </style>
