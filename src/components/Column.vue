@@ -65,7 +65,8 @@ export default {
   }
 
   .down {
-    width: 45.4rem;
+    //width: 45.4rem;
+    width: 142.4rem;
   }
 }
 </style>
