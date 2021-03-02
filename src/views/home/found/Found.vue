@@ -52,13 +52,11 @@
     <column>
       <h1 slot="title">排行榜</h1>
       <div class="charts" slot="item">
-        <charts-item v-for="(item, index) in 1" :key="index">
-          <h1 slot="title">硬地原创音乐榜</h1>
+        <charts-item v-for="(item, index) in this.chartsList" :key="index">
+          <h1 slot="title">{{ item.name }}</h1>
           <div class="charts-rank" slot="top-three">
-            <charts-rank-item v-for="(item, index) in 3" :key="index">
-              <img
-                  src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201903%2F14%2F20190314133032_jwwcl.jpg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617291460&t=8b630d8a012fc32d5310c96de815743a"
-                  slot="img">
+            <charts-rank-item v-for="(rankItem, index) in this.topThreeList" :key="index">
+              <img src="" slot="img">
               <p slot="songIndex">{{ index + 1 }}</p>
               <p slot="songName">酒肉朋友酒肉朋友酒肉朋友</p>
               <p slot="songAuthor">- 李毅杰 PISSY/法老</p>
@@ -102,6 +100,8 @@ export default {
       images: [],
       imgHeight: window.innerWidth * 193 / 522,
       songList: [],
+      chartsList: [],
+      topThreeList: [],
     }
   },
   methods: {
@@ -110,6 +110,7 @@ export default {
       // todo 搜索功能
       Toast(val);
     },
+    // 获取轮播图
     bannerImageQry() {
       // todo 判断不同设备来请求不同的轮播图片
       // 0: pc
@@ -126,20 +127,52 @@ export default {
         }
       })
     },
+    // 获取每日推荐歌单
     songListGet() {
       let that = this;
       this.$api.found.recSongListQry().then(res => {
         if (res) {
           that.songList = res.data.recommend.slice(0, 6);
           that.updateSongList(res.data.recommend.slice(0, 6));
-          console.log('歌单：', that.songList);
         }
       })
-    }
+    },
+    // 获取榜单
+    chartsGet() {
+      let that = this;
+      this.$api.found.chartsQry().then(res => {
+        if (res) {
+          console.log('排行榜：', res)
+          that.chartsList = res.data.list.slice(0, 6);
+          for (let item of that.chartsList) {
+            this.$api.found.chartsDetQry({
+              id: item.id
+            }).then(res => {
+              if (res) {
+                console.log('排行榜详情：', res.data)
+                that.topThreeList = res.data;
+              }
+            })
+          }
+        }
+      })
+    },
+    // 获取榜单详情
+    // chartsDetGet(val) {
+    // this.$api.found.chartsDetQry({
+    //   id: val
+    // }).then(res => {
+    //   if (res) {
+    //     console.log('排行榜详情：', res.data)
+    //     this.topThreeList = res.data;
+    //   }
+    // })
+    // },
   },
   mounted() {
     this.bannerImageQry();
     this.songListGet();
+    this.chartsGet();
   },
   updated() {
     // this.$refs.swipe.resize();

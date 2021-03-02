@@ -18,6 +18,18 @@ const found = {
             params: params
         })
     },
+    // 获取所有榜单
+    chartsQry(params) {
+        return axios.get(`${base.baseURL}/toplist`, {
+            params: params
+        })
+    },
+    // 获取歌单详情
+    chartsDetQry(params) {
+        return axios.get(`${base.baseURL}/playlist/detail`, {
+            params: params
+        })
+    },
     // post提交
     // articleDetail1 (params) {
     //     return axios.post(`${base.baseURL}/accesstoken`, qs.stringify(params));
