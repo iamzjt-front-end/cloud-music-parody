@@ -21,7 +21,9 @@ export default {
   width: 23rem;
   height: 14rem;
   background-color: pink;
+  margin: 0.5rem 0;
   padding: 1rem;
+  border-radius: 0.6rem;
 
   .title {
     width: 100%;
