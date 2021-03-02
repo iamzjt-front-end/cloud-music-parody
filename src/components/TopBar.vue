@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar">
+  <div class="top-bar">
     <div class="left">
       <slot name="left"></slot>
     </div>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav-bar {
+.top-bar {
   display: flex;
   height: 54px;
   line-height: 54px;
