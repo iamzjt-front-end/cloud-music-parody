@@ -52,7 +52,19 @@
     <column>
       <h1 slot="title">排行榜</h1>
       <div class="charts" slot="item">
-        <charts-item></charts-item>
+        <charts-item v-for="(item, index) in 1" :key="index">
+          <h1 slot="title">硬地原创音乐榜</h1>
+          <div class="charts-rank" slot="top-three">
+            <charts-rank-item v-for="(item, index) in 3" :key="index">
+              <img
+                  src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201903%2F14%2F20190314133032_jwwcl.jpg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617291460&t=8b630d8a012fc32d5310c96de815743a"
+                  slot="img">
+              <p slot="songIndex">{{ index + 1 }}</p>
+              <p slot="songName">酒肉朋友酒肉朋友酒肉朋友</p>
+              <p slot="songAuthor">- 李毅杰 PISSY/法老</p>
+            </charts-rank-item>
+          </div>
+        </charts-item>
       </div>
     </column>
   </div>
@@ -65,6 +77,7 @@ import ShortcutMenu from "@/components/ShortcutMenu";
 import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
 import ChartsItem from "@/components/ChartsItem";
+import ChartsRankItem from "@/components/ChartsRankItem";
 
 import Vue from 'vue';
 import {Lazyload} from 'vant';
@@ -81,6 +94,7 @@ export default {
     Column,
     SongListItem,
     ChartsItem,
+    ChartsRankItem,
   },
   data() {
     return {
