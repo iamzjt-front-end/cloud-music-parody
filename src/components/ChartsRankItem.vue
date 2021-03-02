@@ -56,6 +56,11 @@ export default {
     }
   }
 
+  .songName, .songAuthor {
+    max-width: 7rem;
+    padding: 0 0.1rem;
+  }
+
   .songIndex {
     width: 1.8rem;
     text-align: center;
@@ -64,15 +69,11 @@ export default {
 
   .songName {
     color: #333334;
-    max-width: 7rem;
-    padding: 0 0.1rem;
     background-color: blueviolet;
   }
 
   .songAuthor {
     color: #9a9a9a;
-    max-width: 7rem;
-    padding: 0 0.1rem;
     background-color: rosybrown;
   }
 }
