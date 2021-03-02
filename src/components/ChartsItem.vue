@@ -62,10 +62,11 @@ export default {
   width: 23rem;
   height: 14rem;
   background-color: #fff;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0.7rem 0 0;
   padding: 1rem;
   border-radius: 0.6rem;
-  box-shadow: 15px 15px 200px rgba(0, 0, 0, 0.05);
+  box-shadow: 15px 15px 80px rgba(0, 0, 0, 0.05);
+  display: inline-block;
 
   .title {
     width: 100%;
