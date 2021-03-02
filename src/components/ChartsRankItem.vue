@@ -27,7 +27,6 @@ export default {
 .charts-rank-item {
   width: 100%;
   height: 3rem;
-  background-color: orange;
   margin-top: 0.4rem;
 
   span {
@@ -62,19 +61,20 @@ export default {
   }
 
   .songIndex {
+    color: #333334;
     width: 1.8rem;
     text-align: center;
-    background-color: greenyellow;
+    font-size: 0.9rem;
   }
 
   .songName {
     color: #333334;
-    background-color: blueviolet;
+    font-size: 0.9rem;
   }
 
   .songAuthor {
     color: #9a9a9a;
-    background-color: rosybrown;
+    font-size: 0.5rem;
   }
 }
 </style>

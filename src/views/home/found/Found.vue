@@ -52,16 +52,9 @@
     <column>
       <h1 slot="title">排行榜</h1>
       <div class="charts" slot="item">
-        <charts-item v-for="(item, index) in this.chartsList" :key="index">
+        <charts-item v-for="(item, index) in this.chartsList" :key="index"
+                     :chartsList="chartsList" :index="index">
           <h1 slot="title">{{ item.name }}</h1>
-          <div class="charts-rank" slot="top-three">
-            <charts-rank-item v-for="(rankItem, index) in this.topThreeList" :key="index">
-              <img src="" slot="img">
-              <p slot="songIndex">{{ index + 1 }}</p>
-              <p slot="songName">酒肉朋友酒肉朋友酒肉朋友</p>
-              <p slot="songAuthor">- 李毅杰 PISSY/法老</p>
-            </charts-rank-item>
-          </div>
         </charts-item>
       </div>
     </column>
@@ -75,7 +68,6 @@ import ShortcutMenu from "@/components/ShortcutMenu";
 import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
 import ChartsItem from "@/components/ChartsItem";
-import ChartsRankItem from "@/components/ChartsRankItem";
 
 import Vue from 'vue';
 import {Lazyload} from 'vant';
@@ -92,7 +84,6 @@ export default {
     Column,
     SongListItem,
     ChartsItem,
-    ChartsRankItem,
   },
   data() {
     return {
@@ -101,7 +92,6 @@ export default {
       imgHeight: window.innerWidth * 193 / 522,
       songList: [],
       chartsList: [],
-      topThreeList: [],
     }
   },
   methods: {
@@ -142,32 +132,11 @@ export default {
       let that = this;
       this.$api.found.chartsQry().then(res => {
         if (res) {
-          console.log('排行榜：', res)
+          // console.log('排行榜：', res)
           that.chartsList = res.data.list.slice(0, 6);
-          for (let item of that.chartsList) {
-            this.$api.found.chartsDetQry({
-              id: item.id
-            }).then(res => {
-              if (res) {
-                console.log('排行榜详情：', res.data)
-                that.topThreeList = res.data;
-              }
-            })
-          }
         }
       })
     },
-    // 获取榜单详情
-    // chartsDetGet(val) {
-    // this.$api.found.chartsDetQry({
-    //   id: val
-    // }).then(res => {
-    //   if (res) {
-    //     console.log('排行榜详情：', res.data)
-    //     this.topThreeList = res.data;
-    //   }
-    // })
-    // },
   },
   mounted() {
     this.bannerImageQry();
