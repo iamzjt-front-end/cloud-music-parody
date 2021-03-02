@@ -7,16 +7,16 @@ const store = new Vuex.Store({
     state: {
         // 存储token
         token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : '',
-        songList: ''
+        songList: '',
     },
     mutations: {
         // 修改token，sessionStorage
-        changeLogin(state, user) {
-            state.token = user.token;
-            localStorage.setItem('token', user.token);
+        changeLogin(state, data) {
+            state.token = data;
+            sessionStorage.setItem('token', data);
         },
-        updateSongList(state, arr) {
-            state.songList = arr;
+        updateSongList(state, data) {
+            state.songList = data;
         }
     }
 })

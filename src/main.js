@@ -5,6 +5,7 @@ import store from "./store"
 import api from './api'
 
 Vue.prototype.$api = api; // 将api挂载到vue的原型上
+// Vue.prototype.$bus = new Vue();
 
 // 引入Vant-UI
 import 'plugins/vant'

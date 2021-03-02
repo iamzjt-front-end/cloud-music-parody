@@ -60,6 +60,8 @@ import SongListItem from "@/components/SongListItem";
 import Vue from 'vue';
 import {Lazyload} from 'vant';
 
+import {mapMutations} from 'vuex';
+
 Vue.use(Lazyload);
 
 export default {
@@ -79,6 +81,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['updateSongList']),
     onSearch(val) {
       // todo 搜索功能
       Toast(val);
@@ -98,12 +101,21 @@ export default {
           }
         }
       })
+    },
+    songListGet() {
+      let that = this;
+      this.$api.login.recSongListQry().then(res => {
+        if (res) {
+          that.songList = res.data.recommend.slice(0, 6);
+          that.updateSongList(res.data.recommend.slice(0, 6));
+          console.log('歌单：', that.songList);
+        }
+      })
     }
   },
   mounted() {
     this.bannerImageQry();
-    this.songList = this.$store.state.songList.slice(0, 6);
-    console.log('歌单：', this.songList)
+    this.songListGet();
   },
   updated() {
     // this.$refs.swipe.resize();

@@ -4,8 +4,7 @@
  */
 const base = {
     // baseURL: 'https://api.lk-lmusic.top',
-    // baseURL: 'http://lk-music.cn1.utools.club',
-    baseURL: ' http://localhost:8080/api',
+    baseURL: ' http://localhost:8080/api', // 跨域代理
 }
 
 export default base;

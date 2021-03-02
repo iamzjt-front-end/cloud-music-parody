@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['changeLogin', 'updateSongList']),
+    ...mapMutations(['changeLogin']),
     // 返回开始页面
     onClickLeft() {
       this.$router.push({path: '/start'});
@@ -67,12 +67,9 @@ export default {
           this.password = '';
         } else if (res.data.code == 200) { // 登录成功
           // 将用户token保存到sessionStorage和vuex中
-          that.changeLogin(res.data);
+          that.changeLogin(res.data.token);
           Toast.success('登录成功');
           that.$router.push('/home');
-          that.$api.login.recSongListQry().then(res => {
-            that.updateSongList(res.data.recommend);
-          })
         }
       })
     },
