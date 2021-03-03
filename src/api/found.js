@@ -12,7 +12,7 @@ const found = {
             params: params
         });
     },
-    // 获取每日推荐歌单
+    // 获取推荐歌单
     recSongListQry(params) {
         return axios.get(`${base.baseURL}/recommend/resource`, {
             params: params
@@ -30,6 +30,13 @@ const found = {
             params: params
         })
     },
+    // 获取每日推荐
+    perDayRecQry(params) {
+        return axios.get(`${base.baseURL}/recommend/songs`, {
+            params: params
+        })
+    },
+
     // post提交
     // articleDetail1 (params) {
     //     return axios.post(`${base.baseURL}/accesstoken`, qs.stringify(params));

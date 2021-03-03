@@ -117,7 +117,7 @@ export default {
         }
       })
     },
-    // 获取每日推荐歌单
+    // 获取推荐歌单
     songListGet() {
       let that = this;
       this.$api.found.recSongListQry().then(res => {
