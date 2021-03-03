@@ -53,8 +53,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../../assets/scss/variable';
-
 .recommend {
   width: 100%;
   height: 100%;
