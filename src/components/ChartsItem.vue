@@ -35,9 +35,9 @@ export default {
     index: Number
   },
   mounted() {
-    console.log('子组件拿到的：', this.index, this.chartsList[this.index]);
+    // console.log('子组件拿到的：', this.index, this.chartsList[this.index]);
     this.chartsDetGet();
-    console.log('topThreeList:', this.topThreeList);
+    // console.log('topThreeList:', this.topThreeList);
   },
   methods: {
     // 获取榜单详情
@@ -48,7 +48,7 @@ export default {
         id: this.chartsList[this.index].id
       }).then(res => {
         if (res) {
-          console.log('排行榜详情：', res.data.playlist.tracks.slice(0, 3))
+          // console.log('排行榜详情：', res.data.playlist.tracks.slice(0, 3))
           that.topThreeList = res.data.playlist.tracks.slice(0, 3);
         }
       })
