@@ -65,7 +65,7 @@ export default {
   margin: 0.5rem 0.7rem 0 0;
   padding: 1rem;
   border-radius: 0.6rem;
-  box-shadow: 15px 15px 80px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
   display: inline-block;
 
   .title {
