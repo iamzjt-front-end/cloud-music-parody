@@ -1,6 +1,7 @@
 <template>
   <div class="shortcut-menu">
-    <shortcut-menu-item v-for="(item, index) in titleList" :key="index">
+    <shortcut-menu-item v-for="(item, index) in titleList" :key="index"
+                        @click.native="skip(item)">
       <i class="iconfont" :class="item.className" slot="icon"></i>
       <p slot="title">{{ item.title }}</p>
     </shortcut-menu-item>
@@ -9,6 +10,7 @@
 
 <script>
 import ShortcutMenuItem from "@/components/ShortcutMenuItem";
+import {Toast} from 'vant'
 
 export default {
   name: "ShortcutMenu",
@@ -39,6 +41,32 @@ export default {
       // todo 增加快捷菜单 并 可左右滑动拓展
     }
   },
+  methods: {
+    // 跳转
+    skip(item) {
+      switch (item.title) {
+        case '每日推荐' :
+          this.$router.push({path: '/recommend'});
+          break;
+        case '私人FM' :
+          Toast('正在开发中...');
+          // this.$router.push({path: ''});
+          break;
+        case '歌单' :
+          Toast('正在开发中...');
+          // this.$router.push({path: ''});
+          break;
+        case '排行榜' :
+          Toast('正在开发中...');
+          // this.$router.push({path: ''});
+          break;
+        case '专辑' :
+          Toast('正在开发中...');
+          // this.$router.push({path: ''});
+          break;
+      }
+    },
+  }
 }
 </script>
 
