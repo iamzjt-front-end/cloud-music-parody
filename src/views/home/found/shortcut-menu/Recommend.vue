@@ -113,6 +113,14 @@ export default {
     background-position: center;
     position: relative;
 
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backdrop-filter: blur(8px);
+    }
+
     .calendar {
       position: absolute;
       bottom: 2.2rem;
