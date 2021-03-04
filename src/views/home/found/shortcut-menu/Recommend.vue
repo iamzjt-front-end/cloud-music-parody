@@ -25,17 +25,16 @@
           <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
         </div>
       </van-index-anchor>
-      <van-cell>
-        <!-- 推荐歌曲曲目 -->
-        <div class="recommend-song">
-          <song v-for="(item, index) in this.perDayRecList" :key="index">
-            <img :src="item.al.picUrl" slot="front-cover">
-            <h1 slot="song-name">{{ item.name }}</h1>
-            <p slot="song-author">{{ item.ar[0].name }} - {{ item.al.name }}</p>
-            <i class="iconfont icon-more" slot="operate"></i>
-          </song>
-        </div>
-      </van-cell>
+      <!-- 推荐歌曲曲目 -->
+      <div class="recommend-song">
+        <song v-for="(item, index) in this.perDayRecList" :key="index">
+          <img :src="item.al.picUrl" slot="front-cover">
+          <h1 slot="song-name">{{ item.name }}</h1>
+          <p slot="song-author">{{ item.ar[0].name }} - {{ item.al.name }}</p>
+          <i class="iconfont icon-more" slot="operate"></i>
+        </song>
+        <div style="width: 100%; height: 1px"></div>
+      </div>
     </van-index-bar>
   </div>
 </template>
