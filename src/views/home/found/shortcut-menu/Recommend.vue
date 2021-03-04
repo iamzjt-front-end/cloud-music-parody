@@ -64,11 +64,11 @@ export default {
     // 返回主页
     backToHome() {
       this.$router.push({path: '/found'});
-    }
+    },
   },
   mounted() {
     this.perDayRecGet();
-  }
+  },
 }
 </script>
 
