@@ -1,6 +1,6 @@
 <template>
   <div class="recommend">
-    <van-index-bar>
+    <van-index-bar :index-list="indexList">
       <!-- 顶栏 -->
       <top-bar>
         <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
@@ -54,6 +54,7 @@ export default {
     return {
       perDayRecList: [],
       mainImgUrl: '',
+      indexList: [],
     }
   },
   methods: {
