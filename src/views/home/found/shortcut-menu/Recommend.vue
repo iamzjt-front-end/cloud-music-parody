@@ -7,8 +7,8 @@
     </top-bar>
     <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
       <p class="calendar">
-        <i class="day">04</i>
-        <i class="month"> / 03</i>
+        <i class="day">{{day}}</i>
+        <i class="month"> / {{month}}</i>
       </p>
       <p class="fortune">
         今日运势：吉
@@ -33,9 +33,12 @@ export default {
     return {
       perDayRecList: [],
       mainImgUrl: '',
+      day: '',
+      month: '',
     }
   },
   methods: {
+    // 获取每日推荐歌单信息
     perDayRecGet() {
       let that = this;
       this.$api.found.perDayRecQry().then(res => {
@@ -44,10 +47,17 @@ export default {
         let index = Math.floor(33 * Math.random())
         that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
       })
-    }
+    },
+    // 获取日和月
+    dayMonthGet() {
+      let dateObj = new Date();
+      this.day = dateObj.getDate() < 10 ? '0' + dateObj.getDate() : dateObj.getDate();
+      this.month = dateObj.getMonth() < 10 ? '0' + dateObj.getMonth() : dateObj.getMonth();
+    },
   },
   mounted() {
     this.perDayRecGet();
+    this.dayMonthGet();
   }
 }
 </script>
