@@ -33,7 +33,7 @@ export default {
   width: 100%;
   height: 3.5rem;
   background-color: #fff;
-  margin: 0.5rem 0 1rem 0;
+  margin: 0.5rem 0 1.3rem 0;
   padding: 0 1.05rem;
   display: flex;
 
@@ -56,7 +56,7 @@ export default {
 
     .song-name, .song-author {
       width: 100%;
-      padding: 0 0.5rem;
+      padding: 0 0.8rem;
       @include single-line-ellipsis;
     }
 
@@ -64,14 +64,14 @@ export default {
       color: #333334;
       height: 2rem;
       line-height: 2rem;
-      font-size: 1.05rem;
+      font-size: 1.2rem;
     }
 
     .song-author {
       color: #808080;
       height: 1.5rem;
       line-height: 1.5rem;
-      font-size: 0.6rem;
+      font-size: 0.85rem;
     }
   }
 
