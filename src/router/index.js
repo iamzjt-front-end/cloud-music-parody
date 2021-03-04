@@ -45,11 +45,11 @@ const router = new Router({
                     path: '/cloud-village',
                     component: CloudVillage,
                 },
-                {
-                    path: '/recommend',
-                    component: Recommend,
-                },
             ]
+        },
+        {
+            path: '/recommend',
+            component: Recommend,
         },
     ]
 });
