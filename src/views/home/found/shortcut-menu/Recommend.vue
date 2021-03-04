@@ -15,8 +15,9 @@
       </p>
     </div>
     <div class="play-all">
-      <i class="iconfont icon-back" slot="left"></i>
-      <span>播放全部</span>
+      <i class="iconfont icon-play-all" slot="left"></i>
+      <span class="play-text">播放全部</span>
+      <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
     </div>
   </div>
 </template>
@@ -41,7 +42,7 @@ export default {
       this.$api.found.perDayRecQry().then(res => {
         console.log('每日推荐：', res)
         that.perDayRecList = res.data.data.dailySongs;
-        let index = Math.floor(33 * Math.random())
+        let index = Math.floor(33 * Math.random());
         that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
       })
     }
@@ -109,7 +110,33 @@ export default {
   .play-all {
     width: 100%;
     height: 3.4rem;
-    background-color: pink;
+    background-color: #fff;
+    display: flex;
+
+    .icon-play-all {
+      height: 100%;
+      padding: 0 0.3rem 0 0.7rem;
+      color: #323537;
+      font-size: 1.3rem;
+      text-align: center;
+      line-height: 3.4rem;
+    }
+
+    .play-text {
+      height: 100%;
+      padding: 0 0.1rem;
+      color: #333334;
+      font-size: 1.05rem;
+      line-height: 3.4rem;
+    }
+
+    .play-length {
+      width: 2rem;
+      height: 100%;
+      color: #999999;
+      font-size: 0.8rem;
+      padding: 1.35rem 0 0 0.2rem;
+    }
   }
 }
 </style>
