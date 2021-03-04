@@ -55,7 +55,7 @@ export default {
     perDayRecGet() {
       let that = this;
       this.$api.found.perDayRecQry().then(res => {
-        console.log('每日推荐：', res)
+        // console.log('每日推荐：', res)
         that.perDayRecList = res.data.data.dailySongs;
         let index = Math.floor(33 * Math.random());
         that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
