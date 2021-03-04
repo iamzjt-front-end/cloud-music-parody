@@ -129,7 +129,7 @@ export default {
   .play-all {
     width: 100%;
     height: 3.4rem;
-    background-color: pink;
+    background-color: #fff;
     display: flex;
 
     .icon-play-all {
