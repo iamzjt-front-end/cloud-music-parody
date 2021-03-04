@@ -142,7 +142,7 @@ export default {
       height: 100%;
       padding: 0 0.3rem 0 0.7rem;
       color: #323537;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       text-align: center;
       line-height: 3.4rem;
     }
@@ -160,7 +160,7 @@ export default {
       height: 100%;
       color: #999999;
       font-size: 0.8rem;
-      padding: 1.35rem 0 0 0.2rem;
+      padding: 0.8rem 0 0 0.2rem;
     }
   }
 
