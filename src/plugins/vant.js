@@ -14,6 +14,8 @@ import {
     Search,
     Swipe,
     SwipeItem,
+    IndexBar,
+    IndexAnchor,
 } from 'vant';
 
 // 3.注册组件
@@ -28,3 +30,5 @@ Vue.use(TabbarItem);
 Vue.use(Search);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
+Vue.use(IndexBar);
+Vue.use(IndexAnchor);
