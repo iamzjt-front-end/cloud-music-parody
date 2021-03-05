@@ -10,8 +10,8 @@
       <!-- 主图 -->
       <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
         <p class="calendar">
-          <i class="day">04</i>
-          <i class="month"> / 03</i>
+          <i class="day">{{day}}</i>
+          <i class="month"> / {{month}}</i>
         </p>
         <p class="fortune">
           今日运势：吉
@@ -53,6 +53,8 @@ export default {
     return {
       perDayRecList: [],
       mainImgUrl: '',
+      day: '',
+      month: '',
       indexList: [],
     }
   },
@@ -67,6 +69,14 @@ export default {
         that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
       })
     },
+    // 获取日和月
+    dayMonthGet() {
+      let dateObj = new Date();
+      let day = dateObj.getDate();
+      this.day = day < 10 ? '0' + day : day;
+      let month = dateObj.getMonth() + 1;
+      this.month = month < 10 ? '0' + month : month;
+    },
     // 返回主页
     backToHome() {
       this.$router.push({path: '/found'});
@@ -74,6 +84,7 @@ export default {
   },
   mounted() {
     this.perDayRecGet();
+    this.dayMonthGet();
   },
 }
 </script>
