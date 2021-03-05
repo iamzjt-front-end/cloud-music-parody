@@ -33,14 +33,14 @@ export default {
   width: 100%;
   height: 3.5rem;
   background-color: #fff;
-  margin: 0.5rem 0 1rem 0;
+  margin: 0.5rem 0 1.3rem 0;
   padding: 0 1.05rem;
   display: flex;
   align-items: center;
 
   .front-cover {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 3.5rem;
+    height: 3.5rem;
     background-color: rosybrown;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -65,7 +65,7 @@ export default {
       color: #333334;
       height: 2rem;
       line-height: 2rem;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
     .song-author {
