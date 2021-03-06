@@ -19,7 +19,11 @@ import 'assets/scss/index.scss'
 
 // 移动端调试
 import VConsole from 'vconsole';
+
 Vue.prototype.$vconsole = new VConsole();
+
+// 导入moment.js
+import './plugins/moment'
 
 Vue.config.productionTip = false
 

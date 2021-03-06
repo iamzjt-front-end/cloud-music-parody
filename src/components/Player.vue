@@ -28,13 +28,13 @@
       <!-- 进度条 -->
       <div class="progress-bar-box">
         <div class="start-time">
-          <p>00:00</p>
+          <p>{{ playTimeM }}:{{ playTimeS }}</p>
         </div>
         <div class="progress-bar">
           <div class="little-dot"></div>
         </div>
         <div class="end-time">
-          <p>04:22</p>
+          <p>{{ totalTimeM }}:{{ totalTimeS }}</p>
         </div>
       </div>
       <!-- 播放控制 -->
@@ -69,6 +69,10 @@ export default {
       singers: '', // 歌手
       albumNm: '', // 专辑名称
       albumPicUrl: '', // 专辑封面
+      playTimeM: '00', // 播放时间 - 分
+      playTimeS: '00', // 播放时间 - 秒
+      totalTimeM: '', // 总时间 - 分
+      totalTimeS: '', // 总时间 - 秒
     }
   },
   methods: {
@@ -95,6 +99,15 @@ export default {
             that.singers = songData.ar.singers;
             that.albumNm = songData.al.name;
             that.albumPicUrl = songData.al.picUrl;
+            // 获取歌曲时长
+            that.totalTimeM = that.$moment(songData.dt).minutes();
+            that.totalTimeS = that.$moment(songData.dt).seconds();
+            if (that.totalTimeM < 10) {
+              that.totalTimeM = '0' + that.totalTimeM;
+            }
+            if (that.totalTimeS < 10) {
+              that.totalTimeS = '0' + that.totalTimeS;
+            }
             that.$nextTick(() => {
               that.$refs.player.style = `background-image: url("${that.albumPicUrl}")`;
             })
