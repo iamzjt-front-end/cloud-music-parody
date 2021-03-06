@@ -5,7 +5,7 @@
         <i class="iconfont icon-xiala" slot="left"></i>
         <div class="singNmAndSinger" slot="center">
           <h1>{{ songNm }}</h1>
-          <p>{{ singers }} - {{ album }}</p>
+          <p>{{ singers }} - {{ albumNm }}</p>
         </div>
         <i class="iconfont icon-fenxiang" slot="right"></i>
       </top-bar>
@@ -42,8 +42,8 @@
         <music-operations>
           <i class="iconfont icon-shunxu" slot="item1"></i>
           <i class="iconfont icon-shangyiqu" slot="item2"></i>
-          <i class="iconfont icon-bofang" slot="item3"></i>
-          <i class="iconfont icon-shangyiqu" slot="item4"></i>
+          <i class="iconfont icon-bofang" slot="item3" @click="this.play"></i>
+          <i class="iconfont icon-xiayiqu" slot="item4"></i>
           <i class="iconfont icon-bofangliebiao" slot="item5"></i>
         </music-operations>
       </div>
@@ -63,12 +63,12 @@ export default {
   },
   data() {
     return {
-      songId: '',
-      songDet: null,
-      songNm: '',
-      singers: '',
-      album: '',
-      albumPicUrl: '',
+      songId: '', // 歌曲Id
+      songDet: null, // 歌曲详情
+      songNm: '', // 歌名
+      singers: '', // 歌手
+      albumNm: '', // 专辑名称
+      albumPicUrl: '', // 专辑封面
     }
   },
   methods: {
@@ -93,7 +93,7 @@ export default {
             that.songDet = songData;
             that.songNm = songData.name;
             that.singers = songData.ar.singers;
-            that.album = songData.al.name;
+            that.albumNm = songData.al.name;
             that.albumPicUrl = songData.al.picUrl;
             that.$nextTick(() => {
               that.$refs.player.style = `background-image: url("${that.albumPicUrl}")`;
@@ -102,14 +102,18 @@ export default {
         });
       })
     },
+    // 播放
+    play() {
+      console.log()
+    }
   },
   created() {
     if (this.$route.params.songId) {
       sessionStorage.setItem('songId', JSON.stringify(this.$route.params.songId));
-      console.log('params', this.$route.params.songId)
+      // console.log('params', this.$route.params.songId)
     }
     this.songId = JSON.parse(sessionStorage.getItem('songId'));
-    console.log('songId:', this.songId)
+    // console.log('songId:', this.songId)
     this.SongDetGet(this.songId);
   },
 }
@@ -251,6 +255,10 @@ $width-cover: 30vh;
 
     .icon-bofang {
       font-size: 3.2rem;
+    }
+
+    i {
+      top: 35%;
     }
   }
 }
