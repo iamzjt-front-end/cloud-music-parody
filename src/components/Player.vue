@@ -28,8 +28,16 @@
         </music-operations>
       </div>
       <!-- 进度条 -->
-      <div class="progress-bar">
-
+      <div class="progress-bar-box">
+        <div class="start-time">
+          <p>00:00</p>
+        </div>
+        <div class="progress-bar">
+          <div class="little-dot"></div>
+        </div>
+        <div class="end-time">
+          <p>04:22</p>
+        </div>
       </div>
       <!-- 播放控制 -->
       <div class="play-control">
@@ -136,9 +144,55 @@ $width-cover: 30vh;
     margin: 0 auto;
   }
 
-  .progress-bar {
-    width: 100%;
+  .progress-bar-box {
+    width: 95%;
     height: 4rem;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+
+    .start-time, .end-time {
+      width: 2.6rem;
+      height: 4rem;
+      text-align: center;
+      line-height: 4rem;
+
+      p {
+        font-size: 0.7rem;
+        opacity: 0.5;
+      }
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 0.08rem;
+      border-radius: 0.04rem;
+      background-color: #fff;
+      opacity: 0.5;
+
+      &:active {
+        height: 0.22rem;
+        border-radius: 0.11rem;
+      }
+    }
+
+    .little-dot {
+      width: 0.6rem;
+      height: 0.6rem;
+      background-color: #fff;
+      border-radius: 0.35rem;
+      position: relative;
+      top: -0.25rem;
+      left: 2rem;
+
+      &:active {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 0.5rem;
+        position: relative;
+        top: -0.4rem;
+      }
+    }
   }
 
   .play-control {
