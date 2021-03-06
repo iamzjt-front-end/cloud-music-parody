@@ -50,10 +50,12 @@ const router = new Router({
         },
         {
             path: '/recommend',
+            name: 'recommend',
             component: Recommend,
         },
         {
             path: '/player',
+            name: 'player',
             component: Player,
         },
     ]

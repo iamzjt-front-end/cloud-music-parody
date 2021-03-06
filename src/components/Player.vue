@@ -1,20 +1,18 @@
 <template>
-  <div id="player">
+  <div id="player" ref="player">
     <div class="obscured-glass">
       <top-bar>
         <i class="iconfont icon-xiala" slot="left"></i>
         <div class="singNmAndSinger" slot="center">
-          <h1>歌曲名称</h1>
-          <p>歌手</p>
+          <h1>{{ songNm }}</h1>
+          <p>{{ singers }} - {{ album }}</p>
         </div>
         <i class="iconfont icon-fenxiang" slot="right"></i>
       </top-bar>
       <!-- 唱片封面 -->
       <div class="record-cover-box">
         <div class="record-cover">
-          <img
-              src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201412%2F15%2F20141215154216_HeKFJ.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617605020&t=04caff22525318c1197f606cab4f12cd"
-              alt="">
+          <img :src="albumPicUrl">
         </div>
       </div>
       <!-- 其他选项 -->
@@ -62,7 +60,58 @@ export default {
   components: {
     TopBar,
     MusicOperations,
-  }
+  },
+  data() {
+    return {
+      songId: '',
+      songDet: null,
+      songNm: '',
+      singers: '',
+      album: '',
+      albumPicUrl: '',
+    }
+  },
+  methods: {
+    // 歌曲详情获取
+    SongDetGet(val) {
+      let that = this;
+      this.$api.player.songDetQry({
+        ids: val
+      }).then(res => {
+        let counter = 0;
+        // 对歌手信息进行处理，有的歌曲可能不止一个歌手
+        let songData = res.data.songs[0];
+        songData.ar.forEach(function (item, index) {
+          if (index == 0) {
+            songData.ar.singers = item.name;
+          } else {
+            songData.ar.singers = songData.ar.singers + '/' + item.name;
+          }
+          counter++;
+          if (counter == songData.ar.length) {
+            // 等遍历完再进行这里面的操作
+            that.songDet = songData;
+            that.songNm = songData.name;
+            that.singers = songData.ar.singers;
+            that.album = songData.al.name;
+            that.albumPicUrl = songData.al.picUrl;
+            that.$nextTick(() => {
+              that.$refs.player.style = `background-image: url("${that.albumPicUrl}")`;
+            })
+          }
+        });
+      })
+    },
+  },
+  created() {
+    if (this.$route.params.songId) {
+      sessionStorage.setItem('songId', JSON.stringify(this.$route.params.songId));
+      console.log('params', this.$route.params.songId)
+    }
+    this.songId = JSON.parse(sessionStorage.getItem('songId'));
+    console.log('songId:', this.songId)
+    this.SongDetGet(this.songId);
+  },
 }
 </script>
 
@@ -72,7 +121,6 @@ $width-cover: 30vh;
 #player {
   width: 100%;
   height: 100vh;
-  background-image: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201412%2F15%2F20141215154216_HeKFJ.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617605020&t=04caff22525318c1197f606cab4f12cd");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -94,6 +142,7 @@ $width-cover: 30vh;
   .singNmAndSinger {
     width: 100%;
     height: 100%;
+    margin-top: 0.5rem;
 
     h1, p {
       display: flex;
@@ -103,14 +152,14 @@ $width-cover: 30vh;
     }
 
     h1 {
-      height: 70%;
-      font-size: 1.3rem;
+      height: 50%;
+      font-size: 1.2rem;
       color: #ffffff;
     }
 
     p {
       height: 30%;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       color: #deddde;
     }
   }
@@ -123,7 +172,7 @@ $width-cover: 30vh;
     .record-cover {
       width: $width-cover;
       height: $width-cover;
-      background-color: rosybrown;
+      background-color: #fff;
       border-radius: 50%;
       position: absolute;
       top: 50%;

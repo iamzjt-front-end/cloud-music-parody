@@ -30,7 +30,7 @@
         <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item)">
           <img :src="item.al.picUrl" slot="front-cover">
           <h1 slot="song-name">{{ item.name }}</h1>
-          <p slot="song-author">{{ item.ar[0].name }} - {{ item.al.name }}</p>
+          <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
           <i class="iconfont icon-more" slot="operate"></i>
         </song>
         <div style="width: 100%; height: 1px"></div>
@@ -64,9 +64,24 @@ export default {
       let that = this;
       this.$api.found.perDayRecQry().then(res => {
         // console.log('每日推荐：', res)
-        that.perDayRecList = res.data.data.dailySongs;
-        let index = Math.floor(32 * Math.random());
-        that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
+        let counter = 0;
+        res.data.data.dailySongs.forEach(function (item1) {
+          // 对歌手信息进行处理，有的歌曲可能不止一个歌手
+          item1.ar.forEach(function (item2, index) {
+            if (index == 0) {
+              item1.ar.singers = item2.name;
+            } else {
+              item1.ar.singers = item1.ar.singers + '/' + item2.name;
+            }
+          });
+          counter++;
+          if (counter == res.data.data.dailySongs.length) {
+            // 等遍历完再进行这里面的操作
+            that.perDayRecList = res.data.data.dailySongs;
+            let index = Math.floor(32 * Math.random());
+            that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
+          }
+        })
       })
     },
     // 获取日和月
@@ -85,10 +100,11 @@ export default {
     // path传参用query，会附带在url地址上
     // name传参用params，不会附带在url地址上
     toPlayer(item) {
-      console.log('item1:', item);
       this.$router.push({
         name: 'player',
-        params: item,
+        params: {
+          songId: item.id,
+        },
       });
     },
   },
