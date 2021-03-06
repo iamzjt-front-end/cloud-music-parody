@@ -101,6 +101,12 @@ export default {
     position: relative;
     z-index: 2;
 
+    .center {
+      h1 {
+        line-height: 54px;
+      }
+    }
+
     .icon-back {
       font-size: 1.1rem;
     }
