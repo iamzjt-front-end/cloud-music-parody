@@ -10,8 +10,8 @@
       <!-- 主图 -->
       <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
         <p class="calendar">
-          <i class="day">{{day}}</i>
-          <i class="month"> / {{month}}</i>
+          <i class="day">{{ day }}</i>
+          <i class="month"> / {{ month }}</i>
         </p>
         <p class="fortune">
           今日运势：吉
@@ -27,7 +27,7 @@
       </van-index-anchor>
       <!-- 推荐歌曲曲目 -->
       <div class="recommend-song">
-        <song v-for="(item, index) in this.perDayRecList" :key="index">
+        <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item)">
           <img :src="item.al.picUrl" slot="front-cover">
           <h1 slot="song-name">{{ item.name }}</h1>
           <p slot="song-author">{{ item.ar[0].name }} - {{ item.al.name }}</p>
@@ -65,7 +65,7 @@ export default {
       this.$api.found.perDayRecQry().then(res => {
         // console.log('每日推荐：', res)
         that.perDayRecList = res.data.data.dailySongs;
-        let index = Math.floor(33 * Math.random());
+        let index = Math.floor(32 * Math.random());
         that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
       })
     },
@@ -80,6 +80,16 @@ export default {
     // 返回主页
     backToHome() {
       this.$router.push({path: '/found'});
+    },
+    // 跳转去播放
+    // path传参用query，会附带在url地址上
+    // name传参用params，不会附带在url地址上
+    toPlayer(item) {
+      console.log('item1:', item);
+      this.$router.push({
+        name: 'player',
+        params: item,
+      });
     },
   },
   mounted() {
