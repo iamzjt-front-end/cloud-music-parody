@@ -136,6 +136,7 @@ export default {
       height: 100%;
       position: absolute;
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .calendar {
