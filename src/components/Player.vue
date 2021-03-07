@@ -5,7 +5,7 @@
         <i class="iconfont icon-xiala" slot="left"></i>
         <div class="singNmAndSinger" slot="center">
           <h1>{{ songNm }}</h1>
-          <p>{{ singers }} - {{ albumNm }}</p>
+          <p>{{ singers }}</p>
         </div>
         <i class="iconfont icon-fenxiang" slot="right"></i>
       </top-bar>
@@ -67,7 +67,6 @@ export default {
       songDet: null, // 歌曲详情
       songNm: '', // 歌名
       singers: '', // 歌手
-      albumNm: '', // 专辑名称
       albumPicUrl: '', // 专辑封面
       playTimeM: '00', // 播放时间 - 分
       playTimeS: '00', // 播放时间 - 秒
@@ -97,7 +96,6 @@ export default {
             that.songDet = songData;
             that.songNm = songData.name;
             that.singers = songData.ar.singers;
-            that.albumNm = songData.al.name;
             that.albumPicUrl = songData.al.picUrl;
             // 获取歌曲时长
             that.totalTimeM = that.$moment(songData.dt).minutes();
