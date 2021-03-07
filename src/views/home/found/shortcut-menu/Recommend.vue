@@ -104,6 +104,7 @@ export default {
         name: 'player',
         params: {
           songId: item.id,
+          originalPath: '/recommend',
         },
       });
     },

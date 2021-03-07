@@ -2,7 +2,7 @@
   <div id="player" ref="player">
     <div class="obscured-glass">
       <top-bar>
-        <i class="iconfont icon-xiala" slot="left"></i>
+        <i class="iconfont icon-xiala" slot="left" @click="back()"></i>
         <div class="singNmAndSinger" slot="center">
           <h1>{{ songNm }}</h1>
           <p>{{ singers }}</p>
@@ -42,7 +42,7 @@
         <music-operations>
           <i class="iconfont icon-shunxu" slot="item1"></i>
           <i class="iconfont icon-shangyiqu" slot="item2"></i>
-          <i class="iconfont icon-bofang" slot="item3" @click="this.play"></i>
+          <i class="iconfont icon-bofang" slot="item3" @click="play()"></i>
           <i class="iconfont icon-xiayiqu" slot="item4"></i>
           <i class="iconfont icon-bofangliebiao" slot="item5"></i>
         </music-operations>
@@ -72,6 +72,7 @@ export default {
       playTimeS: '00', // 播放时间 - 秒
       totalTimeM: '', // 总时间 - 分
       totalTimeS: '', // 总时间 - 秒
+      originalPath: '', // 跳转过来的页面的路径
     }
   },
   methods: {
@@ -116,14 +117,20 @@ export default {
     // 播放
     play() {
       console.log()
-    }
+    },
+    // 返回
+    back() {
+      this.$router.push({path: this.originalPath});
+    },
   },
   created() {
     if (this.$route.params.songId) {
       sessionStorage.setItem('songId', JSON.stringify(this.$route.params.songId));
+      sessionStorage.setItem('originalPath', JSON.stringify(this.$route.params.originalPath));
       // console.log('params', this.$route.params.songId)
     }
     this.songId = JSON.parse(sessionStorage.getItem('songId'));
+    this.originalPath = JSON.parse(sessionStorage.getItem('originalPath'));
     // console.log('songId:', this.songId)
     this.SongDetGet(this.songId);
   },
