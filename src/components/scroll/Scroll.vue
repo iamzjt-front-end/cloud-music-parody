@@ -8,7 +8,7 @@
 import BetterScroll from 'better-scroll'
 
 export default {
-  name: "scroll",
+  name: "Scroll",
   props: {
     probeType: {
       type: Number,
