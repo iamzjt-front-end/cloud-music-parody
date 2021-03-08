@@ -119,7 +119,7 @@ export default {
 <style lang="scss" scoped>
 .recommend {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 
   .top-bar {
     box-shadow: none;
