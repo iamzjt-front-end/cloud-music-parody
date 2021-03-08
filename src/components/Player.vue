@@ -1,5 +1,6 @@
 <template>
-  <div id="player" ref="player">
+<div id="player">
+  <div class="normal-player" ref="player">
     <div class="obscured-glass">
       <top-bar>
         <i class="iconfont icon-xiala" slot="left" @click="back()"></i>
@@ -49,6 +50,10 @@
       </div>
     </div>
   </div>
+  <div class="mini-player">
+
+  </div>
+</div>
 </template>
 
 <script>
@@ -204,147 +209,153 @@ export default {
 $width-cover: 30vh;
 
 #player {
-  width: 100%;
-  height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-
-  .obscured-glass {
+  .normal-player {
     width: 100%;
-    height: 100%;
-    backdrop-filter: blur(66px);
-  }
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
-  .top-bar {
-    box-shadow: none;
-
-    .icon-xiala, .icon-fenxiang {
-      font-size: 1.25rem;
-    }
-  }
-
-  .singNmAndSinger {
-    width: 100%;
-    height: 100%;
-    margin-top: 0.5rem;
-
-    h1, p {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 2rem;
+    .obscured-glass {
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(66px);
     }
 
-    h1 {
-      height: 50%;
-      font-size: 1.2rem;
-      color: #ffffff;
-    }
+    .top-bar {
+      box-shadow: none;
 
-    p {
-      height: 30%;
-      font-size: 0.7rem;
-      color: #deddde;
-    }
-  }
-
-  .record-cover-box {
-    width: 100%;
-    height: calc(100vh - 54px - 10vh - 4rem - 15vh);
-    position: relative;
-
-    .record-cover {
-      width: $width-cover;
-      height: $width-cover;
-      background-color: #fff;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        height: 100%;
+      .icon-xiala, .icon-fenxiang {
+        font-size: 1.25rem;
       }
     }
-  }
 
-  .other-options {
-    width: 95%;
-    height: 10vh;
-    margin: 0 auto;
+    .singNmAndSinger {
+      width: 100%;
+      height: 100%;
+      margin-top: 0.5rem;
 
-    .icon-aixin2 {
-      color: #eb4d44;
-    }
-  }
+      h1, p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 2rem;
+      }
 
-  .progress-bar-box {
-    width: 95%;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-
-    .start-time, .end-time {
-      width: 2.6rem;
-      height: 4rem;
-      text-align: center;
-      line-height: 4rem;
+      h1 {
+        height: 50%;
+        font-size: 1.2rem;
+        color: #ffffff;
+      }
 
       p {
+        height: 30%;
         font-size: 0.7rem;
-        opacity: 0.5;
+        color: #deddde;
       }
     }
 
-    .progress-bar {
-      flex: 1;
-      height: 0.08rem;
-      border-radius: 0.04rem;
-      background-color: #fff;
-      opacity: 0.5;
-
-      &:active {
-        height: 0.22rem;
-        border-radius: 0.11rem;
-      }
-    }
-
-    .little-dot {
-      width: 0.6rem;
-      height: 0.6rem;
-      background-color: #fff;
-      border-radius: 0.35rem;
+    .record-cover-box {
+      width: 100%;
+      height: calc(100vh - 54px - 10vh - 4rem - 15vh);
       position: relative;
-      top: -0.25rem;
-      left: 2rem;
 
-      &:active {
-        width: 1rem;
-        height: 1rem;
-        border-radius: 0.5rem;
+      .record-cover {
+        width: $width-cover;
+        height: $width-cover;
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    .other-options {
+      width: 95%;
+      height: 10vh;
+      margin: 0 auto;
+
+      .icon-aixin2 {
+        color: #eb4d44;
+      }
+    }
+
+    .progress-bar-box {
+      width: 95%;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+
+      .start-time, .end-time {
+        width: 2.6rem;
+        height: 4rem;
+        text-align: center;
+        line-height: 4rem;
+
+        p {
+          font-size: 0.7rem;
+          opacity: 0.5;
+        }
+      }
+
+      .progress-bar {
+        flex: 1;
+        height: 0.08rem;
+        border-radius: 0.04rem;
+        background-color: #fff;
+        opacity: 0.5;
+
+        &:active {
+          height: 0.22rem;
+          border-radius: 0.11rem;
+        }
+      }
+
+      .little-dot {
+        width: 0.6rem;
+        height: 0.6rem;
+        background-color: #fff;
+        border-radius: 0.35rem;
         position: relative;
-        top: -0.4rem;
+        top: -0.25rem;
+        left: 2rem;
+
+        &:active {
+          width: 1rem;
+          height: 1rem;
+          border-radius: 0.5rem;
+          position: relative;
+          top: -0.4rem;
+        }
+      }
+    }
+
+    .play-control {
+      width: 95%;
+      height: 15vh;
+      margin: 0 auto;
+
+      .icon-bofang, .icon-zanting {
+        font-size: 3.2rem;
+      }
+
+      i {
+        top: 35%;
       }
     }
   }
 
-  .play-control {
-    width: 95%;
-    height: 15vh;
-    margin: 0 auto;
+  .mini-player {
 
-    .icon-bofang, .icon-zanting {
-      font-size: 3.2rem;
-    }
-
-    i {
-      top: 35%;
-    }
   }
 }
 </style>
