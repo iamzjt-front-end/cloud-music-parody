@@ -1,8 +1,13 @@
+import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from "./store"
 import api from './api'
+
+import fastclick from 'fastclick'
+
+fastclick.attach(document.body)
 
 Vue.prototype.$api = api; // 将api挂载到vue的原型上
 // Vue.prototype.$bus = new Vue();

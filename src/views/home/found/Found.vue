@@ -41,7 +41,7 @@
     <column>
       <h1 slot="title">推荐歌单</h1>
       <div class="song-list" slot="item">
-        <song-list-item v-for="(item, index) in this.songList" :key="index">
+        <song-list-item v-for="(item, index) in this.recSongList" :key="index">
           <img :src="item.picUrl" slot="img">
           <p slot="description">{{ item.name }}</p>
         </song-list-item>
@@ -90,8 +90,8 @@ export default {
       value: '',
       images: [],
       imgHeight: window.innerWidth * 193 / 522,
-      songList: [],
-      chartsList: [],
+      recSongList: [], // 推荐歌单列表
+      chartsList: [], // 排行榜歌单列表
     }
   },
   methods: {
@@ -122,7 +122,7 @@ export default {
       let that = this;
       this.$api.found.recSongListQry().then(res => {
         if (res) {
-          that.songList = res.data.recommend.slice(0, 6);
+          that.recSongList = res.data.recommend.slice(0, 6);
           that.updateSongList(res.data.recommend.slice(0, 6));
         }
       })
