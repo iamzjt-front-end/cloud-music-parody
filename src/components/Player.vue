@@ -7,22 +7,22 @@
           <h1>{{ songNm }}</h1>
           <p>{{ singers }}</p>
         </div>
-        <i class="iconfont icon-fenxiang" slot="right"></i>
+        <i class="iconfont icon-fenxiang" slot="right" @click="toShare()"></i>
       </top-bar>
       <!-- 唱片封面 -->
       <div class="record-cover-box">
         <div class="record-cover">
-          <img :src="albumPicUrl">
+          <img :src="albumPicUrl" alt="">
         </div>
       </div>
       <!-- 其他选项 -->
       <div class="other-options">
         <music-operations>
-          <i class="iconfont icon-aixin" slot="item1"></i>
-          <i class="iconfont icon-xiazai" slot="item2"></i>
-          <i class="iconfont icon-texiao" slot="item3"></i>
-          <i class="iconfont icon-pinglun" slot="item4"></i>
-          <i class="iconfont icon-more" slot="item5"></i>
+          <i class="iconfont" :class="`icon-aixin${isLove}`" slot="item1" @click="loveJudge()"></i>
+          <i class="iconfont icon-xiazai" slot="item2" @click="songDownload()"></i>
+          <i class="iconfont icon-texiao" slot="item3" @click="SpecialEffectsCtrl()"></i>
+          <i class="iconfont icon-pinglun" slot="item4" @click="toComment()"></i>
+          <i class="iconfont icon-more" slot="item5" @click="toMore()"></i>
         </music-operations>
       </div>
       <!-- 进度条 -->
@@ -40,11 +40,11 @@
       <!-- 播放控制 -->
       <div class="play-control">
         <music-operations>
-          <i class="iconfont icon-shunxu" slot="item1"></i>
-          <i class="iconfont icon-shangyiqu" slot="item2"></i>
-          <i class="iconfont icon-bofang" slot="item3" @click="play()"></i>
-          <i class="iconfont icon-xiayiqu" slot="item4"></i>
-          <i class="iconfont icon-bofangliebiao" slot="item5"></i>
+          <i class="iconfont icon-shunxu" slot="item1" @click="cycleControl()"></i>
+          <i class="iconfont icon-shangyiqu" slot="item2" @click="lastSong()"></i>
+          <i class="iconfont" :class="`icon-${isPlay}`" slot="item3" @click="playJudge()"></i>
+          <i class="iconfont icon-xiayiqu" slot="item4" @click="nextSong()"></i>
+          <i class="iconfont icon-bofangliebiao" slot="item5" @click="toPlayList()"></i>
         </music-operations>
       </div>
     </div>
@@ -54,6 +54,7 @@
 <script>
 import TopBar from "@/components/TopBar";
 import MusicOperations from "@/components/MusicOperations";
+import {Toast} from 'vant';
 
 export default {
   name: "Player",
@@ -73,6 +74,8 @@ export default {
       totalTimeM: '', // 总时间 - 分
       totalTimeS: '', // 总时间 - 秒
       originalPath: '', // 跳转过来的页面的路径
+      isLove: '1', // 是否喜欢 1-不喜欢 2-喜欢
+      isPlay: 'bofang', // 是否正在播放 默认是播放按钮,点击播放
     }
   },
   methods: {
@@ -86,13 +89,13 @@ export default {
         // 对歌手信息进行处理，有的歌曲可能不止一个歌手
         let songData = res.data.songs[0];
         songData.ar.forEach(function (item, index) {
-          if (index == 0) {
+          if (index === 0) {
             songData.ar.singers = item.name;
           } else {
             songData.ar.singers = songData.ar.singers + '/' + item.name;
           }
           counter++;
-          if (counter == songData.ar.length) {
+          if (counter === songData.ar.length) {
             // 等遍历完再进行这里面的操作
             that.songDet = songData;
             that.songNm = songData.name;
@@ -114,13 +117,73 @@ export default {
         });
       })
     },
-    // 播放
-    play() {
-      console.log()
-    },
     // 返回
     back() {
       this.$router.push({path: this.originalPath});
+    },
+    // 去往分享
+    toShare() {
+      Toast('正在开发中...');
+    },
+    // 喜欢判断
+    loveJudge() {
+      if (this.isLove === '1') {
+        this.isLove = '2';
+        // 已添加到我喜欢的音乐
+        this.$notify('已添加到我喜欢的音乐');
+      } else {
+        this.isLove = '1';
+        // 已取消喜欢
+        this.$notify({
+          message: '已取消喜欢',
+          color: '#ad0000',
+          background: '#ffe1e1',
+        });
+      }
+    },
+    // 歌曲下载
+    songDownload() {
+      Toast('正在开发中...');
+    },
+    // 特效控制
+    SpecialEffectsCtrl() {
+      Toast('正在开发中...');
+    },
+    // 进入评论
+    toComment() {
+      Toast('正在开发中...');
+    },
+    // 更多操作
+    toMore() {
+      Toast('正在开发中...');
+    },
+    // 循环控制
+    cycleControl() {
+      Toast('正在开发中...');
+    },
+    // 播放
+    playJudge() {
+      if (this.isPlay === 'bofang') {
+        // 暂停状态 ---> 播放状态
+        this.isPlay = 'zanting';
+        console.log('播放');
+      } else {
+        // 播放状态 ---> 暂停状态
+        this.isPlay = 'bofang';
+        console.log('暂停');
+      }
+    },
+    // 上一曲
+    lastSong() {
+
+    },
+    // 下一步
+    nextSong() {
+
+    },
+    // 播放列表
+    toPlayList() {
+
     },
   },
   created() {
@@ -213,6 +276,10 @@ $width-cover: 30vh;
     width: 95%;
     height: 10vh;
     margin: 0 auto;
+
+    .icon-aixin2 {
+      color: #eb4d44;
+    }
   }
 
   .progress-bar-box {
@@ -271,7 +338,7 @@ $width-cover: 30vh;
     height: 15vh;
     margin: 0 auto;
 
-    .icon-bofang {
+    .icon-bofang, .icon-zanting {
       font-size: 3.2rem;
     }
 

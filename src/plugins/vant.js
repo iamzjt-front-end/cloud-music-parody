@@ -16,6 +16,7 @@ import {
     SwipeItem,
     IndexBar,
     IndexAnchor,
+    Notify,
 } from 'vant';
 
 // 3.注册组件
@@ -32,3 +33,4 @@ Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(IndexBar);
 Vue.use(IndexAnchor);
+Vue.use(Notify );
