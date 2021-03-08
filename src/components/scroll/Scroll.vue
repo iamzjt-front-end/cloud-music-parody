@@ -12,7 +12,7 @@ export default {
   props: {
     probeType: {
       type: Number,
-      dafault: 1
+      default: 1
     },
     click: {
       type: Boolean,
@@ -26,6 +26,7 @@ export default {
   mounted() {
     setTimeout(() => { // 确保DOM渲染完毕
       this.initScroll()
+      console.log('this.scroll', this.scroll);
     }, 20)
   },
   methods: {
