@@ -138,7 +138,7 @@ export default {
       })
     },
   },
-  mounted() {
+  created() {
     this.bannerImageQry();
     this.songListGet();
     this.chartsGet();
