@@ -58,9 +58,6 @@
         </charts-item>
       </div>
     </column>
-    <transition name="slide">
-      <router-view class="page"></router-view>
-    </transition>
   </div>
 </template>
 
@@ -190,23 +187,6 @@ export default {
   .wide-line {
     height: 0.55rem;
     background-color: #f8f8f8;
-  }
-
-  .page {
-    position: absolute;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-  }
-
-  .slide-enter-active, .slide-leave-active {
-    transition: all 0.3s;
-  }
-
-  .slide-enter, .slide-leave-to {
-    transform: translate3d(100%, 0, 0);
   }
 }
 </style>
