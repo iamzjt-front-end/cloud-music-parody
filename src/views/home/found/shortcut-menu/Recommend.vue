@@ -1,44 +1,42 @@
 <template>
-  <transition name="slide">
-    <div class="recommend">
-      <van-index-bar :index-list="indexList">
-        <!-- 顶栏 -->
-        <top-bar>
-          <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
-          <h1 slot="center">每日推荐</h1>
-          <i class="iconfont icon-more" slot="right"></i>
-        </top-bar>
-        <!-- 主图 -->
-        <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
-          <p class="calendar">
-            <i class="day">{{ day }}</i>
-            <i class="month"> / {{ month }}</i>
-          </p>
-          <p class="fortune">
-            今日运势：吉
-          </p>
+  <div class="recommend">
+    <van-index-bar :index-list="indexList">
+      <!-- 顶栏 -->
+      <top-bar>
+        <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
+        <h1 slot="center">每日推荐</h1>
+        <i class="iconfont icon-more" slot="right"></i>
+      </top-bar>
+      <!-- 主图 -->
+      <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
+        <p class="calendar">
+          <i class="day">{{ day }}</i>
+          <i class="month"> / {{ month }}</i>
+        </p>
+        <p class="fortune">
+          今日运势：吉
+        </p>
+      </div>
+      <van-index-anchor index="1">
+        <!-- 播放全部 -->
+        <div class="play-all">
+          <i class="iconfont icon-play-all" slot="left"></i>
+          <span class="play-text">播放全部</span>
+          <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
         </div>
-        <van-index-anchor index="1">
-          <!-- 播放全部 -->
-          <div class="play-all">
-            <i class="iconfont icon-play-all" slot="left"></i>
-            <span class="play-text">播放全部</span>
-            <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
-          </div>
-        </van-index-anchor>
-        <!-- 推荐歌曲曲目 -->
-        <div class="recommend-song">
-          <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item)">
-            <img :src="item.al.picUrl" slot="front-cover">
-            <h1 slot="song-name">{{ item.name }}</h1>
-            <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
-            <i class="iconfont icon-more" slot="operate"></i>
-          </song>
-          <div style="width: 100%; height: 1px"></div>
-        </div>
-      </van-index-bar>
-    </div>
-  </transition>
+      </van-index-anchor>
+      <!-- 推荐歌曲曲目 -->
+      <div class="recommend-song">
+        <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item)">
+          <img :src="item.al.picUrl" slot="front-cover">
+          <h1 slot="song-name">{{ item.name }}</h1>
+          <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
+          <i class="iconfont icon-more" slot="operate"></i>
+        </song>
+        <div style="width: 100%; height: 1px"></div>
+      </div>
+    </van-index-bar>
+  </div>
 </template>
 
 <script>
@@ -120,12 +118,6 @@ export default {
 
 <style lang="scss" scoped>
 .recommend {
-  position: absolute;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
   width: 100%;
   height: 100vh;
 
@@ -230,13 +222,5 @@ export default {
     height: calc(100vh - 28vh - 3.4rem);
     background-color: #fff;
   }
-}
-
-.slide-enter-active, .slide-leave-active {
-  transition: all 0.3s;
-}
-
-.slide-enter, .slide-leave-to {
-  transform: translate3d(100%, 0, 0);
 }
 </style>
