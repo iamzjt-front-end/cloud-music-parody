@@ -14,7 +14,7 @@ const store = new Vuex.Store({
         playList: [], // 播放列表
         sequenceList: [], // 顺序播放列表
         mode: playMode.sequence, // 播放模式
-        currentIndex: -1,
+        currentIndex: -1, // 当前播放歌曲index
     },
     mutations: {
         // 修改token，sessionStorage
@@ -24,6 +24,12 @@ const store = new Vuex.Store({
         },
         updateSongList(state, data) {
             state.songList = data;
+        }
+    },
+    getters: {
+        // 当前播放歌曲
+        currentSong(state, currentIndex) {
+            return state.playList[currentIndex] || {};
         }
     }
 })
