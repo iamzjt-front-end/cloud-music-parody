@@ -28,10 +28,10 @@ const store = new Vuex.Store({
     },
     getters: {
         // 当前播放歌曲
-        currentSong(state, currentIndex) {
-            return state.playList[currentIndex] || {};
-        }
-    }
+        currentSong: state => {
+            return state.playList[state.currentIndex] || {};
+        },
+    },
 })
 
 export default store
