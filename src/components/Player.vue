@@ -1,5 +1,6 @@
 <template>
 <div id="player">
+  <!-- 播放器正常页面 -->
   <div class="normal-player" ref="player">
     <div class="obscured-glass">
       <top-bar>
@@ -50,6 +51,7 @@
       </div>
     </div>
   </div>
+  <!-- 播放器缩小页面 -->
   <div class="mini-player">
 
   </div>
