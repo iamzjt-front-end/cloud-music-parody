@@ -8,13 +8,12 @@ const store = new Vuex.Store({
     state: {
         // 存储token
         token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : '',
-        recSongList: '',
+        playList: [], // 当前播放列表
+        currentIndex: -1, // 当前播放歌曲index
         playing: false, // 播放状态
         fullScreen: false, // 全屏还是小屏
-        playList: [], // 播放列表
         sequenceList: [], // 顺序播放列表
         mode: playMode.sequence, // 播放模式
-        currentIndex: -1, // 当前播放歌曲index
     },
     mutations: {
         // 修改token，sessionStorage
@@ -24,6 +23,9 @@ const store = new Vuex.Store({
         },
         updatePlayList(state, data) {
             state.playList = data;
+        },
+        updateCurrentIndex(state, data) {
+            state.currentIndex = data;
         }
     },
     getters: {

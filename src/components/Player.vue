@@ -61,7 +61,7 @@
 <script>
 import TopBar from "@/components/TopBar";
 import MusicOperations from "@/components/MusicOperations";
-import {mapState} from 'vuex';
+import {mapState, mapGetters} from 'vuex';
 import {Toast} from 'vant';
 
 export default {
@@ -72,8 +72,6 @@ export default {
   },
   data() {
     return {
-      playList: [], // 播放列表
-      currentIndex: '', // 当前播放歌曲索引
       songDet: null, // 歌曲详情
       songNm: '', // 歌名
       singers: '', // 歌手
@@ -88,10 +86,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(['fullScreen']),
-    songId() { // 歌曲Id
-      return this.playList[this.currentIndex].id;
-    }
+    ...mapState(['fullScreen', 'playList', 'currentIndex']),
+    ...mapGetters(['currentSong']),
   },
   methods: {
     // 歌曲详情获取
@@ -202,16 +198,10 @@ export default {
     },
   },
   created() {
-    if (this.$route.params.currentIndex) {
-      sessionStorage.setItem('currentIndex', JSON.stringify(this.$route.params.currentIndex));
-      sessionStorage.setItem('originalPath', JSON.stringify(this.$route.params.originalPath));
-      // console.log('params', this.$route.params.songId)
-    }
-    this.currentIndex = JSON.parse(sessionStorage.getItem('index'));
-    this.originalPath = JSON.parse(sessionStorage.getItem('originalPath'));
-    // console.log('songId:', this.songId)
-    this.playList = this.$store.state.playList;
-    this.SongDetGet(this.songId);
+    this.SongDetGet(this.currentSong.id);
+  },
+  mounted() {
+
   }
 }
 </script>
