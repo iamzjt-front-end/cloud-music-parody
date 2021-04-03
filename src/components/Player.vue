@@ -1,7 +1,7 @@
 <template>
-<div id="player">
+<div id="player" v-show="playList.length > 0">
   <!-- 播放器正常页面 -->
-  <div class="normal-player" ref="player">
+  <div class="normal-player" ref="player" v-show="fullScreen">
     <div class="obscured-glass">
       <top-bar>
         <i class="iconfont icon-xiala" slot="left" @click="back()"></i>
@@ -52,7 +52,7 @@
     </div>
   </div>
   <!-- 播放器缩小页面 -->
-  <div class="mini-player">
+  <div class="mini-player" v-show="!fullScreen">
 
   </div>
 </div>
@@ -61,6 +61,7 @@
 <script>
 import TopBar from "@/components/TopBar";
 import MusicOperations from "@/components/MusicOperations";
+import {mapState} from 'vuex';
 import {Toast} from 'vant';
 
 export default {
@@ -71,6 +72,8 @@ export default {
   },
   data() {
     return {
+      playList: [], // 播放列表
+      index: '', // 歌曲索引
       songId: '', // 歌曲Id
       songDet: null, // 歌曲详情
       songNm: '', // 歌名
@@ -85,6 +88,9 @@ export default {
       isPlay: 'bofang', // 是否正在播放 默认是播放按钮,点击播放
     }
   },
+  computed: mapState({
+    fullScreen: state => state.fullScreen,
+  }),
   methods: {
     // 歌曲详情获取
     SongDetGet(val) {
@@ -194,16 +200,22 @@ export default {
     },
   },
   created() {
-    if (this.$route.params.songId) {
-      sessionStorage.setItem('songId', JSON.stringify(this.$route.params.songId));
+    if (this.$route.params.index) {
+      sessionStorage.setItem('index', JSON.stringify(this.$route.params.index));
       sessionStorage.setItem('originalPath', JSON.stringify(this.$route.params.originalPath));
       // console.log('params', this.$route.params.songId)
     }
-    this.songId = JSON.parse(sessionStorage.getItem('songId'));
+    this.index = JSON.parse(sessionStorage.getItem('index'));
     this.originalPath = JSON.parse(sessionStorage.getItem('originalPath'));
     // console.log('songId:', this.songId)
-    this.SongDetGet(this.songId);
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.playList = this.$store.state.playList;
+      let songId = this.playList[this.index].id;
+      this.SongDetGet(songId);
+    })
+  }
 }
 </script>
 

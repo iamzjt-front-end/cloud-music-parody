@@ -27,7 +27,7 @@
       </van-index-anchor>
       <!-- 推荐歌曲曲目 -->
       <div class="recommend-song">
-        <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item)">
+        <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item, index)">
           <img :src="item.al.picUrl" slot="front-cover">
           <h1 slot="song-name">{{ item.name }}</h1>
           <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
@@ -42,6 +42,7 @@
 <script>
 import TopBar from "@/components/TopBar";
 import Song from "@/components/Song";
+import {mapMutations} from 'vuex';
 
 export default {
   name: "Recommend",
@@ -59,6 +60,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['updateSongList']),
     // 每日推荐获取
     perDayRecGet() {
       let that = this;
@@ -78,6 +80,7 @@ export default {
           if (counter == res.data.data.dailySongs.length) {
             // 等遍历完再进行这里面的操作
             that.perDayRecList = res.data.data.dailySongs;
+            // 设置随机封面图
             let index = Math.floor(32 * Math.random());
             that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
           }
@@ -99,11 +102,12 @@ export default {
     // 跳转去播放
     // path传参用query，会附带在url地址上
     // name传参用params，不会附带在url地址上
-    toPlayer(item) {
+    toPlayer(item, index) {
+      this.$store.commit('updateSongList', this.perDayRecList);
       this.$router.push({
         name: 'player',
         params: {
-          songId: item.id,
+          index: index,
           originalPath: '/recommend',
         },
       });

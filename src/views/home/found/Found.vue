@@ -123,7 +123,6 @@ export default {
       this.$api.found.recSongListQry().then(res => {
         if (res) {
           that.recSongList = res.data.recommend.slice(0, 6);
-          that.updateSongList(res.data.recommend.slice(0, 6));
         }
       })
     },
