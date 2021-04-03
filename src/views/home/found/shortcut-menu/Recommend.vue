@@ -42,7 +42,7 @@
 <script>
 import TopBar from "@/components/TopBar";
 import Song from "@/components/Song";
-import {mapMutations} from 'vuex';
+import {mapMutations, mapActions} from 'vuex';
 
 export default {
   name: "Recommend",
@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     ...mapMutations(['updatePlayList', 'updateCurrentIndex']),
+    ...mapActions(['selectPlay']),
     // 每日推荐获取
     perDayRecGet() {
       let that = this;
@@ -103,8 +104,10 @@ export default {
     // path传参用query，会附带在url地址上
     // name传参用params，不会附带在url地址上
     toPlayer(item, index) {
-      this.$store.commit('updatePlayList', this.perDayRecList); // 更新播放列表
-      this.$store.commit('updateCurrentIndex', index); // 更新当前播放歌曲索引
+      this.selectPlay({
+        list: this.perDayRecList,
+        index: index
+      });
     },
   },
   created() {
