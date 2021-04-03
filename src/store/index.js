@@ -22,8 +22,8 @@ const store = new Vuex.Store({
             state.token = data;
             sessionStorage.setItem('token', data);
         },
-        updateSongList(state, data) {
-            state.songList = data;
+        updatePlayList(state, data) {
+            state.playList = data;
         }
     },
     getters: {

@@ -60,7 +60,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['updateSongList']),
+    ...mapMutations(['updatePlayList']),
     // 每日推荐获取
     perDayRecGet() {
       let that = this;
@@ -103,11 +103,11 @@ export default {
     // path传参用query，会附带在url地址上
     // name传参用params，不会附带在url地址上
     toPlayer(item, index) {
-      this.$store.commit('updateSongList', this.perDayRecList);
+      this.$store.commit('updatePlayList', this.perDayRecList);
       this.$router.push({
         name: 'player',
         params: {
-          index: index,
+          currentIndex: index,
           originalPath: '/recommend',
         },
       });

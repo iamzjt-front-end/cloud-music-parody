@@ -73,8 +73,7 @@ export default {
   data() {
     return {
       playList: [], // 播放列表
-      index: '', // 歌曲索引
-      songId: '', // 歌曲Id
+      currentIndex: '', // 当前播放歌曲索引
       songDet: null, // 歌曲详情
       songNm: '', // 歌名
       singers: '', // 歌手
@@ -88,9 +87,12 @@ export default {
       isPlay: 'bofang', // 是否正在播放 默认是播放按钮,点击播放
     }
   },
-  computed: mapState({
-    fullScreen: state => state.fullScreen,
-  }),
+  computed: {
+    ...mapState(['fullScreen']),
+    songId() { // 歌曲Id
+      return this.playList[this.currentIndex].id;
+    }
+  },
   methods: {
     // 歌曲详情获取
     SongDetGet(val) {
@@ -200,21 +202,16 @@ export default {
     },
   },
   created() {
-    if (this.$route.params.index) {
-      sessionStorage.setItem('index', JSON.stringify(this.$route.params.index));
+    if (this.$route.params.currentIndex) {
+      sessionStorage.setItem('currentIndex', JSON.stringify(this.$route.params.currentIndex));
       sessionStorage.setItem('originalPath', JSON.stringify(this.$route.params.originalPath));
       // console.log('params', this.$route.params.songId)
     }
-    this.index = JSON.parse(sessionStorage.getItem('index'));
+    this.currentIndex = JSON.parse(sessionStorage.getItem('index'));
     this.originalPath = JSON.parse(sessionStorage.getItem('originalPath'));
     // console.log('songId:', this.songId)
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.playList = this.$store.state.playList;
-      let songId = this.playList[this.index].id;
-      this.SongDetGet(songId);
-    })
+    this.playList = this.$store.state.playList;
+    this.SongDetGet(this.songId);
   }
 }
 </script>
