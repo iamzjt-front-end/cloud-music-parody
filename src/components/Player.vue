@@ -83,7 +83,7 @@
       </div>
     </div>
   </transition>
-  <audio ref="audio" :src="currentSongUrl"></audio>
+  <audio ref="audio" :src="currentSongUrl" preload></audio>
 </div>
 </template>
 
@@ -298,7 +298,7 @@ export default {
         this.$store.commit('updateCurrentIndex', index);
       }
     },
-    // 下一步
+    // 下一曲
     nextSong() {
       let index = this.currentIndex;
       index++;
