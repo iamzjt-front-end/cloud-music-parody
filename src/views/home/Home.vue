@@ -6,22 +6,19 @@
         <router-view/>
       </keep-alive>
     </div>
-    <!-- 播放器 -->
-    <player></player>
     <!-- tab栏 -->
     <tab-bar/>
   </div>
 </template>
 
 <script>
-import Player from "@/components/Player";
+
 import TabBar from "@/components/TabBar";
 
 export default {
   name: "Home",
   components: {
     TabBar,
-    Player
   }
 }
 </script>

@@ -3,15 +3,19 @@
     <keep-alive exclude="Player">
       <router-view/>
     </keep-alive>
+    <!-- 播放器 -->
+    <player></player>
   </div>
 </template>
 
 <script>
-
+import Player from "@/components/Player";
 
 export default {
   name: 'App',
-
+  components: {
+    Player,
+  },
   methods: {
     touchstart() {
       document.body.addEventListener('touchstart', function () {

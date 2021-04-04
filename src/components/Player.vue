@@ -337,7 +337,7 @@ $width-cover: 65vw;
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 100;
+    z-index: 150;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
