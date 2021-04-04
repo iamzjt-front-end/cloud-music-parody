@@ -52,7 +52,7 @@
     </div>
   </div>
   <!-- 播放器缩小页面 -->
-  <div class="mini-player" v-show="!fullScreen">
+  <div class="mini-player" v-show="!fullScreen" @click="toMax()">
     <div class="mini-record-cover-box">
       <div class="mini-record-cover-bg">
         <div class="mini-record-cover">
@@ -148,6 +148,10 @@ export default {
     // 最小化
     toMin() {
       this.$store.commit('updateFullScreen', false);
+    },
+    // 最大化
+    toMax() {
+      this.$store.commit('updateFullScreen', true);
     },
     // 去往分享
     toShare() {
