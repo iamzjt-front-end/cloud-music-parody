@@ -23,41 +23,45 @@
         <!-- todo 听歌识曲功能 -->
       </div>
     </top-bar>
-    <!-- 轮播图 -->
-    <div class="swiper">
-      <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
-        <van-swipe-item v-for="(image, index) in images" :key="index">
-          <img v-lazy="image"/>
-        </van-swipe-item>
-      </van-swipe>
-    </div>
-    <!-- todo 图片最下方被覆盖了一部分 -->
-    <!-- 快捷菜单 -->
-    <div class="shortcut-menu">
-      <shortcut-menu></shortcut-menu>
-    </div>
-    <div class="line"></div>
-    <!-- 推荐歌单专栏 -->
-    <column>
-      <h1 slot="title">推荐歌单</h1>
-      <div class="song-list" slot="item">
-        <song-list-item v-for="(item, index) in this.recSongList" :key="index">
-          <img :src="item.picUrl" slot="img">
-          <p slot="description">{{ item.name }}</p>
-        </song-list-item>
+    <scroll>
+      <div>
+        <!-- 轮播图 -->
+        <div class="swiper">
+          <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
+            <van-swipe-item v-for="(image, index) in images" :key="index">
+              <img v-lazy="image"/>
+            </van-swipe-item>
+          </van-swipe>
+        </div>
+        <!-- todo 图片最下方被覆盖了一部分 -->
+        <!-- 快捷菜单 -->
+        <div class="shortcut-menu">
+          <shortcut-menu></shortcut-menu>
+        </div>
+        <div class="line"></div>
+        <!-- 推荐歌单专栏 -->
+        <column>
+          <h1 slot="title">推荐歌单</h1>
+          <div class="song-list" slot="item">
+            <song-list-item v-for="(item, index) in this.recSongList" :key="index">
+              <img :src="item.picUrl" slot="img">
+              <p slot="description">{{ item.name }}</p>
+            </song-list-item>
+          </div>
+        </column>
+        <div class="wide-line"></div>
+        <!-- 排行榜专栏 -->
+        <column>
+          <h1 slot="title">排行榜</h1>
+          <div class="charts" slot="item">
+            <charts-item v-for="(item, index) in this.chartsList" :key="index"
+                         :chartsList="chartsList" :index="index">
+              <h1 slot="title">{{ item.name }}</h1>
+            </charts-item>
+          </div>
+        </column>
       </div>
-    </column>
-    <div class="wide-line"></div>
-    <!-- 排行榜专栏 -->
-    <column>
-      <h1 slot="title">排行榜</h1>
-      <div class="charts" slot="item">
-        <charts-item v-for="(item, index) in this.chartsList" :key="index"
-                     :chartsList="chartsList" :index="index">
-          <h1 slot="title">{{ item.name }}</h1>
-        </charts-item>
-      </div>
-    </column>
+    </scroll>
   </div>
 </template>
 
@@ -67,6 +71,7 @@ import ShortcutMenu from "@/components/ShortcutMenu";
 import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
 import ChartsItem from "@/components/ChartsItem";
+import Scroll from "@/components/scroll/Scroll";
 
 import Vue from 'vue';
 import {Lazyload, Toast} from 'vant';
@@ -83,6 +88,7 @@ export default {
     Column,
     SongListItem,
     ChartsItem,
+    Scroll
   },
   data() {
     return {
@@ -157,9 +163,11 @@ export default {
 @import '../../../assets/scss/variable';
 
 #found {
+  position: fixed;
+  top: 54px;
+  bottom: 0;
   width: 100%;
   height: 100%;
-  margin-top: 54px;
   background-color: $color-bgc;
 
   .top-bar {

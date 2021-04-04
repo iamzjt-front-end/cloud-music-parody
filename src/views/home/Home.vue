@@ -26,8 +26,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/variable';
 
-.content {
-  width: 100%;
-  height: 100%;
+#home {
+
 }
 </style>

@@ -26,16 +26,20 @@
             <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
           </div>
         </van-index-anchor>
-        <!-- 推荐歌曲曲目 -->
-        <div class="recommend-song">
-          <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item, index)">
-            <img :src="item.al.picUrl" slot="front-cover">
-            <h1 slot="song-name">{{ item.name }}</h1>
-            <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
-            <i class="iconfont icon-more" slot="operate"></i>
-          </song>
-          <div style="width: 100%; height: 1px"></div>
-        </div>
+        <scroll>
+          <div>
+            <!-- 推荐歌曲曲目 -->
+            <div class="recommend-song">
+              <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item, index)">
+                <img :src="item.al.picUrl" slot="front-cover">
+                <h1 slot="song-name">{{ item.name }}</h1>
+                <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
+                <i class="iconfont icon-more" slot="operate"></i>
+              </song>
+              <div style="width: 100%; height: 1px"></div>
+            </div>
+          </div>
+        </scroll>
       </van-index-bar>
     </div>
   </transition>
@@ -45,12 +49,14 @@
 import TopBar from "@/components/TopBar";
 import Song from "@/components/Song";
 import {mapActions} from 'vuex';
+import Scroll from "@/components/scroll/Scroll";
 
 export default {
   name: "Recommend",
   components: {
     TopBar,
     Song,
+    Scroll
   },
   data() {
     return {
@@ -120,7 +126,7 @@ export default {
 
 <style lang="scss" scoped>
 .slide-enter-active, .slide-leave-active {
-  transition: all 0.3s;
+  transition: all 2s;
 }
 
 .slide-enter, .slide-leave-to {
