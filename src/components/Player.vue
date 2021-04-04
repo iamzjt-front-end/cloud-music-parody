@@ -4,7 +4,7 @@
   <div class="normal-player" ref="player" v-show="fullScreen">
     <div class="obscured-glass">
       <top-bar>
-        <i class="iconfont icon-xiala" slot="left" @click="back()"></i>
+        <i class="iconfont icon-xiala" slot="left" @click="toMin()"></i>
         <div class="singNmAndSinger" slot="center">
           <h1>{{ songNm }}</h1>
           <p>{{ singers }}</p>
@@ -53,12 +53,23 @@
   </div>
   <!-- 播放器缩小页面 -->
   <div class="mini-player" v-show="!fullScreen">
-    <div class="icon"></div>
-    <div class="text">
-      <h2 class="name"></h2>
-      <p class="desc"></p>
+    <div class="mini-record-cover-box">
+      <div class="mini-record-cover-bg">
+        <div class="mini-record-cover">
+          <img :src="albumPicUrl" alt="">
+        </div>
+      </div>
     </div>
-    <div class="control"></div>
+    <div class="mini-text">
+      <h2 class="mini-songNm">{{ songNm }}</h2>
+      <p class="mini-singers">- {{ singers }}</p>
+    </div>
+    <div class="mini-play-control">
+      <i class="iconfont" :class="`icon-${isPlay}`" slot="item3" @click="playJudge()"></i>
+    </div>
+    <div class="mini-play-list">
+      <i class="iconfont icon-bofangliebiao" slot="item5" @click="toPlayList()"></i>
+    </div>
   </div>
 </div>
 </template>
@@ -95,7 +106,7 @@ export default {
     ...mapGetters(['currentSong']),
   },
   methods: {
-    ...mapMutations(['updateCurrentIndex']),
+    ...mapMutations(['updateCurrentIndex', 'updateFullScreen']),
     // 歌曲详情获取
     SongDetGet(val) {
       let that = this;
@@ -134,9 +145,9 @@ export default {
         });
       })
     },
-    // 返回
-    back() {
-      this.$router.push({path: this.originalPath});
+    // 最小化
+    toMin() {
+      this.$store.commit('updateFullScreen', false);
     },
     // 去往分享
     toShare() {
@@ -232,14 +243,13 @@ export default {
 $width-cover: 30vh;
 
 #player {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 100;
-
   .normal-player {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
     width: 100%;
     height: 100vh;
     background-repeat: no-repeat;
@@ -385,7 +395,91 @@ $width-cover: 30vh;
   }
 
   .mini-player {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 180;
+    width: 100%;
+    height: 2.8rem;
+    border-top: 1px solid #e3e3e3;
+    background-color: #fdfdfd;
 
+    .mini-record-cover-box {
+      width: 20%;
+      height: 100%;
+      position: relative;
+
+      .mini-record-cover-bg {
+        width: 2.8rem;
+        height: 2.8rem;
+        background-color: black;
+        border-radius: 50%;
+        position: absolute;
+        top: -0.3rem;
+        left: 60%;
+        transform: translateX(-50%);
+
+        .mini-record-cover {
+          width: 1.8rem;
+          height: 1.8rem;
+          background-color: pink;
+          border-radius: 50%;
+          overflow: hidden;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    .mini-text {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      .mini-songNm {
+        color: #323233;
+        font-size: 0.9rem;
+        padding: 0 0.3rem;
+      }
+
+      .mini-singers {
+        color: #838384;
+        font-size: 0.75rem;
+      }
+    }
+
+    .mini-play-control,
+    .mini-play-list {
+      width: 15%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mini-play-control {
+      .icon-bofang, .icon-zanting {
+        font-size: 1.6rem;
+        color: #323333;
+      }
+    }
+
+    .mini-play-list {
+      .icon-bofangliebiao {
+        font-size: 1.35rem;
+        color: #323333;
+      }
+    }
   }
 }
 </style>
