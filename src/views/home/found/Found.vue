@@ -1,28 +1,5 @@
 <template>
   <div id="found">
-    <!-- 顶栏 -->
-    <top-bar>
-      <div class="settings" slot="left">
-        <i class="iconfont icon-settings"></i>
-        <!-- todo 点击进入设置 -->
-      </div>
-      <div class="search" slot="center">
-        <form action="/">
-          <van-search
-              v-model="value"
-              shape="round"
-              input-align="center"
-              placeholder="请输入搜索关键词"
-              background="#fff"
-              @search="onSearch"
-          />
-        </form>
-      </div>
-      <div class="distinguish" slot="right">
-        <i class="iconfont icon-distinguish"></i>
-        <!-- todo 听歌识曲功能 -->
-      </div>
-    </top-bar>
     <!-- 轮播图 -->
     <div class="swiper">
       <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
@@ -62,8 +39,6 @@
 </template>
 
 <script>
-import {Toast} from 'vant'
-import TopBar from "@/components/TopBar";
 import ShortcutMenu from "@/components/ShortcutMenu";
 import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
@@ -79,7 +54,6 @@ Vue.use(Lazyload);
 export default {
   name: "found",
   components: {
-    TopBar,
     ShortcutMenu,
     Column,
     SongListItem,
@@ -87,7 +61,6 @@ export default {
   },
   data() {
     return {
-      value: '',
       images: [],
       imgHeight: window.innerWidth * 193 / 522,
       recSongList: [], // 推荐歌单列表
@@ -96,10 +69,6 @@ export default {
   },
   methods: {
     ...mapMutations(['updateSongList']),
-    onSearch(val) {
-      // todo 搜索功能
-      Toast(val);
-    },
     // 获取轮播图
     bannerImageQry() {
       // todo 判断不同设备来请求不同的轮播图片
@@ -161,11 +130,6 @@ export default {
   width: 100%;
   height: 100%;
   background-color: $color-bgc;
-
-  .icon-settings, .icon-distinguish {
-    color: $color-text-ddd;
-    font-size: $font-size-xxxl;
-  }
 
   .swiper {
     margin: 0.5rem 1rem 0.2rem 1rem;

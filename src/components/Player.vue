@@ -331,6 +331,8 @@ export default {
 $width-cover: 65vw;
 
 #player {
+  position: relative;
+
   .normal-player {
     position: fixed;
     left: 0;
@@ -503,7 +505,7 @@ $width-cover: 65vw;
   .mini-player {
     display: flex;
     align-items: center;
-    position: fixed;
+    position: absolute;
     left: 0;
     bottom: 0;
     z-index: 180;
