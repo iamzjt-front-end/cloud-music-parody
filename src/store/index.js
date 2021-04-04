@@ -10,7 +10,7 @@ const store = new Vuex.Store({
         token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : '',
         playList: [], // 当前播放列表
         currentIndex: -1, // 当前播放歌曲index
-        playingState: false, // 播放状态
+        playingState: false, // 播放状态 false-暂停 true-正在播放
         fullScreen: false, // 全屏还是小屏
         mode: playMode.sequence, // 播放模式
     },

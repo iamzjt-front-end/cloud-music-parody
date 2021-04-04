@@ -12,6 +12,12 @@ const player = {
             params: params
         });
     },
+    // 获取歌曲url
+    songUrlGet(params) {
+        return axios.get(`${base.baseURL}/song/url`, {
+            params: params
+        });
+    },
 
     // post提交
     // articleDetail1 (params) {

@@ -1,84 +1,101 @@
 <template>
 <div id="player" v-show="playList.length > 0">
   <!-- 播放器正常页面 -->
-  <div class="normal-player" ref="player" v-show="fullScreen">
-    <div class="obscured-glass">
-      <top-bar>
-        <i class="iconfont icon-xiala" slot="left" @click="toMin()"></i>
-        <div class="singNmAndSinger" slot="center">
-          <h1>{{ songNm }}</h1>
-          <p>{{ singers }}</p>
+  <transition name="normal"
+              @enter="enter"
+              @after-enter="afterEnter"
+              @leave="leave"
+              @after-leave="afterLeave">
+    <div class="normal-player" ref="player" v-show="fullScreen">
+      <div class="obscured-glass">
+        <div class="top">
+          <top-bar>
+            <i class="iconfont icon-xiala" slot="left" @click="toMin()"></i>
+            <div class="singNmAndSinger" slot="center">
+              <h1>{{ songNm }}</h1>
+              <p>{{ singers }}</p>
+            </div>
+            <i class="iconfont icon-fenxiang" slot="right" @click="toShare()"></i>
+          </top-bar>
         </div>
-        <i class="iconfont icon-fenxiang" slot="right" @click="toShare()"></i>
-      </top-bar>
-      <!-- 唱片封面 -->
-      <div class="record-cover-box">
-        <div class="record-cover">
-          <img :src="albumPicUrl" alt="">
+        <!-- 唱片封面 -->
+        <div class="record-cover-box">
+          <div class="record-cover" ref="recordCover">
+            <img :src="albumPicUrl" alt="">
+          </div>
         </div>
-      </div>
-      <!-- 其他选项 -->
-      <div class="other-options">
-        <music-operations>
-          <i class="iconfont" :class="`icon-aixin${isLove}`" slot="item1" @click="loveJudge()"></i>
-          <i class="iconfont icon-xiazai" slot="item2" @click="songDownload()"></i>
-          <i class="iconfont icon-texiao" slot="item3" @click="SpecialEffectsCtrl()"></i>
-          <i class="iconfont icon-pinglun" slot="item4" @click="toComment()"></i>
-          <i class="iconfont icon-more" slot="item5" @click="toMore()"></i>
-        </music-operations>
-      </div>
-      <!-- 进度条 -->
-      <div class="progress-bar-box">
-        <div class="start-time">
-          <p>{{ playTimeM }}:{{ playTimeS }}</p>
+        <div class="bottom">
+          <!-- 其他选项 -->
+          <div class="other-options">
+            <music-operations>
+              <i class="iconfont" :class="loveIcon" slot="item1" @click="loveJudge()"></i>
+              <i class="iconfont icon-xiazai" slot="item2" @click="songDownload()"></i>
+              <i class="iconfont icon-texiao" slot="item3" @click="SpecialEffectsCtrl()"></i>
+              <i class="iconfont icon-pinglun" slot="item4" @click="toComment()"></i>
+              <i class="iconfont icon-more" slot="item5" @click="toMore()"></i>
+            </music-operations>
+          </div>
+          <!-- 进度条 -->
+          <div class="progress-bar-box">
+            <div class="start-time">
+              <p>{{ playTimeM }}:{{ playTimeS }}</p>
+            </div>
+            <div class="progress-bar">
+              <div class="little-dot"></div>
+            </div>
+            <div class="end-time">
+              <p>{{ totalTimeM }}:{{ totalTimeS }}</p>
+            </div>
+          </div>
+          <!-- 播放控制 -->
+          <div class="play-control">
+            <music-operations>
+              <i class="iconfont icon-shunxu" slot="item1" @click="cycleControl()"></i>
+              <i class="iconfont icon-shangyiqu" slot="item2" @click="lastSong()"></i>
+              <i class="iconfont" :class="playIcon" slot="item3" @click="playJudge()"></i>
+              <i class="iconfont icon-xiayiqu" slot="item4" @click="nextSong()"></i>
+              <i class="iconfont icon-bofangliebiao" slot="item5" @click="toPlayList()"></i>
+            </music-operations>
+          </div>
         </div>
-        <div class="progress-bar">
-          <div class="little-dot"></div>
-        </div>
-        <div class="end-time">
-          <p>{{ totalTimeM }}:{{ totalTimeS }}</p>
-        </div>
-      </div>
-      <!-- 播放控制 -->
-      <div class="play-control">
-        <music-operations>
-          <i class="iconfont icon-shunxu" slot="item1" @click="cycleControl()"></i>
-          <i class="iconfont icon-shangyiqu" slot="item2" @click="lastSong()"></i>
-          <i class="iconfont" :class="`icon-${isPlay}`" slot="item3" @click="playJudge()"></i>
-          <i class="iconfont icon-xiayiqu" slot="item4" @click="nextSong()"></i>
-          <i class="iconfont icon-bofangliebiao" slot="item5" @click="toPlayList()"></i>
-        </music-operations>
       </div>
     </div>
-  </div>
+  </transition>
   <!-- 播放器缩小页面 -->
-  <div class="mini-player" v-show="!fullScreen" @click="toMax()">
-    <div class="mini-record-cover-box">
-      <div class="mini-record-cover-bg">
-        <div class="mini-record-cover">
-          <img :src="albumPicUrl" alt="">
+  <transition name="mini">
+    <div class="mini-player" v-show="!fullScreen" @click="toMax()">
+      <div class="mini-record-cover-box">
+        <div class="mini-record-cover-bg">
+          <div class="mini-record-cover">
+            <img :src="albumPicUrl" alt="">
+          </div>
         </div>
       </div>
+      <div class="mini-text">
+        <h2 class="mini-songNm">{{ songNm }}</h2>
+        <p class="mini-singers">- {{ singers }}</p>
+      </div>
+      <div class="mini-play-control">
+        <i class="iconfont" :class="playIcon" slot="item3" @click.stop="playJudge()"></i>
+      </div>
+      <div class="mini-play-list">
+        <i class="iconfont icon-bofangliebiao" slot="item5" @click.stop="toPlayList()"></i>
+      </div>
     </div>
-    <div class="mini-text">
-      <h2 class="mini-songNm">{{ songNm }}</h2>
-      <p class="mini-singers">- {{ singers }}</p>
-    </div>
-    <div class="mini-play-control">
-      <i class="iconfont" :class="`icon-${isPlay}`" slot="item3" @click="playJudge()"></i>
-    </div>
-    <div class="mini-play-list">
-      <i class="iconfont icon-bofangliebiao" slot="item5" @click="toPlayList()"></i>
-    </div>
-  </div>
+  </transition>
+  <audio ref="audio" :src="currentSongUrl"></audio>
 </div>
 </template>
 
 <script>
 import TopBar from "@/components/TopBar";
+import {Toast} from 'vant';
 import MusicOperations from "@/components/MusicOperations";
 import {mapState, mapGetters, mapMutations} from 'vuex';
-import {Toast} from 'vant';
+import animations from 'create-keyframe-animation';
+import {prefixStyle} from '@/common/dom';
+
+const transform = prefixStyle('transform');
 
 export default {
   name: "Player",
@@ -89,6 +106,7 @@ export default {
   data() {
     return {
       songDet: null, // 歌曲详情
+      currentSongUrl: '', // 歌曲url
       songNm: '', // 歌名
       singers: '', // 歌手
       albumPicUrl: '', // 专辑封面
@@ -96,19 +114,23 @@ export default {
       playTimeS: '00', // 播放时间 - 秒
       totalTimeM: '', // 总时间 - 分
       totalTimeS: '', // 总时间 - 秒
-      originalPath: '', // 跳转过来的页面的路径
-      isLove: '1', // 是否喜欢 1-不喜欢 2-喜欢
-      isPlay: 'bofang', // 是否正在播放 默认是播放按钮,点击播放
+      isLove: true, // 是否喜欢 false-不喜欢 true-喜欢
     }
   },
   computed: {
-    ...mapState(['fullScreen', 'playList', 'currentIndex']),
+    ...mapState(['fullScreen', 'playList', 'currentIndex', 'playingState']),
     ...mapGetters(['currentSong']),
+    playIcon() {
+      return this.playingState ? 'icon-zanting' : 'icon-bofang';
+    },
+    loveIcon() {
+      return this.isLove ? 'icon-aixin1' : 'icon-aixin2';
+    },
   },
   methods: {
-    ...mapMutations(['updateCurrentIndex', 'updateFullScreen']),
+    ...mapMutations(['updateCurrentIndex', 'updateFullScreen', 'updatePlayingState']),
     // 歌曲详情获取
-    SongDetGet(val) {
+    songDetGet(val) {
       let that = this;
       this.$api.player.songDetQry({
         ids: val
@@ -144,6 +166,67 @@ export default {
           }
         });
       })
+    },
+    // 歌曲url获取
+    songUrlGet(val) {
+      this.$api.player.songUrlGet({
+        id: val
+      }).then(res => {
+        this.currentSongUrl = res.data.data[0].url;
+      })
+    },
+    // 动画钩子
+    enter(el, done) {
+      const {x, y, scale} = this._getPosAndScale()
+      let animation = {
+        0: {
+          transform: `translate3d(${x}px,${y}px,0) scale(${scale})`
+        },
+        60: {
+          transform: `translate3d(0,0,0) scale(1.1)`
+        },
+        100: {
+          transform: `translate3d(0,0,0) scale(1)`
+        }
+      }
+      animations.registerAnimation({
+        name: 'move',
+        animation,
+        presets: {
+          duration: 2000,
+          easing: 'linear'
+        }
+      })
+      animations.runAnimation(this.$refs.recordCover, 'move', done)
+    },
+    afterEnter() {
+      animations.unregisterAnimation('move')
+      this.$refs.recordCover.style.animation = ''
+    },
+    leave(el, done) {
+      this.$refs.recordCover.style.transition = 'all 2s'
+      const {x, y, scale} = this._getPosAndScale()
+      this.$refs.recordCover.style[transform] = `translate3d(${x}px,${y}px,0) scale(${scale})`
+      this.$refs.recordCover.addEventListener('transitionend', done)
+    },
+    afterLeave() {
+      this.$refs.recordCover.style.transition = ''
+      this.$refs.recordCover.style[transform] = ''
+    },
+    _getPosAndScale() {
+      const targetWidth = 28.8
+      const paddingLeft = 17.6
+      const paddingBottom = 27.2
+      const paddingTop = (window.innerHeight * 0.75 - 118) / 2 - window.innerWidth * 0.65 / 2 + 54
+      const width = window.innerWidth * 0.65
+      const scale = targetWidth / width
+      const x = -(window.innerWidth / 2 - paddingLeft)
+      const y = window.innerHeight - paddingTop - width / 2 - paddingBottom
+      return {
+        x,
+        y,
+        scale
+      }
     },
     // 最小化
     toMin() {
@@ -195,14 +278,14 @@ export default {
     },
     // 播放
     playJudge() {
-      if (this.isPlay === 'bofang') {
+      if (!this.playingState) {
         // 暂停状态 ---> 播放状态
-        this.isPlay = 'zanting';
-        console.log('播放');
+        this.$store.commit('updatePlayingState', true);
+        this.$refs.audio.play();
       } else {
         // 播放状态 ---> 暂停状态
-        this.isPlay = 'bofang';
-        console.log('暂停');
+        this.$store.commit('updatePlayingState', false);
+        this.$refs.audio.pause();
       }
     },
     // 上一曲
@@ -235,7 +318,8 @@ export default {
       deep: true,
       handler: function (newValue, oldValue) {
         if (newValue !== oldValue) {
-          this.SongDetGet(this.currentSong.id);
+          this.songDetGet(this.currentSong.id);
+          this.songUrlGet(this.currentSong.id);
         }
       }
     }
@@ -244,7 +328,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$width-cover: 30vh;
+$width-cover: 65vw;
 
 #player {
   .normal-player {
@@ -254,11 +338,29 @@ $width-cover: 30vh;
     top: 0;
     bottom: 0;
     z-index: 100;
-    width: 100%;
-    height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
+    &.normal-enter-active, &.normal-leave-active {
+      transition: all 0.4s;
+
+      .top, .bottom {
+        transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32);
+      }
+    }
+
+    &.normal-enter, &.normal-leave-to {
+      opacity: 0;
+
+      .top {
+        transform: translate3d(0, -100px, 0)
+      }
+
+      .bottom {
+        transform: translate3d(0, 100px, 0)
+      }
+    }
 
     .obscured-glass {
       width: 100%;
@@ -410,6 +512,14 @@ $width-cover: 30vh;
     border-top: 1px solid #e3e3e3;
     background-color: #fdfdfd;
 
+    &.mini-enter-active, &.mini-leave-active {
+      transition: all 0.4s;
+    }
+
+    &.mini-enter, &.mini-leave-to {
+      opacity: 0;
+    }
+
     .mini-record-cover-box {
       width: 20%;
       height: 100%;
@@ -422,7 +532,7 @@ $width-cover: 30vh;
         border-radius: 50%;
         position: absolute;
         top: -0.3rem;
-        left: 60%;
+        left: 2.5rem;
         transform: translateX(-50%);
 
         .mini-record-cover {
