@@ -42,7 +42,7 @@
 <script>
 import TopBar from "@/components/TopBar";
 import Song from "@/components/Song";
-import {mapMutations, mapActions} from 'vuex';
+import {mapActions} from 'vuex';
 
 export default {
   name: "Recommend",
@@ -60,7 +60,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['updatePlayList', 'updateCurrentIndex']),
     ...mapActions(['selectPlay']),
     // 每日推荐获取
     perDayRecGet() {

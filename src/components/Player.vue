@@ -53,7 +53,12 @@
   </div>
   <!-- 播放器缩小页面 -->
   <div class="mini-player" v-show="!fullScreen">
-
+    <div class="icon"></div>
+    <div class="text">
+      <h2 class="name"></h2>
+      <p class="desc"></p>
+    </div>
+    <div class="control"></div>
   </div>
 </div>
 </template>
@@ -61,7 +66,7 @@
 <script>
 import TopBar from "@/components/TopBar";
 import MusicOperations from "@/components/MusicOperations";
-import {mapState, mapGetters} from 'vuex';
+import {mapState, mapGetters, mapMutations} from 'vuex';
 import {Toast} from 'vant';
 
 export default {
@@ -90,6 +95,7 @@ export default {
     ...mapGetters(['currentSong']),
   },
   methods: {
+    ...mapMutations(['updateCurrentIndex']),
     // 歌曲详情获取
     SongDetGet(val) {
       let that = this;
@@ -186,22 +192,38 @@ export default {
     },
     // 上一曲
     lastSong() {
-
+      let index = this.currentIndex;
+      index--;
+      if (index < 0) {
+        this.$store.commit('updateCurrentIndex', this.playList.length - 1);
+      } else {
+        this.$store.commit('updateCurrentIndex', index);
+      }
     },
     // 下一步
     nextSong() {
-
+      let index = this.currentIndex;
+      index++;
+      if (index > this.playList.length - 1) {
+        this.$store.commit('updateCurrentIndex', 0);
+      } else {
+        this.$store.commit('updateCurrentIndex', index);
+      }
     },
     // 播放列表
     toPlayList() {
 
     },
   },
-  created() {
-    this.SongDetGet(this.currentSong.id);
-  },
-  mounted() {
-
+  watch: {
+    currentSong: {
+      deep: true,
+      handler: function (newValue, oldValue) {
+        if (newValue !== oldValue) {
+          this.SongDetGet(this.currentSong.id);
+        }
+      }
+    }
   }
 }
 </script>
