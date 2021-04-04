@@ -28,9 +28,9 @@
       <keep-alive>
         <router-view/>
       </keep-alive>
-      <!-- 播放器 -->
-      <player></player>
     </div>
+    <!-- 播放器 -->
+    <player></player>
     <!-- tab栏 -->
     <tab-bar/>
   </div>
