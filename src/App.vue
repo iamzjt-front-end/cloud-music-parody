@@ -46,7 +46,7 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 80;
+  z-index: 50;
 
   .slide-enter-active, .slide-leave-active {
     transition: all 0.4s;
