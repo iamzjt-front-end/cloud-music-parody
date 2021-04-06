@@ -1,11 +1,9 @@
 <template>
   <div id="home">
     <!-- 内容区 -->
-    <div class="content">
-      <keep-alive>
-        <router-view/>
-      </keep-alive>
-    </div>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
     <!-- tab栏 -->
     <tab-bar/>
   </div>
@@ -13,8 +11,6 @@
 
 <script>
 import TabBar from "@/components/TabBar";
-
-1
 
 export default {
   name: "Home",
@@ -28,16 +24,11 @@ export default {
 @import '../../assets/scss/variable';
 
 #home {
-  .router-view {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: 0 auto;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 80;
 }
 </style>

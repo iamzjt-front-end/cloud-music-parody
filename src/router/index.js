@@ -8,7 +8,6 @@ import Found from '@/views/home/found/Found'
 import Mine from '@/views/home/mine/Mine'
 import CloudVillage from '@/views/home/cloud-village/CloudVillage';
 import Recommend from '@/views/home/found/shortcut-menu/Recommend';
-import Player from "@/components/Player";
 
 Vue.use(Router);
 
@@ -52,11 +51,6 @@ const router = new Router({
             path: '/recommend',
             name: 'recommend',
             component: Recommend,
-        },
-        {
-            path: '/player',
-            name: 'player',
-            component: Player,
         },
     ]
 });

@@ -1,7 +1,10 @@
 <template>
   <div id="app">
+    <!-- 内容区 -->
     <keep-alive>
-      <router-view/>
+      <transition name="slide">
+        <router-view/>
+      </transition>
     </keep-alive>
     <!-- 播放器 -->
     <player></player>
@@ -36,4 +39,22 @@ export default {
 
 <style lang="scss" scoped>
 @import "../node_modules/vant/lib/index.css";
+
+#app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 80;
+
+  .slide-enter-active, .slide-leave-active {
+    transition: all 0.4s;
+  }
+
+  .slide-enter, .slide-leave-to {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+}
 </style>

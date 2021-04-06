@@ -1,5 +1,4 @@
 <template>
-  <transition name="slide">
     <div class="recommend">
       <van-index-bar :index-list="indexList">
         <!-- 顶栏 -->
@@ -26,10 +25,10 @@
             <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
           </div>
         </van-index-anchor>
-        <scroll>
-          <div>
-            <!-- 推荐歌曲曲目 -->
-            <div class="recommend-song">
+        <!--<scroll>-->
+        <!--  <div>-->
+        <!-- 推荐歌曲曲目 -->
+        <div class="recommend-song">
               <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item, index)">
                 <img :src="item.al.picUrl" slot="front-cover">
                 <h1 slot="song-name">{{ item.name }}</h1>
@@ -38,25 +37,24 @@
               </song>
               <div style="width: 100%; height: 1px"></div>
             </div>
-          </div>
-        </scroll>
+        <!--</div>-->
+        <!--</scroll>-->
       </van-index-bar>
     </div>
-  </transition>
 </template>
 
 <script>
 import TopBar from "@/components/TopBar";
 import Song from "@/components/Song";
 import {mapActions} from 'vuex';
-import Scroll from "@/components/scroll/Scroll";
+// import Scroll from "@/components/scroll/Scroll";
 
 export default {
   name: "Recommend",
   components: {
     TopBar,
     Song,
-    Scroll
+    // Scroll
   },
   data() {
     return {
@@ -125,14 +123,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.slide-enter-active, .slide-leave-active {
-  transition: all 2s;
-}
-
-.slide-enter, .slide-leave-to {
-  transform: translate3d(100%, 0, 0);
-}
-
 .recommend {
   position: fixed;
   top: 0;

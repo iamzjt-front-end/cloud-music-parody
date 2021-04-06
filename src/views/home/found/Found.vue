@@ -23,10 +23,10 @@
         <!-- todo 听歌识曲功能 -->
       </div>
     </top-bar>
-    <scroll>
-      <div>
-        <!-- 轮播图 -->
-        <div class="swiper">
+    <!--<scroll>-->
+    <!--  <div>-->
+    <!-- 轮播图 -->
+    <div class="swiper">
           <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
             <van-swipe-item v-for="(image, index) in images" :key="index">
               <img v-lazy="image"/>
@@ -60,8 +60,8 @@
             </charts-item>
           </div>
         </column>
-      </div>
-    </scroll>
+    <!--</div>-->
+    <!--</scroll>-->
   </div>
 </template>
 
@@ -71,7 +71,7 @@ import ShortcutMenu from "@/components/ShortcutMenu";
 import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
 import ChartsItem from "@/components/ChartsItem";
-import Scroll from "@/components/scroll/Scroll";
+// import Scroll from "@/components/scroll/Scroll";
 
 import Vue from 'vue';
 import {Lazyload, Toast} from 'vant';
@@ -88,7 +88,7 @@ export default {
     Column,
     SongListItem,
     ChartsItem,
-    Scroll
+    // Scroll
   },
   data() {
     return {
