@@ -19,15 +19,30 @@ const router = new Router({
         },
         {
             path: '/start',
+            name: 'start',
             component: Start,
+            meta: {
+                title: "开始页",
+                index: 1
+            }
         },
         {
             path: '/passwordlogin',
+            name: 'passwordlogin',
             component: PasswordLogin,
+            meta: {
+                title: "密码登录",
+                index: 2
+            }
         },
         {
             path: '/home',
+            name: 'home',
             component: Home,
+            meta: {
+                title: "主页",
+                index: 3
+            },
             children: [
                 {
                     path: '/',
@@ -35,15 +50,30 @@ const router = new Router({
                 },
                 {
                     path: '/found',
+                    name: 'found',
                     component: Found,
+                    meta: {
+                        title: "发现",
+                        index: 4
+                    },
                 },
                 {
                     path: '/mine',
+                    name: 'mine',
                     component: Mine,
+                    meta: {
+                        title: "我的",
+                        index: 4
+                    },
                 },
                 {
                     path: '/cloud-village',
+                    name: 'cloud-villlage',
                     component: CloudVillage,
+                    meta: {
+                        title: "云村",
+                        index: 4
+                    },
                 },
             ]
         },
@@ -51,6 +81,10 @@ const router = new Router({
             path: '/recommend',
             name: 'recommend',
             component: Recommend,
+            meta: {
+                title: "推荐歌单",
+                index: 5
+            },
         },
     ]
 });

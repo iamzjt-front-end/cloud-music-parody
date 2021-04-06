@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <!-- 内容区 -->
-    <keep-alive>
-      <transition name="slide">
+    <transition :name="transitionName">
+      <keep-alive>
         <router-view/>
-      </transition>
-    </keep-alive>
+      </keep-alive>
+    </transition>
     <!-- 播放器 -->
     <player></player>
   </div>
@@ -18,6 +18,11 @@ export default {
   name: 'App',
   components: {
     Player,
+  },
+  data() {
+    return {
+      transitionName: 'slide-left' // 默认动画
+    };
   },
   methods: {
     touchstart() {
@@ -34,6 +39,17 @@ export default {
   mounted() {
     this.touchstart();
   },
+  watch: {
+    '$route'(to, from) {
+      //页面切换动画
+      // console.log(to)
+
+      const toIndex = to.meta.index
+      const fromIndex = from.meta.index
+
+      this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
+    }
+  },
 }
 </script>
 
@@ -48,13 +64,33 @@ export default {
   right: 0;
   z-index: 50;
 
-  .slide-enter-active, .slide-leave-active {
-    transition: all 0.4s;
+  .slide-right-enter-active,
+  .slide-right-leave-active,
+  .slide-left-enter-active,
+  .slide-left-leave-active {
+    will-change: transform;
+    transition: all 500ms;
+    position: absolute;
   }
 
-  .slide-enter, .slide-leave-to {
-    transform: translate3d(100%, 0, 0);
+  .slide-right-enter {
     opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  .slide-right-leave-active {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  .slide-left-enter {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  .slide-left-leave-active {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
   }
 }
 </style>
