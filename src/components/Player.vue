@@ -93,9 +93,9 @@ import {Toast} from 'vant';
 import MusicOperations from "@/components/MusicOperations";
 import {mapState, mapGetters, mapMutations} from 'vuex';
 import animations from 'create-keyframe-animation';
-import {prefixStyle} from '@/common/dom';
+// import {prefixStyle} from '@/common/dom';
 
-const transform = prefixStyle('transform');
+// const transform = prefixStyle('transform');
 
 export default {
   name: "Player",
@@ -177,7 +177,7 @@ export default {
     },
     // 动画钩子
     enter(el, done) {
-      const {x, y, scale} = this._getPosAndScale()
+      const {x, y, scale} = this.getPosAndScale()
       let animation = {
         0: {
           transform: `translate3d(${x}px,${y}px,0) scale(${scale})`
@@ -193,7 +193,7 @@ export default {
         name: 'move',
         animation,
         presets: {
-          duration: 2000,
+          duration: 400,
           easing: 'linear'
         }
       })
@@ -204,16 +204,16 @@ export default {
       this.$refs.recordCover.style.animation = ''
     },
     leave(el, done) {
-      this.$refs.recordCover.style.transition = 'all 2s'
-      const {x, y, scale} = this._getPosAndScale()
-      this.$refs.recordCover.style[transform] = `translate3d(${x}px,${y}px,0) scale(${scale})`
+      this.$refs.recordCover.style.transition = 'all 0.4s'
+      const {x, y, scale} = this.getPosAndScale()
+      this.$refs.recordCover.style.transform = `translate3d(${x}px,${y}px,0) scale(${scale})`
       this.$refs.recordCover.addEventListener('transitionend', done)
     },
     afterLeave() {
       this.$refs.recordCover.style.transition = ''
-      this.$refs.recordCover.style[transform] = ''
+      this.$refs.recordCover.style.transform = ''
     },
-    _getPosAndScale() {
+    getPosAndScale() {
       const targetWidth = 28.8
       const paddingLeft = 17.6
       const paddingBottom = 27.2
@@ -404,17 +404,19 @@ $width-cover: 65vw;
     .record-cover-box {
       width: 100%;
       height: calc(100vh - 54px - 10vh - 4rem - 15vh);
-      position: relative;
+      //position: relative;
+      display: flex;
 
       .record-cover {
         width: $width-cover;
         height: $width-cover;
         background-color: #fff;
         border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        margin: auto;
+        //position: absolute;
+        //top: 20%;
+        //left: 17.5%;
+        //transform: translate(-50%, -50%);
         overflow: hidden;
 
         img {
