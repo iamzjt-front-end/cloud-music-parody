@@ -83,7 +83,7 @@
       </div>
     </div>
   </transition>
-  <audio ref="audio" :src="currentSongUrl" preload></audio>
+  <audio id="audio" ref="audio" :src="currentSongUrl" preload></audio>
 </div>
 </template>
 
@@ -93,9 +93,6 @@ import {Toast} from 'vant';
 import MusicOperations from "@/components/MusicOperations";
 import {mapState, mapGetters, mapMutations} from 'vuex';
 import animations from 'create-keyframe-animation';
-// import {prefixStyle} from '@/common/dom';
-
-// const transform = prefixStyle('transform');
 
 export default {
   name: "Player",
@@ -173,6 +170,12 @@ export default {
         id: val
       }).then(res => {
         this.currentSongUrl = res.data.data[0].url;
+
+        if (this.playingState) {
+          this.$nextTick(() => {
+            this.$refs.audio.play();
+          })
+        }
       })
     },
     // 动画钩子
@@ -322,7 +325,7 @@ export default {
           this.songUrlGet(this.currentSong.id);
         }
       }
-    }
+    },
   }
 }
 </script>

@@ -40,7 +40,7 @@ export default {
     this.touchstart();
   },
   watch: {
-    '$route'(to, from) {
+    $route(to, from) {
       //页面切换动画
       // console.log(to)
 

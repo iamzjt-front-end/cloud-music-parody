@@ -105,9 +105,7 @@ export default {
     backToHome() {
       this.$router.push({path: '/found'});
     },
-    // 跳转去播放
-    // path传参用query，会附带在url地址上
-    // name传参用params，不会附带在url地址上
+    // 去播放
     toPlayer(item, index) {
       this.selectPlay({
         list: this.perDayRecList,
