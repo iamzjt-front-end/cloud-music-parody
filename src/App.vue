@@ -13,6 +13,7 @@
 
 <script>
 import Player from "@/components/Player";
+import animations from 'create-keyframe-animation';
 
 export default {
   name: 'App',
@@ -48,6 +49,62 @@ export default {
       const fromIndex = from.meta.index
 
       this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
+
+      if (to.meta.index == 4) {
+        this.$nextTick(() => {
+          let animation = {
+            0: {
+              transform: 'translateY(0)'
+            },
+            60:{
+              transform: 'translateY(-40px)'
+            },
+            100: {
+              transform: 'translateY(-49px)'
+            }
+          }
+          animations.registerAnimation({
+            name: 'moveUp',
+            animation,
+            presets: {
+              duration: 400,
+              easing: 'linear'
+            }
+          })
+          let miniPlayer = document.querySelector('.mini-player')
+          animations.runAnimation(miniPlayer, 'moveUp')
+          // animations.unregisterAnimation('moveUp')
+          // miniPlayer.style.animation = ''
+        })
+      } else {
+        this.$nextTick(() => {
+          let animation = {
+            0: {
+              transform: 'translateY(-49px)'
+            },
+            60:{
+              transform: 'translateY(-9px)'
+            },
+            100: {
+              transform: 'translateY(0)'
+            }
+          }
+          animations.registerAnimation({
+            name: 'moveDown',
+            animation,
+            presets: {
+              duration: 400,
+              easing: 'linear'
+            }
+          })
+          let miniPlayer = document.querySelector('.mini-player')
+          animations.runAnimation(miniPlayer, 'moveDown')
+          setTimeout(function () {
+            animations.unregisterAnimation('moveDown')
+            miniPlayer.style.animation = ''
+          }, 800)
+        })
+      }
     }
   },
 }
