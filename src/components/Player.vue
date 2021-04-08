@@ -83,7 +83,7 @@
       </div>
     </div>
   </transition>
-  <audio id="audio" ref="audio" :src="currentSongUrl" preload></audio>
+  <audio id="audio" ref="audio" :src="currentSongUrl" preload autoplay></audio>
 </div>
 </template>
 
@@ -171,11 +171,11 @@ export default {
       }).then(res => {
         this.currentSongUrl = res.data.data[0].url;
 
-        if (this.playingState) {
-          this.$nextTick(() => {
-            this.$refs.audio.play();
-          })
-        }
+        // if (this.playingState) {
+        //   this.$nextTick(() => {
+        //     this.$refs.audio.play();
+        //   })
+        // }
       })
     },
     // 动画钩子
