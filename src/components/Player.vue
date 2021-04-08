@@ -278,6 +278,7 @@ export default {
     // 循环控制
     cycleControl() {
       Toast('正在开发中...');
+      // audio 加上 loop属性 就能自动播放
     },
     // 播放
     playJudge() {
