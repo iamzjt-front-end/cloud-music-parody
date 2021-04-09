@@ -38,13 +38,13 @@
           <!-- 进度条 -->
           <div class="progress-bar-box">
             <div class="start-time">
-              <p>{{ playTimeM }}:{{ playTimeS }}</p>
+              <p class="playTime">{{ playTime }}</p>
             </div>
             <div class="progress-bar">
               <div class="little-dot"></div>
             </div>
             <div class="end-time">
-              <p>{{ totalTimeM }}:{{ totalTimeS }}</p>
+              <p>{{ totalTime }}</p>
             </div>
           </div>
           <!-- 播放控制 -->
@@ -107,11 +107,10 @@ export default {
       songNm: '', // 歌名
       singers: '', // 歌手
       albumPicUrl: '', // 专辑封面
-      playTimeM: '00', // 播放时间 - 分
-      playTimeS: '00', // 播放时间 - 秒
-      totalTimeM: '', // 总时间 - 分
-      totalTimeS: '', // 总时间 - 秒
+      playTime: '00:00', // 播放时间 - 分秒
+      totalTime: '', // 总时间 - 分秒
       isLove: true, // 是否喜欢 false-不喜欢 true-喜欢
+      timer: null, // 播放器 setInterval
     }
   },
   computed: {
@@ -148,21 +147,26 @@ export default {
             that.songNm = songData.name;
             that.singers = songData.ar.singers;
             that.albumPicUrl = songData.al.picUrl;
-            // 获取歌曲时长
-            that.totalTimeM = that.$moment(songData.dt).minutes();
-            that.totalTimeS = that.$moment(songData.dt).seconds();
-            if (that.totalTimeM < 10) {
-              that.totalTimeM = '0' + that.totalTimeM;
-            }
-            if (that.totalTimeS < 10) {
-              that.totalTimeS = '0' + that.totalTimeS;
-            }
+            // 获取歌曲总时长
+            that.totalTime = that.countTime(songData.dt);
             that.$nextTick(() => {
               that.$refs.player.style = `background-image: url("${that.albumPicUrl}")`;
             })
           }
         });
       })
+    },
+    // 秒 转为 分秒
+    countTime(time) {
+      let minutes = this.$moment(time).minutes();
+      let seconds = this.$moment(time).seconds();
+      if (minutes < 10) {
+        minutes = '0' + minutes;
+      }
+      if (seconds < 10) {
+        seconds = '0' + seconds;
+      }
+      return minutes + ':' + seconds
     },
     // 歌曲url获取
     songUrlGet(val) {
@@ -282,10 +286,19 @@ export default {
         // 暂停状态 ---> 播放状态
         this.$store.commit('updatePlayingState', true);
         this.$refs.audio.play();
+        // 获取 audio
+        let audio = document.querySelector('#audio');
+        let that = this;
+        this.timer = setInterval(function(){
+          that.playTime = that.countTime(audio.currentTime); // 当前播放时长
+          let proBarWidth = document.querySelector('.progress-bar').style.width;
+          document.querySelector('.little-dot').style.left = ((audio.currentTime / audio.duration) * proBarWidth) + 'px';
+        },1000)
       } else {
         // 播放状态 ---> 暂停状态
         this.$store.commit('updatePlayingState', false);
         this.$refs.audio.pause();
+        clearInterval(this.timer)
       }
     },
     // 上一曲
@@ -444,15 +457,22 @@ $width-cover: 65vw;
       margin: 0 auto;
 
       .start-time, .end-time {
-        width: 2.6rem;
+        width: 2.5rem;
         height: 4rem;
-        text-align: center;
         line-height: 4rem;
 
         p {
           font-size: 0.7rem;
           opacity: 0.5;
         }
+      }
+
+      .start-time {
+        text-align: left;
+      }
+
+      .end-time {
+        text-align: right;
       }
 
       .progress-bar {
@@ -462,10 +482,10 @@ $width-cover: 65vw;
         background-color: #fff;
         opacity: 0.5;
 
-        &:active {
-          height: 0.22rem;
-          border-radius: 0.11rem;
-        }
+        //&:active {
+        //  height: 0.22rem;
+        //  border-radius: 0.11rem;
+        //}
       }
 
       .little-dot {
@@ -475,15 +495,16 @@ $width-cover: 65vw;
         border-radius: 0.35rem;
         position: relative;
         top: -0.25rem;
-        left: 2rem;
+        left: -0.3rem;
 
-        &:active {
-          width: 1rem;
-          height: 1rem;
-          border-radius: 0.5rem;
-          position: relative;
-          top: -0.4rem;
-        }
+        //&:active {
+        //  width: 1rem;
+        //  height: 1rem;
+        //  border-radius: 0.5rem;
+        //  position: relative;
+        //  top: -0.4rem;
+        //  left: -0.5rem;
+        //}
       }
     }
 
