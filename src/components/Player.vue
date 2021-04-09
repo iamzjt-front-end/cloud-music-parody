@@ -248,15 +248,11 @@ export default {
       if (this.isLove === '1') {
         this.isLove = '2';
         // 已添加到我喜欢的音乐
-        this.$notify('已添加到我喜欢的音乐');
+
       } else {
         this.isLove = '1';
         // 已取消喜欢
-        this.$notify({
-          message: '已取消喜欢',
-          color: '#ad0000',
-          background: '#ffe1e1',
-        });
+
       }
     },
     // 歌曲下载
