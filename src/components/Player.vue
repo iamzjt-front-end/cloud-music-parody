@@ -288,11 +288,13 @@ export default {
         this.$refs.audio.play();
         // 获取 audio
         let audio = document.querySelector('#audio');
+        let proBarWidth = document.querySelector('.progress-bar').style.width; // 进度条长度
+        let littleDot = document.querySelector('.little-dot');
+        let littleDotWidth = document.querySelector('.little-dot').style.width; // 小圆点宽度
         let that = this;
         this.timer = setInterval(function(){
           that.playTime = that.countTime(audio.currentTime); // 当前播放时长
-          let proBarWidth = document.querySelector('.progress-bar').style.width;
-          document.querySelector('.little-dot').style.left = ((audio.currentTime / audio.duration) * proBarWidth) + 'px';
+          littleDot.style.left = ((audio.currentTime / audio.duration) * proBarWidth - littleDotWidth / 2) + 'px';
         },1000)
       } else {
         // 播放状态 ---> 暂停状态
