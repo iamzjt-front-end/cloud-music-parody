@@ -1,21 +1,20 @@
 <template>
-  <div id="passwordLogin">
-    <van-nav-bar title="手机号登录" right-text="" left-arrow @click-left="onClickLeft">
+  <div id="EmailLogin">
+    <van-nav-bar title="邮箱登录" right-text="" left-arrow @click-left="onClickLeft">
       <template #left>
         <van-icon name="cross" size="24" color="#333739"/>
       </template>
     </van-nav-bar>
     <div class="cue">
       <p>登录体验更多精彩</p>
-      <i>未注册手机号登陆后将自动创建账号</i>
+      <i>未注册邮箱登陆后将自动创建账号</i>
     </div>
-    <van-form @submit="onSubmit">
+    <div>
       <van-field
-          v-model="phone"
-          type="tel"
-          name="phone"
-          label="手机号"
-          placeholder="请填写手机号"
+          v-model="email"
+          name="email"
+          label="邮箱"
+          placeholder="请填写163网易邮箱"
           :rules="[{ required: true }]"
       />
       <van-field
@@ -27,16 +26,11 @@
           :rules="[{ required: true }]"
       />
       <div style="margin: 28px 16px 0 16px;">
-        <van-button round block type="info" color="#333739" :disabled="!phone || !password" native-type="submit">立即登录
+        <van-button round block type="info" color="#333739" :disabled="!email || !password" native-type="button"
+                    @click="emailLogin">立即登录
         </van-button>
       </div>
-    </van-form>
-    <a class="verification-code" @click="toEmailLogin">
-      邮箱登录
-    </a>
-    <a class="register" @click="toRegister">
-      立即注册
-    </a>
+    </div>
   </div>
 </template>
 
@@ -45,23 +39,25 @@ import {Toast} from 'vant';
 import {mapMutations} from 'vuex';
 
 export default {
-  name: "PasswordLogin",
+  name: "EmailLogin",
   data() {
     return {
-      phone: '',
-      password: '',
+      email: '', // 163 网易邮箱
+      password: '', // 密码
     };
   },
   methods: {
     ...mapMutations(['changeLogin']),
     // 返回开始页面
     onClickLeft() {
-      this.$router.push({path: '/start'});
+      this.$router.push({path: '/passwordlogin'});
     },
-    // 登录
-    onSubmit(values) {
-      let that = this;
-      this.$api.login.passwordLogin(values).then(res => {
+    // 邮箱登录
+    emailLogin() {
+      this.$api.login.emailLogin({
+        email: this.email, // 163 网易邮箱
+        password: this.password, // 密码
+      }).then(res => {
         if (res.data.code == 502) { // 密码错误
           Toast.fail(res.data.message);
           this.password = '';
@@ -69,18 +65,10 @@ export default {
           // 将用户token保存到sessionStorage和vuex中
           this.$store.commit('changeLogin', res.data.token);
           Toast.success('登录成功');
-          that.$router.push('/home');
+          this.$router.push('/home');
         }
       })
     },
-    // 邮箱登录
-    toEmailLogin() {
-      this.$router.push('/emailLogin');
-    },
-    // 注册
-    toRegister() {
-      Toast('正在开发中...');
-    }
   },
 }
 </script>
@@ -88,7 +76,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/scss/variable";
 
-#passwordLogin {
+#EmailLogin {
   width: 100%;
   height: 100vh;
   background-color: $color-bgc;
@@ -110,31 +98,6 @@ export default {
     i {
       color: $color-text-ld;
       font-size: $font-size-s;
-    }
-  }
-
-  .verification-code {
-    display: block;
-    float: right;
-    color: $color-text-ld;
-    margin: 1.5rem 2rem;
-    font-size: $font-size-m;
-
-    &:active {
-      color: $color-text-d;
-    }
-  }
-
-  .register {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    color: $color-text-lld;
-    font-size: $font-size-m;
-
-    &:active {
-      color: $color-text-ld;
     }
   }
 }

@@ -12,6 +12,12 @@ const login = {
             params: params
         });
     },
+    // 邮箱登录
+    emailLogin(params) {
+        return axios.get(`${base.baseURL}/login`, {
+            params: params
+        });
+    },
 
     // post提交
     // articleDetail1 (params) {

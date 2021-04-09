@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Start from '@/views/start/Start'
 import PasswordLogin from '@/views/start/PasswordLogin'
+import EmailLogin from 'views/start/EmailLogin'
 import Home from '@/views/home/Home'
 import Found from '@/views/home/found/Found'
 import Mine from '@/views/home/mine/Mine'
@@ -36,12 +37,21 @@ const router = new Router({
             }
         },
         {
+            path: '/emailLogin',
+            name: 'emailLogin',
+            component: EmailLogin,
+            meta: {
+                title: "邮箱登录",
+                index: 3
+            }
+        },
+        {
             path: '/home',
             name: 'home',
             component: Home,
             meta: {
                 title: "主页",
-                index: 3
+                index: 4
             },
             children: [
                 {
@@ -54,7 +64,7 @@ const router = new Router({
                     component: Found,
                     meta: {
                         title: "发现",
-                        index: 4
+                        index: 5
                     },
                 },
                 {
@@ -63,7 +73,7 @@ const router = new Router({
                     component: Mine,
                     meta: {
                         title: "我的",
-                        index: 4
+                        index: 5
                     },
                 },
                 {
@@ -72,7 +82,7 @@ const router = new Router({
                     component: CloudVillage,
                     meta: {
                         title: "云村",
-                        index: 4
+                        index: 5
                     },
                 },
             ]
@@ -83,7 +93,7 @@ const router = new Router({
             component: Recommend,
             meta: {
                 title: "推荐歌单",
-                index: 5
+                index: 6
             },
         },
     ]
