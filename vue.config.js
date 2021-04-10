@@ -12,19 +12,19 @@ module.exports = {
             .set('components', resolve('src/components'))
             .set('plugins', resolve('src/plugins'))
     },
-    // devServer: {
-    //     proxy: {
-    //         '/api': {
-    //             // target: 'https://api.lk-lmusic.top', // 接口域名
-    //             target: 'http://localhost:3000', // 接口域名
-    //             secure: false, // 如果是https接口，需要配置这个参数
-    //             changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
-    //             pathRewrite: {
-    //                 '^/api': ''
-    //             }
-    //         }
-    //     }
-    // },
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'https://api.lk-lmusic.top', // 接口域名
+                // target: 'http://localhost:3000', // 接口域名
+                secure: false, // 如果是https接口，需要配置这个参数
+                changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
+    },
     publicPath: process.env.NODE_ENV === 'production'
         ? '/cloud-music-parody/'
         : '/'
