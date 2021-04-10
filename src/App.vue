@@ -50,7 +50,7 @@ export default {
 
       this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
 
-      if (to.meta.index == 4) {
+      if (to.meta.index == 5) {
         this.$nextTick(() => {
           let animation = {
             0: {
