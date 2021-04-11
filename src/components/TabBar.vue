@@ -38,5 +38,9 @@ export default {
 .tab-bar {
   width: 100vw;
   height: 50px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 80;
 }
 </style>

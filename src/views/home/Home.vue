@@ -1,9 +1,11 @@
 <template>
   <div id="home">
-    <!-- 内容区 -->
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+    <div class="content">
+      <!-- 内容区 -->
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
+    </div>
     <!-- tab栏 -->
     <tab-bar/>
   </div>
@@ -24,11 +26,16 @@ export default {
 @import '../../assets/scss/variable';
 
 #home {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 80;
+  width: 100vw;
+  height: 100vh;
+
+  .content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 50px;
+    right: 0;
+    z-index: 80;
+  }
 }
 </style>

@@ -23,45 +23,45 @@
         <!-- todo 听歌识曲功能 -->
       </div>
     </top-bar>
-    <!--<scroll>-->
-    <!--  <div>-->
-    <!-- 轮播图 -->
-    <div class="swiper">
-      <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
-        <van-swipe-item v-for="(image, index) in images" :key="index">
-          <img v-lazy="image"/>
-        </van-swipe-item>
-      </van-swipe>
-    </div>
-    <!-- todo 图片最下方被覆盖了一部分 -->
-    <!-- 快捷菜单 -->
-    <div class="shortcut-menu">
-      <shortcut-menu></shortcut-menu>
-    </div>
-    <div class="line"></div>
-    <!-- 推荐歌单专栏 -->
-    <column class="rec-list">
-      <h1 slot="title">推荐歌单</h1>
-      <div class="song-list" slot="item">
-        <song-list-item v-for="(item, index) in this.recSongList" :key="index">
-          <img :src="item.picUrl" slot="img">
-          <p slot="description">{{ item.name }}</p>
-        </song-list-item>
+    <scroll :data="recSongList">
+      <div>
+        <!-- 轮播图 -->
+        <div class="swiper">
+          <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
+            <van-swipe-item v-for="(image, index) in images" :key="index">
+              <img v-lazy="image"/>
+            </van-swipe-item>
+          </van-swipe>
+        </div>
+        <!-- todo 图片最下方被覆盖了一部分 -->
+        <!-- 快捷菜单 -->
+        <div class="shortcut-menu">
+          <shortcut-menu></shortcut-menu>
+        </div>
+        <div class="line"></div>
+        <!-- 推荐歌单专栏 -->
+        <column class="rec-list">
+          <h1 slot="title">推荐歌单</h1>
+          <div class="song-list" slot="item">
+            <song-list-item v-for="(item, index) in this.recSongList" :key="index">
+              <img :src="item.picUrl" slot="img">
+              <p slot="description">{{ item.name }}</p>
+            </song-list-item>
+          </div>
+        </column>
+        <div class="wide-line"></div>
+        <!-- 排行榜专栏 -->
+        <column class="char-list">
+          <h1 slot="title">排行榜</h1>
+          <div class="charts" slot="item">
+            <charts-item v-for="(item, index) in this.chartsList" :key="index"
+                         :chartsList="chartsList" :index="index">
+              <h1 slot="title">{{ item.name }}</h1>
+            </charts-item>
+          </div>
+        </column>
       </div>
-    </column>
-    <div class="wide-line"></div>
-    <!-- 排行榜专栏 -->
-    <column class="char-list">
-      <h1 slot="title">排行榜</h1>
-      <div class="charts" slot="item">
-        <charts-item v-for="(item, index) in this.chartsList" :key="index"
-                     :chartsList="chartsList" :index="index">
-          <h1 slot="title">{{ item.name }}</h1>
-        </charts-item>
-      </div>
-    </column>
-    <!--</div>-->
-    <!--</scroll>-->
+    </scroll>
   </div>
 </template>
 
@@ -71,7 +71,7 @@ import ShortcutMenu from "@/components/ShortcutMenu";
 import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
 import ChartsItem from "@/components/ChartsItem";
-// import Scroll from "@/components/scroll/Scroll";
+import Scroll from "@/components/scroll/Scroll";
 
 import Vue from 'vue';
 import {Lazyload, Toast} from 'vant';
@@ -88,7 +88,7 @@ export default {
     Column,
     SongListItem,
     ChartsItem,
-    // Scroll
+    Scroll
   },
   data() {
     return {
@@ -128,6 +128,11 @@ export default {
       this.$api.found.recSongListQry().then(res => {
         if (res) {
           that.recSongList = res.data.recommend.slice(0, 6);
+          this.$nextTick(() => {
+            let songList = document.querySelector('.song-list');
+            let songListItemWidth = document.querySelector('.song-list-item').scrollWidth;
+            songList.style.width = songListItemWidth * 6.5 + 'px';
+          })
         }
       })
     },
@@ -138,6 +143,11 @@ export default {
         if (res) {
           // console.log('排行榜：', res)
           that.chartsList = res.data.list.slice(0, 6);
+          this.$nextTick(() => {
+            let charts = document.querySelector('.charts');
+            let chartsItemWidth = document.querySelector('.charts-item').clientWidth;
+            charts.style.width = chartsItemWidth * 6.5 + 'px';
+          })
         }
       })
     },
@@ -155,7 +165,7 @@ export default {
     for (let item of img) {
       item.style.height = this.imgHeight + 'px'
     }
-  }
+  },
 }
 </script>
 
@@ -163,13 +173,15 @@ export default {
 @import '../../../assets/scss/variable';
 
 #found {
+  width: 100vw;
+  height: calc(100vh - 54px - 50px);
+
   position: fixed;
   top: 54px;
   left: 0;
-  bottom: 0;
+  bottom: 50px;
   right: 0;
-  width: 100%;
-  height: 100%;
+
   background-color: $color-bgc;
 
   .top-bar {
@@ -205,7 +217,6 @@ export default {
     height: 14.25rem;
 
     .song-list {
-      width: 100%;
       height: 100%;
     }
   }
@@ -216,7 +227,11 @@ export default {
   }
 
   .char-list {
-    height: 17.4rem;
+    height: 19rem;
+
+    .charts {
+      height: 100%;
+    }
   }
 }
 </style>
