@@ -34,6 +34,7 @@ export default {
           if (distance > scrollWidth) {
             distance = 1;
             // todo 优化  回到原处可以停顿个半秒，然后再继续移动
+            // todo bug：快速切换时有点问题
           }
           this.$refs.scroll.style.transform = `translateX(${-distance}px)`;
         }, 35)
