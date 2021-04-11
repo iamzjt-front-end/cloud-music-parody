@@ -130,7 +130,7 @@ export default {
           that.recSongList = res.data.recommend.slice(0, 6);
           this.$nextTick(() => {
             let songList = document.querySelector('.song-list');
-            let songListItemWidth = document.querySelector('.song-list-item').scrollWidth;
+            let songListItemWidth = document.querySelector('.song-list-item').clientWidth;
             songList.style.width = songListItemWidth * 6.5 + 'px';
           })
         }
