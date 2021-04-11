@@ -1,46 +1,42 @@
 <template>
   <div class="recommend">
-    <van-index-bar :index-list="indexList">
-      <!-- 顶栏 -->
-      <top-bar>
-        <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
-        <h1 slot="center">每日推荐</h1>
-        <i class="iconfont icon-more" slot="right"></i>
-      </top-bar>
-      <!-- 主图 -->
-      <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
-        <p class="calendar">
-          <i class="day">{{ day }}</i>
-          <i class="month"> / {{ month }}</i>
-        </p>
-        <p class="fortune">
-          今日运势：吉
-        </p>
-      </div>
-      <van-index-anchor index="1">
-        <!-- 播放全部 -->
-        <div class="play-all">
-          <i class="iconfont icon-play-all" slot="left"></i>
-          <span class="play-text">播放全部</span>
-          <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
-        </div>
-      </van-index-anchor>
-      <div class="recommend-song-box">
-        <scroll ref="scroll" :data="perDayRecList">
-          <div>
-            <!-- 推荐歌曲曲目 -->
-            <div class="recommend-song">
-              <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item, index)">
-                <img :src="item.al.picUrl" slot="front-cover" @load="load">
-                <h1 slot="song-name">{{ item.name }}</h1>
-                <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
-                <i class="iconfont icon-more" slot="operate"></i>
-              </song>
-            </div>
+    <!-- 顶栏 -->
+    <top-bar>
+      <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
+      <h1 slot="center">每日推荐</h1>
+      <i class="iconfont icon-more" slot="right"></i>
+    </top-bar>
+    <!-- 主图 -->
+    <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
+      <p class="calendar">
+        <i class="day">{{ day }}</i>
+        <i class="month"> / {{ month }}</i>
+      </p>
+      <p class="fortune">
+        今日运势：吉
+      </p>
+    </div>
+    <!-- 播放全部 -->
+    <div class="play-all">
+      <i class="iconfont icon-play-all" slot="left"></i>
+      <span class="play-text">播放全部</span>
+      <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
+    </div>
+    <div class="recommend-song-box">
+      <scroll ref="scroll" :data="perDayRecList">
+        <div>
+          <!-- 推荐歌曲曲目 -->
+          <div class="recommend-song">
+            <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item, index)">
+              <img :src="item.al.picUrl" slot="front-cover" @load="load">
+              <h1 slot="song-name">{{ item.name }}</h1>
+              <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
+              <i class="iconfont icon-more" slot="operate"></i>
+            </song>
           </div>
-        </scroll>
-      </div>
-    </van-index-bar>
+        </div>
+      </scroll>
+    </div>
   </div>
 </template>
 
@@ -240,7 +236,7 @@ export default {
       height: 100%;
       color: #999999;
       font-size: 0.8rem;
-      padding: 0.8rem 0 0 0.2rem;
+      padding: 1.5rem 0 0 0.2rem;
     }
   }
 
