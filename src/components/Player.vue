@@ -361,6 +361,13 @@ export default {
         }
       }
     },
+    playTime: {
+      handler: function (newValue, oldValue) {
+        if (newValue !== oldValue && this.playTime == this.totalTime) {
+          this.nextSong();
+        }
+      }
+    },
   }
 }
 </script>
