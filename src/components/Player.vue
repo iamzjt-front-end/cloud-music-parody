@@ -380,6 +380,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/scss/mixin";
+
 $width-cover: 65vw;
 
 #player {
@@ -634,23 +636,20 @@ $width-cover: 65vw;
       height: 100%;
       display: flex;
       align-items: center;
-      white-space: nowrap;
 
       .mini-songNm {
         width: 60%;
         color: #323233;
         font-size: 0.9rem;
         padding: 0 0.3rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        @include single-line-ellipsis;
       }
 
       .mini-singers {
         width: 35%;
         color: #838384;
         font-size: 0.7rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        @include single-line-ellipsis;
       }
     }
 
