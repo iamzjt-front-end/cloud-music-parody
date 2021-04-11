@@ -41,6 +41,7 @@
               <p class="playTime">{{ playTime }}</p>
             </div>
             <div class="progress-bar">
+              <div class="progress-bar-cover"></div>
               <div class="little-dot"></div>
             </div>
             <div class="end-time">
@@ -303,7 +304,8 @@ export default {
     playTimeUpt() {
       // 获取 audio
       let audio = document.querySelector('#audio');
-      let proBarWidth = document.querySelector('.progress-bar').offsetWidth; // 进度条长度
+      let proBarWidth = document.querySelector('.progress-bar').offsetWidth; // 总进度条长度
+      let proBarCover = document.querySelector('.progress-bar-cover'); // 已播放进度条
       let littleDot = document.querySelector('.little-dot');
       let littleDotWidth = document.querySelector('.little-dot').offsetWidth; // 小圆点宽度
       let that = this;
@@ -311,6 +313,7 @@ export default {
       this.timer = setInterval(function () {
         that.playTime = that.countTime(audio.currentTime); // 当前播放时长
         littleDot.style.left = ((audio.currentTime / audio.duration) * proBarWidth - littleDotWidth / 2) + 'px';
+        proBarCover.style.width = (audio.currentTime / audio.duration) * proBarWidth + 'px';
       }, 1000);
       // 封面旋转 定时器
       this.rotateTimer = setInterval(function () {
@@ -499,10 +502,21 @@ $width-cover: 65vw;
 
       .progress-bar {
         flex: 1;
-        height: 0.08rem;
-        border-radius: 0.04rem;
-        background-color: #fff;
-        opacity: 0.5;
+        height: 1.5px;
+        border-radius: 0.75px;
+        background-color: rgba(255, 255, 255, 0.3);
+        position: relative;
+
+        .progress-bar-cover {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 1.5px;
+          background-color: rgba(255, 255, 255, 0.4);
+          z-index: 10;
+        }
 
         //&:active {
         //  height: 0.22rem;
@@ -515,9 +529,10 @@ $width-cover: 65vw;
         height: 10px;
         background-color: #fff;
         border-radius: 5px;
-        position: relative;
+        position: absolute;
         top: -4px;
         left: -5px;
+        z-index: 20;
 
         //&:active {
         //  width: 1rem;
