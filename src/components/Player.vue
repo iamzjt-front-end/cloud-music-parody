@@ -174,12 +174,7 @@ export default {
         id: val
       }).then(res => {
         this.currentSongUrl = res.data.data[0].url;
-
-        // if (this.playingState) {
-        //   this.$nextTick(() => {
-        //     this.$refs.audio.play();
-        //   })
-        // }
+        this.playTimeUpt();
       })
     },
     // 动画钩子
@@ -286,22 +281,26 @@ export default {
         // 暂停状态 ---> 播放状态
         this.$store.commit('updatePlayingState', true);
         this.$refs.audio.play();
-        // 获取 audio
-        let audio = document.querySelector('#audio');
-        let proBarWidth = document.querySelector('.progress-bar').style.width; // 进度条长度
-        let littleDot = document.querySelector('.little-dot');
-        let littleDotWidth = document.querySelector('.little-dot').style.width; // 小圆点宽度
-        let that = this;
-        this.timer = setInterval(function(){
-          that.playTime = that.countTime(audio.currentTime); // 当前播放时长
-          littleDot.style.left = ((audio.currentTime / audio.duration) * proBarWidth - littleDotWidth / 2) + 'px';
-        },1000)
+        this.playTimeUpt();
       } else {
         // 播放状态 ---> 暂停状态
         this.$store.commit('updatePlayingState', false);
         this.$refs.audio.pause();
         clearInterval(this.timer)
       }
+    },
+    // 播放时间更新 及 进度条更新
+    playTimeUpt() {
+      // 获取 audio
+      let audio = document.querySelector('#audio');
+      let proBarWidth = document.querySelector('.progress-bar').offsetWidth; // 进度条长度
+      let littleDot = document.querySelector('.little-dot');
+      let littleDotWidth = document.querySelector('.little-dot').offsetWidth; // 小圆点宽度
+      let that = this;
+      this.timer = setInterval(function () {
+        that.playTime = that.countTime(audio.currentTime); // 当前播放时长
+        littleDot.style.left = ((audio.currentTime / audio.duration) * proBarWidth - littleDotWidth / 2) + 'px';
+      }, 1000)
     },
     // 上一曲
     lastSong() {
@@ -491,13 +490,13 @@ $width-cover: 65vw;
       }
 
       .little-dot {
-        width: 0.6rem;
-        height: 0.6rem;
+        width: 10px;
+        height: 10px;
         background-color: #fff;
-        border-radius: 0.35rem;
+        border-radius: 5px;
         position: relative;
-        top: -0.25rem;
-        left: -0.3rem;
+        top: -4px;
+        left: -5px;
 
         //&:active {
         //  width: 1rem;
