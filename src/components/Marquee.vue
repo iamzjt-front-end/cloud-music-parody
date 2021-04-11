@@ -33,6 +33,7 @@ export default {
           distance++;
           if (distance > scrollWidth) {
             distance = 1;
+            // todo 优化  回到原处可以停顿个半秒，然后再继续移动
           }
           this.$refs.scroll.style.transform = `translateX(${-distance}px)`;
         }, 35)
