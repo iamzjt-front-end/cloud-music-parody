@@ -190,6 +190,7 @@ export default {
         //     this.$refs.audio.play();
         //   })
         // }
+        this.$store.commit('updatePlayingState', true);
         this.clearTime();
         this.playTimeUpt();
       })
@@ -629,26 +630,33 @@ $width-cover: 65vw;
     }
 
     .mini-text {
-      width: 50%;
+      width: 54%;
       height: 100%;
       display: flex;
       align-items: center;
+      white-space: nowrap;
 
       .mini-songNm {
+        width: 60%;
         color: #323233;
         font-size: 0.9rem;
         padding: 0 0.3rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .mini-singers {
+        width: 35%;
         color: #838384;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
     .mini-play-control,
     .mini-play-list {
-      width: 15%;
+      width: 13%;
       height: 100%;
       display: flex;
       justify-content: center;

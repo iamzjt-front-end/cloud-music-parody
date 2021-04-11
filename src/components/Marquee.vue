@@ -45,9 +45,7 @@ export default {
       handler: function (newVal, oldVal) {
         if (newVal != oldVal) {
           clearInterval(this.timer);
-          for (let item of this.value) {
-            this.text += item
-          }
+          this.text = this.value;
           let timer = setTimeout(() => {
             this.move();
             clearTimeout(timer);
