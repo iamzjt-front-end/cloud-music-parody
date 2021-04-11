@@ -58,7 +58,10 @@ export default {
     .song-name, .song-author {
       width: 100%;
       padding: 0 0.8rem;
-      @include single-line-ellipsis;
+
+      h1, p {
+        @include single-line-ellipsis;
+      }
     }
 
     .song-name {
