@@ -65,8 +65,17 @@ export default {
   }
 
   .down {
-    //width: 45.4rem;
-    width: 142.4rem;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: -webkit-box;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .down::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
   }
 }
 </style>

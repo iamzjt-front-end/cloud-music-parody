@@ -40,7 +40,7 @@
         </div>
         <div class="line"></div>
         <!-- 推荐歌单专栏 -->
-        <column>
+        <column class="rec-list">
           <h1 slot="title">推荐歌单</h1>
           <div class="song-list" slot="item">
             <song-list-item v-for="(item, index) in this.recSongList" :key="index">
@@ -51,15 +51,15 @@
         </column>
         <div class="wide-line"></div>
         <!-- 排行榜专栏 -->
-        <column>
-          <h1 slot="title">排行榜</h1>
-          <div class="charts" slot="item">
-            <charts-item v-for="(item, index) in this.chartsList" :key="index"
-                         :chartsList="chartsList" :index="index">
-              <h1 slot="title">{{ item.name }}</h1>
-            </charts-item>
-          </div>
-        </column>
+    <column class="char-list">
+      <h1 slot="title">排行榜</h1>
+      <div class="charts" slot="item">
+        <charts-item v-for="(item, index) in this.chartsList" :key="index"
+                     :chartsList="chartsList" :index="index">
+          <h1 slot="title">{{ item.name }}</h1>
+        </charts-item>
+      </div>
+    </column>
     <!--</div>-->
     <!--</scroll>-->
   </div>
@@ -196,14 +196,20 @@ export default {
   }
 
   .line {
-    height: 0.04rem;
-    background-color: #e5e5e5;
+    height: 1px;
+    background-color: #e6e6e6;
     margin-top: 0.8rem;
   }
 
+  .rec-list {
+    height: 14.25rem;
+  }
+
   .wide-line {
-    height: 0.55rem;
+    height: 9px;
     background-color: #f8f8f8;
   }
+
+  //.char-list {}
 }
 </style>
