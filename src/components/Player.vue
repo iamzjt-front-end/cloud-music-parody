@@ -94,12 +94,14 @@ import {Toast} from 'vant';
 import MusicOperations from "@/components/MusicOperations";
 import {mapState, mapGetters, mapMutations} from 'vuex';
 import animations from 'create-keyframe-animation';
+// import Marquee from "components/Marquee";
 
 export default {
   name: "Player",
   components: {
     TopBar,
     MusicOperations,
+    // Marquee,
   },
   data() {
     return {
