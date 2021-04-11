@@ -1,60 +1,61 @@
 <template>
-    <div class="recommend">
-      <van-index-bar :index-list="indexList">
-        <!-- 顶栏 -->
-        <top-bar>
-          <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
-          <h1 slot="center">每日推荐</h1>
-          <i class="iconfont icon-more" slot="right"></i>
-        </top-bar>
-        <!-- 主图 -->
-        <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
-          <p class="calendar">
-            <i class="day">{{ day }}</i>
-            <i class="month"> / {{ month }}</i>
-          </p>
-          <p class="fortune">
-            今日运势：吉
-          </p>
+  <div class="recommend">
+    <van-index-bar :index-list="indexList">
+      <!-- 顶栏 -->
+      <top-bar>
+        <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
+        <h1 slot="center">每日推荐</h1>
+        <i class="iconfont icon-more" slot="right"></i>
+      </top-bar>
+      <!-- 主图 -->
+      <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
+        <p class="calendar">
+          <i class="day">{{ day }}</i>
+          <i class="month"> / {{ month }}</i>
+        </p>
+        <p class="fortune">
+          今日运势：吉
+        </p>
+      </div>
+      <van-index-anchor index="1">
+        <!-- 播放全部 -->
+        <div class="play-all">
+          <i class="iconfont icon-play-all" slot="left"></i>
+          <span class="play-text">播放全部</span>
+          <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
         </div>
-        <van-index-anchor index="1">
-          <!-- 播放全部 -->
-          <div class="play-all">
-            <i class="iconfont icon-play-all" slot="left"></i>
-            <span class="play-text">播放全部</span>
-            <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
-          </div>
-        </van-index-anchor>
-        <!--<scroll>-->
-        <!--  <div>-->
-        <!-- 推荐歌曲曲目 -->
-        <div class="recommend-song">
+      </van-index-anchor>
+      <div class="recommend-song-box">
+        <scroll ref="scroll" :data="perDayRecList">
+          <div>
+            <!-- 推荐歌曲曲目 -->
+            <div class="recommend-song">
               <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item, index)">
-                <img :src="item.al.picUrl" slot="front-cover">
+                <img :src="item.al.picUrl" slot="front-cover" @load="load">
                 <h1 slot="song-name">{{ item.name }}</h1>
                 <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
                 <i class="iconfont icon-more" slot="operate"></i>
               </song>
-              <div style="width: 100%; height: 1px"></div>
             </div>
-        <!--</div>-->
-        <!--</scroll>-->
-      </van-index-bar>
-    </div>
+          </div>
+        </scroll>
+      </div>
+    </van-index-bar>
+  </div>
 </template>
 
 <script>
 import TopBar from "@/components/TopBar";
 import Song from "@/components/Song";
 import {mapActions} from 'vuex';
-// import Scroll from "@/components/scroll/Scroll";
+import Scroll from "@/components/scroll/Scroll";
 
 export default {
   name: "Recommend",
   components: {
     TopBar,
     Song,
-    // Scroll
+    Scroll
   },
   data() {
     return {
@@ -92,6 +93,18 @@ export default {
           }
         })
       })
+    },
+    load() {
+      if (!this.checkloaded) {
+        this.checkloaded = true
+        // recommend-song 高度计算
+        this.$nextTick(() => {
+          let recommendSong = document.querySelector('.recommend-song');
+          let songWidth = document.querySelector('#song').scrollHeight;
+          recommendSong.style.height = songWidth * this.perDayRecList.length + 'px';
+        })
+        this.$refs.scroll.refresh()
+      }
     },
     // 获取日和月
     dayMonthGet() {
@@ -137,7 +150,7 @@ export default {
     color: #fff;
     background-color: transparent;
     position: relative;
-    z-index: 2;
+    z-index: 81;
 
     .center {
       h1 {
@@ -167,6 +180,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
+    z-index: 80;
 
     &::before {
       content: '';
@@ -201,6 +215,8 @@ export default {
     height: 3.4rem;
     background-color: #fff;
     display: flex;
+    position: relative;
+    z-index: 80;
 
     .icon-play-all {
       height: 100%;
@@ -228,10 +244,15 @@ export default {
     }
   }
 
-  .recommend-song {
+  .recommend-song-box {
     width: 100%;
     height: calc(100vh - 28vh - 3.4rem);
-    background-color: #fff;
+
+    .recommend-song {
+      width: 100%;
+      height: calc(100vh - 28vh - 3.4rem);
+      background-color: #fff;
+    }
   }
 }
 </style>

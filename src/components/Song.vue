@@ -31,10 +31,9 @@ export default {
 
 #song {
   width: 100%;
-  height: 3.5rem;
+  height: 4.7rem;
   background-color: #fff;
-  margin: 0.5rem 0 1.3rem 0;
-  padding: 0 1.05rem;
+  padding: 0.5rem 1.05rem 1.2rem;
   display: flex;
   align-items: center;
 
@@ -67,14 +66,14 @@ export default {
     .song-name {
       color: #333334;
       height: 2rem;
-      line-height: 2rem;
+      line-height: 1.5rem;
       font-size: 1.2rem;
     }
 
     .song-author {
       color: #808080;
       height: 1.5rem;
-      line-height: 1.5rem;
+      line-height: 1rem;
       font-size: 0.85rem;
     }
   }
