@@ -23,10 +23,10 @@ export default {
       let wrapWidth = this.$refs.marqueeWrap.offsetWidth; // 容器宽度
       let textWidth = this.$refs.getWidth.scrollWidth; // 实际内容宽度
       let scrollWidth = textWidth + 40;
+
       if (textWidth >= wrapWidth) {
-        let copy = this.$refs.copy;
-        copy.innerText = this.text;
-        copy.style.marginLeft = '40px';
+        this.$refs.copy.innerText = this.text;
+        this.$refs.copy.style.marginLeft = '40px';
 
         let distance = 0;
         this.timer = setInterval(() => {
@@ -45,10 +45,17 @@ export default {
       handler: function (newVal, oldVal) {
         if (newVal != oldVal) {
           clearInterval(this.timer);
+
+          let copy = this.$refs.copy;
+          copy.innerText = '';
+          copy.style.marginLeft = '0';
+          let scroll = this.$refs.scroll;
+          scroll.style.transform = 'translateX(0)';
+
           this.text = this.value;
-          let timer = setTimeout(() => {
+          let timer1 = setTimeout(() => {
             this.move();
-            clearTimeout(timer);
+            clearTimeout(timer1);
           }, 1000)
         }
       }
