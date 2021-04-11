@@ -27,30 +27,30 @@
     <!--  <div>-->
     <!-- 轮播图 -->
     <div class="swiper">
-          <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
-            <van-swipe-item v-for="(image, index) in images" :key="index">
-              <img v-lazy="image"/>
-            </van-swipe-item>
-          </van-swipe>
-        </div>
-        <!-- todo 图片最下方被覆盖了一部分 -->
-        <!-- 快捷菜单 -->
-        <div class="shortcut-menu">
-          <shortcut-menu></shortcut-menu>
-        </div>
-        <div class="line"></div>
-        <!-- 推荐歌单专栏 -->
-        <column class="rec-list">
-          <h1 slot="title">推荐歌单</h1>
-          <div class="song-list" slot="item">
-            <song-list-item v-for="(item, index) in this.recSongList" :key="index">
-              <img :src="item.picUrl" slot="img">
-              <p slot="description">{{ item.name }}</p>
-            </song-list-item>
-          </div>
-        </column>
-        <div class="wide-line"></div>
-        <!-- 排行榜专栏 -->
+      <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
+        <van-swipe-item v-for="(image, index) in images" :key="index">
+          <img v-lazy="image"/>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    <!-- todo 图片最下方被覆盖了一部分 -->
+    <!-- 快捷菜单 -->
+    <div class="shortcut-menu">
+      <shortcut-menu></shortcut-menu>
+    </div>
+    <div class="line"></div>
+    <!-- 推荐歌单专栏 -->
+    <column class="rec-list">
+      <h1 slot="title">推荐歌单</h1>
+      <div class="song-list" slot="item">
+        <song-list-item v-for="(item, index) in this.recSongList" :key="index">
+          <img :src="item.picUrl" slot="img">
+          <p slot="description">{{ item.name }}</p>
+        </song-list-item>
+      </div>
+    </column>
+    <div class="wide-line"></div>
+    <!-- 排行榜专栏 -->
     <column class="char-list">
       <h1 slot="title">排行榜</h1>
       <div class="charts" slot="item">
@@ -203,6 +203,11 @@ export default {
 
   .rec-list {
     height: 14.25rem;
+
+    .song-list {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .wide-line {
@@ -210,6 +215,8 @@ export default {
     background-color: #f8f8f8;
   }
 
-  //.char-list {}
+  .char-list {
+    height: 17.4rem;
+  }
 }
 </style>

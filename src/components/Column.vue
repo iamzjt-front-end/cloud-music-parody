@@ -24,7 +24,7 @@ export default {
 .column {
   box-sizing: border-box;
   width: 100%;
-  height: auto;
+  height: 100%;
   padding: 0.5rem 1rem;
   background-color: #fff;
   overflow: hidden;
@@ -66,16 +66,7 @@ export default {
 
   .down {
     width: 100%;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    display: -webkit-box;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .down::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    display: none;
+    height: calc(100% - 2rem);
   }
 }
 </style>
