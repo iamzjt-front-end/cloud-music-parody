@@ -21,7 +21,7 @@
         <!-- 唱片封面 -->
         <div class="record-cover-box">
           <div class="record-cover" ref="recordCover">
-            <img :src="albumPicUrl" alt="">
+            <img :src="albumPicUrl" alt="" :style="{transform: musicRotate}">
           </div>
         </div>
         <div class="bottom">
@@ -67,7 +67,7 @@
       <div class="mini-record-cover-box">
         <div class="mini-record-cover-bg">
           <div class="mini-record-cover">
-            <img :src="albumPicUrl" alt="">
+            <img :src="albumPicUrl" alt="" :style="{transform: musicRotate}">
           </div>
         </div>
       </div>
@@ -111,6 +111,9 @@ export default {
       totalTime: '', // 总时间 - 分秒
       isLove: true, // 是否喜欢 false-不喜欢 true-喜欢
       timer: null, // 播放器 setInterval
+      musicRotateInit: 0, // 初始化旋转角度
+      musicRotate: "rotate(" + 0 + "deg)", // 封面实时旋转角度
+      rotateTimer: null, // 旋转 setInterval
     }
   },
   computed: {
@@ -292,10 +295,11 @@ export default {
         // 播放状态 ---> 暂停状态
         this.$store.commit('updatePlayingState', false);
         this.$refs.audio.pause();
-        clearInterval(this.timer)
+        clearInterval(this.timer);
+        clearInterval(this.rotateTimer);
       }
     },
-    // 播放时间更新 及 进度条更新
+    // 播放时间更新 及 进度条更新 及 封面旋转
     playTimeUpt() {
       // 获取 audio
       let audio = document.querySelector('#audio');
@@ -303,10 +307,16 @@ export default {
       let littleDot = document.querySelector('.little-dot');
       let littleDotWidth = document.querySelector('.little-dot').offsetWidth; // 小圆点宽度
       let that = this;
+      // 进度条 定时器
       this.timer = setInterval(function () {
         that.playTime = that.countTime(audio.currentTime); // 当前播放时长
         littleDot.style.left = ((audio.currentTime / audio.duration) * proBarWidth - littleDotWidth / 2) + 'px';
-      }, 1000)
+      }, 1000);
+      // 封面旋转 定时器
+      this.rotateTimer = setInterval(function () {
+        that.musicRotateInit = that.musicRotateInit + 0.05;
+        that.musicRotate = "rotate(" + that.musicRotateInit + "deg)";
+      }, 1);
     },
     // 上一曲
     lastSong() {
