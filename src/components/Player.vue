@@ -12,8 +12,12 @@
           <top-bar>
             <i class="iconfont icon-xiala" slot="left" @click="toMin()"></i>
             <div class="singNmAndSinger" slot="center">
-              <h1>{{ songNm }}</h1>
-              <p>{{ singers }}</p>
+              <div class="songNm">
+                <marquee :value="songNm"></marquee>
+              </div>
+              <div class="singers">
+                <marquee :value="singers"></marquee>
+              </div>
             </div>
             <i class="iconfont icon-fenxiang" slot="right" @click="toShare()"></i>
           </top-bar>
@@ -94,14 +98,14 @@ import {Toast} from 'vant';
 import MusicOperations from "@/components/MusicOperations";
 import {mapState, mapGetters, mapMutations} from 'vuex';
 import animations from 'create-keyframe-animation';
-// import Marquee from "components/Marquee";
+import Marquee from "components/Marquee";
 
 export default {
   name: "Player",
   components: {
     TopBar,
     MusicOperations,
-    // Marquee,
+    Marquee,
   },
   data() {
     return {
@@ -427,21 +431,23 @@ $width-cover: 65vw;
       width: 100%;
       height: 100%;
       margin-top: 0.5rem;
+      padding: 0 1rem;
 
-      h1, p {
+      .songNm, .singers {
+        width: 100%;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 2rem;
       }
 
-      h1 {
+      .songNm {
         height: 50%;
         font-size: 1.2rem;
         color: #ffffff;
       }
 
-      p {
+      .singers {
         height: 30%;
         font-size: 0.7rem;
         color: #deddde;
