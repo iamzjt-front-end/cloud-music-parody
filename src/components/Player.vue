@@ -183,6 +183,7 @@ export default {
         //     this.$refs.audio.play();
         //   })
         // }
+        this.clearTime();
         this.playTimeUpt();
       })
     },
@@ -295,8 +296,7 @@ export default {
         // 播放状态 ---> 暂停状态
         this.$store.commit('updatePlayingState', false);
         this.$refs.audio.pause();
-        clearInterval(this.timer);
-        clearInterval(this.rotateTimer);
+        this.clearTime();
       }
     },
     // 播放时间更新 及 进度条更新 及 封面旋转
@@ -317,6 +317,11 @@ export default {
         that.musicRotateInit = that.musicRotateInit + 0.05;
         that.musicRotate = "rotate(" + that.musicRotateInit + "deg)";
       }, 1);
+    },
+    // 清除进度条 及 封面旋转 定时器
+    clearTime() {
+      clearInterval(this.timer);
+      clearInterval(this.rotateTimer);
     },
     // 上一曲
     lastSong() {
