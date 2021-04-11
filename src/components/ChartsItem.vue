@@ -59,7 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 .charts-item {
-  width: 23rem;
+  width: 21rem;
   height: 14rem;
   background-color: #fff;
   margin: 0.5rem 0.7rem 0 0;
