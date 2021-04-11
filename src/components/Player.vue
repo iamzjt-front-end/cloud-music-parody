@@ -174,6 +174,12 @@ export default {
         id: val
       }).then(res => {
         this.currentSongUrl = res.data.data[0].url;
+        // ios autoplay不生效
+        // if (this.playingState) {
+        //   this.$nextTick(() => {
+        //     this.$refs.audio.play();
+        //   })
+        // }
         this.playTimeUpt();
       })
     },
