@@ -148,7 +148,7 @@ export default {
             that.singers = songData.ar.singers;
             that.albumPicUrl = songData.al.picUrl;
             // 获取歌曲总时长
-            that.totalTime = that.countTime(songData.dt);
+            that.totalTime = that.countTime(songData.dt / 1000);
             that.$nextTick(() => {
               that.$refs.player.style = `background-image: url("${that.albumPicUrl}")`;
             })
@@ -158,8 +158,8 @@ export default {
     },
     // 秒 转为 分秒
     countTime(time) {
-      let minutes = this.$moment(time).minutes();
-      let seconds = this.$moment(time).seconds();
+      let minutes = Math.floor(time / 60);
+      let seconds = Math.floor(time % 60) + 1;
       if (minutes < 10) {
         minutes = '0' + minutes;
       }
