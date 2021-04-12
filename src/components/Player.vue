@@ -465,7 +465,6 @@ $width-cover: 65vw;
       .record-cover {
         width: $width-cover;
         height: $width-cover;
-        background-color: #fff;
         border-radius: 50%;
         margin: auto;
         //position: absolute;
