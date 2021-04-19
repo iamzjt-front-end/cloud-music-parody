@@ -115,6 +115,14 @@ export default {
       backdrop-filter: blur(66px);
       -webkit-backdrop-filter: blur(8px);
     }
+
+    .main-img-left {
+
+    }
+
+    .main-img-right {
+
+    }
   }
 
   .play-all {
