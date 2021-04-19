@@ -23,7 +23,7 @@
         <!-- todo 听歌识曲功能 -->
       </div>
     </top-bar>
-    <scroll :data="recSongList">
+    <scroll ref="scroll" :data="chartsList">
       <div>
         <!-- 轮播图 -->
         <div class="swiper">

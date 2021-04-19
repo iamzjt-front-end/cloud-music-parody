@@ -98,8 +98,8 @@ export default {
           let recommendSong = document.querySelector('.recommend-song');
           let songWidth = document.querySelector('#song').scrollHeight;
           recommendSong.style.height = songWidth * this.perDayRecList.length + 'px';
+          this.$refs.scroll.refresh();
         })
-        this.$refs.scroll.refresh()
       }
     },
     // 获取日和月
