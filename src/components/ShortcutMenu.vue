@@ -46,7 +46,7 @@ export default {
     skip(item) {
       switch (item.title) {
         case '每日推荐' :
-          this.$router.push({path: '/recommend'});
+          this.$router.push({path: '/day-recommend'});
           break;
         case '私人FM' :
           Toast('正在开发中...');

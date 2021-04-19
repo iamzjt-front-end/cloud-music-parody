@@ -43,7 +43,7 @@
         <column class="rec-list">
           <h1 slot="title">推荐歌单</h1>
           <div class="song-list" slot="item">
-            <song-list-item v-for="(item, index) in this.recSongList" :key="index">
+            <song-list-item v-for="(item, index) in this.recSongList" :key="index" @click.native="toRecList(item)">
               <img :src="item.picUrl" slot="img">
               <p slot="description">{{ item.name }}</p>
             </song-list-item>
@@ -135,6 +135,10 @@ export default {
           })
         }
       })
+    },
+    // 跳转去推荐歌单
+    toRecList(val) {
+      console.log(val);
     },
     // 获取榜单
     chartsGet() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend">
+  <div class="day-recommend">
     <!-- 顶栏 -->
     <top-bar>
       <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
@@ -47,7 +47,7 @@ import {mapActions} from 'vuex';
 import Scroll from "@/components/scroll/Scroll";
 
 export default {
-  name: "Recommend",
+  name: "DayRecommend",
   components: {
     TopBar,
     Song,
@@ -130,7 +130,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.recommend {
+.day-recommend {
   position: fixed;
   top: 0;
   left: 0;

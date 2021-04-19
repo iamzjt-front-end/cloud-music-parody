@@ -8,7 +8,7 @@ import Home from '@/views/home/Home'
 import Found from '@/views/home/found/Found'
 import Mine from '@/views/home/mine/Mine'
 import CloudVillage from '@/views/home/cloud-village/CloudVillage';
-import Recommend from '@/views/home/found/shortcut-menu/Recommend';
+import DayRecommend from 'views/home/found/shortcut-menu/DayRecommend';
 
 Vue.use(Router);
 
@@ -88,9 +88,9 @@ const router = new Router({
             ]
         },
         {
-            path: '/recommend',
-            name: 'recommend',
-            component: Recommend,
+            path: '/day-recommend',
+            name: 'day-recommend',
+            component: DayRecommend,
             meta: {
                 title: "推荐歌单",
                 index: 6
