@@ -9,6 +9,7 @@ import Found from '@/views/home/found/Found'
 import Mine from '@/views/home/mine/Mine'
 import CloudVillage from '@/views/home/cloud-village/CloudVillage';
 import DayRecommend from 'views/home/found/shortcut-menu/DayRecommend';
+import RecList from "views/home/found/rec-list/RecList";
 
 Vue.use(Router);
 
@@ -91,6 +92,15 @@ const router = new Router({
             path: '/day-recommend',
             name: 'day-recommend',
             component: DayRecommend,
+            meta: {
+                title: "推荐歌单",
+                index: 6
+            },
+        },
+        {
+            path: '/rec-list',
+            name: 'rec-list',
+            component: RecList,
             meta: {
                 title: "推荐歌单",
                 index: 6

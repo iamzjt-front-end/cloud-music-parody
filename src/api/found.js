@@ -36,6 +36,12 @@ const found = {
             params: params
         })
     },
+    // 推荐歌单获取
+    recListQry(params) {
+        return axios.get(`${base.baseURL}/playlist/detail`, {
+            params: params
+        })
+    },
 
     // post提交
     // articleDetail1 (params) {
