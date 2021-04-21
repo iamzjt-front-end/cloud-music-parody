@@ -42,6 +42,18 @@ const found = {
             params: params
         })
     },
+    // 精品歌单标签列表
+    playListTagsQry(params) {
+        return axios.get(`${base.baseURL}/playlist/highquality/tags`, {
+            params: params
+        })
+    },
+    // 获取精品歌单
+    highListQry(params) {
+        return axios.get(`${base.baseURL}/top/playlist/highquality`, {
+            params: params
+        })
+    },
 
     // post提交
     // articleDetail1 (params) {

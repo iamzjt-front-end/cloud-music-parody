@@ -2,7 +2,7 @@
   <div class="column">
     <div class="top">
       <slot name="title"></slot>
-      <span class="more">更多<span class="iconBox" @click="toMore">
+      <span class="more" @click="toMore">更多<span class="iconBox">
           <van-icon name="arrow" class="icon"/>
         </span>
       </span>
@@ -16,12 +16,16 @@
 <script>
 export default {
   name: "Column",
+  props: ['more'],
   methods: {
     toMore() {
-      this.$router.push({
-        name: 'rec-list',
-        params: {}
-      });
+      if (this.more == 'rec') {
+        // 跳转去歌单广场
+        this.$router.push({path: '/song-list-square'});
+      } else if (this.more == 'char') {
+        // 跳转去排行榜
+        this.$router.push({path: '/charts'});
+      }
     }
   }
 }

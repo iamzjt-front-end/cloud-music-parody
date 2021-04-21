@@ -11,6 +11,8 @@ import CloudVillage from '@/views/home/cloud-village/CloudVillage';
 import DayRecommend from 'views/home/found/shortcut-menu/DayRecommend';
 import RecList from "views/home/found/rec-list/RecList";
 import SongListSquare from "views/home/found/rec-list/SongListSquare";
+import RankList from "views/home/found/charts/RankList";
+import Charts from "views/home/found/charts/Charts";
 
 Vue.use(Router);
 
@@ -113,6 +115,24 @@ const router = new Router({
             component: SongListSquare,
             meta: {
                 title: "歌单广场",
+                index: 6
+            },
+        },
+        {
+            path: '/rank-list',
+            name: 'rank-list',
+            component: RankList,
+            meta: {
+                title: "排行榜歌单",
+                index: 6
+            },
+        },
+        {
+            path: '/charts',
+            name: 'charts',
+            component: Charts,
+            meta: {
+                title: "排行榜",
                 index: 6
             },
         },
