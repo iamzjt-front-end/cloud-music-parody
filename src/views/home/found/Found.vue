@@ -138,7 +138,6 @@ export default {
     },
     // 跳转去推荐歌单
     toRecList(val) {
-      console.log(val);
       this.$router.push({
         name: 'rec-list',
         params: {

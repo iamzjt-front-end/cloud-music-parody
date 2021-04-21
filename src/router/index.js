@@ -10,6 +10,7 @@ import Mine from '@/views/home/mine/Mine'
 import CloudVillage from '@/views/home/cloud-village/CloudVillage';
 import DayRecommend from 'views/home/found/shortcut-menu/DayRecommend';
 import RecList from "views/home/found/rec-list/RecList";
+import SongListSquare from "views/home/found/rec-list/SongListSquare";
 
 Vue.use(Router);
 
@@ -103,6 +104,15 @@ const router = new Router({
             component: RecList,
             meta: {
                 title: "推荐歌单",
+                index: 6
+            },
+        },
+        {
+            path: '/song-list-square',
+            name: 'song-list-square',
+            component: SongListSquare,
+            meta: {
+                title: "歌单广场",
                 index: 6
             },
         },

@@ -2,7 +2,7 @@
   <div class="column">
     <div class="top">
       <slot name="title"></slot>
-      <span class="more">更多<span class="iconBox">
+      <span class="more">更多<span class="iconBox" @click="toMore">
           <van-icon name="arrow" class="icon"/>
         </span>
       </span>
@@ -15,7 +15,15 @@
 
 <script>
 export default {
-  name: "Column"
+  name: "Column",
+  methods: {
+    toMore() {
+      this.$router.push({
+        name: 'rec-list',
+        params: {}
+      });
+    }
+  }
 }
 </script>
 
