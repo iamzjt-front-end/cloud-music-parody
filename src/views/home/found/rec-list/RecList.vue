@@ -44,6 +44,7 @@
 import TopBar from "components/TopBar";
 import Song from "components/Song";
 import Scroll from "components/scroll/Scroll";
+import {mapActions} from 'vuex';
 
 export default {
   name: "RecList",
@@ -65,6 +66,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['selectPlay']),
     // 返回主页
     backToHome() {
       this.$router.push({path: '/found'});
@@ -105,6 +107,13 @@ export default {
           this.$refs.scroll.refresh();
         })
       }
+    },
+    // 去播放
+    toPlayer(item, index) {
+      this.selectPlay({
+        list: this.recList,
+        index: index
+      });
     },
   },
   created() {

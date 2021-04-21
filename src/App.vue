@@ -2,7 +2,7 @@
   <div id="app">
     <!-- 内容区 -->
     <transition :name="transitionName">
-      <keep-alive>
+      <keep-alive exclude="RecList">
         <router-view/>
       </keep-alive>
     </transition>
