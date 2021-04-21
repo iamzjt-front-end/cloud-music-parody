@@ -9,10 +9,12 @@
     <!-- 主图 -->
     <div class="main-img" :style="{backgroundImage:`url(${mainImgUrl})`}">
       <div class="main-img-left">
-
+        <img :src="mainImgUrl">
       </div>
       <div class="main-img-right">
-
+        <h1>{{ titleName }}</h1>
+        <p>{{ description }}</p>
+        <i class="iconfont icon-xiala"></i>
       </div>
     </div>
     <!-- 播放全部 -->
@@ -33,6 +35,12 @@ export default {
   components: {
     TopBar,
   },
+  data() {
+    return {
+      titleName: '', // 歌单名称
+      description: '', // 歌单描述
+    }
+  },
   computed: {
     mainImgUrl() {
       return this.$route.params.imgUrl;
@@ -48,7 +56,8 @@ export default {
       this.$api.found.recListQry({
         id: this.$route.params.id, // 歌单 id
       }).then(res => {
-        console.log(res.data);
+        this.titleName = res.data.playlist.name;
+        this.description = res.data.playlist.description;
       })
     },
   },
@@ -59,6 +68,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'src/assets/scss/mixin';
+
 #rec-list {
   position: fixed;
   top: 0;
@@ -112,16 +123,76 @@ export default {
       width: 100%;
       height: 100%;
       position: absolute;
+      z-index: 5;
       backdrop-filter: blur(66px);
       -webkit-backdrop-filter: blur(8px);
     }
 
     .main-img-left {
+      position: absolute;
+      bottom: 4vh;
+      left: 4vh;
+      z-index: 10;
+      width: 7.5rem;
+      height: 7.5rem;
+      background-color: #fff;
+      border-radius: 0.8rem;
+      // 让子元素呈现 3D 转换
+      transform-style: preserve-3d;
 
+      img {
+        width: 100%;
+        border-radius: 0.8rem;
+      }
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 6.5rem;
+        height: 6.5rem;
+        background-color: #f3f3f3;
+        border-radius: 0.6rem;
+        position: absolute;
+        top: -0.3rem;
+        left: 0.5rem;
+        // 使用Z轴进行 3D 转换
+        transform: translateZ(-1px);
+        opacity: 0.1;
+      }
     }
 
     .main-img-right {
+      position: absolute;
+      bottom: 4vh;
+      right: 4vh;
+      z-index: 10;
+      width: 10rem;
+      height: 7.5rem;
 
+      h1 {
+        line-height: 1.25rem;
+      }
+
+      p {
+        position: absolute;
+        left: 0;
+        bottom: 0.25rem;
+        @include single-line-ellipsis;
+        display: inline-block;
+        width: 100%;
+        font-size: 0.8rem;
+        opacity: 0.7;
+      }
+
+      .icon-xiala {
+        position: absolute;
+        bottom: 0.2rem;
+        right: -0.4rem;
+        font-size: 0.4rem;
+        color: #fff;
+        transform: rotate(-90deg);
+        opacity: 0.7;
+      }
     }
   }
 
