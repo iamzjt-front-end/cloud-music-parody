@@ -21,24 +21,42 @@
     <div class="play-all">
       <i class="iconfont icon-play-all" slot="left"></i>
       <span class="play-text">播放全部</span>
-      <p class="play-length">{{ '(' + ')' }}</p>
+      <p class="play-length">{{ '(' + this.recList.length + ')' }}</p>
     </div>
-
+    <div class="rec-song-box">
+      <scroll ref="scroll" :data="recList">
+        <div>
+          <div class="rec-song">
+            <song v-for="(item, index) in this.recList" :key="index" @click.native="toPlayer(item, index)">
+              <img :src="item.al.picUrl" slot="front-cover" @load="load">
+              <h1 slot="song-name">{{ item.name }}</h1>
+              <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
+              <i class="iconfont icon-more" slot="operate"></i>
+            </song>
+          </div>
+        </div>
+      </scroll>
+    </div>
   </div>
 </template>
 
 <script>
 import TopBar from "components/TopBar";
+import Song from "components/Song";
+import Scroll from "components/scroll/Scroll";
 
 export default {
   name: "RecList",
   components: {
     TopBar,
+    Song,
+    Scroll,
   },
   data() {
     return {
       titleName: '', // 歌单名称
       description: '', // 歌单描述
+      recList: [], // 歌单列表
     }
   },
   computed: {
@@ -53,12 +71,40 @@ export default {
     },
     // 推荐歌单获取
     recListGet() {
+      let that = this;
       this.$api.found.recListQry({
         id: this.$route.params.id, // 歌单 id
       }).then(res => {
         this.titleName = res.data.playlist.name;
         this.description = res.data.playlist.description;
+        let counter = 0;
+        res.data.playlist.tracks.forEach(function (item1) {
+          // 对歌手信息进行处理，有的歌曲可能不止一个歌手
+          item1.ar.forEach(function (item2, index) {
+            if (index == 0) {
+              item1.ar.singers = item2.name;
+            } else {
+              item1.ar.singers = item1.ar.singers + '/' + item2.name;
+            }
+          });
+          counter++;
+          if (counter == res.data.playlist.tracks.length) {
+            that.recList = res.data.playlist.tracks;
+          }
+        })
       })
+    },
+    load() {
+      if (!this.checkloaded) {
+        this.checkloaded = true
+        // recommend-song 高度计算
+        this.$nextTick(() => {
+          let recSong = document.querySelector('.rec-song');
+          let songHeight = document.querySelector('#song').scrollHeight;
+          recSong.style.height = songHeight * this.recList.length + 'px';
+          this.$refs.scroll.refresh();
+        })
+      }
     },
   },
   created() {
@@ -227,6 +273,17 @@ export default {
       color: #999999;
       font-size: 0.8rem;
       padding: 1.5rem 0 0 0.2rem;
+    }
+  }
+
+  .rec-song-box {
+    width: 100%;
+    height: calc(100vh - 28vh - 3.4rem);
+
+    .rec-song {
+      width: 100%;
+      height: calc(100vh - 28vh - 3.4rem);
+      background-color: #fff;
     }
   }
 }

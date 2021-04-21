@@ -96,8 +96,8 @@ export default {
         // recommend-song 高度计算
         this.$nextTick(() => {
           let recommendSong = document.querySelector('.recommend-song');
-          let songWidth = document.querySelector('#song').scrollHeight;
-          recommendSong.style.height = songWidth * this.perDayRecList.length + 'px';
+          let songHeight = document.querySelector('#song').scrollHeight;
+          recommendSong.style.height = songHeight * this.perDayRecList.length + 'px';
           this.$refs.scroll.refresh();
         })
       }
