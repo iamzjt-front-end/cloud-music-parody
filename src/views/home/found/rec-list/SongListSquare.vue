@@ -7,7 +7,7 @@
     </top-bar>
     <!-- 标签栏 -->
     <van-tabs scrollspy swipeable sticky animated @click="toggle">
-      <van-tab v-for="(item, index) in tagList" :title="item.name" :key="index"
+      <van-tab v-for="(item, index) in tagList" :title="item.name" :key="index" ref="tabs" v-model="active"
                title-style="font-size: 16px">
         <div class="loading" v-if="!highList.length">
           <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
@@ -41,6 +41,7 @@ export default {
   },
   data() {
     return {
+      active: 0,
       tagList: [], // 歌单标签列表
       highList: [], // 精品歌单列表
     }
@@ -81,6 +82,7 @@ export default {
     this.playListTagsGet().then(res => {
       this.tagList = res.data.tags;
       this.highListGet(this.tagList[0].name);
+      // this.$refs.tabs.resize();
     });
   }
 }
