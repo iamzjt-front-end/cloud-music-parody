@@ -106,7 +106,7 @@ const router = new Router({
             component: RecList,
             meta: {
                 title: "推荐歌单",
-                index: 6
+                index: 7
             },
         },
         {
@@ -124,7 +124,7 @@ const router = new Router({
             component: RankList,
             meta: {
                 title: "排行榜歌单",
-                index: 6
+                index: 7
             },
         },
         {
