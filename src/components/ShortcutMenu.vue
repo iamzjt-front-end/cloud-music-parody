@@ -53,12 +53,10 @@ export default {
           // this.$router.push({path: ''});
           break;
         case '歌单' :
-          Toast('正在开发中...');
-          // this.$router.push({path: ''});
+          this.$router.push({path: '/song-list-square'});
           break;
         case '排行榜' :
-          Toast('正在开发中...');
-          // this.$router.push({path: ''});
+          this.$router.push({path: '/charts'});
           break;
         case '专辑' :
           Toast('正在开发中...');
