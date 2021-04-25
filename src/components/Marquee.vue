@@ -27,17 +27,20 @@ export default {
       if (textWidth >= wrapWidth) {
         this.$refs.copy.innerText = this.text;
         this.$refs.copy.style.marginLeft = '40px';
+        this.$refs.scroll.style.justifyContent = '';
 
         let distance = 0;
-        this.timer = setInterval(() => {
-          distance++;
-          if (distance > scrollWidth) {
-            distance = 1;
-            // todo 优化  回到原处可以停顿个半秒，然后再继续移动
-            // todo bug：快速切换时有点问题
-          }
-          this.$refs.scroll.style.transform = `translateX(${-distance}px)`;
-        }, 35)
+        setTimeout(() => {
+          this.timer = setInterval(() => {
+            distance++;
+            if (distance > scrollWidth) {
+              distance = 1;
+            }
+            this.$refs.scroll.style.transform = `translateX(${-distance}px)`;
+          }, 35)
+        }, 1200)
+      } else {
+        this.$refs.scroll.style.justifyContent = 'center';
       }
     }
   },
@@ -57,7 +60,7 @@ export default {
           let timer1 = setTimeout(() => {
             this.move();
             clearTimeout(timer1);
-          }, 1000)
+          })
         }
       }
     },
@@ -77,13 +80,10 @@ export default {
   }
 
   .scroll {
-    p {
-      display: inline;
-    }
+    display: flex;
   }
 
   .getWidth {
-    white-space: nowrap;
     position: absolute;
     opacity: 0;
     top: 0;
