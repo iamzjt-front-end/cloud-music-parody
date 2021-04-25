@@ -146,11 +146,13 @@ export default {
         }
       });
     },
+    // 跳转去排行榜歌单
     toRankList(val) {
       this.$router.push({
         name: 'rank-list',
         params: {
-          val: val // todo
+          id: val.id,
+          imgUrl: val.coverImgUrl
         }
       });
     },

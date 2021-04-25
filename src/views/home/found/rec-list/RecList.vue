@@ -13,6 +13,10 @@
       </div>
       <div class="main-img-right">
         <h1>{{ titleName }}</h1>
+        <div class="creator">
+          <img :src="avatarUrl">
+          <span>{{ nickname }}</span>
+        </div>
         <p>{{ description }}</p>
         <i class="iconfont icon-xiala"></i>
       </div>
@@ -58,6 +62,8 @@ export default {
       titleName: '', // 歌单名称
       description: '', // 歌单描述
       recList: [], // 歌单列表
+      avatarUrl: '', // 歌单作者头像url
+      nickname: '', // 歌单作者昵称
     }
   },
   computed: {
@@ -79,6 +85,8 @@ export default {
       }).then(res => {
         this.titleName = res.data.playlist.name;
         this.description = res.data.playlist.description;
+        this.avatarUrl = res.data.playlist.creator.avatarUrl;
+        this.nickname = res.data.playlist.creator.nickname;
         let counter = 0;
         res.data.playlist.tracks.forEach(function (item1) {
           // 对歌手信息进行处理，有的歌曲可能不止一个歌手
@@ -190,7 +198,6 @@ export default {
       z-index: 10;
       width: 7.5rem;
       height: 7.5rem;
-      background-color: #fff;
       border-radius: 0.8rem;
       // 让子元素呈现 3D 转换
       transform-style: preserve-3d;
@@ -226,6 +233,25 @@ export default {
 
       h1 {
         line-height: 1.25rem;
+      }
+
+      .creator {
+        margin-top: 1rem;
+        width: 100%;
+        height: 1.4rem;
+
+        img {
+          display: inline-block;
+          width: 1.4rem;
+          height: 1.4rem;
+          border-radius: 0.7rem;
+          vertical-align: middle;
+        }
+
+        span {
+          font-size: 13px;
+          padding-left: 6px;
+        }
       }
 
       p {
