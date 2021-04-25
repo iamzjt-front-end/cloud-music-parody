@@ -160,7 +160,7 @@ export default {
             // 获取歌曲总时长
             that.totalTime = that.countTime(songData.dt / 1000);
             that.$nextTick(() => {
-              that.$refs.player.style = `background-image: url("${that.albumPicUrl}")`;
+              that.$refs.player.style.backgroundImage = `url("${that.albumPicUrl}")`;
             })
           }
         });
