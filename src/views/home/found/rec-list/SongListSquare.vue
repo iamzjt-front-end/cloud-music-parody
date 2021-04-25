@@ -15,7 +15,7 @@
         <div class="tag-content" v-if="highList.length">
           <scroll :data="highList">
             <div>
-              <song-list-item v-for="(item1, index1) in highList" :key="index1">
+              <song-list-item v-for="(item1, index1) in highList" :key="index1" @click.native="toRecList(item1)">
                 <img :src="item1.coverImgUrl" slot="img" @load="load">
                 <p slot="description">{{ item1.description }}</p>
               </song-list-item>
@@ -76,7 +76,17 @@ export default {
       if (!this.loading) {
         this.loading = true;
       }
-    }
+    },
+    // 跳转去歌单
+    toRecList(val) {
+      this.$router.push({
+        name: 'rec-list',
+        params: {
+          id: val.id,
+          imgUrl: val.coverImgUrl
+        }
+      });
+    },
   },
   mounted() {
     this.playListTagsGet().then(res => {

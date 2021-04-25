@@ -2,7 +2,7 @@
   <div id="rec-list">
     <!-- 顶栏 -->
     <top-bar>
-      <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
+      <i class="iconfont icon-back" slot="left" @click="back"></i>
       <h1 slot="center">歌单</h1>
       <i class="iconfont icon-more" slot="right"></i>
     </top-bar>
@@ -68,8 +68,8 @@ export default {
   methods: {
     ...mapActions(['selectPlay']),
     // 返回主页
-    backToHome() {
-      this.$router.push({path: '/found'});
+    back() {
+      this.$router.go(-1);
     },
     // 推荐歌单获取
     recListGet() {
