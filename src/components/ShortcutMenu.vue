@@ -19,24 +19,22 @@ export default {
   },
   data() {
     return {
-      titleList: [
-        {
-          className: 'icon-recommend',
-          title: '每日推荐'
-        }, {
-          className: 'icon-privateFM',
-          title: '私人FM'
-        }, {
-          className: 'icon-songlist',
-          title: '歌单'
-        }, {
-          className: 'icon-charts',
-          title: '排行榜'
-        }, {
-          className: 'icon-album',
-          title: '专辑'
-        }
-      ]
+      titleList: [{
+        className: 'icon-recommend',
+        title: '每日推荐'
+      }, {
+        className: 'icon-privateFM',
+        title: '私人FM'
+      }, {
+        className: 'icon-songlist',
+        title: '歌单'
+      }, {
+        className: 'icon-charts',
+        title: '排行榜'
+      }, {
+        className: 'icon-album',
+        title: '专辑'
+      }]
       // titleList: ['每日推荐','私人FM', '歌单', '排行榜', '直播', '专辑', '游戏']
       // todo 增加快捷菜单 并 可左右滑动拓展
     }
