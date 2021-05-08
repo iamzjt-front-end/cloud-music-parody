@@ -1,6 +1,6 @@
 <template>
   <div class="song-list-item">
-    <div class="img">
+    <div class="img" ref="imgBox">
       <slot name="img"></slot>
     </div>
     <slot name="description"></slot>
@@ -10,9 +10,6 @@
 <script>
 export default {
   name: "SongListItem",
-  created() {
-    // this.songListImgQry();
-  },
   methods: {
     // songListImgQry() {
     //   this.$api.found.songListImg({
@@ -23,6 +20,12 @@ export default {
     //     }
     //   })
     // },
+  },
+  created() {
+    // this.songListImgQry();
+  },
+  mounted() {
+    this.$refs.imgBox.style.height = this.$refs.imgBox.clientWidth + 'px';
   }
 }
 </script>
@@ -38,11 +41,10 @@ export default {
   display: inline-block;
 
   .img {
-    width: 7rem;
-    height: 7rem;
+    width: 100%;
+    //height: 7rem;
     background-color: #fff;
     border-radius: 0.8rem;
-    border: 0.05rem solid #e3e5e5;
     position: relative;
     // 让子元素呈现 3D 转换
     transform-style: preserve-3d;
@@ -55,8 +57,8 @@ export default {
     &::before {
       content: '';
       display: inline-block;
-      width: 6rem;
-      height: 6rem;
+      width: 85%;
+      height: 85%;
       background-color: #f3f3f3;
       border-radius: 0.6rem;
       position: absolute;
