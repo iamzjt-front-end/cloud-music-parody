@@ -100,7 +100,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['updateSongList']),
+    ...mapMutations(['updateChartsList']),
     onSearch(val) {
       // todo 搜索功能
       Toast(val);
@@ -163,6 +163,7 @@ export default {
         if (res) {
           // console.log('排行榜：', res)
           that.chartsList = res.data.list.slice(0, 6);
+          this.updateChartsList(res.data.list);
           this.$nextTick(() => {
             let charts = document.querySelector('.charts');
             let chartsItemWidth = document.querySelector('.charts-item').clientWidth;

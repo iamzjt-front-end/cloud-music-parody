@@ -13,6 +13,7 @@ const store = new Vuex.Store({
         playingState: false, // 播放状态 false-暂停 true-正在播放
         fullScreen: false, // 全屏还是小屏
         mode: playMode.sequence, // 播放模式
+        chartsList: [], // 排行榜歌单
     },
     mutations: {
         // 修改token，sessionStorage
@@ -34,7 +35,10 @@ const store = new Vuex.Store({
         },
         updateMode(state, data) {
             state.mode = data;
-        }
+        },
+        updateChartsList(state, data) {
+            state.chartsList = data;
+        },
     },
     getters: {
         // 当前播放歌曲
