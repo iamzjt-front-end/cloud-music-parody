@@ -54,6 +54,7 @@ export default {
     getRandomList() {
       let randomList = [];
       for (let i = 0; i < 10; i++) { // 不断生成随机数
+        // todo 不是很完美, 因为存在 10 次中随机数重复9次的可能, 即不能生成3次不同的随机数 (只不过可能性实在是不大, 暂时先不优化了)
         let random = Math.floor(this.chartsList.length * Math.random());
         if (randomList.length == 0) { // 一开始没数据, 添加第一项随机数进去
           randomList.push(random);
