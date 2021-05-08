@@ -84,7 +84,7 @@ export default {
             // 等遍历完再进行这里面的操作
             that.perDayRecList = res.data.data.dailySongs;
             // 设置随机封面图
-            let index = Math.floor(32 * Math.random());
+            let index = Math.floor(that.perDayRecList.length * Math.random());
             that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
           }
         })
@@ -183,8 +183,8 @@ export default {
       width: 100%;
       height: 100%;
       position: absolute;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .calendar {

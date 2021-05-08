@@ -45,10 +45,32 @@ export default {
     },
     // 获取榜单推荐列表
     getTopChartsList() {
-      for (let i = 0; i < 3; i++) {
-        let index = Math.floor(32 * Math.random());
-        this.topChartsList.push(this.chartsList[index]);
+      let that = this;
+      this.getRandomList().forEach(function (item) {
+        that.topChartsList.push(that.chartsList[item]);
+      })
+    },
+    // 生成三个不同的随机数
+    getRandomList() {
+      let randomList = [];
+      for (let i = 0; i < 10; i++) { // 不断生成随机数
+        let random = Math.floor(this.chartsList.length * Math.random());
+        if (randomList.length == 0) { // 一开始没数据, 添加第一项随机数进去
+          randomList.push(random);
+        } else {
+          for (let j = 0; j < randomList.length; j++) {
+            if (randomList[j] == random) { // 只要有一项相同, 直接跳出当前循环
+              break;
+            } else {
+              if (j == randomList.length - 1 && randomList.length < 3) {
+                // 只有新生成的随机数与原随机数数组中的每一项都不相同 且 随机数数组的长度不大于3, 才能push进去
+                randomList.push(random);
+              }
+            }
+          }
+        }
       }
+      return randomList;
     },
     // 跳转去歌单
     toRecList(val) {
@@ -96,7 +118,7 @@ export default {
   }
 
   .topChartsRec {
-    height: 11.5rem;
+    height: 11.2rem;
     background-color: #fff;
     margin: 1rem;
     border-radius: 0.7rem;
