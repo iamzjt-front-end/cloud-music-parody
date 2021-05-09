@@ -637,7 +637,7 @@ $width-cover: 65vw;
       align-items: center;
 
       .mini-songNm {
-        width: 60%;
+        max-width: 60%;
         color: #323233;
         font-size: 0.9rem;
         padding: 0 0.3rem;
@@ -645,7 +645,7 @@ $width-cover: 65vw;
       }
 
       .mini-singers {
-        width: 35%;
+        max-width: 35%;
         color: #838384;
         font-size: 0.7rem;
         @include single-line-ellipsis;
