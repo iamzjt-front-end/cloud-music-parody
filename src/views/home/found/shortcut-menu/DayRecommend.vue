@@ -84,7 +84,7 @@ export default {
             // 等遍历完再进行这里面的操作
             that.perDayRecList = res.data.data.dailySongs;
             // 设置随机封面图
-            let index = Math.floor(that.perDayRecList.length * Math.random());
+            let index = Math.floor((that.perDayRecList.length + 1) * Math.random());
             that.mainImgUrl = res.data.data.dailySongs[index].al.picUrl;
           }
         })
