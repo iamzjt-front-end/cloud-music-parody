@@ -4,6 +4,7 @@
       <slot name="img"></slot>
     </div>
     <slot name="description"></slot>
+    <slot name="bubble"></slot>
   </div>
 </template>
 
@@ -39,6 +40,7 @@ export default {
   background-color: #fff;
   margin: 0.75rem 0.2rem 0.5rem 0.2rem;
   display: inline-block;
+  position: relative;
 
   .img {
     width: 100%;
@@ -59,7 +61,7 @@ export default {
       display: inline-block;
       width: 85%;
       height: 85%;
-      background-color: #f3f3f3;
+      background-color: #ededed;
       border-radius: 0.6rem;
       position: absolute;
       top: -0.3rem;
@@ -78,6 +80,20 @@ export default {
     line-height: 1.3rem;
     padding-top: 0.3rem;
     @include multi-line-ellipsis(2);
+  }
+
+  span {
+    position: absolute;
+    top: 3px;
+    right: -2px;
+    display: block;
+    line-height: 14px;
+    padding: 2px 6px;
+    background-color: rgba(0, 0, 0, .1);
+    border-radius: 8px;
+    font-size: 12px;
+    color: #fff;
+    transform: scale(0.8);
   }
 }
 </style>
