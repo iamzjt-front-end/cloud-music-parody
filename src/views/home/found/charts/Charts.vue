@@ -12,7 +12,7 @@
           <div class="topChartsRec">
             <h1>榜单推荐</h1>
             <div class="topChartsRec-box">
-              <song-list-item v-for="(item, index) in this.topChartsList" :key="index" @click.native="toRecList(item)">
+              <song-list-item v-for="(item, index) in topChartsList" :key="index" @click.native="toRecList(item)">
                 <img :src="item.coverImgUrl" slot="img">
                 <p slot="description">{{ item.name }}</p>
               </song-list-item>
@@ -28,6 +28,30 @@
             </div>
             <div class="official-charts-box">
               <official-charts-item v-for="(item, index) in officialChartsList" :key="index" :item="item"/>
+            </div>
+          </div>
+          <!-- 曲风榜 -->
+          <div class="wide-line"></div>
+          <div class="cur-wind-charts">
+            <h1>曲风榜</h1>
+            <div class="cur-wind-charts-box">
+              <song-list-item v-for="(item, index) in curWindList" :key="index" @click.native="toRecList(item)">
+                <img :src="item.coverImgUrl" slot="img">
+                <p slot="description">{{ item.name }}</p>
+                <span slot="bubble">{{ item.updateFrequency }}</span>
+              </song-list-item>
+            </div>
+          </div>
+          <!-- 全球榜 -->
+          <div class="wide-line"></div>
+          <div class="whole-world-charts">
+            <h1>全球榜</h1>
+            <div class="whole-world-charts-box">
+              <song-list-item v-for="(item, index) in wholeWorldList" :key="index" @click.native="toRecList(item)">
+                <img :src="item.coverImgUrl" slot="img">
+                <p slot="description">{{ item.name }}</p>
+                <span slot="bubble">{{ item.updateFrequency }}</span>
+              </song-list-item>
             </div>
           </div>
         </div>
@@ -144,7 +168,7 @@ export default {
   .content {
     width: 100%;
     height: calc(100vh - 54px);
-    padding: 1rem 0;
+    padding: 1rem 0 0 0;
 
     .topChartsRec {
       height: 11.2rem;
@@ -207,6 +231,43 @@ export default {
           font-size: 1.2rem;
           font-weight: bolder;
           margin-left: 0.5rem;
+        }
+      }
+    }
+
+    .wide-line {
+      height: 10px;
+      background-color: #f2f2f2;
+    }
+
+    .cur-wind-charts,
+    .whole-world-charts {
+      width: 100%;
+      padding: 1rem 1rem 0.5rem 1rem;
+      background-color: #fafafa;
+
+      h1 {
+        color: #323233;
+        font-size: 1.2rem;
+      }
+
+      .cur-wind-charts-box,
+      .whole-world-charts-box {
+        padding-top: 0.5rem;
+
+        .song-list-item {
+          width: 30%;
+          height: 8rem;
+          margin: 0.5rem 0.3rem;
+          background-color: transparent;
+
+          p {
+            display: inline-block;
+            height: 1.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
         }
       }
     }
