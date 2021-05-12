@@ -27,7 +27,8 @@
               <h1>官方榜</h1>
             </div>
             <div class="official-charts-box">
-              <official-charts-item v-for="(item, index) in officialChartsList" :key="index" :item="item"/>
+              <official-charts-item v-for="(item, index) in officialChartsList" :key="index" :item="item"
+                                    :index="index"/>
             </div>
           </div>
           <!-- 曲风榜 -->
