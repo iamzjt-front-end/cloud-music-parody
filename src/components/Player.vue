@@ -420,6 +420,8 @@ $width-cover: 65vw;
       width: 100%;
       height: 100%;
       backdrop-filter: blur(66px);
+      -webkit-backdrop-filter: blur(66px);
+      background-color: rgba(0, 0, 0, .32);
     }
 
     .top-bar {
@@ -446,13 +448,14 @@ $width-cover: 65vw;
       .songNm {
         height: 50%;
         font-size: 1.2rem;
-        color: #ffffff;
+        color: #fff;
       }
 
       .singers {
         height: 30%;
         font-size: 0.7rem;
-        color: #deddde;
+        color: #ffffff;
+        opacity: 0.75;
       }
     }
 
