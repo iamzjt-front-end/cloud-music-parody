@@ -120,6 +120,7 @@ export default {
     getTopChartsList() {
       let that = this;
       this.getRandomList().forEach(function (item) {
+        if (!that.chartsList[item].coverImgUrl) return;
         that.topChartsList.push(that.chartsList[item]);
       })
     },
@@ -127,7 +128,7 @@ export default {
     getRandomList() {
       let randomList = [];
       for (let i = 0; i < 3; i++) { // 不断生成随机数
-        let random = Math.floor((this.chartsList.length + 1) * Math.random());
+        let random = Math.floor(this.chartsList.length * Math.random());
         if (randomList.includes(random)) {
           i--;
         } else {
