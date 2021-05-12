@@ -22,12 +22,12 @@
       <span class="play-text">播放全部</span>
       <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
     </div>
-    <div class="recommend-song-box">
+    <div class="recommend-song-box" v-if="perDayRecList.length">
       <scroll ref="scroll" :data="perDayRecList">
         <div>
           <!-- 推荐歌曲曲目 -->
           <div class="recommend-song">
-            <song v-for="(item, index) in this.perDayRecList" :key="index" @click.native="toPlayer(item, index)">
+            <song v-for="(item, index) in perDayRecList" :key="index" @click.native="toPlayer(item, index)">
               <img :src="item.al.picUrl" slot="front-cover" @load="load">
               <h1 slot="song-name">{{ item.name }}</h1>
               <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
@@ -36,6 +36,9 @@
           </div>
         </div>
       </scroll>
+    </div>
+    <div class="loading" v-if="!perDayRecList.length">
+      <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
     </div>
   </div>
 </template>
@@ -249,6 +252,11 @@ export default {
       height: calc(100vh - 28vh - 3.4rem);
       background-color: #fff;
     }
+  }
+
+  .loading {
+    padding-top: 1rem;
+    text-align: center;
   }
 }
 </style>
