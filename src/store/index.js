@@ -14,6 +14,7 @@ const store = new Vuex.Store({
         fullScreen: false, // 全屏还是小屏
         mode: playMode.sequence, // 播放模式
         chartsList: [], // 排行榜歌单
+        singerChartsList: [], // 歌手榜
     },
     mutations: {
         // 修改token，sessionStorage
@@ -38,6 +39,9 @@ const store = new Vuex.Store({
         },
         updateChartsList(state, data) {
             state.chartsList = data;
+        },
+        updateSingerChartsList(state, data) {
+            state.singerChartsList.push(data);
         },
     },
     getters: {

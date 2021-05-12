@@ -35,7 +35,7 @@
           <div class="cur-wind-charts">
             <h1>曲风榜</h1>
             <div class="cur-wind-charts-box">
-              <song-list-item v-for="(item, index) in curWindList" :key="index" @click.native="toRecList(item)">
+              <song-list-item v-for="(item, index) in curWindChartsList" :key="index" @click.native="toRecList(item)">
                 <img :src="item.coverImgUrl" slot="img">
                 <p slot="description">{{ item.name }}</p>
                 <span slot="bubble">{{ item.updateFrequency }}</span>
@@ -47,7 +47,26 @@
           <div class="whole-world-charts">
             <h1>全球榜</h1>
             <div class="whole-world-charts-box">
-              <song-list-item v-for="(item, index) in wholeWorldList" :key="index" @click.native="toRecList(item)">
+              <song-list-item v-for="(item, index) in wholeWorldChartsList" :key="index"
+                              @click.native="toRecList(item)">
+                <img :src="item.coverImgUrl" slot="img">
+                <p slot="description">{{ item.name }}</p>
+                <span slot="bubble">{{ item.updateFrequency }}</span>
+              </song-list-item>
+            </div>
+          </div>
+          <!-- 特色榜 -->
+          <div class="wide-line"></div>
+          <div class="featured-charts">
+            <h1>特色榜</h1>
+            <div class="featured-charts-box">
+              <song-list-item v-for="(item, index) in singerChartsList" :key="index + '1'"
+                              @click.native="toSingerCharts(item)">
+                <img :src="item.coverUrl" slot="img">
+                <p slot="description">{{ item.name }}</p>
+                <span slot="bubble">{{ item.updateFrequency }}</span>
+              </song-list-item>
+              <song-list-item v-for="(item, index) in featuredChartsList" :key="index" @click.native="toRecList(item)">
                 <img :src="item.coverImgUrl" slot="img">
                 <p slot="description">{{ item.name }}</p>
                 <span slot="bubble">{{ item.updateFrequency }}</span>
@@ -66,6 +85,7 @@ import TopBar from 'components/TopBar';
 import SongListItem from 'components/SongListItem';
 import OfficialChartsItem from 'components/OfficialChartsItem';
 import Scroll from 'components/scroll/Scroll';
+import {Toast} from 'vant';
 
 export default {
   name: "Charts",
@@ -79,12 +99,16 @@ export default {
     return {
       topChartsList: [], // 榜单推荐 - 随机拿三个榜单
       officialChartsList: [], // 官方榜
-      curWindList: [], // 曲风榜
-      wholeWorldList: [], // 全球榜
+      curWindChartsList: [], // 曲风榜
+      curWindChartsIds: [1978921795, 71385702, 991319590, 5059633707, 5059661515, 10520166, 71384707, 5059642708], // 曲风榜 ids
+      wholeWorldChartsList: [], // 全球榜
+      wholeWorldChartsIds: [60198, 180106, 11641012, 60131, 27135204, 2809577409, 2809513713, 5059644681, 745956260, 6732051320, 6732014811], // 全球榜 ids
+      featuredChartsList: [], // 特色榜
+      featuredChartsIds: [6688069460, 5338990334, 3112516681, 21845217, 3812895], // 特色榜 ids
     }
   },
   computed: {
-    ...mapState(['chartsList'])
+    ...mapState(['chartsList', 'singerChartsList'])
   },
   methods: {
     // 返回主页
@@ -114,8 +138,29 @@ export default {
     // 榜单数据分类
     chartsDataProcess() {
       this.officialChartsList = this.chartsList.slice(0, 4); // 官方榜
-      this.curWindList = this.chartsList.slice(4, 11); // 曲风榜
-      this.wholeWorldList = this.chartsList.slice(11, 33); // 全球榜
+
+      let that = this;
+      this.curWindChartsIds.forEach(function (item) { // 曲风榜
+        that.chartsList.forEach(function (item1) {
+          if (item == item1.id) {
+            that.curWindChartsList.push(item1);
+          }
+        })
+      })
+      this.wholeWorldChartsIds.forEach(function (item) { // 全球榜
+        that.chartsList.forEach(function (item1) {
+          if (item == item1.id) {
+            that.wholeWorldChartsList.push(item1);
+          }
+        })
+      })
+      this.featuredChartsIds.forEach(function (item) { // 特色榜
+        that.chartsList.forEach(function (item1) {
+          if (item == item1.id) {
+            that.featuredChartsList.push(item1);
+          }
+        })
+      })
     },
     // 跳转去歌单
     toRecList(val) {
@@ -126,6 +171,11 @@ export default {
           imgUrl: val.coverImgUrl
         }
       });
+    },
+    // 跳转去歌手榜
+    toSingerCharts(val) {
+      console.log(val);
+      Toast('正在开发中...'); // todo 歌手榜单
     },
   },
   mounted() {
@@ -241,7 +291,8 @@ export default {
     }
 
     .cur-wind-charts,
-    .whole-world-charts {
+    .whole-world-charts,
+    .featured-charts {
       width: 100%;
       padding: 1rem 1rem 0.5rem 1rem;
       background-color: #fafafa;
@@ -252,7 +303,8 @@ export default {
       }
 
       .cur-wind-charts-box,
-      .whole-world-charts-box {
+      .whole-world-charts-box,
+      .featured-charts-box {
         padding-top: 0.5rem;
 
         .song-list-item {
