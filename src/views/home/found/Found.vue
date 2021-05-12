@@ -55,8 +55,8 @@
           <h1 slot="title">排行榜</h1>
           <div class="charts" slot="item">
             <charts-item v-for="(item, index) in this.chartsList" :key="index"
-                         :chartsList="chartsList" :index="index">
-              <h1 slot="title" @click="toRankList(item)">{{ item.name }}</h1>
+                         :chartsList="chartsList" :index="index" @click.native="toRankList(item)">
+              <h1 slot="title">{{ item.name }}</h1>
             </charts-item>
           </div>
         </column>

@@ -1,6 +1,6 @@
 <template>
-  <div id="official-charts-item" ref="officialChartsItem">
-    <div class="left" @click="toRecList(item)">
+  <div id="official-charts-item" ref="officialChartsItem" @click="toRecList(item)">
+    <div class="left">
       <img :src="item.coverImgUrl">
       <span class="bubble">{{ item.updateFrequency }}</span>
     </div>
