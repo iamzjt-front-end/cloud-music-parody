@@ -9,7 +9,7 @@
         <span class="songIndex">{{ index + 1 + '.' }}</span>
         <span class="songName">{{ item.name }}</span>
         <span class="linker">-</span>
-        <span class="songAuthor">{{ item.ar[0].name }}</span>
+        <span class="songAuthor">{{ item.ar[0].name }}{{ item.ar[1] ? '/' + item.ar[1].name : '' }}</span>
       </div>
     </div>
   </div>
@@ -105,6 +105,9 @@ export default {
       width: 100%;
       height: 2rem;
       color: #323233;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       .songIndex,
       .songName,
@@ -113,9 +116,6 @@ export default {
         display: inline-block;
         font-size: 0.95rem;
         line-height: 2rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
       .songIndex {
@@ -126,12 +126,8 @@ export default {
         margin: 0 5px;
       }
 
-      .songName {
-        max-width: 50%;
-      }
-
       .songAuthor {
-        max-width: 30%;
+        color: #8f8f8f;
       }
     }
   }

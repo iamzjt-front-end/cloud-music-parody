@@ -11,7 +11,7 @@
         <img :src="rankItem.al.picUrl" slot="img">
         <p slot="songIndex">{{ index + 1 }}</p>
         <p slot="songName">{{ rankItem.name }}</p>
-        <p slot="songAuthor">- {{ rankItem.ar[0].name }}</p>
+        <p slot="songAuthor">- {{ rankItem.ar[0].name }}{{ rankItem.ar[1] ? '/' + rankItem.ar[1].name : '' }}</p>
       </charts-rank-item>
     </div>
   </div>
