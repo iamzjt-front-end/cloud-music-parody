@@ -99,7 +99,8 @@ export default {
   .right {
     width: calc(100% - 8rem);
     height: calc(100% - 2rem);
-    margin: 1rem;
+    margin: 1rem 0;
+    padding-left: 1rem;
 
     .rightItem {
       width: 100%;
@@ -113,7 +114,7 @@ export default {
       .songName,
       .linker,
       .songAuthor {
-        display: inline-block;
+        display: inline;
         font-size: 0.95rem;
         line-height: 2rem;
       }
