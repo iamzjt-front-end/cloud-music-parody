@@ -188,6 +188,7 @@ export default {
       position: absolute;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
+      background-color: rgba(0, 0, 0, .32);
     }
 
     .calendar {
