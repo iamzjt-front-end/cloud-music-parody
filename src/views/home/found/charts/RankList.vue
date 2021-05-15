@@ -191,7 +191,7 @@ export default {
       z-index: 5;
       backdrop-filter: blur(66px);
       -webkit-backdrop-filter: blur(8px);
-      background-color: rgba(0, 0, 0, .22);
+      background-color: rgba(0, 0, 0, .2);
     }
 
     .main-img-left {
