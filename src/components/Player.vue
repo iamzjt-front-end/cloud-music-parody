@@ -160,7 +160,9 @@ export default {
             // 获取歌曲总时长
             that.totalTime = that.countTime(songData.dt / 1000);
             that.$nextTick(() => {
-              that.$refs.player.style.backgroundImage = `url("${that.albumPicUrl}")`;
+              setTimeout(function () {
+                that.$refs.player.style.backgroundImage = `url("${that.albumPicUrl}")`;
+              }, 800)
             })
           }
         });
@@ -363,6 +365,9 @@ export default {
       deep: true,
       handler: function (newValue, oldValue) {
         if (newValue !== oldValue) {
+          // 播放时间 和 进度条位置 初始化
+          this.playTime = '00:00';
+          document.querySelector('.little-dot').style.left = '-5px';
           this.songDetGet(this.currentSong.id);
           this.songUrlGet(this.currentSong.id);
         }
@@ -395,6 +400,8 @@ $width-cover: 65vw;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    transition: all 1s linear;
+    -webkit-transition: all 1s linear;
 
     &.normal-enter-active, &.normal-leave-active {
       transition: all 0.4s;
