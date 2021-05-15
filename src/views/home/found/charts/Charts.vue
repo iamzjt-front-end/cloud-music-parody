@@ -12,7 +12,7 @@
           <div class="topChartsRec">
             <h1>榜单推荐</h1>
             <div class="topChartsRec-box">
-              <song-list-item v-for="(item, index) in topChartsList" :key="index" @click.native="toRecList(item)">
+              <song-list-item v-for="(item, index) in topChartsList" :key="index" @click.native="toRankList(item)">
                 <img :src="item.coverImgUrl" slot="img">
                 <p slot="description">{{ item.name }}</p>
               </song-list-item>
@@ -36,7 +36,7 @@
           <div class="cur-wind-charts">
             <h1>曲风榜</h1>
             <div class="cur-wind-charts-box">
-              <song-list-item v-for="(item, index) in curWindChartsList" :key="index" @click.native="toRecList(item)">
+              <song-list-item v-for="(item, index) in curWindChartsList" :key="index" @click.native="toRankList(item)">
                 <img :src="item.coverImgUrl" slot="img">
                 <p slot="description">{{ item.name }}</p>
                 <span slot="bubble">{{ item.updateFrequency }}</span>
@@ -49,7 +49,7 @@
             <h1>全球榜</h1>
             <div class="whole-world-charts-box">
               <song-list-item v-for="(item, index) in wholeWorldChartsList" :key="index"
-                              @click.native="toRecList(item)">
+                              @click.native="toRankList(item)">
                 <img :src="item.coverImgUrl" slot="img">
                 <p slot="description">{{ item.name }}</p>
                 <span slot="bubble">{{ item.updateFrequency }}</span>
@@ -67,7 +67,7 @@
                 <p slot="description">{{ item.name }}</p>
                 <span slot="bubble">{{ item.updateFrequency }}</span>
               </song-list-item>
-              <song-list-item v-for="(item, index) in featuredChartsList" :key="index" @click.native="toRecList(item)">
+              <song-list-item v-for="(item, index) in featuredChartsList" :key="index" @click.native="toRankList(item)">
                 <img :src="item.coverImgUrl" slot="img">
                 <p slot="description">{{ item.name }}</p>
                 <span slot="bubble">{{ item.updateFrequency }}</span>
@@ -165,9 +165,9 @@ export default {
       })
     },
     // 跳转去歌单
-    toRecList(val) {
+    toRankList(val) {
       this.$router.push({
-        name: 'rec-list',
+        name: 'rank-list',
         params: {
           id: val.id,
           imgUrl: val.coverImgUrl

@@ -1,5 +1,5 @@
 <template>
-  <div id="official-charts-item" ref="officialChartsItem" @click="toRecList(item)">
+  <div id="official-charts-item" ref="officialChartsItem" @click="toRankList(item)">
     <div class="left">
       <img :src="item.coverImgUrl">
       <span class="bubble">{{ item.updateFrequency }}</span>
@@ -43,9 +43,9 @@ export default {
       })
     },
     // 跳转去歌单
-    toRecList(val) {
+    toRankList(val) {
       this.$router.push({
-        name: 'rec-list',
+        name: 'rank-list',
         params: {
           id: val.id,
           imgUrl: val.coverImgUrl

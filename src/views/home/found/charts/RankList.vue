@@ -24,13 +24,13 @@
     <div class="play-all">
       <i class="iconfont icon-play-all" slot="left"></i>
       <span class="play-text">播放全部</span>
-      <p class="play-length">{{ '(' + this.recList.length + ')' }}</p>
+      <p class="play-length">{{ '(' + this.rankList.length + ')' }}</p>
     </div>
-    <div class="rec-song-box" v-if="recList.length">
-      <scroll ref="scroll" :data="{rec: recList}">
+    <div class="rank-song-box" v-if="rankList.length">
+      <scroll ref="scroll" :data="{rank: rankList}">
         <div>
-          <div class="rec-song">
-            <song v-for="(item, index) in this.recList" :key="index" @click.native="toPlayer(item, index)">
+          <div class="rank-song">
+            <song v-for="(item, index) in this.rankList" :key="index" @click.native="toPlayer(item, index)">
               <img :src="item.al.picUrl" slot="front-cover" @load="load">
               <h1 slot="song-name">{{ item.name }}</h1>
               <p slot="song-author">{{ item.ar.singers }} - {{ item.al.name }}</p>
@@ -40,7 +40,7 @@
         </div>
       </scroll>
     </div>
-    <div class="loading" v-if="!recList.length">
+    <div class="loading" v-if="!rankList.length">
       <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
     </div>
   </div>
@@ -63,7 +63,7 @@ export default {
     return {
       titleName: '', // 歌单名称
       description: '', // 歌单描述
-      recList: [], // 歌单列表
+      rankList: [], // 歌单列表
       avatarUrl: '', // 歌单作者头像url
       nickname: '', // 歌单作者昵称
     }
@@ -79,8 +79,8 @@ export default {
     back() {
       this.$router.go(-1);
     },
-    // 推荐歌单获取
-    recListGet() {
+    // 排行榜歌单获取
+    rankListGet() {
       let that = this;
       this.$api.found.recListQry({
         id: this.$route.params.id, // 歌单 id
@@ -101,7 +101,7 @@ export default {
           });
           counter++;
           if (counter == res.data.playlist.tracks.length) {
-            that.recList = res.data.playlist.tracks;
+            that.rankList = res.data.playlist.tracks;
           }
         })
       })
@@ -109,11 +109,11 @@ export default {
     load() {
       if (!this.checkloaded) {
         this.checkloaded = true
-        // recommend-song 高度计算
+        // rank-song 高度计算
         this.$nextTick(() => {
-          let recSong = document.querySelector('.rec-song');
+          let rankSong = document.querySelector('.rank-song');
           let songHeight = document.querySelector('#song').scrollHeight;
-          recSong.style.height = songHeight * this.recList.length + 'px';
+          rankSong.style.height = songHeight * this.rankList.length + 'px';
           this.$refs.scroll.refresh();
         })
       }
@@ -121,13 +121,13 @@ export default {
     // 去播放
     toPlayer(item, index) {
       this.selectPlay({
-        list: this.recList,
+        list: this.rankList,
         index: index
       });
     },
   },
   created() {
-    this.recListGet();
+    this.rankListGet();
   }
 }
 </script>
@@ -191,6 +191,7 @@ export default {
       z-index: 5;
       backdrop-filter: blur(66px);
       -webkit-backdrop-filter: blur(8px);
+      background-color: rgba(0, 0, 0, .22);
     }
 
     .main-img-left {
@@ -221,12 +222,14 @@ export default {
 
       h1 {
         line-height: 1.25rem;
+        @include single-line-ellipsis;
       }
 
       .creator {
         margin-top: 1rem;
         width: 100%;
         height: 1.4rem;
+        @include single-line-ellipsis;
 
         img {
           display: inline-block;
@@ -246,12 +249,12 @@ export default {
         position: absolute;
         left: 0;
         bottom: 0.25rem;
-        @include multi-line-ellipsis(2);
         display: inline-block;
         width: 100%;
         font-size: 0.8rem;
         line-height: 1rem;
         opacity: 0.7;
+        @include multi-line-ellipsis(2);
       }
     }
   }
@@ -290,11 +293,11 @@ export default {
     }
   }
 
-  .rec-song-box {
+  .rank-song-box {
     width: 100%;
     height: calc(100vh - 28vh - 3.4rem);
 
-    .rec-song {
+    .rank-song {
       width: 100%;
       height: calc(100vh - 28vh - 3.4rem);
       background-color: #fff;
