@@ -6,7 +6,7 @@
       <h1 slot="center">排行榜</h1>
     </top-bar>
     <div class="content">
-      <scroll :data="chartsList">
+      <scroll :data="{charts: chartsList}">
         <div>
           <!-- 榜单推荐 -->
           <div class="topChartsRec">

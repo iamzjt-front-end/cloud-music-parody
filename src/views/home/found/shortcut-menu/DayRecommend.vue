@@ -23,7 +23,7 @@
       <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
     </div>
     <div class="recommend-song-box" v-if="perDayRecList.length">
-      <scroll ref="scroll" :data="perDayRecList">
+      <scroll ref="scroll" :data="{perDayRec: perDayRecList}">
         <div>
           <!-- 推荐歌曲曲目 -->
           <div class="recommend-song">

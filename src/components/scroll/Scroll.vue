@@ -19,7 +19,7 @@ export default {
       default: true
     },
     data: {
-      type: Array,
+      type: Object,
       default: null
     }
   },
@@ -50,10 +50,14 @@ export default {
     }
   },
   watch: {
-    data() {
-      setTimeout(() => {
-        this.refresh()
-      }, 20)
+    data: {
+      handler(newVal, oldVal) {
+        if (newVal != oldVal) {
+          this.refresh()
+        }
+      },
+      immediate: true,
+      deep: true
     }
   }
 }

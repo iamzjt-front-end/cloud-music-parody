@@ -26,8 +26,8 @@
       <span class="play-text">播放全部</span>
       <p class="play-length">{{ '(' + this.recList.length + ')' }}</p>
     </div>
-    <div class="rec-song-box">
-      <scroll ref="scroll" :data="recList">
+    <div class="rec-song-box" v-if="recList.length">
+      <scroll ref="scroll" :data="{rec: recList}">
         <div>
           <div class="rec-song">
             <song v-for="(item, index) in this.recList" :key="index" @click.native="toPlayer(item, index)">
@@ -39,6 +39,9 @@
           </div>
         </div>
       </scroll>
+    </div>
+    <div class="loading" v-if="!recList.length">
+      <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
     </div>
   </div>
 </template>
@@ -296,6 +299,11 @@ export default {
       height: calc(100vh - 28vh - 3.4rem);
       background-color: #fff;
     }
+  }
+
+  .loading {
+    padding-top: 1rem;
+    text-align: center;
   }
 }
 </style>

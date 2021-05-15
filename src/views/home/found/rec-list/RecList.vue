@@ -28,7 +28,7 @@
       <p class="play-length">{{ '(' + this.recList.length + ')' }}</p>
     </div>
     <div class="rec-song-box" v-if="recList.length">
-      <scroll ref="scroll" :data="recList">
+      <scroll ref="scroll" :data="{rec: recList}">
         <div>
           <div class="rec-song">
             <song v-for="(item, index) in this.recList" :key="index" @click.native="toPlayer(item, index)">

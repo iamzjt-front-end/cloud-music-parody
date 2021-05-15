@@ -13,7 +13,7 @@
           <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
         </div>
         <div class="tag-content" v-if="highList.length">
-          <scroll :data="highList">
+          <scroll :data="{high: highList}">
             <div>
               <song-list-item v-for="(item1, index1) in highList" :key="index1" @click.native="toRecList(item1)">
                 <img :src="item1.coverImgUrl" slot="img" @load="load">
