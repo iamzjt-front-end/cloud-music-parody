@@ -368,6 +368,7 @@ export default {
           // 播放时间 和 进度条位置 初始化
           this.playTime = '00:00';
           document.querySelector('.little-dot').style.left = '-5px';
+          document.querySelector('.progress-bar-cover').style.width = '0';
           this.songDetGet(this.currentSong.id);
           this.songUrlGet(this.currentSong.id);
         }
