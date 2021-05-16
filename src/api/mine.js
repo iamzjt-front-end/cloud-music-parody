@@ -24,6 +24,12 @@ const mine = {
             params: params
         });
     },
+    // 喜欢音乐列表
+    likeListGet(params) {
+        return axios.get(`${base.baseURL}/likelist`, {
+            params: params
+        });
+    },
     // 获取用户信息 , 歌单，收藏，mv, dj 数量
     userSubcountGet(params) {
         return axios.get(`${base.baseURL}/user/subcount`, {

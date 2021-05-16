@@ -29,8 +29,24 @@
       </div>
     </div>
     <!-- 音乐应用 -->
-    <div class="music-applications">
-
+    <div class="music-application">
+      <music-application-item v-for="(item, index) in musicApplicationList" :key="index" :data="item"/>
+    </div>
+    <!-- 我喜欢的音乐 -->
+    <div class="i-like-music">
+      <div class="like-cover-img">
+        <img :src="likeCoverImgUrl">
+      </div>
+      <div class="i-like-info">
+        <h2>我喜欢的音乐</h2>
+        <p>{{ likeList.length + '首' }}</p>
+      </div>
+      <div class="heartbeat-mode">
+        <div class="icon-heartbeat-box">
+          <i class="iconfont icon-heartbeat"></i>
+          <span>心动模式</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,18 +54,50 @@
 <script>
 import TopBar from "@/components/TopBar";
 import {Toast} from "vant";
+import MusicApplicationItem from "components/MusicApplicationItem";
 
 export default {
   name: "Mine",
   components: {
     TopBar,
+    MusicApplicationItem,
   },
   data() {
     return {
       avatarUrl: '', // 头像
       nickname: '', // 昵称
       backgroundUrl: '', // 主页背景图片
+      userId: '', // 用户id
       level: '', // 用户等级
+      musicApplicationList: [
+        {
+          icon: '',
+          title: '本地/下载'
+        }, {
+          icon: '',
+          title: '云盘'
+        }, {
+          icon: '',
+          title: '已购'
+        }, {
+          icon: '',
+          title: '最近播放'
+        }, {
+          icon: '',
+          title: '我的好友'
+        }, {
+          icon: '',
+          title: '收藏和赞'
+        }, {
+          icon: '',
+          title: '我的播客'
+        }, {
+          icon: '',
+          title: '音乐应用'
+        }
+      ], // 音乐应用列表
+      likeList: [], // 已喜欢的音乐列表
+      likeCoverImgUrl: '', // 我喜欢的音乐封面
     }
   },
   methods: {
@@ -60,6 +108,8 @@ export default {
         that.avatarUrl = res.data.profile.avatarUrl;
         that.nickname = res.data.profile.nickname;
         that.backgroundUrl = res.data.profile.backgroundUrl;
+        that.userId = res.data.profile.userId;
+        that.likeListGet();
       })
     },
     // 获取用户等级信息
@@ -72,7 +122,26 @@ export default {
     // 去主页
     toMyHome() {
       Toast('emmmm, 还没开发好...');
-    }
+    },
+    // 已喜欢的音乐列表获取
+    likeListGet() {
+      let that = this;
+      this.$api.mine.likeListGet({
+        uid: this.userId,
+      }).then(res => {
+        that.likeList = res.data.ids;
+        that.likeCoverImgGet(res.data.ids[0]);
+      })
+    },
+    // 封面获取
+    likeCoverImgGet(val) {
+      let that = this;
+      this.$api.player.songDetQry({
+        ids: val
+      }).then(res => {
+        that.likeCoverImgUrl = res.data.songs[0].al.picUrl;
+      })
+    },
   },
   created() {
     this.userAccountGet();
@@ -195,8 +264,101 @@ export default {
     }
   }
 
-  .music-applications {
+  .music-application {
+    margin: 0 1rem 1rem;
+    height: 11rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
+  }
 
+  .i-like-music {
+    margin: 0 1rem 1rem;
+    height: 5rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
+    padding: 0.9rem;
+
+    .like-cover-img {
+      display: inline-block;
+      width: 3.2rem;
+      height: 3.2rem;
+      // 让子元素呈现 3D 转换
+      transform-style: preserve-3d;
+      position: relative;
+      vertical-align: middle;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+      }
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 85%;
+        height: 85%;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        position: absolute;
+        top: -0.2rem;
+        left: 7.5%;
+        // 使用Z轴进行 3D 转换
+        transform: translateZ(-1px);
+      }
+
+      //&::after {
+      //  content: '';
+      //  //width: 85%;
+      //  //height: 85%;
+      //  position: absolute;
+      //  top: 0;
+      //  left: 0;
+      //}
+    }
+
+    .i-like-info {
+      display: inline-block;
+      width: calc(100% - 9rem);
+      height: 3.2rem;
+      vertical-align: middle;
+      padding-left: 10px;
+
+      h2 {
+        display: inline-block;
+        width: 100%;
+        height: 1.8rem;
+        line-height: 1.8rem;
+        font-size: 1.05rem;
+        color: #333334;
+      }
+
+      p {
+        display: inline-block;
+        width: 100%;
+        height: 1.4rem;
+        line-height: 1.4rem;
+        font-size: 0.8rem;
+        color: #9c9c9c;
+      }
+    }
+
+    .heartbeat-mode {
+      display: inline-block;
+      width: 5.8rem;
+      height: 3.2rem;
+      vertical-align: middle;
+      background-color: pink;
+
+      .icon-heartbeat-box {
+        display: inline-block;
+        width: 5.8rem;
+        height: 1.4rem;
+        background-color: green;
+      }
+    }
   }
 }
 </style>
