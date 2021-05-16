@@ -31,7 +31,7 @@ export default {
 
 #song {
   width: 100%;
-  height: 4.7rem;
+  height: 4.5rem;
   background-color: #fff;
   padding: 0.5rem 1.05rem 1.2rem;
   display: flex;
