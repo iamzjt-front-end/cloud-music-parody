@@ -18,7 +18,7 @@
           <span>{{ nickname }}</span>
         </div>
         <p>{{ description }}</p>
-        <i class="iconfont icon-xiala"></i>
+        <i class="iconfont icon-xiala" v-if="description"></i>
       </div>
     </div>
     <!-- 播放全部 -->

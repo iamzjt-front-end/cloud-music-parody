@@ -34,18 +34,35 @@
     </div>
     <!-- 我喜欢的音乐 -->
     <div class="i-like-music">
-      <div class="like-cover-img">
+      <div class="like-cover-img" @click="toRecList(likeSongList[0])">
         <img :src="likeCoverImgUrl">
       </div>
-      <div class="i-like-info">
+      <div class="i-like-info" @click="toRecList(likeSongList[0])">
         <h2>我喜欢的音乐</h2>
-        <p>{{ likeList.length + '首' }}</p>
+        <p>{{ likeTrackCount + '首' }}</p>
       </div>
       <div class="heartbeat-mode">
-        <div class="icon-heartbeat-box">
-          <i class="iconfont icon-heartbeat"></i>
-          <span>心动模式</span>
+        <i class="iconfont icon-heartbeat"></i>
+        <span>心动模式</span>
+      </div>
+    </div>
+    <!-- 歌单tab栏 -->
+    <div class="song-list-tab">
+      <!-- todo 暂时只做收藏歌单, 创建歌单 和 歌单助手以后再做 -->
+      收藏歌单
+    </div>
+    <!-- 收藏歌单 -->
+    <div class="favorite-song-list">
+      <div class="favorite-song-info">
+        <div class="left">
+          收藏歌单 ({{ subPlaylistCount + '个' }})
         </div>
+        <div class="right">
+          <i class="iconfont icon-more"></i>
+        </div>
+      </div>
+      <div class="favorite-song-content">
+
       </div>
     </div>
   </div>
@@ -96,8 +113,12 @@ export default {
           title: '音乐应用'
         }
       ], // 音乐应用列表
-      likeList: [], // 已喜欢的音乐列表
-      likeCoverImgUrl: '', // 我喜欢的音乐封面
+      likeCoverImgUrl: '', // 我喜欢的音乐歌单 封面
+      likeTrackCount: '', // 我喜欢的音乐歌单 歌曲数量
+      subPlaylistCount: '', // 用户收藏歌单数量
+      likeSongList: [], // 我喜欢的音乐歌单列表
+      createSongList: [], // 我创建的歌单列表
+      favoriteSongList: [], // 我收藏的歌单
     }
   },
   methods: {
@@ -109,7 +130,7 @@ export default {
         that.nickname = res.data.profile.nickname;
         that.backgroundUrl = res.data.profile.backgroundUrl;
         that.userId = res.data.profile.userId;
-        that.likeListGet();
+        that.userPlaylistGet();
       })
     },
     // 获取用户等级信息
@@ -123,29 +144,44 @@ export default {
     toMyHome() {
       Toast('emmmm, 还没开发好...');
     },
-    // 已喜欢的音乐列表获取
-    likeListGet() {
+    // 跳转去歌单
+    toRecList(val) {
+      this.$router.push({
+        name: 'rec-list',
+        params: {
+          id: val.id,
+          imgUrl: val.picUrl
+        }
+      });
+    },
+    // 获取用户收藏歌单数量
+    userSubcountGet() {
       let that = this;
-      this.$api.mine.likeListGet({
+      this.$api.mine.userSubcountGet().then(res => {
+        that.subPlaylistCount = res.data.subPlaylistCount;
+      })
+    },
+    // 获取用户歌单
+    userPlaylistGet() {
+      let that = this;
+      this.$api.mine.userPlaylistGet({
         uid: this.userId,
       }).then(res => {
-        that.likeList = res.data.ids;
-        that.likeCoverImgGet(res.data.ids[0]);
+        var lastIndex = res.data.playlist.length - 1;
+        that.likeSongList = res.data.playlist.slice(0, 1); // 我喜欢的音乐歌单列表
+        that.likeCoverImgUrl = that.likeSongList[0].coverImgUrl;
+        that.likeSongList[0].picUrl = that.likeCoverImgUrl;
+        that.likeTrackCount = that.likeSongList[0].trackCount;
+        that.createSongList = res.data.playlist.slice(1, 2); // 我创建的歌单列表
+        that.favoriteSongList = res.data.playlist.slice(2, lastIndex); // 我收藏的歌单
       })
     },
-    // 封面获取
-    likeCoverImgGet(val) {
-      let that = this;
-      this.$api.player.songDetQry({
-        ids: val
-      }).then(res => {
-        that.likeCoverImgUrl = res.data.songs[0].al.picUrl;
-      })
-    },
+
   },
   created() {
     this.userAccountGet();
     this.userLevelGet();
+    this.userSubcountGet();
   }
 }
 </script>
@@ -273,7 +309,7 @@ export default {
   }
 
   .i-like-music {
-    margin: 0 1rem 1rem;
+    margin: 0 1rem;
     height: 5rem;
     background-color: #ffffff;
     border-radius: 10px;
@@ -350,14 +386,67 @@ export default {
       width: 5.8rem;
       height: 3.2rem;
       vertical-align: middle;
-      background-color: pink;
+      text-align: center;
+      line-height: 3.2rem;
 
-      .icon-heartbeat-box {
-        display: inline-block;
-        width: 5.8rem;
-        height: 1.4rem;
-        background-color: green;
+      .icon-heartbeat {
+        vertical-align: middle;
       }
+
+      span {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .song-list-tab {
+    width: 100%;
+    height: 3rem;
+    font-size: 1rem;
+    color: #636364;
+    text-align: center;
+    line-height: 3rem;
+  }
+
+  .favorite-song-list {
+    margin: 0 1rem;
+    padding: 1rem 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
+
+    .favorite-song-info {
+      width: 100%;
+      height: 1.2rem;
+
+      .left {
+        float: left;
+        width: 8rem;
+        height: 100%;
+        line-height: 1.2rem;
+        //background-color: pink;
+        color: #999999;
+        font-size: 0.75rem;
+        padding-left: 12px;
+      }
+
+      .right {
+        float: right;
+        width: 2.4rem;
+        height: 100%;
+        //background-color: pink;
+        color: #999999;
+        text-align: center;
+
+        .icon-more {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .favorite-song-content {
+      width: 100%;
+      height: 20rem;
     }
   }
 }

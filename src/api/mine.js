@@ -12,12 +12,6 @@ const mine = {
             params: params
         });
     },
-    // 获取用户详情
-    userDetailGet(params) {
-        return axios.get(`${base.baseURL}/user/detail`, {
-            params: params
-        });
-    },
     //获取用户等级信息
     userLevelGet(params) {
         return axios.get(`${base.baseURL}/user/level`, {
@@ -30,9 +24,15 @@ const mine = {
             params: params
         });
     },
-    // 获取用户信息 , 歌单，收藏，mv, dj 数量
+    // 获取用户信息, 歌单，收藏，mv, dj 数量
     userSubcountGet(params) {
         return axios.get(`${base.baseURL}/user/subcount`, {
+            params: params
+        });
+    },
+    // 获取用户歌单
+    userPlaylistGet(params) {
+        return axios.get(`${base.baseURL}/user/playlist`, {
             params: params
         });
     },
