@@ -1,6 +1,6 @@
 <template>
   <div id="favorite-song-item">
-    <img :src="imgUrl" @load="load">
+    <img :src="imgUrl">
     <div class="info-box">
       <h1>{{ songListName }}</h1>
       <p>{{ `${trackCount}首，by ${creatorNickname}` }}</p>
@@ -24,11 +24,6 @@ export default {
     },
     creatorNickname() { // 歌单作者
       return this.item.creator.nickname;
-    }
-  },
-  methods: {
-    load() {
-      this.$emit('favoriteSongLoad');
     }
   }
 }

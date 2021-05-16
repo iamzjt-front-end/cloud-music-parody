@@ -39,6 +39,7 @@ export default {
     background-color: #fff;
     border-radius: 0.4rem;
     overflow: hidden;
+    vertical-align: middle;
 
     img {
       width: 100%;
@@ -49,6 +50,7 @@ export default {
   .songIndex, .songName, .songAuthor {
     height: 3rem;
     line-height: 3rem;
+    vertical-align: middle;
 
     p {
       @include single-line-ellipsis;

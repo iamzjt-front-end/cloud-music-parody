@@ -10,7 +10,7 @@
         <!-- todo 上划显示 id -->
       </div>
     </top-bar>
-    <scroll ref="srcoll" :data="{play: playlist}">
+    <scroll :data="{play: playlist}">
       <div>
         <!-- 我的 -->
         <div class="mine-home">
@@ -45,7 +45,7 @@
           </div>
           <div class="heartbeat-mode">
             <i class="iconfont icon-heartbeat"></i>
-            <span>心动模式</span>
+            <span> 心动模式</span>
           </div>
         </div>
         <!-- 歌单tab栏 -->
@@ -65,7 +65,7 @@
           </div>
           <div class="favorite-song-content">
             <favorite-song-item v-for="(item, index) in favoriteSongList" :key="index" :item="item"
-                                @click.native="toRecList(item)" @favorite-song-load="load"/>
+                                @click.native="toRecList(item)"/>
           </div>
         </div>
       </div>
@@ -186,20 +186,8 @@ export default {
         that.likeCoverImgUrl = that.likeSongList[0].coverImgUrl;
         that.likeTrackCount = that.likeSongList[0].trackCount;
         that.createSongList = res.data.playlist.slice(1, 2); // 我创建的歌单列表
-        that.favoriteSongContent = res.data.playlist.slice(2, lastIndex); // 我收藏的歌单
+        that.favoriteSongList = res.data.playlist.slice(2, lastIndex); // 我收藏的歌单
       })
-    },
-    // 歌单子组件封面图片加载事件
-    load() {
-      if (!this.checkloaded) {
-        this.checkloaded = true
-        this.$nextTick(() => {
-          let favoriteSongContent = document.querySelector('.favorite-song-content');
-          let songHeight = document.querySelector('#favorite-song-item').clientHeight;
-          favoriteSongContent.style.height = songHeight * this.favoriteSongContent.length + 'px';
-          this.$refs.scroll.refresh();
-        })
-      }
     },
   },
   created() {
@@ -225,7 +213,7 @@ export default {
 
   .top-bar {
     box-shadow: none;
-    background-color: #fafafa;;
+    background-color: #fafafa;
 
     .icon-settings, .icon-distinguish {
       color: $color-text-ddd;
