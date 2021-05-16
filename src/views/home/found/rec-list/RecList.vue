@@ -134,7 +134,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'src/assets/scss/mixin';
+@import "src/assets/scss/mixin";
 
 #rec-list {
   position: fixed;

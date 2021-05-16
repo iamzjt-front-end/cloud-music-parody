@@ -30,7 +30,7 @@
     </div>
     <!-- 音乐应用 -->
     <div class="music-application">
-      <music-application-item v-for="(item, index) in musicApplicationList" :key="index" :data="item"/>
+      <music-application-item v-for="(item, index) in musicApplicationList" :key="index" :item="item"/>
     </div>
     <!-- 我喜欢的音乐 -->
     <div class="i-like-music">
@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="favorite-song-content">
-
+        <favorite-song-item v-for="(item, index) in favoriteSongList" :key="index" :item="item"/>
       </div>
     </div>
   </div>
@@ -72,12 +72,14 @@
 import TopBar from "@/components/TopBar";
 import {Toast} from "vant";
 import MusicApplicationItem from "components/MusicApplicationItem";
+import FavoriteSongItem from "components/FavoriteSongItem";
 
 export default {
   name: "Mine",
   components: {
     TopBar,
     MusicApplicationItem,
+    FavoriteSongItem,
   },
   data() {
     return {
@@ -417,14 +419,13 @@ export default {
 
     .favorite-song-info {
       width: 100%;
-      height: 1.2rem;
+      height: 1.5rem;
 
       .left {
         float: left;
         width: 8rem;
         height: 100%;
         line-height: 1.2rem;
-        //background-color: pink;
         color: #999999;
         font-size: 0.75rem;
         padding-left: 12px;
@@ -434,7 +435,6 @@ export default {
         float: right;
         width: 2.4rem;
         height: 100%;
-        //background-color: pink;
         color: #999999;
         text-align: center;
 
@@ -446,7 +446,6 @@ export default {
 
     .favorite-song-content {
       width: 100%;
-      height: 20rem;
     }
   }
 }

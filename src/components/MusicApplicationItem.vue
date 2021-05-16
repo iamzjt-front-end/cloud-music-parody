@@ -6,7 +6,8 @@
 
 <script>
 export default {
-  name: "MusicApplicationItem"
+  name: "MusicApplicationItem",
+  props: ['item'],
 }
 </script>
 
