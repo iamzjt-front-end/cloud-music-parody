@@ -10,61 +10,66 @@
         <!-- todo 上划显示 id -->
       </div>
     </top-bar>
-    <!-- 我的 -->
-    <div class="mine-home">
-      <div class="left">
-        <img :src="avatarUrl">
-      </div>
-      <div class="right">
-        <div class="id-and-lv">
-          <h1>{{ nickname }}</h1>
-          <div class="icon-vip-box">
-            <i class="iconfont icon-vip"></i>
+    <scroll ref="srcoll" :data="{play: playlist}">
+      <div>
+        <!-- 我的 -->
+        <div class="mine-home">
+          <div class="left">
+            <img :src="avatarUrl">
           </div>
-          <span>{{ 'lv.' + level }}</span>
+          <div class="right">
+            <div class="id-and-lv">
+              <h1>{{ nickname }}</h1>
+              <div class="icon-vip-box">
+                <i class="iconfont icon-vip"></i>
+              </div>
+              <span>{{ 'lv.' + level }}</span>
+            </div>
+            <div class="to-my-home" @click="toMyHome">
+              <i class="iconfont icon-xiala"></i>
+            </div>
+          </div>
         </div>
-        <div class="to-my-home" @click="toMyHome">
-          <i class="iconfont icon-xiala"></i>
+        <!-- 音乐应用 -->
+        <div class="music-application">
+          <music-application-item v-for="(item, index) in musicApplicationList" :key="index" :item="item"/>
+        </div>
+        <!-- 我喜欢的音乐 -->
+        <div class="i-like-music">
+          <div class="like-cover-img" @click="toRecList(likeSongList[0])">
+            <img :src="likeCoverImgUrl">
+          </div>
+          <div class="i-like-info" @click="toRecList(likeSongList[0])">
+            <h2>我喜欢的音乐</h2>
+            <p>{{ likeTrackCount + '首' }}</p>
+          </div>
+          <div class="heartbeat-mode">
+            <i class="iconfont icon-heartbeat"></i>
+            <span>心动模式</span>
+          </div>
+        </div>
+        <!-- 歌单tab栏 -->
+        <div class="song-list-tab">
+          <!-- todo 暂时只做收藏歌单, 创建歌单 和 歌单助手以后再做 -->
+          收藏歌单
+        </div>
+        <!-- 收藏歌单 -->
+        <div class="favorite-song-list">
+          <div class="favorite-song-info">
+            <div class="left">
+              收藏歌单 ({{ subPlaylistCount + '个' }})
+            </div>
+            <div class="right">
+              <i class="iconfont icon-more"></i>
+            </div>
+          </div>
+          <div class="favorite-song-content">
+            <favorite-song-item v-for="(item, index) in favoriteSongList" :key="index" :item="item"
+                                @click.native="toRecList(item)" @favorite-song-load="load"/>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- 音乐应用 -->
-    <div class="music-application">
-      <music-application-item v-for="(item, index) in musicApplicationList" :key="index" :item="item"/>
-    </div>
-    <!-- 我喜欢的音乐 -->
-    <div class="i-like-music">
-      <div class="like-cover-img" @click="toRecList(likeSongList[0])">
-        <img :src="likeCoverImgUrl">
-      </div>
-      <div class="i-like-info" @click="toRecList(likeSongList[0])">
-        <h2>我喜欢的音乐</h2>
-        <p>{{ likeTrackCount + '首' }}</p>
-      </div>
-      <div class="heartbeat-mode">
-        <i class="iconfont icon-heartbeat"></i>
-        <span>心动模式</span>
-      </div>
-    </div>
-    <!-- 歌单tab栏 -->
-    <div class="song-list-tab">
-      <!-- todo 暂时只做收藏歌单, 创建歌单 和 歌单助手以后再做 -->
-      收藏歌单
-    </div>
-    <!-- 收藏歌单 -->
-    <div class="favorite-song-list">
-      <div class="favorite-song-info">
-        <div class="left">
-          收藏歌单 ({{ subPlaylistCount + '个' }})
-        </div>
-        <div class="right">
-          <i class="iconfont icon-more"></i>
-        </div>
-      </div>
-      <div class="favorite-song-content">
-        <favorite-song-item v-for="(item, index) in favoriteSongList" :key="index" :item="item"/>
-      </div>
-    </div>
+    </scroll>
   </div>
 </template>
 
@@ -73,6 +78,7 @@ import TopBar from "@/components/TopBar";
 import {Toast} from "vant";
 import MusicApplicationItem from "components/MusicApplicationItem";
 import FavoriteSongItem from "components/FavoriteSongItem";
+import Scroll from "components/scroll/Scroll";
 
 export default {
   name: "Mine",
@@ -80,6 +86,7 @@ export default {
     TopBar,
     MusicApplicationItem,
     FavoriteSongItem,
+    Scroll,
   },
   data() {
     return {
@@ -121,6 +128,7 @@ export default {
       likeSongList: [], // 我喜欢的音乐歌单列表
       createSongList: [], // 我创建的歌单列表
       favoriteSongList: [], // 我收藏的歌单
+      playlist: [], // 用户歌单
     }
   },
   methods: {
@@ -169,16 +177,30 @@ export default {
       this.$api.mine.userPlaylistGet({
         uid: this.userId,
       }).then(res => {
-        var lastIndex = res.data.playlist.length - 1;
+        res.data.playlist.forEach(function (item) {
+          item.picUrl = item.coverImgUrl;
+        })
+        that.playlist = res.data.playlist; // 用户歌单
+        let lastIndex = res.data.playlist.length - 1;
         that.likeSongList = res.data.playlist.slice(0, 1); // 我喜欢的音乐歌单列表
         that.likeCoverImgUrl = that.likeSongList[0].coverImgUrl;
-        that.likeSongList[0].picUrl = that.likeCoverImgUrl;
         that.likeTrackCount = that.likeSongList[0].trackCount;
         that.createSongList = res.data.playlist.slice(1, 2); // 我创建的歌单列表
-        that.favoriteSongList = res.data.playlist.slice(2, lastIndex); // 我收藏的歌单
+        that.favoriteSongContent = res.data.playlist.slice(2, lastIndex); // 我收藏的歌单
       })
     },
-
+    // 歌单子组件封面图片加载事件
+    load() {
+      if (!this.checkloaded) {
+        this.checkloaded = true
+        this.$nextTick(() => {
+          let favoriteSongContent = document.querySelector('.favorite-song-content');
+          let songHeight = document.querySelector('#favorite-song-item').clientHeight;
+          favoriteSongContent.style.height = songHeight * this.favoriteSongContent.length + 'px';
+          this.$refs.scroll.refresh();
+        })
+      }
+    },
   },
   created() {
     this.userAccountGet();
@@ -193,17 +215,17 @@ export default {
 
 #mine {
   position: fixed;
-  top: 0;
+  top: 54px;
   right: 0;
-  bottom: 0;
+  bottom: 50px;
   left: 0;
   width: 100%;
-  height: 100vh;
   background-color: #fafafa;
   color: #000000;
 
   .top-bar {
     box-shadow: none;
+    background-color: #fafafa;;
 
     .icon-settings, .icon-distinguish {
       color: $color-text-ddd;

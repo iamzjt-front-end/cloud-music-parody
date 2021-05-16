@@ -430,6 +430,11 @@ $width-cover: 65vw;
       backdrop-filter: blur(66px);
       -webkit-backdrop-filter: blur(66px);
       background-color: rgba(0, 0, 0, .32);
+
+      .top {
+        width: 100vw;
+        height: 54px;
+      }
     }
 
     .top-bar {
