@@ -42,11 +42,13 @@
         <!-- 推荐歌单专栏 -->
         <column class="rec-list" :more="'rec'">
           <h1 slot="title">推荐歌单</h1>
-          <div class="song-list" slot="item">
-            <song-list-item v-for="(item, index) in this.recSongList" :key="index" @click.native="toRecList(item)">
-              <img :src="item.picUrl" slot="img">
-              <p slot="description">{{ item.name }}</p>
-            </song-list-item>
+          <div class="song-list" slot="item" ref="songList">
+            <div class="song-list-box">
+              <song-list-item v-for="(item, index) in this.recSongList" :key="index" @click.native="toRecList(item)">
+                <img :src="item.picUrl" slot="img" @load="recImgLoad">
+                <p slot="description">{{ item.name }}</p>
+              </song-list-item>
+            </div>
           </div>
         </column>
         <div class="wide-line"></div>
@@ -72,6 +74,7 @@ import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
 import ChartsItem from "@/components/ChartsItem";
 import Scroll from "@/components/scroll/Scroll";
+import BScroll from 'better-scroll';
 
 import Vue from 'vue';
 import {Lazyload, Toast} from 'vant';
@@ -128,11 +131,6 @@ export default {
       this.$api.found.recSongListQry().then(res => {
         if (res) {
           that.recSongList = res.data.recommend.slice(0, 6);
-          this.$nextTick(() => {
-            let songList = document.querySelector('.song-list');
-            let songListItemWidth = document.querySelector('.song-list-item').clientWidth;
-            songList.style.width = songListItemWidth * 6.5 + 'px';
-          })
         }
       })
     },
@@ -173,6 +171,35 @@ export default {
         }
       })
     },
+    // 推荐歌单容器宽度设置
+    recImgLoad() {
+      if (!this.checkloaded) {
+        this.checkloaded = true
+        // song-list 宽度计算
+        this.$nextTick(() => {
+          let songListBox = document.querySelector('.song-list-box');
+          let songListItemWidth = document.querySelectorAll('.song-list-item')[0].clientWidth;
+          songListBox.style.width = songListItemWidth * 6 + 'px';
+          this.scrollLoad();
+        })
+      }
+    },
+    // 横向滚动初始化
+    scrollLoad() {
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.songList, {
+            startX: 0,  // 配置的详细信息请参考better-scroll的官方文档，这里不再赘述
+            click: true,
+            scrollX: true,
+            scrollY: false,
+            eventPassthrough: 'vertical'
+          })
+        } else {
+          this.scroll.refresh() //如果dom结构发生改变调用该方法
+        }
+      })
+    }
   },
   created() {
     this.bannerImageQry();
@@ -188,6 +215,16 @@ export default {
       item.style.height = this.imgHeight + 'px'
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      let timer = setTimeout(() => {
+        if (timer) {
+          clearTimeout(timer);
+          this.scrollLoad();
+        }
+      }, 0)
+    })
+  }
 }
 </script>
 
@@ -235,7 +272,12 @@ export default {
     height: 14.25rem;
 
     .song-list {
+      width: 100%;
       height: 100%;
+
+      .song-list-box {
+        height: 100%;
+      }
     }
   }
 

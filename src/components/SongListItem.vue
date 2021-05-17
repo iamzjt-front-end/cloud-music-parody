@@ -38,7 +38,7 @@ export default {
   width: 7rem;
   height: 10rem;
   background-color: #fff;
-  margin: 0.75rem 0.2rem 0.5rem 0.2rem;
+  padding: 0.75rem 0.2rem 0.5rem 0.2rem;
   display: inline-block;
   position: relative;
 
