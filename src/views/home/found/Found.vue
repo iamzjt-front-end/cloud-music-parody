@@ -55,11 +55,13 @@
         <!-- 排行榜专栏 -->
         <column class="char-list" :more="'char'">
           <h1 slot="title">排行榜</h1>
-          <div class="charts" slot="item">
-            <charts-item v-for="(item, index) in this.chartsList" :key="index"
-                         :chartsList="chartsList" :index="index" @click.native="toRankList(item)">
-              <h1 slot="title">{{ item.name }}</h1>
-            </charts-item>
+          <div class="charts" slot="item" ref="charts">
+            <div class="charts-box">
+              <charts-item v-for="(item, index) in this.chartsList" :key="index"
+                           :chartsList="chartsList" :index="index" @click.native="toRankList(item)">
+                <h1 slot="title">{{ item.name }}</h1>
+              </charts-item>
+            </div>
           </div>
         </column>
       </div>
@@ -74,7 +76,8 @@ import Column from "@/components/Column";
 import SongListItem from "@/components/SongListItem";
 import ChartsItem from "@/components/ChartsItem";
 import Scroll from "@/components/scroll/Scroll";
-import BScroll from 'better-scroll';
+import BScroll from '@better-scroll/core';
+import Slide from '@better-scroll/slide';
 
 import Vue from 'vue';
 import {Lazyload, Toast} from 'vant';
@@ -164,9 +167,10 @@ export default {
           this.updateChartsList(res.data.list);
           this.updateSingerChartsList(res.data.artistToplist);
           this.$nextTick(() => {
-            let charts = document.querySelector('.charts');
-            let chartsItemWidth = document.querySelector('.charts-item').clientWidth;
-            charts.style.width = chartsItemWidth * 6.5 + 'px';
+            let chartsBox = document.querySelector('.charts-box');
+            let chartsItemWidth = document.querySelectorAll('.charts-item')[0].clientWidth;
+            chartsBox.style.width = chartsItemWidth * 6 + 'px';
+            this.chartsScrollLoad();
           })
         }
       })
@@ -180,12 +184,12 @@ export default {
           let songListBox = document.querySelector('.song-list-box');
           let songListItemWidth = document.querySelectorAll('.song-list-item')[0].clientWidth;
           songListBox.style.width = songListItemWidth * 6 + 'px';
-          this.scrollLoad();
+          this.recScrollLoad();
         })
       }
     },
-    // 横向滚动初始化
-    scrollLoad() {
+    // 推荐歌单横向滚动初始化
+    recScrollLoad() {
       this.$nextTick(() => {
         if (!this.scroll) {
           this.scroll = new BScroll(this.$refs.songList, {
@@ -197,6 +201,29 @@ export default {
           })
         } else {
           this.scroll.refresh() //如果dom结构发生改变调用该方法
+        }
+      })
+    },
+    // 榜单轮播初始化
+    chartsScrollLoad() {
+      this.$nextTick(() => {
+        if (!this.chartsScroll) {
+          BScroll.use(Slide);
+          this.chartsScroll = new BScroll(this.$refs.charts, {
+            scrollX: true,
+            scrollY: false,
+            slide: {
+              threshold: 0.1,
+              loop: false,
+              autoplay: false,
+              easing: 'transition-timing-function',
+            },
+            momentum: false,
+            bounce: false,
+            stopPropagation: false
+          })
+        } else {
+          this.chartsScroll.refresh() //如果dom结构发生改变调用该方法
         }
       })
     }
@@ -214,16 +241,6 @@ export default {
     for (let item of img) {
       item.style.height = this.imgHeight + 'px'
     }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      let timer = setTimeout(() => {
-        if (timer) {
-          clearTimeout(timer);
-          this.scrollLoad();
-        }
-      }, 0)
-    })
   }
 }
 </script>
@@ -290,7 +307,12 @@ export default {
     height: 19rem;
 
     .charts {
+      width: 100%;
       height: 100%;
+
+      .charts-box {
+        height: 100%;
+      }
     }
   }
 }

@@ -58,7 +58,7 @@ export default {
   }
 
   .songName, .songAuthor {
-    max-width: 7rem;
+    max-width: 6.6rem;
     padding: 0 0.1rem;
   }
 
