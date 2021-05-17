@@ -27,7 +27,7 @@ export default {
     setTimeout(() => { // 确保DOM渲染完毕
       this.initScroll()
       console.log('this.scroll', this.scroll);
-    }, 20)
+    }, 2000)
   },
   methods: {
     initScroll() {
@@ -53,7 +53,14 @@ export default {
     data: {
       handler(newVal, oldVal) {
         if (newVal != oldVal) {
-          this.refresh()
+          if (!this.scroll) {
+            let that = this;
+            this.$nextTick(() => {
+              that.initScroll();
+            })
+          } else {
+            this.refresh()
+          }
         }
       },
       immediate: true,
