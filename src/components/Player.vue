@@ -654,6 +654,8 @@ $width-cover: 65vw;
 
       .mini-songNm {
         max-width: 60%;
+        height: 2rem;
+        line-height: 2rem;
         color: #323233;
         font-size: 0.9rem;
         padding: 0 0.3rem;
@@ -662,6 +664,8 @@ $width-cover: 65vw;
 
       .mini-singers {
         max-width: 35%;
+        height: 2rem;
+        line-height: 2rem;
         color: #838384;
         font-size: 0.7rem;
         @include single-line-ellipsis;
