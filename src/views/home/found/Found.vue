@@ -142,33 +142,26 @@ export default {
     // 轮播图初始化
     swiperSliderInit() {
       let that = this;
-      if (!this.swiperSlider) {
-        this.swiperSlider = new BScroll(this.$refs.swiper, {
-          scrollX: true,
-          scrollY: false,
-          slide: {
-            threshold: 0.1,
-            loop: true,
-            autoplay: true,
-            easing: 'transition-timing-function',
-            interval: '4500', // 距离下一次播放的间隔
-            speed: '1000', // 切换 Page 动画的默认时长
-          },
-          momentum: false,
-          bounce: false,
-          stopPropagation: false
-        })
-        //this.swiperSlider.on('scrollEnd', this._onScrollEnd)
-        this.swiperSlider.on('slideWillChange', (page) => {
-          that.currentPageIndex = page.pageX;
-        })
-      } else {
-        this.swiperSlider.refresh() //如果dom结构发生改变调用该方法
-      }
+      this.swiperSlider = new BScroll(this.$refs.swiper, {
+        scrollX: true,
+        scrollY: false,
+        slide: {
+          threshold: 0.1,
+          loop: true,
+          autoplay: true,
+          easing: 'transition-timing-function',
+          interval: '5000', // 距离下一次播放的间隔
+        },
+        useTransition: true,
+        momentum: false,
+        bounce: false,
+        stopPropagation: true,
+        probeType: 2
+      })
+      this.swiperSlider.on('slideWillChange', (page) => {
+        that.currentPageIndex = page.pageX;
+      })
     },
-    //_onScrollEnd() {
-    //  console.log('CurrentPage => ', this.swiperSlider.getCurrentPage())
-    //},
     // 获取推荐歌单
     songListGet() {
       let that = this;
@@ -246,24 +239,18 @@ export default {
     },
     // 榜单轮播初始化
     chartsSliderInit() {
-      this.$nextTick(() => {
-        if (!this.chartsScroll) {
-          this.chartsScroll = new BScroll(this.$refs.charts, {
-            scrollX: true,
-            scrollY: false,
-            slide: {
-              threshold: 0.1,
-              loop: false,
-              autoplay: false,
-              easing: 'transition-timing-function',
-            },
-            momentum: false,
-            bounce: false,
-            stopPropagation: false
-          })
-        } else {
-          this.chartsScroll.refresh() //如果dom结构发生改变调用该方法
-        }
+      this.chartsScroll = new BScroll(this.$refs.charts, {
+        scrollX: true,
+        scrollY: false,
+        slide: {
+          threshold: 0.1,
+          loop: false,
+          autoplay: false,
+          easing: 'transition-timing-function',
+        },
+        momentum: false,
+        bounce: false,
+        stopPropagation: false
       })
     }
   },
@@ -299,7 +286,7 @@ export default {
 
   .banner-wrapper {
     width: 100vw;
-    height: 9rem;
+    height: 39vw;
     position: relative;
 
     .swiper-wrapper {
@@ -327,7 +314,7 @@ export default {
 
     .dots-wrapper {
       position: absolute;
-      bottom: 8px;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
 
