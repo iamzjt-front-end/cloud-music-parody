@@ -26,14 +26,20 @@
     <scroll ref="scroll" :data="{recSong: recSongList, charts: chartsList}">
       <div>
         <!-- 轮播图 -->
-        <div class="swiper">
-          <van-swipe :autoplay="5000" indicator-color="#fff" ref="swipe">
-            <van-swipe-item v-for="(image, index) in images" :key="index">
-              <img v-lazy="image"/>
-            </van-swipe-item>
-          </van-swipe>
+        <div class="banner-wrapper">
+          <div class="swiper-wrapper" ref="swiper">
+            <div class="swiper-content">
+              <div v-for="(item, index) in images" :key="index">
+                <img :src="item">
+              </div>
+            </div>
+          </div>
+          <!-- todo 轮播图下方小圆点 -->
+          <div class="dots-wrapper">
+            <span class="dot" v-for="(item, index) in images" :key="index"
+                  :class="{'active': currentPageIndex === index}"></span>
+          </div>
         </div>
-        <!-- todo 图片最下方被覆盖了一部分 -->
         <!-- 快捷菜单 -->
         <div class="shortcut-menu">
           <shortcut-menu></shortcut-menu>
@@ -79,6 +85,8 @@ import Scroll from "@/components/scroll/Scroll";
 import BScroll from '@better-scroll/core';
 import Slide from '@better-scroll/slide';
 
+BScroll.use(Slide);
+
 import Vue from 'vue';
 import {Lazyload, Toast} from 'vant';
 
@@ -99,8 +107,8 @@ export default {
   data() {
     return {
       value: '',
-      images: [],
-      imgHeight: window.innerWidth * 193 / 522,
+      images: [], // 轮播图片列表
+      currentPageIndex: 0, // 轮播图默认位置
       recSongList: [], // 推荐歌单列表
       chartsList: [], // 排行榜歌单列表
     }
@@ -112,7 +120,7 @@ export default {
       Toast(val);
     },
     // 获取轮播图
-    bannerImageQry() {
+    bannerImageGet() {
       // todo 判断不同设备来请求不同的轮播图片
       // 0: pc
       // 1: android
@@ -125,15 +133,76 @@ export default {
           for (let item of res.data.banners) {
             this.images.push(item.pic);
           }
+          this.$nextTick(() => {
+            this.swiperSliderInit();
+          })
         }
       })
     },
+    // 轮播图初始化
+    swiperSliderInit() {
+      let that = this;
+      if (!this.swiperSlider) {
+        this.swiperSlider = new BScroll(this.$refs.swiper, {
+          scrollX: true,
+          scrollY: false,
+          slide: {
+            threshold: 0.1,
+            loop: true,
+            autoplay: true,
+            easing: 'transition-timing-function',
+            interval: '4500', // 距离下一次播放的间隔
+            speed: '1000', // 切换 Page 动画的默认时长
+          },
+          momentum: false,
+          bounce: false,
+          stopPropagation: false
+        })
+        //this.swiperSlider.on('scrollEnd', this._onScrollEnd)
+        this.swiperSlider.on('slideWillChange', (page) => {
+          that.currentPageIndex = page.pageX;
+        })
+      } else {
+        this.swiperSlider.refresh() //如果dom结构发生改变调用该方法
+      }
+    },
+    //_onScrollEnd() {
+    //  console.log('CurrentPage => ', this.swiperSlider.getCurrentPage())
+    //},
     // 获取推荐歌单
     songListGet() {
       let that = this;
       this.$api.found.recSongListQry().then(res => {
         if (res) {
           that.recSongList = res.data.recommend.slice(0, 6);
+        }
+      })
+    },
+    // 推荐歌单容器宽度设置
+    recImgLoad() {
+      if (!this.recImgLoaded) {
+        this.recImgLoaded = true
+        this.$nextTick(() => {
+          let songListBox = document.querySelector('.song-list-box');
+          let songListItemWidth = document.querySelectorAll('.song-list-item')[0].clientWidth;
+          songListBox.style.width = songListItemWidth * 6 + 'px';
+          this.recScrollInit();
+        })
+      }
+    },
+    // 推荐歌单横向滚动初始化
+    recScrollInit() {
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.songList, {
+            startX: 0,  // 配置的详细信息请参考better-scroll的官方文档，这里不再赘述
+            click: true,
+            scrollX: true,
+            scrollY: false,
+            eventPassthrough: 'vertical'
+          })
+        } else {
+          this.scroll.refresh() //如果dom结构发生改变调用该方法
         }
       })
     },
@@ -170,45 +239,15 @@ export default {
             let chartsBox = document.querySelector('.charts-box');
             let chartsItemWidth = document.querySelectorAll('.charts-item')[0].clientWidth;
             chartsBox.style.width = chartsItemWidth * 6 + 'px';
-            this.chartsScrollLoad();
+            this.chartsSliderInit();
           })
-        }
-      })
-    },
-    // 推荐歌单容器宽度设置
-    recImgLoad() {
-      if (!this.checkloaded) {
-        this.checkloaded = true
-        // song-list 宽度计算
-        this.$nextTick(() => {
-          let songListBox = document.querySelector('.song-list-box');
-          let songListItemWidth = document.querySelectorAll('.song-list-item')[0].clientWidth;
-          songListBox.style.width = songListItemWidth * 6 + 'px';
-          this.recScrollLoad();
-        })
-      }
-    },
-    // 推荐歌单横向滚动初始化
-    recScrollLoad() {
-      this.$nextTick(() => {
-        if (!this.scroll) {
-          this.scroll = new BScroll(this.$refs.songList, {
-            startX: 0,  // 配置的详细信息请参考better-scroll的官方文档，这里不再赘述
-            click: true,
-            scrollX: true,
-            scrollY: false,
-            eventPassthrough: 'vertical'
-          })
-        } else {
-          this.scroll.refresh() //如果dom结构发生改变调用该方法
         }
       })
     },
     // 榜单轮播初始化
-    chartsScrollLoad() {
+    chartsSliderInit() {
       this.$nextTick(() => {
         if (!this.chartsScroll) {
-          BScroll.use(Slide);
           this.chartsScroll = new BScroll(this.$refs.charts, {
             scrollX: true,
             scrollY: false,
@@ -229,18 +268,9 @@ export default {
     }
   },
   created() {
-    this.bannerImageQry();
+    this.bannerImageGet();
     this.songListGet();
     this.chartsGet();
-  },
-  updated() {
-    // this.$refs.swipe.resize();
-    // 可能是我的用法不对, 官方提供的重绘方法还是不能正确计算出高度
-    // 解决 vant UI swipe 组件, 每次页面重绘的时候, 计算不出正确高度的bug
-    let img = document.querySelector('.swiper').querySelectorAll('img');
-    for (let item of img) {
-      item.style.height = this.imgHeight + 'px'
-    }
   }
 }
 </script>
@@ -249,16 +279,14 @@ export default {
 @import '../../../assets/scss/variable';
 
 #found {
-  width: 100vw;
-  height: calc(100vh - 54px - 50px);
-
   position: fixed;
   top: 54px;
   left: 0;
   bottom: 50px;
   right: 0;
-
   background-color: $color-bgc;
+  width: 100%;
+  height: calc(100vh - 54px - 50px);
 
   .top-bar {
     background-color: #fff;
@@ -269,13 +297,53 @@ export default {
     }
   }
 
-  .swiper {
-    margin: 0.5rem 1rem 0.2rem 1rem;
-    border-radius: 0.5rem;
-    overflow: hidden;
+  .banner-wrapper {
+    width: 100vw;
+    height: 9rem;
+    position: relative;
 
-    img {
+    .swiper-wrapper {
       width: 100%;
+      height: 100%;
+
+      .swiper-content {
+        width: 1000%;
+        height: 100%;
+
+        div {
+          display: inline-block;
+          width: 100vw;
+          height: 100%;
+          padding: 0.5rem 1rem 0.2rem 1rem;
+          white-space: nowrap;
+
+          img {
+            width: 100%;
+            border-radius: 8px;
+          }
+        }
+      }
+    }
+
+    .dots-wrapper {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .dot {
+        display: inline-block;
+        margin: 0 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #eee;
+      }
+
+      .active {
+        width: 20px;
+        border-radius: 5px;
+      }
     }
   }
 

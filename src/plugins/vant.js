@@ -12,8 +12,6 @@ import {
     Tabbar,
     TabbarItem,
     Search,
-    Swipe,
-    SwipeItem,
     Tab,
     Tabs,
     Loading,
@@ -29,8 +27,6 @@ Vue.use(Icon);
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
 Vue.use(Search);
-Vue.use(Swipe);
-Vue.use(SwipeItem);
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Loading);
