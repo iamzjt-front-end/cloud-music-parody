@@ -39,7 +39,7 @@ export default {
   height: 10rem;
   background-color: #fff;
   padding: 0.75rem 0.2rem 0.5rem 0.2rem;
-  display: inline-block;
+  float: left;
   position: relative;
 
   .img {
