@@ -101,10 +101,13 @@ export default {
     }
 
     &::before {
+      top: 0;
+      left: 0;
       animation: scale 6s linear 0s infinite;
     }
 
     &::after {
+      top: 0;
       left: 0;
       opacity: 0;
       animation: scale 6s linear 2s infinite;
