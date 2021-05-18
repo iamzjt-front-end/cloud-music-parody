@@ -6,15 +6,18 @@
         <i class="iconfont icon-settings"></i>
         <!-- todo 点击进入设置 -->
       </div>
-      <div class="title" slot="center">
-        <!-- todo 上划显示 id -->
+      <div class="title" slot="center" ref="title">
+        <div class="img-box">
+          <img :src="avatarUrl">
+        </div>
+        <h1>{{ nickname }}</h1>
       </div>
     </top-bar>
-    <div class="mine-content">
-      <scroll :data="{play: playlist}">
+    <div class="mine-content" ref="mineContent">
+      <scroll :data="{play: playlist}" :probe-type="probeType" :listen-scroll="listenScroll" @scroll="scroll">
         <div>
           <!-- 我的 -->
-          <div class="mine-home">
+          <div class="mine-home" ref="mineHome">
             <div class="left">
               <img :src="avatarUrl">
             </div>
@@ -131,6 +134,9 @@ export default {
       createSongList: [], // 我创建的歌单列表
       favoriteSongList: [], // 我收藏的歌单
       playlist: [], // 用户歌单
+      probeType: 3, // better-scroll 参数
+      listenScroll: true, // better-scroll 参数
+      scrollY: 0, // 纵向滚动距离
     }
   },
   methods: {
@@ -191,6 +197,32 @@ export default {
         that.favoriteSongList = res.data.playlist.slice(2, lastIndex); // 我收藏的歌单
       })
     },
+    // 监听 BScroll 的滚动
+    scroll(pos) {
+      this.scrollY = pos.y;
+
+      this.$refs.mineHome.style.opacity = (this.scrollY + 50) / 50;
+
+      let topBar = document.querySelector('.top-bar');
+
+      if (this.scrollY >= -5) {
+        topBar.style.backgroundColor = '#fafafa';
+      } else if (this.scrollY < -5) {
+        topBar.style.backgroundColor = 'transparent';
+      } else if (-this.scrollY >= 50) {
+        topBar.style.backgroundColor = '#fff';
+      }
+
+      if (this.scrollY < 0 && -this.scrollY >= 50) {
+        this.$refs.mineContent.style.overflow = 'hidden';
+        this.$refs.title.style.opacity = '1';
+        this.$refs.title.style.transform = 'translateY(0)';
+      } else {
+        this.$refs.mineContent.style.overflow = 'visible';
+        this.$refs.title.style.opacity = '0';
+        this.$refs.title.style.transform = 'translateY(-25%)';
+      }
+    },
   },
   created() {
     this.userAccountGet();
@@ -211,10 +243,53 @@ export default {
   .top-bar {
     box-shadow: none;
     background-color: #fafafa;
+    transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
 
     .icon-settings, .icon-distinguish {
       color: $color-text-ddd;
       font-size: $font-size-xxxl;
+    }
+
+    .title {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: translateY(-25%);
+      transition: all 0.3s linear;
+      -webkit-transition: all 0.3s linear;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .img-box {
+        width: 1.5rem;
+        height: 1.5rem;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+
+        &::after {
+          content: '';
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 50%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: scale(0.85);
+          border: 1px solid #e3e3e3;
+        }
+      }
+
+      h1 {
+        padding-left: 6px;
+        font-size: 14px;
+      }
     }
   }
 
@@ -226,7 +301,7 @@ export default {
     left: 0;
     width: 100%;
     background-color: #fafafa;
-    overflow: hidden;
+    //overflow: hidden;
 
     .mine-home {
       width: 100%;
