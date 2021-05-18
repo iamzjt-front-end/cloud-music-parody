@@ -221,6 +221,7 @@ export default {
     width: 100%;
     height: calc(100vh - 54px);
     padding: 1rem 0 0 0;
+    overflow: hidden;
 
     .topChartsRec {
       height: 11.2rem;
@@ -300,6 +301,8 @@ export default {
       background-color: #fafafa;
 
       h1 {
+        width: 100%;
+        height: 1rem;
         color: #323233;
         font-size: 1.2rem;
       }
@@ -307,7 +310,7 @@ export default {
       .cur-wind-charts-box,
       .whole-world-charts-box,
       .featured-charts-box {
-        padding-top: 0.5rem;
+        width: 100%;
 
         .song-list-item {
           width: 30%;
@@ -323,6 +326,18 @@ export default {
             text-overflow: ellipsis;
           }
         }
+      }
+
+      .cur-wind-charts-box {
+        height: 27.5rem;
+      }
+
+      .whole-world-charts-box {
+        height: 36.5rem;
+      }
+
+      .featured-charts-box {
+        height: 18.5rem;
       }
     }
   }

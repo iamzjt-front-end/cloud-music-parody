@@ -84,8 +84,8 @@ export default {
 
   span {
     position: absolute;
-    top: 3px;
-    right: -2px;
+    top: 0.85rem;
+    right: -0.1rem;
     display: block;
     line-height: 14px;
     padding: 2px 6px;
@@ -93,7 +93,7 @@ export default {
     border-radius: 8px;
     font-size: 12px;
     color: #fff;
-    transform: scale(0.8);
+    transform: scale(0.7);
   }
 }
 </style>
