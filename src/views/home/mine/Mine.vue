@@ -10,66 +10,68 @@
         <!-- todo 上划显示 id -->
       </div>
     </top-bar>
-    <scroll :data="{play: playlist}">
-      <div>
-        <!-- 我的 -->
-        <div class="mine-home">
-          <div class="left">
-            <img :src="avatarUrl">
-          </div>
-          <div class="right">
-            <div class="id-and-lv">
-              <h1>{{ nickname }}</h1>
-              <div class="icon-vip-box">
-                <i class="iconfont icon-vip"></i>
-              </div>
-              <span>{{ 'lv.' + level }}</span>
-            </div>
-            <div class="to-my-home" @click="toMyHome">
-              <i class="iconfont icon-xiala"></i>
-            </div>
-          </div>
-        </div>
-        <!-- 音乐应用 -->
-        <div class="music-application">
-          <music-application-item v-for="(item, index) in musicApplicationList" :key="index" :item="item"/>
-        </div>
-        <!-- 我喜欢的音乐 -->
-        <div class="i-like-music">
-          <div class="like-cover-img" @click="toRecList(likeSongList[0])">
-            <img :src="likeCoverImgUrl">
-          </div>
-          <div class="i-like-info" @click="toRecList(likeSongList[0])">
-            <h2>我喜欢的音乐</h2>
-            <p>{{ likeTrackCount + '首' }}</p>
-          </div>
-          <div class="heartbeat-mode">
-            <i class="iconfont icon-heartbeat"></i>
-            <span> 心动模式</span>
-          </div>
-        </div>
-        <!-- 歌单tab栏 -->
-        <div class="song-list-tab">
-          <!-- todo 暂时只做收藏歌单, 创建歌单 和 歌单助手以后再做 -->
-          收藏歌单
-        </div>
-        <!-- 收藏歌单 -->
-        <div class="favorite-song-list">
-          <div class="favorite-song-info">
+    <div class="mine-content">
+      <scroll :data="{play: playlist}">
+        <div>
+          <!-- 我的 -->
+          <div class="mine-home">
             <div class="left">
-              收藏歌单 ({{ subPlaylistCount + '个' }})
+              <img :src="avatarUrl">
             </div>
             <div class="right">
-              <i class="iconfont icon-more"></i>
+              <div class="id-and-lv">
+                <h1>{{ nickname }}</h1>
+                <div class="icon-vip-box">
+                  <i class="iconfont icon-vip"></i>
+                </div>
+                <span>{{ 'lv.' + level }}</span>
+              </div>
+              <div class="to-my-home" @click="toMyHome">
+                <i class="iconfont icon-xiala"></i>
+              </div>
             </div>
           </div>
-          <div class="favorite-song-content">
-            <favorite-song-item v-for="(item, index) in favoriteSongList" :key="index" :item="item"
-                                @click.native="toRecList(item)"/>
+          <!-- 音乐应用 -->
+          <div class="music-application">
+            <music-application-item v-for="(item, index) in musicApplicationList" :key="index" :item="item"/>
+          </div>
+          <!-- 我喜欢的音乐 -->
+          <div class="i-like-music">
+            <div class="like-cover-img" @click="toRecList(likeSongList[0])">
+              <img :src="likeCoverImgUrl">
+            </div>
+            <div class="i-like-info" @click="toRecList(likeSongList[0])">
+              <h2>我喜欢的音乐</h2>
+              <p>{{ likeTrackCount + '首' }}</p>
+            </div>
+            <div class="heartbeat-mode">
+              <i class="iconfont icon-heartbeat"></i>
+              <span> 心动模式</span>
+            </div>
+          </div>
+          <!-- 歌单tab栏 -->
+          <div class="song-list-tab">
+            <!-- todo 暂时只做收藏歌单, 创建歌单 和 歌单助手以后再做 -->
+            收藏歌单
+          </div>
+          <!-- 收藏歌单 -->
+          <div class="favorite-song-list">
+            <div class="favorite-song-info">
+              <div class="left">
+                收藏歌单 ({{ subPlaylistCount + '个' }})
+              </div>
+              <div class="right">
+                <i class="iconfont icon-more"></i>
+              </div>
+            </div>
+            <div class="favorite-song-content">
+              <favorite-song-item v-for="(item, index) in favoriteSongList" :key="index" :item="item"
+                                  @click.native="toRecList(item)"/>
+            </div>
           </div>
         </div>
-      </div>
-    </scroll>
+      </scroll>
+    </div>
   </div>
 </template>
 
@@ -202,13 +204,8 @@ export default {
 @import '../../../assets/scss/variable';
 
 #mine {
-  position: fixed;
-  top: 54px;
-  right: 0;
-  bottom: 50px;
-  left: 0;
   width: 100%;
-  background-color: #fafafa;
+  height: calc(100vh - 50px);
   color: #000000;
 
   .top-bar {
@@ -221,241 +218,252 @@ export default {
     }
   }
 
-  .mine-home {
+  .mine-content {
+    position: fixed;
+    top: 54px;
+    right: 0;
+    bottom: 50px;
+    left: 0;
     width: 100%;
-    height: 6rem;
-    display: flex;
+    background-color: #fafafa;
+    overflow: hidden;
 
-    .left {
-      width: 6rem;
-      height: 100%;
-      position: relative;
-
-      img {
-        width: 3.6rem;
-        height: 3.6rem;
-        border-radius: 50%;
-        margin: 1.2rem 1.2rem;
-      }
-
-      &::after {
-        content: '';
-        width: 3.6rem;
-        height: 3.6rem;
-        border-radius: 50%;
-        position: absolute;
-        top: 19%;
-        left: 19%;
-        transform: scale(0.85);
-        border: 1px solid #e3e3e3;
-      }
-    }
-
-    .right {
-      width: calc(100% - 6rem);
-      height: 100%;
+    .mine-home {
+      width: 100%;
+      height: 6rem;
       display: flex;
 
-      .id-and-lv {
-        width: calc(100% - 3rem);
-        height: 100%;
-
-        h1 {
-          width: 100%;
-          height: 2rem;
-          line-height: 2rem;
-          font-size: 1.1rem;
-          font-weight: bolder;
-          margin-top: 1.2rem;
-          margin-bottom: 0.2rem;
-        }
-
-        .icon-vip-box {
-          float: left;
-          width: 1.5rem;
-          height: 1.2rem;
-          text-align: center;
-          line-height: 1.2rem;
-
-          .icon-vip {
-            color: #323233;
-            font-size: 1.3rem;
-          }
-        }
-
-        span {
-          float: left;
-          width: 3rem;
-          height: 1.2rem;
-          font-size: 0.75rem;
-          font-weight: bolder;
-          color: #323233;
-          text-align: center;
-          line-height: 1.2rem;
-        }
-      }
-
-      .to-my-home {
-        width: 3rem;
+      .left {
+        width: 6rem;
         height: 100%;
         position: relative;
 
-        .icon-xiala {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%) rotate(-90deg);
-          font-size: 1rem;
-          font-weight: bolder;
-          color: #292929;
+        img {
+          width: 3.6rem;
+          height: 3.6rem;
+          border-radius: 50%;
+          margin: 1.2rem 1.2rem;
         }
-      }
-    }
-  }
 
-  .music-application {
-    margin: 0 1rem 1rem;
-    height: 11rem;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
-  }
-
-  .i-like-music {
-    margin: 0 1rem;
-    height: 5rem;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
-    padding: 0.9rem;
-
-    .like-cover-img {
-      display: inline-block;
-      width: 3.2rem;
-      height: 3.2rem;
-      // 让子元素呈现 3D 转换
-      transform-style: preserve-3d;
-      position: relative;
-      vertical-align: middle;
-
-      img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-      }
-
-      &::before {
-        content: '';
-        display: inline-block;
-        width: 85%;
-        height: 85%;
-        background-color: #f2f2f2;
-        border-radius: 10px;
-        position: absolute;
-        top: -0.2rem;
-        left: 7.5%;
-        // 使用Z轴进行 3D 转换
-        transform: translateZ(-1px);
-      }
-
-      //&::after {
-      //  content: '';
-      //  //width: 85%;
-      //  //height: 85%;
-      //  position: absolute;
-      //  top: 0;
-      //  left: 0;
-      //}
-    }
-
-    .i-like-info {
-      display: inline-block;
-      width: calc(100% - 9rem);
-      height: 3.2rem;
-      vertical-align: middle;
-      padding-left: 10px;
-
-      h2 {
-        display: inline-block;
-        width: 100%;
-        height: 1.8rem;
-        line-height: 1.8rem;
-        font-size: 1.05rem;
-        color: #333334;
-      }
-
-      p {
-        display: inline-block;
-        width: 100%;
-        height: 1.4rem;
-        line-height: 1.4rem;
-        font-size: 0.8rem;
-        color: #9c9c9c;
-      }
-    }
-
-    .heartbeat-mode {
-      display: inline-block;
-      width: 5.8rem;
-      height: 3.2rem;
-      vertical-align: middle;
-      text-align: center;
-      line-height: 3.2rem;
-
-      .icon-heartbeat {
-        vertical-align: middle;
-      }
-
-      span {
-        font-size: 0.8rem;
-      }
-    }
-  }
-
-  .song-list-tab {
-    width: 100%;
-    height: 3rem;
-    font-size: 1rem;
-    color: #636364;
-    text-align: center;
-    line-height: 3rem;
-  }
-
-  .favorite-song-list {
-    margin: 0 1rem;
-    padding: 1rem 0;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
-
-    .favorite-song-info {
-      width: 100%;
-      height: 1.5rem;
-
-      .left {
-        float: left;
-        width: 8rem;
-        height: 100%;
-        line-height: 1.2rem;
-        color: #999999;
-        font-size: 0.75rem;
-        padding-left: 12px;
+        &::after {
+          content: '';
+          width: 3.6rem;
+          height: 3.6rem;
+          border-radius: 50%;
+          position: absolute;
+          top: 19%;
+          left: 19%;
+          transform: scale(0.85);
+          border: 1px solid #e3e3e3;
+        }
       }
 
       .right {
-        float: right;
-        width: 2.4rem;
+        width: calc(100% - 6rem);
         height: 100%;
-        color: #999999;
-        text-align: center;
+        display: flex;
 
-        .icon-more {
-          font-size: 1.1rem;
+        .id-and-lv {
+          width: calc(100% - 3rem);
+          height: 100%;
+
+          h1 {
+            width: 100%;
+            height: 2rem;
+            line-height: 2rem;
+            font-size: 1.1rem;
+            font-weight: bolder;
+            margin-top: 1.2rem;
+            margin-bottom: 0.2rem;
+          }
+
+          .icon-vip-box {
+            float: left;
+            width: 1.5rem;
+            height: 1.2rem;
+            text-align: center;
+            line-height: 1.2rem;
+
+            .icon-vip {
+              color: #323233;
+              font-size: 1.3rem;
+            }
+          }
+
+          span {
+            float: left;
+            width: 3rem;
+            height: 1.2rem;
+            font-size: 0.75rem;
+            font-weight: bolder;
+            color: #323233;
+            text-align: center;
+            line-height: 1.2rem;
+          }
+        }
+
+        .to-my-home {
+          width: 3rem;
+          height: 100%;
+          position: relative;
+
+          .icon-xiala {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 1rem;
+            font-weight: bolder;
+            color: #292929;
+          }
         }
       }
     }
 
-    .favorite-song-content {
+    .music-application {
+      margin: 0 1rem 1rem;
+      height: 11rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
+    }
+
+    .i-like-music {
+      margin: 0 1rem;
+      height: 5rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
+      padding: 0.9rem;
+
+      .like-cover-img {
+        display: inline-block;
+        width: 3.2rem;
+        height: 3.2rem;
+        // 让子元素呈现 3D 转换
+        transform-style: preserve-3d;
+        position: relative;
+        vertical-align: middle;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+        }
+
+        &::before {
+          content: '';
+          display: inline-block;
+          width: 85%;
+          height: 85%;
+          background-color: #f2f2f2;
+          border-radius: 10px;
+          position: absolute;
+          top: -0.2rem;
+          left: 7.5%;
+          // 使用Z轴进行 3D 转换
+          transform: translateZ(-1px);
+        }
+
+        //&::after {
+        //  content: '';
+        //  //width: 85%;
+        //  //height: 85%;
+        //  position: absolute;
+        //  top: 0;
+        //  left: 0;
+        //}
+      }
+
+      .i-like-info {
+        display: inline-block;
+        width: calc(100% - 9rem);
+        height: 3.2rem;
+        vertical-align: middle;
+        padding-left: 10px;
+
+        h2 {
+          display: inline-block;
+          width: 100%;
+          height: 1.8rem;
+          line-height: 1.8rem;
+          font-size: 1.05rem;
+          color: #333334;
+        }
+
+        p {
+          display: inline-block;
+          width: 100%;
+          height: 1.4rem;
+          line-height: 1.4rem;
+          font-size: 0.8rem;
+          color: #9c9c9c;
+        }
+      }
+
+      .heartbeat-mode {
+        display: inline-block;
+        width: 5.8rem;
+        height: 3.2rem;
+        vertical-align: middle;
+        text-align: center;
+        line-height: 3.2rem;
+
+        .icon-heartbeat {
+          vertical-align: middle;
+        }
+
+        span {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .song-list-tab {
       width: 100%;
+      height: 3rem;
+      font-size: 1rem;
+      color: #636364;
+      text-align: center;
+      line-height: 3rem;
+    }
+
+    .favorite-song-list {
+      margin: 0 1rem;
+      padding: 1rem 0;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
+
+      .favorite-song-info {
+        width: 100%;
+        height: 1.5rem;
+
+        .left {
+          float: left;
+          width: 8rem;
+          height: 100%;
+          line-height: 1.2rem;
+          color: #999999;
+          font-size: 0.75rem;
+          padding-left: 12px;
+        }
+
+        .right {
+          float: right;
+          width: 2.4rem;
+          height: 100%;
+          color: #999999;
+          text-align: center;
+
+          .icon-more {
+            font-size: 1.1rem;
+          }
+        }
+      }
+
+      .favorite-song-content {
+        width: 100%;
+      }
     }
   }
 }

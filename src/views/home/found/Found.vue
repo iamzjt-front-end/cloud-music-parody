@@ -269,6 +269,9 @@ export default {
 @import '../../../assets/scss/variable';
 
 #found {
+  width: 100%;
+  height: calc(100vh - 50px);
+
   .top-bar {
     background-color: #fff;
 
