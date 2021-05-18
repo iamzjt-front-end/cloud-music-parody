@@ -152,8 +152,8 @@ export default {
           loop: true,
           autoplay: true,
           easing: 'transition-timing-function',
-          interval: '5000', // 距离下一次播放的间隔
-          speed: '1000', // 切换 Page 动画的默认时长
+          interval: '6666', // 距离下一次播放的间隔
+          speed: '400', // 切换 Page 动画的默认时长
         },
         useTransition: true,
         momentum: false, // 当使用 slide 时，这个值需要设置为 false，用来避免惯性动画带来的快速滚动时的闪烁的问题和快速滑动时一次滚动多页的问题
@@ -320,23 +320,26 @@ export default {
       }
 
       .dots-wrapper {
+        width: 36vw;
+        height: 5px;
+        text-align: center;
         position: absolute;
-        bottom: 10px;
+        bottom: 20px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 1px);
 
         .dot {
           display: inline-block;
-          margin: 0 4px;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
+          margin: 0 2px;
+          width: 9px;
+          height: 2px;
+          border-radius: 1px;
           background: #eee;
+          opacity: 0.5;
         }
 
         .active {
-          width: 20px;
-          border-radius: 5px;
+          opacity: 1;
         }
       }
     }
