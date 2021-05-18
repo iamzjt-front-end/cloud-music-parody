@@ -23,55 +23,57 @@
         <!-- todo 听歌识曲功能 -->
       </div>
     </top-bar>
-    <scroll ref="scroll" :data="{recSong: recSongList, charts: chartsList}">
-      <div>
-        <!-- 轮播图 -->
-        <div class="banner-wrapper">
-          <div class="swiper-wrapper" ref="swiper">
-            <div class="swiper-content">
-              <div v-for="(item, index) in images" :key="index">
-                <img :src="item">
+    <div class="found-content">
+      <scroll ref="scroll" :data="{recSong: recSongList, charts: chartsList}">
+        <div>
+          <!-- 轮播图 -->
+          <div class="banner-wrapper">
+            <div class="swiper-wrapper" ref="swiper">
+              <div class="swiper-content">
+                <div v-for="(item, index) in images" :key="index">
+                  <img :src="item">
+                </div>
               </div>
             </div>
-          </div>
-          <!-- todo 轮播图下方小圆点 -->
-          <div class="dots-wrapper">
+            <!-- todo 轮播图下方小圆点 -->
+            <div class="dots-wrapper">
             <span class="dot" v-for="(item, index) in images" :key="index"
                   :class="{'active': currentPageIndex === index}"></span>
-          </div>
-        </div>
-        <!-- 快捷菜单 -->
-        <div class="shortcut-menu">
-          <shortcut-menu></shortcut-menu>
-        </div>
-        <div class="line"></div>
-        <!-- 推荐歌单专栏 -->
-        <column class="rec-list" :more="'rec'">
-          <h1 slot="title">推荐歌单</h1>
-          <div class="song-list" slot="item" ref="songList">
-            <div class="song-list-box">
-              <song-list-item v-for="(item, index) in this.recSongList" :key="index" @click.native="toRecList(item)">
-                <img :src="item.picUrl" slot="img" @load="recImgLoad">
-                <p slot="description">{{ item.name }}</p>
-              </song-list-item>
             </div>
           </div>
-        </column>
-        <div class="wide-line"></div>
-        <!-- 排行榜专栏 -->
-        <column class="char-list" :more="'char'">
-          <h1 slot="title">排行榜</h1>
-          <div class="charts" slot="item" ref="charts">
-            <div class="charts-box">
-              <charts-item v-for="(item, index) in this.chartsList" :key="index"
-                           :chartsList="chartsList" :index="index" @click.native="toRankList(item)">
-                <h1 slot="title">{{ item.name }}</h1>
-              </charts-item>
-            </div>
+          <!-- 快捷菜单 -->
+          <div class="shortcut-menu">
+            <shortcut-menu></shortcut-menu>
           </div>
-        </column>
-      </div>
-    </scroll>
+          <div class="line"></div>
+          <!-- 推荐歌单专栏 -->
+          <column class="rec-list" :more="'rec'">
+            <h1 slot="title">推荐歌单</h1>
+            <div class="song-list" slot="item" ref="songList">
+              <div class="song-list-box">
+                <song-list-item v-for="(item, index) in this.recSongList" :key="index" @click.native="toRecList(item)">
+                  <img :src="item.picUrl" slot="img" @load="recImgLoad">
+                  <p slot="description">{{ item.name }}</p>
+                </song-list-item>
+              </div>
+            </div>
+          </column>
+          <div class="wide-line"></div>
+          <!-- 排行榜专栏 -->
+          <column class="char-list" :more="'char'">
+            <h1 slot="title">排行榜</h1>
+            <div class="charts" slot="item" ref="charts">
+              <div class="charts-box">
+                <charts-item v-for="(item, index) in this.chartsList" :key="index"
+                             :chartsList="chartsList" :index="index" @click.native="toRankList(item)">
+                  <h1 slot="title">{{ item.name }}</h1>
+                </charts-item>
+              </div>
+            </div>
+          </column>
+        </div>
+      </scroll>
+    </div>
   </div>
 </template>
 
@@ -267,15 +269,6 @@ export default {
 @import '../../../assets/scss/variable';
 
 #found {
-  position: fixed;
-  top: 54px;
-  left: 0;
-  bottom: 50px;
-  right: 0;
-  background-color: $color-bgc;
-  width: 100%;
-  height: calc(100vh - 54px - 50px);
-
   .top-bar {
     background-color: #fff;
 
@@ -285,91 +278,103 @@ export default {
     }
   }
 
-  .banner-wrapper {
-    width: 100vw;
-    height: 39vw;
-    position: relative;
+  .found-content {
+    position: fixed;
+    top: 54px;
+    left: 0;
+    bottom: 50px;
+    right: 0;
+    background-color: $color-bgc;
+    width: 100%;
+    height: calc(100vh - 54px - 50px);
+    overflow: hidden;
 
-    .swiper-wrapper {
-      width: 100%;
-      height: 100%;
+    .banner-wrapper {
+      width: 100vw;
+      height: 39vw;
+      position: relative;
 
-      .swiper-content {
-        width: 1000%;
+      .swiper-wrapper {
+        width: 100%;
         height: 100%;
 
-        div {
-          display: inline-block;
-          width: 100vw;
+        .swiper-content {
+          width: 1000%;
           height: 100%;
-          padding: 0.5rem 1rem 0.2rem 1rem;
-          white-space: nowrap;
-          transform: translate3d(0, 0, 0);
-          backface-visibility: hidden;
 
-          img {
-            width: 100%;
-            border-radius: 8px;
+          div {
+            display: inline-block;
+            width: 100vw;
+            height: 100%;
+            padding: 0.5rem 1rem 0.2rem 1rem;
+            white-space: nowrap;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+
+            img {
+              width: 100%;
+              border-radius: 8px;
+            }
           }
+        }
+      }
+
+      .dots-wrapper {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .dot {
+          display: inline-block;
+          margin: 0 4px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #eee;
+        }
+
+        .active {
+          width: 20px;
+          border-radius: 5px;
         }
       }
     }
 
-    .dots-wrapper {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
+    .line {
+      height: 1px;
+      background-color: #e6e6e6;
+      margin-top: 0.8rem;
+    }
 
-      .dot {
-        display: inline-block;
-        margin: 0 4px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #eee;
-      }
+    .rec-list {
+      height: 14.25rem;
 
-      .active {
-        width: 20px;
-        border-radius: 5px;
+      .song-list {
+        width: 100%;
+        height: 100%;
+
+        .song-list-box {
+          height: 100%;
+        }
       }
     }
-  }
 
-  .line {
-    height: 1px;
-    background-color: #e6e6e6;
-    margin-top: 0.8rem;
-  }
-
-  .rec-list {
-    height: 14.25rem;
-
-    .song-list {
-      width: 100%;
-      height: 100%;
-
-      .song-list-box {
-        height: 100%;
-      }
+    .wide-line {
+      height: 9px;
+      background-color: #f8f8f8;
     }
-  }
 
-  .wide-line {
-    height: 9px;
-    background-color: #f8f8f8;
-  }
+    .char-list {
+      height: 19rem;
 
-  .char-list {
-    height: 19rem;
-
-    .charts {
-      width: 100%;
-      height: 100%;
-
-      .charts-box {
+      .charts {
+        width: 100%;
         height: 100%;
+
+        .charts-box {
+          height: 100%;
+        }
       }
     }
   }
