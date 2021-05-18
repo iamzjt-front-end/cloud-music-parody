@@ -66,17 +66,17 @@ export default {
     color: #333334;
     width: 1.8rem;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 15px;
   }
 
   .songName {
     color: #333334;
-    font-size: 0.9rem;
+    font-size: 14px;
   }
 
   .songAuthor {
     color: #9a9a9a;
-    font-size: 0.5rem;
+    font-size: 11px;
   }
 }
 </style>
