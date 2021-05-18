@@ -172,7 +172,7 @@ export default {
 
   .main-img {
     width: 100%;
-    height: 28vh;
+    height: 14.2rem;
     margin-top: -54px;
     overflow: hidden;
     background-size: cover;
@@ -186,8 +186,8 @@ export default {
       width: 100%;
       height: 100%;
       position: absolute;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      //backdrop-filter: blur(18px);
+      //-webkit-backdrop-filter: blur(18px);
       background-color: rgba(0, 0, 0, .32);
     }
 
@@ -246,11 +246,12 @@ export default {
 
   .recommend-song-box {
     width: 100%;
-    height: calc(100vh - 28vh - 3.4rem);
+    height: calc(100vh - 14.2rem - 3.4rem);
+    overflow: hidden;
 
     .recommend-song {
       width: 100%;
-      height: calc(100vh - 28vh - 3.4rem);
+      height: calc(100vh - 14.2rem - 3.4rem);
       background-color: #fff;
     }
   }

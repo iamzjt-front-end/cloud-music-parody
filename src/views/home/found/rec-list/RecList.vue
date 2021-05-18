@@ -175,7 +175,7 @@ export default {
 
   .main-img {
     width: 100%;
-    height: 28vh;
+    height: 14.2rem;
     margin-top: -54px;
     overflow: hidden;
     background-size: cover;
@@ -190,8 +190,8 @@ export default {
       height: 100%;
       position: absolute;
       z-index: 5;
-      backdrop-filter: blur(66px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
       background-color: rgba(0, 0, 0, .2);
     }
 
@@ -207,7 +207,7 @@ export default {
       transform-style: preserve-3d;
 
       img {
-        width: 100%;
+        width: 7.5rem;
         border-radius: 0.8rem;
       }
 
@@ -230,9 +230,9 @@ export default {
     .main-img-right {
       position: absolute;
       bottom: 4vh;
-      right: 4vh;
+      left: calc(4vh + 9rem);
       z-index: 10;
-      width: 10rem;
+      width: calc(100vw - 4vh - 10.4rem);
       height: 7.5rem;
 
       h1 {
@@ -318,11 +318,12 @@ export default {
 
   .rec-song-box {
     width: 100%;
-    height: calc(100vh - 28vh - 3.4rem);
+    height: calc(100vh - 14.2rem - 3.4rem);
+    overflow: hidden;
 
     .rec-song {
       width: 100%;
-      height: calc(100vh - 28vh - 3.4rem);
+      height: calc(100vh - 14.2rem - 3.4rem);
       background-color: #fff;
     }
   }
