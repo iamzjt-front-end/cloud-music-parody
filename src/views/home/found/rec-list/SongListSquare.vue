@@ -100,6 +100,16 @@ export default {
 
 <style lang="scss" scoped>
 #song-list-square {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+
   .top-bar {
     box-shadow: none;
     color: #323233;
