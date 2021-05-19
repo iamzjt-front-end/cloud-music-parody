@@ -19,7 +19,8 @@
           <div class="tag-content" v-if="videoList.length">
             <scroll :data="{video: videoList}">
               <div class="video-card-wrapper">
-                <video-card v-for="(item, index) in videoList" :key="index" :data="item.data"/>
+                <video-card v-for="(item, index) in videoList" :key="index" :data="item.data"
+                            @click.native="toPlay(item.data.vid)"/>
               </div>
             </scroll>
           </div>
@@ -31,7 +32,7 @@
 
 <script>
 import TopBar from "components/TopBar";
-import videoCard from "components/videoCard";
+import videoCard from "components/VideoCard";
 import Scroll from "components/scroll/Scroll";
 
 export default {
@@ -57,44 +58,29 @@ export default {
     // 获取视频标签下的视频
     videoListGet(val) {
       this.$api.cloudVillage.videoListGet({
-         id: val
+        id: val
       }).then(res => {
         this.videoList = res.data.datas;
       });
     },
+    // tab栏切换
     toggle(name) {
       this.videoList = [];
       this.videoListGet(this.videoTag[name].id);
     },
-    // 获取推荐视频
-    recVideoGet() {
-      this.$api.cloudVillage.recVideoGet().then(res => {
-        console.log(res)
+    // 去播放
+    toPlay(val) {
+      this.$api.cloudVillage.videoUrlGet({
+        id: val
+      }).then(res => {
+        let url = res.data.urls[0].url;
+        this.$router.push({
+          name: 'video-play',
+          params: {
+            url: url
+          }
+        });
       });
-    },
-    // 获取相关视频
-    relatedVideoGet() {
-      this.$api.cloudVillage.relatedVideoGet({
-        // id: ''
-      }).then(res => {
-        console.log(res);
-      })
-    },
-    // 获取视频详情
-    videoDetailGet() {
-      this.$api.cloudVillage.videoDetailGet({
-        // id: ''
-      }).then(res => {
-        console.log(res);
-      })
-    },
-    // 获取视频点赞转发评论数数据
-    videoDetailInfoGet(val) {
-      this.$api.cloudVillage.videoDetailInfoGet({
-        vid: val
-      }).then(res => {
-        console.log(res);
-      })
     },
   },
   mounted() {

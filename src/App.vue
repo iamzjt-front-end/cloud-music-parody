@@ -2,7 +2,7 @@
   <div id="app">
     <!-- 内容区 -->
     <transition :name="transitionName">
-      <keep-alive exclude="RecList,SongListSquare,RankList,Charts">
+      <keep-alive exclude="RecList,SongListSquare,RankList,Charts,VideoPlay">
         <router-view/>
       </keep-alive>
     </transition>

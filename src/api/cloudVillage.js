@@ -19,6 +19,13 @@ const cloudVillage = {
             // 必选参数 : id: videoGroup 的 id
         });
     },
+    // 获取视频播放地址
+    videoUrlGet(params) {
+        return axios.get(`${base.baseURL}/video/url`, {
+            params: params
+            //必选参数 : id: 视频 的 id
+        });
+    },
     // 获取推荐视频
     recVideoGet(params) {
         return axios.get(`${base.baseURL}/video/timeline/recommend`, {

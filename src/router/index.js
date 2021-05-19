@@ -20,6 +20,7 @@ import RecList from "views/home/found/rec-list/RecList";
 import SongListSquare from "views/home/found/rec-list/SongListSquare";
 import RankList from "views/home/found/charts/RankList";
 import Charts from "views/home/found/charts/Charts";
+import VideoPlay from "views/home/cloud-village/VideoPlay";
 
 Vue.use(Router);
 
@@ -140,6 +141,15 @@ const router = new Router({
             component: Charts,
             meta: {
                 title: "排行榜",
+                index: 6
+            },
+        },
+        {
+            path: '/video-play',
+            name: 'video-play',
+            component: VideoPlay,
+            meta: {
+                title: "视频播放",
                 index: 6
             },
         },

@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "videoCard",
+  name: "VideoCard",
   props: ['data'],
 }
 </script>
@@ -26,11 +26,11 @@ export default {
   overflow: hidden;
 
   &:nth-child(2n - 1) {
-    margin: 0 1.2vw 1.2vw 4.7vw;
+    margin: 0 1.2vw 2.4vw 4.7vw;
   }
 
   &:nth-child(2n) {
-    margin: 0 4.7vw 1.2vw 1.2vw;
+    margin: 0 4.7vw 2.4vw 1.2vw;
   }
 
   .top-cover-img {
