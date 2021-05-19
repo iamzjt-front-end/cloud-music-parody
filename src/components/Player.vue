@@ -438,7 +438,7 @@ $width-cover: 65vw;
     }
 
     .top-bar {
-      box-shadow: none;
+      // box-shadow: none;
 
       .icon-xiala, .icon-fenxiang {
         font-size: 1.25rem;

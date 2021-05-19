@@ -148,7 +148,6 @@ export default {
   background-color: #fff;
 
   .top-bar {
-    box-shadow: none;
     color: #fff;
     background-color: transparent;
     position: relative;

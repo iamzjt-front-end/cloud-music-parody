@@ -1,12 +1,27 @@
 <template>
   <div id="cloud-village">
-    云村
+    <!-- 顶栏 -->
+    <top-bar>
+      <div class="settings" slot="left">
+        <i class="iconfont icon-settings"></i>
+        <!-- todo 点击进入设置 -->
+      </div>
+      <h1 slot="center">广场</h1>
+    </top-bar>
+    <div class="cloud-village-square">
+
+    </div>
   </div>
 </template>
 
 <script>
+import TopBar from "components/TopBar";
+
 export default {
   name: "CloudVillage",
+  components: {
+    TopBar
+  },
   data() {
     return {
       videoTag: [], // 视频标签
@@ -73,8 +88,31 @@ export default {
 
 #cloud-village {
   width: 100%;
-  height: 100%;
-  background-color: $color-bgc;
-  color: #333334;
+  height: calc(100vh - 50px);
+  background-color: #fff;
+
+  .top-bar {
+    color: $color-text-ddd;
+
+    .icon-settings {
+      font-size: $font-size-xxxl;
+    }
+
+    h1 {
+      line-height: 54px;
+      font-size: 1.1rem;
+    }
+  }
+
+  .cloud-village-square {
+    position: fixed;
+    top: 54px;
+    right: 0;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    background-color: #fafafa;
+    overflow: hidden;
+  }
 }
 </style>

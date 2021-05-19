@@ -238,10 +238,9 @@ export default {
 #mine {
   width: 100%;
   height: calc(100vh - 50px);
-  color: #000000;
+  color: $color-text-ddd;
 
   .top-bar {
-    box-shadow: none;
     background-color: #fafafa;
     transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;

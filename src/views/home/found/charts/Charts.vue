@@ -201,7 +201,6 @@ export default {
   background-color: #f9f9f9;
 
   .top-bar {
-    box-shadow: none;
     color: #323233;
     background-color: #fff;
     position: relative;
