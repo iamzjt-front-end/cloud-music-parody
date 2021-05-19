@@ -17,9 +17,11 @@
             <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
           </div>
           <div class="tag-content" v-if="videoList.length">
-            <video-card v-for="(item, index) in videoList" :key="index" :data="item.data">
-
-            </video-card>
+            <scroll :data="{video: videoList}">
+              <div class="video-card-wrapper">
+                <video-card v-for="(item, index) in videoList" :key="index" :data="item.data"/>
+              </div>
+            </scroll>
           </div>
         </van-tab>
       </van-tabs>
@@ -30,12 +32,14 @@
 <script>
 import TopBar from "components/TopBar";
 import videoCard from "components/videoCard";
+import Scroll from "components/scroll/Scroll";
 
 export default {
   name: "CloudVillage",
   components: {
     TopBar,
-    videoCard
+    videoCard,
+    Scroll
   },
   data() {
     return {
@@ -85,19 +89,28 @@ export default {
       })
     },
     // 获取视频点赞转发评论数数据
-    videoDetailInfoGet() {
+    videoDetailInfoGet(val) {
       this.$api.cloudVillage.videoDetailInfoGet({
-        // vid: ''
+        vid: val
       }).then(res => {
         console.log(res);
       })
     },
+    // video-card-wrapper 高度计算
+    cardWrapperHeightGet() {
+      this.$nextTick(() => {
+        //let cardHeight = document.querySelector('#video-card').clientHeight;
+        //let cardWrapper = document.querySelector('.video-card-wrapper');
+        //cardWrapper.style.height = cardHeight * 12;
+      })
+    },
   },
   mounted() {
-     this.videoTagGet().then(res => {
-       this.videoTag = res.data.data;
-       this.videoListGet(this.videoTag[0].id);
-     })
+    this.videoTagGet().then(res => {
+      this.videoTag = res.data.data;
+      this.videoListGet(this.videoTag[0].id);
+    })
+    this.cardWrapperHeightGet();
   }
 }
 </script>
@@ -141,7 +154,6 @@ export default {
       width: 100vw;
       height: calc(100vh - 54px - 44px - 50px);
       background-color: #fff;
-      padding: 0 calc((100vw - 22.2rem) / 2);
     }
   }
 }
