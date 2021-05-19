@@ -96,21 +96,12 @@ export default {
         console.log(res);
       })
     },
-    // video-card-wrapper 高度计算
-    cardWrapperHeightGet() {
-      this.$nextTick(() => {
-        //let cardHeight = document.querySelector('#video-card').clientHeight;
-        //let cardWrapper = document.querySelector('.video-card-wrapper');
-        //cardWrapper.style.height = cardHeight * 12;
-      })
-    },
   },
   mounted() {
     this.videoTagGet().then(res => {
       this.videoTag = res.data.data;
       this.videoListGet(this.videoTag[0].id);
     })
-    this.cardWrapperHeightGet();
   }
 }
 </script>
