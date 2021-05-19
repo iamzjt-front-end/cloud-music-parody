@@ -17,11 +17,11 @@
             <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
           </div>
           <div class="tag-content" v-if="videoList.length">
-            <scroll :data="{video: videoList}">
-              <div>
+<!--            <scroll :data="{video: videoList}">-->
+<!--              <div>-->
 
-              </div>
-            </scroll>
+<!--              </div>-->
+<!--            </scroll>-->
           </div>
         </van-tab>
       </van-tabs>
@@ -55,14 +55,13 @@ export default {
       this.$api.cloudVillage.videoListGet({
          id: val
       }).then(res => {
-        console.log(res)
+        this.videoList = res.data.datas;
       });
     },
-//    toggle(name, title) {
-//      this.videoList = [];
-//      this.videoListGet();
-//    },
-
+    toggle(name) {
+      this.videoList = [];
+      this.videoListGet(this.videoTag[name].id);
+    },
     // 获取推荐视频
     recVideoGet() {
       this.$api.cloudVillage.recVideoGet().then(res => {
@@ -96,8 +95,8 @@ export default {
   },
   mounted() {
      this.videoTagGet().then(res => {
-       this.videoTag = res;
-//       this.videoListGet(this.videoTag[0]);
+       this.videoTag = res.data.data;
+       this.videoListGet(this.videoTag[0].id);
      })
   }
 }
