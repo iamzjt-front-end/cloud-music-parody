@@ -17,7 +17,12 @@ const cloudVillage = {
         return axios.get(`${base.baseURL}/video/group`, {
             params: params
             // 必选参数 : id: videoGroup 的 id
-            // 可选参数 : offset: 默认0
+        });
+    },
+    // 获取推荐视频
+    recVideoGet(params) {
+        return axios.get(`${base.baseURL}/video/timeline/recommend`, {
+            params: params
         });
     },
 
