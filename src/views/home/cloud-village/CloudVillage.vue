@@ -24,7 +24,7 @@ export default {
     // 获取视频标签下的视频
     videoListGet() {
       this.$api.cloudVillage.videoListGet({
-        // id: this.id;
+        // id: ''
       }).then(res => {
         console.log(res)
       });
@@ -34,6 +34,30 @@ export default {
       this.$api.cloudVillage.recVideoGet().then(res => {
         console.log(res)
       });
+    },
+    // 获取相关视频
+    relatedVideoGet() {
+      this.$api.cloudVillage.relatedVideoGet({
+        // id: ''
+      }).then(res => {
+        console.log(res);
+      })
+    },
+    // 获取视频详情
+    videoDetailGet() {
+      this.$api.cloudVillage.videoDetailGet({
+        // id: ''
+      }).then(res => {
+        console.log(res);
+      })
+    },
+    // 获取视频点赞转发评论数数据
+    videoDetailInfoGet() {
+      this.$api.cloudVillage.videoDetailInfoGet({
+        // vid: ''
+      }).then(res => {
+        console.log(res);
+      })
     },
   },
   mounted() {

@@ -25,6 +25,27 @@ const cloudVillage = {
             params: params
         });
     },
+    // 获取相关视频
+    relatedVideoGet(params) {
+        return axios.get(`${base.baseURL}/related/allvideo`, {
+            params: params
+        });
+        // 必选参数 : id: 视频 的 id
+    },
+    // 获取视频详情
+    videoDetailGet(params) {
+        return axios.get(`${base.baseURL}/video/detail`, {
+            params: params
+        });
+        // 必选参数 : id: 视频 的 id
+    },
+    // 获取视频点赞转发评论数数据
+    videoDetailInfoGet(params) {
+        return axios.get(`${base.baseURL}/video/detail/info`, {
+            params: params
+        });
+        // 必选参数 : vid: 视频id
+    },
 
     // post提交
     // articleDetail1 (params) {
