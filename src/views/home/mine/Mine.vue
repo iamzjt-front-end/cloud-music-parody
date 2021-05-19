@@ -351,6 +351,7 @@ export default {
             font-weight: bolder;
             margin-top: 1.2rem;
             margin-bottom: 0.2rem;
+            color: #333334;
           }
 
           .icon-vip-box {

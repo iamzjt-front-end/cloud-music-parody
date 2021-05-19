@@ -17,11 +17,9 @@
             <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
           </div>
           <div class="tag-content" v-if="videoList.length">
-<!--            <scroll :data="{video: videoList}">-->
-<!--              <div>-->
+            <video-card v-for="(item, index) in videoList" :key="index" :data="item.data">
 
-<!--              </div>-->
-<!--            </scroll>-->
+            </video-card>
           </div>
         </van-tab>
       </van-tabs>
@@ -31,11 +29,13 @@
 
 <script>
 import TopBar from "components/TopBar";
+import videoCard from "components/videoCard";
 
 export default {
   name: "CloudVillage",
   components: {
-    TopBar
+    TopBar,
+    videoCard
   },
   data() {
     return {
@@ -131,6 +131,18 @@ export default {
     left: 0;
     width: 100%;
     overflow: hidden;
+
+    .loading {
+      padding-top: 1rem;
+      text-align: center;
+    }
+
+    .tag-content {
+      width: 100vw;
+      height: calc(100vh - 54px - 44px - 50px);
+      background-color: #fff;
+      padding: 0 calc((100vw - 22.2rem) / 2);
+    }
   }
 }
 </style>

@@ -126,10 +126,6 @@ export default {
     }
   }
 
-  .tag {
-    font-size: 2rem;
-  }
-
   .loading {
     padding-top: 1rem;
     text-align: center;
