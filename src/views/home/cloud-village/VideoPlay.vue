@@ -1,16 +1,21 @@
 <template>
   <div id="video-play">
-    <video-player class="video-player vjs-custom-skin"
-                  ref="videoPlayer"
-                  :playsinline="true"
-                  :options="playerOptions">
-    </video-player>
+    <!-- 顶栏 -->
+    <top-bar>
+      <i class="iconfont icon-back" slot="left" @click="back"></i>
+    </top-bar>
+    <div class="video-wrapper">
+      <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
+                    :options="playerOptions">
+      </video-player>
+    </div>
   </div>
 </template>
 
 <script>
 import {videoPlayer} from 'vue-video-player';
 import 'video.js/dist/video-js.css';
+import TopBar from "components/TopBar";
 
 export default {
   name: "VideoPlay",
@@ -41,19 +46,21 @@ export default {
       }
     },
   },
-  data() {
-    return {}
-  },
   components: {
-    videoPlayer
+    videoPlayer,
+    TopBar
   },
   methods: {
+    // 返回上一页
+    back() {
+      this.$router.go(-1);
+    },
     // 居中播放器
     toCenter() {
       let playerHeight = document.querySelector('.video-player').clientHeight;
-      let videoPlayer = document.querySelector('#video-play');
-      videoPlayer.style.paddingTop = `calc(50vh - ${playerHeight / 2}px)`;
-    }
+      let videoWrapper = document.querySelector('.video-wrapper');
+      videoWrapper.style.paddingTop = `calc(50vh - 27 - ${playerHeight / 2}px)`;
+    },
     //this.$refs.videoPlayer.player.play() // 播放
     //this.$refs.videoPlayer.player.pause() // 暂停
     //this.$refs.videoPlayer.player.src(src) // 重置进度条
@@ -104,5 +111,24 @@ export default {
   background-color: #000;
   width: 100%;
   height: 100%;
+
+  .top-bar {
+    color: #fff;
+    background-color: transparent;
+    position: relative;
+    z-index: 81;
+
+    .icon-back {
+      font-size: 1.1rem;
+    }
+  }
+
+  .video-wrapper {
+    position: fixed;
+    top: 54px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
 }
 </style>
