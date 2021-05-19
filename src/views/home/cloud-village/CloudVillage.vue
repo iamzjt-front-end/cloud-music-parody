@@ -10,7 +10,7 @@
     </top-bar>
     <div class="cloud-village-square">
       <!-- 标签栏 -->
-      <van-tabs ref="tabs" scrollspy swipeable sticky animated @click="toggle">
+      <van-tabs ref="tabs" animated @click="toggle">
         <van-tab v-for="(item, index) in videoTag" :title="item.name" :key="index" v-model="active"
                  title-style="font-size: 16px">
           <div class="loading" v-if="!videoList.length">

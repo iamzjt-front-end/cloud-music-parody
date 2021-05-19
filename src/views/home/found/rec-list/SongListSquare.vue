@@ -6,7 +6,7 @@
       <h1 slot="center">歌单广场</h1>
     </top-bar>
     <!-- 标签栏 -->
-    <van-tabs ref="tabs" scrollspy swipeable sticky animated @click="toggle">
+    <van-tabs ref="tabs" animated @click="toggle">
       <van-tab v-for="(item, index) in tagList" :title="item.name" :key="index" v-model="active"
                title-style="font-size: 16px">
         <div class="loading" v-if="!highList.length">

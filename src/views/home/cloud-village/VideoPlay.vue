@@ -4,11 +4,12 @@
     <top-bar>
       <i class="iconfont icon-back" slot="left" @click="back"></i>
     </top-bar>
-    <div class="video-wrapper">
-      <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
-                    :options="playerOptions">
-      </video-player>
-    </div>
+    <!--<div class="video-wrapper">-->
+    <!--  -->
+    <!--</div>-->
+    <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
+                  :options="playerOptions">
+    </video-player>
   </div>
 </template>
 
@@ -59,7 +60,7 @@ export default {
     toCenter() {
       let playerHeight = document.querySelector('.video-player').clientHeight;
       let videoWrapper = document.querySelector('.video-wrapper');
-      videoWrapper.style.paddingTop = `calc(50vh - 27 - ${playerHeight / 2}px)`;
+      videoWrapper.style.top = `calc(50vh - 27 - ${playerHeight / 2}px)`;
     },
     //this.$refs.videoPlayer.player.play() // 播放
     //this.$refs.videoPlayer.player.pause() // 暂停
@@ -96,7 +97,7 @@ export default {
     //},
   },
   mounted() {
-    this.toCenter();
+    //this.toCenter();
   }
 }
 </script>
@@ -111,24 +112,25 @@ export default {
   background-color: #000;
   width: 100%;
   height: 100%;
+  z-index: 100;
 
   .top-bar {
+    background-color: transparent !important;
     color: #fff;
-    background-color: transparent;
     position: relative;
-    z-index: 81;
+    z-index: 101;
 
     .icon-back {
       font-size: 1.1rem;
     }
   }
 
-  .video-wrapper {
+  .video-player {
+    width: 100%;
+    height: 100%;
     position: fixed;
-    top: 54px;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    top: 50vh;
+    transform: translateY(-50%);
   }
 }
 </style>
