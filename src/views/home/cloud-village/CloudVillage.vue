@@ -9,7 +9,22 @@
       <h1 slot="center">广场</h1>
     </top-bar>
     <div class="cloud-village-square">
+      <!-- 标签栏 -->
+      <van-tabs ref="tabs" scrollspy swipeable sticky animated @click="toggle">
+        <van-tab v-for="(item, index) in videoTag" :title="item.name" :key="index" v-model="active"
+                 title-style="font-size: 16px">
+          <div class="loading" v-if="!videoList.length">
+            <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
+          </div>
+          <div class="tag-content" v-if="videoList.length">
+            <scroll :data="{video: videoList}">
+              <div>
 
+              </div>
+            </scroll>
+          </div>
+        </van-tab>
+      </van-tabs>
     </div>
   </div>
 </template>
@@ -24,6 +39,7 @@ export default {
   },
   data() {
     return {
+      active: 0,
       videoTag: [], // 视频标签
       videoList: [], // 视频列表
       recVideoList: [], // 推荐视频列表
@@ -32,18 +48,21 @@ export default {
   methods: {
     // 获取视频标签列表
     videoTagGet() {
-      this.$api.cloudVillage.videoTagGet().then(res => {
-        console.log(res)
-      });
+      return this.$api.cloudVillage.videoTagGet();
     },
     // 获取视频标签下的视频
-    videoListGet() {
+    videoListGet(val) {
       this.$api.cloudVillage.videoListGet({
-        // id: ''
+         id: val
       }).then(res => {
         console.log(res)
       });
     },
+//    toggle(name, title) {
+//      this.videoList = [];
+//      this.videoListGet();
+//    },
+
     // 获取推荐视频
     recVideoGet() {
       this.$api.cloudVillage.recVideoGet().then(res => {
@@ -76,9 +95,10 @@ export default {
     },
   },
   mounted() {
-    // this.videoTagGet();
-    // this.videoListGet();
-    // this.recVideoGet();
+     this.videoTagGet().then(res => {
+       this.videoTag = res;
+//       this.videoListGet(this.videoTag[0]);
+     })
   }
 }
 </script>
@@ -92,15 +112,15 @@ export default {
   background-color: #fff;
 
   .top-bar {
-    color: $color-text-ddd;
-
     .icon-settings {
+      color: $color-text-ddd;
       font-size: $font-size-xxxl;
     }
 
     h1 {
       line-height: 54px;
       font-size: 1.1rem;
+      color: #333334;
     }
   }
 
@@ -111,7 +131,6 @@ export default {
     bottom: 50px;
     left: 0;
     width: 100%;
-    background-color: #fafafa;
     overflow: hidden;
   }
 }

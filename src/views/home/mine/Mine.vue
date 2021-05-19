@@ -238,7 +238,6 @@ export default {
 #mine {
   width: 100%;
   height: calc(100vh - 50px);
-  color: $color-text-ddd;
 
   .top-bar {
     background-color: #fafafa;
@@ -278,16 +277,19 @@ export default {
           height: 1.5rem;
           border-radius: 50%;
           position: absolute;
-          top: 0;
-          left: 0;
-          transform: scale(0.85);
+          top: -5%;
+          left: -5%;
+          transform: scale(0.8);
           border: 1px solid #e3e3e3;
         }
       }
 
       h1 {
+        height: 1.5rem;
+        line-height: 1.5rem;
         padding-left: 6px;
         font-size: 14px;
+        color: #333334;
       }
     }
   }
