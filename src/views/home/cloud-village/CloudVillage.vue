@@ -154,6 +154,10 @@ export default {
       width: 100vw;
       height: calc(100vh - 54px - 44px - 50px);
       background-color: #fff;
+
+      .video-card-wrapper {
+        padding: 10px 0 5px 0;
+      }
     }
   }
 }
