@@ -102,29 +102,29 @@ export default {
       level: '', // 用户等级
       musicApplicationList: [
         {
-          icon: '',
+          icon: 'icon-bendi',
           title: '本地/下载'
         }, {
-          icon: '',
+          icon: 'icon-yunpan',
           title: '云盘'
         }, {
-          icon: '',
+          icon: 'icon-yigou',
           title: '已购'
         }, {
-          icon: '',
+          icon: 'icon-zuijinbofang',
           title: '最近播放'
         }, {
-          icon: '',
+          icon: 'icon-haoyou',
           title: '我的好友'
         }, {
-          icon: '',
+          icon: 'icon-shoucang',
           title: '收藏和赞'
         }, {
-          icon: '',
-          title: '我的播客'
+          icon: 'icon-paobu',
+          title: '跑步FM'
         }, {
-          icon: '',
-          title: '音乐应用'
+          icon: 'icon-zhumian',
+          title: '助眠解压'
         }
       ], // 音乐应用列表
       likeCoverImgUrl: '', // 我喜欢的音乐歌单 封面
@@ -397,9 +397,12 @@ export default {
     .music-application {
       margin: 0 1rem 1rem;
       height: 11rem;
+      padding: 0.5rem 1rem;
       background-color: #ffffff;
       border-radius: 10px;
       box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-wrap: wrap;
     }
 
     .i-like-music {
