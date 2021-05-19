@@ -6,7 +6,8 @@
 
 <script>
 export default {
-  name: "CloudVillage"
+  name: "CloudVillage",
+
 }
 </script>
 
