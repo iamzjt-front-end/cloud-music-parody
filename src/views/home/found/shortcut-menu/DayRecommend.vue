@@ -1,8 +1,8 @@
 <template>
   <div class="day-recommend">
     <!-- 顶栏 -->
-    <top-bar>
-      <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
+    <top-bar @leftClick="back">
+      <i class="iconfont icon-back" slot="left"></i>
       <h1 slot="center">每日推荐</h1>
       <i class="iconfont icon-more" slot="right"></i>
     </top-bar>
@@ -114,8 +114,8 @@ export default {
       this.month = month < 10 ? '0' + month : month;
     },
     // 返回主页
-    backToHome() {
-      this.$router.push({path: '/found'});
+    back() {
+      this.$router.go(-1);
     },
     // 去播放
     toPlayer(item, index) {

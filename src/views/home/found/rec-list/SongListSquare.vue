@@ -1,8 +1,8 @@
 <template>
   <div id="song-list-square">
     <!-- 顶栏 -->
-    <top-bar>
-      <i class="iconfont icon-back" slot="left" @click="backToHome"></i>
+    <top-bar @leftClick="back">
+      <i class="iconfont icon-back" slot="left"></i>
       <h1 slot="center">歌单广场</h1>
     </top-bar>
     <!-- 标签栏 -->
@@ -48,8 +48,8 @@ export default {
   },
   methods: {
     // 返回主页
-    backToHome() {
-      this.$router.push({path: '/found'});
+    back() {
+      this.$router.go(-1);
     },
     // 精品歌单标签列表获取
     playListTagsGet() {

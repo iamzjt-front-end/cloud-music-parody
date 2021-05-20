@@ -1,8 +1,8 @@
 <template>
   <div id="video-play">
     <!-- 顶栏 -->
-    <top-bar>
-      <i class="iconfont icon-back" slot="left" @click="back"></i>
+    <top-bar @leftClick="back">
+      <i class="iconfont icon-back" slot="left"></i>
     </top-bar>
     <!--<div class="video-wrapper">-->
     <!--  -->
@@ -23,8 +23,7 @@ export default {
   computed: {
     playerOptions() {
       return {
-        playbackRates: [0.5, 1.0, 1.5, 2.0], // 可选的播放速度
-        autoplay: true, // 如果为true,浏览器准备好时开始回放。
+        autoplay: false, // 如果为true,浏览器准备好时开始回放。
         muted: false, // 默认情况下将会消除任何音频。
         loop: true, // 是否视频一结束就重新开始。
         preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
@@ -35,14 +34,7 @@ export default {
           type: "video/mp4", // 类型
           src: this.$route.params.url // url地址
         }],
-        poster: '', // 封面地址
         notSupportedMessage: '此视频暂无法播放，请稍后再试', // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
-        //controlBar: {
-        //  timeDivider: true, // 当前时间和持续时间的分隔符
-        //  durationDisplay: true, // 显示持续时间
-        //  remainingTimeDisplay: false, // 是否显示剩余时间功能
-        //  fullscreenToggle: true // 是否显示全屏按钮
-        //}
         controlBar: false
       }
     },
@@ -117,7 +109,6 @@ export default {
   .top-bar {
     background-color: transparent !important;
     color: #fff;
-    position: relative;
     z-index: 101;
 
     .icon-back {
@@ -126,11 +117,7 @@ export default {
   }
 
   .video-player {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 50vh;
-    transform: translateY(-50%);
+
   }
 }
 </style>

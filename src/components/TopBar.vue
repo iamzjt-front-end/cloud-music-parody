@@ -1,12 +1,12 @@
 <template>
   <div class="top-bar">
-    <div class="left">
+    <div class="left" @click="leftClick">
       <slot name="left"></slot>
     </div>
     <div class="center">
       <slot name="center"></slot>
     </div>
-    <div class="right">
+    <div class="right" @click="rightClick">
       <slot name="right"></slot>
     </div>
   </div>
@@ -14,7 +14,15 @@
 
 <script>
 export default {
-  name: "NavBar"
+  name: "NavBar",
+  methods: {
+    leftClick() {
+      this.$emit('leftClick');
+    },
+    rightClick() {
+      this.$emit('rightClick');
+    }
+  }
 }
 </script>
 

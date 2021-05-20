@@ -1,8 +1,8 @@
 <template>
   <div id="rank-list">
     <!-- 顶栏 -->
-    <top-bar>
-      <i class="iconfont icon-back" slot="left" @click="back"></i>
+    <top-bar @leftClick="back">
+      <i class="iconfont icon-back" slot="left"></i>
       <h1 slot="center">歌单</h1>
       <i class="iconfont icon-more" slot="right"></i>
     </top-bar>
