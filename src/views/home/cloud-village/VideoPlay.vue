@@ -31,7 +31,7 @@ export default {
     },
     playerOptions() {
       return {
-        autoplay: true, // 如果为true,浏览器准备好时开始回放。
+        autoplay: false, // 如果为true,浏览器准备好时开始回放。
         muted: false, // 默认情况下将会消除任何音频。
         loop: true, // 是否视频一结束就重新开始。
         preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）

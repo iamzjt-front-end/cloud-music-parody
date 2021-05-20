@@ -372,7 +372,7 @@ export default {
     }
 
     .char-list {
-      height: 19rem;
+      height: 18.5rem;
 
       .charts {
         width: 100%;
