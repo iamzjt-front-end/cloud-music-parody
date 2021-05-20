@@ -125,8 +125,8 @@ export default {
   }
 
   .video-player {
-    width: 375px;
-    height: 666.66px;
+    width: 100vw;
+    height: calc(666.66 / 375 * 100vw);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
