@@ -4,12 +4,12 @@
     <top-bar @leftClick="back">
       <i class="iconfont icon-back" slot="left"></i>
     </top-bar>
-    <!--<div class="video-wrapper">-->
-    <!--  -->
-    <!--</div>-->
     <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
-                  :options="playerOptions">
+                  :options="playerOptions" v-if="this.url">
     </video-player>
+    <div class="loading" v-if="!this.url">
+      <van-loading size="36px" color="#fff" text-color="#323233"></van-loading>
+    </div>
   </div>
 </template>
 
@@ -20,10 +20,18 @@ import TopBar from "components/TopBar";
 
 export default {
   name: "VideoPlay",
+  data() {
+    return {
+      url: '', // 视频url
+    }
+  },
   computed: {
+    id() {
+      return this.$route.params.id;
+    },
     playerOptions() {
       return {
-        autoplay: false, // 如果为true,浏览器准备好时开始回放。
+        autoplay: true, // 如果为true,浏览器准备好时开始回放。
         muted: false, // 默认情况下将会消除任何音频。
         loop: true, // 是否视频一结束就重新开始。
         preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
@@ -32,7 +40,7 @@ export default {
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         sources: [{
           type: "video/mp4", // 类型
-          src: this.$route.params.url // url地址
+          src: this.url, // url地址
         }],
         notSupportedMessage: '此视频暂无法播放，请稍后再试', // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
         controlBar: false
@@ -48,15 +56,15 @@ export default {
     back() {
       this.$router.go(-1);
     },
-    // 居中播放器
-    toCenter() {
-      let playerHeight = document.querySelector('.video-player').clientHeight;
-      let videoWrapper = document.querySelector('.video-wrapper');
-      videoWrapper.style.top = `calc(50vh - 27 - ${playerHeight / 2}px)`;
+    // 获取视频url
+    videoUrlGet(val) {
+      let that = this;
+      this.$api.cloudVillage.videoUrlGet({
+        id: val
+      }).then(res => {
+        that.url = res.data.urls[0].url;
+      })
     },
-    //this.$refs.videoPlayer.player.play() // 播放
-    //this.$refs.videoPlayer.player.pause() // 暂停
-    //this.$refs.videoPlayer.player.src(src) // 重置进度条
     // 获取推荐视频
     //recVideoGet() {
     //  this.$api.cloudVillage.recVideoGet().then(res => {
@@ -88,8 +96,8 @@ export default {
     //  })
     //},
   },
-  mounted() {
-    //this.toCenter();
+  created() {
+    this.videoUrlGet(this.id);
   }
 }
 </script>
@@ -117,7 +125,26 @@ export default {
   }
 
   .video-player {
+    width: 375px;
+    height: 666.66px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 
+    .vjs-big-play-button {
+      display: none;
+    }
+  }
+
+  .loading {
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 </style>

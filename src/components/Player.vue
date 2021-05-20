@@ -9,8 +9,8 @@
     <div class="normal-player" ref="player" v-show="fullScreen">
       <div class="obscured-glass">
         <div class="top">
-          <top-bar>
-            <i class="iconfont icon-xiala" slot="left" @click="toMin()"></i>
+          <top-bar @leftClick="toMin()">
+            <i class="iconfont icon-xiala" slot="left"></i>
             <div class="singNmAndSinger" slot="center">
               <div class="songNm">
                 <marquee :value="songNm"></marquee>

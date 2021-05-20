@@ -70,17 +70,18 @@ export default {
     },
     // 去播放
     toPlay(val) {
-      this.$api.cloudVillage.videoUrlGet({
-        id: val
-      }).then(res => {
-        let url = res.data.urls[0].url;
-        this.$router.push({
-          name: 'video-play',
-          params: {
-            url: url
-          }
-        });
+      //this.$api.cloudVillage.videoUrlGet({
+      //  id: val
+      //}).then(res => {
+      //  let url = res.data.urls[0].url;
+      this.$router.push({
+        name: 'video-play',
+        params: {
+          id: val,
+          //url: url
+        }
       });
+      //  });
     },
   },
   mounted() {
