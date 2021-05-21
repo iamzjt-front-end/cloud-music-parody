@@ -244,7 +244,7 @@ export default {
     transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;
 
-    .icon-settings, .icon-distinguish {
+    .icon-settings {
       color: $color-text-ddd;
       font-size: $font-size-xxxl;
     }
@@ -487,6 +487,7 @@ export default {
         vertical-align: middle;
         text-align: center;
         line-height: 3.2rem;
+        color: #333334;
 
         .icon-heartbeat {
           vertical-align: middle;

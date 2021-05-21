@@ -10,6 +10,24 @@
     <div class="loading" v-if="!this.url">
       <van-loading size="36px" color="#fff" text-color="#323233"></van-loading>
     </div>
+    <div class="operation-bar">
+      <div class="operdation-bar-item">
+        <i class="iconfont icon-dianzan"></i>
+        <span>{{ likedCount }}</span>
+      </div>
+      <div class="operdation-bar-item">
+        <i class="iconfont icon-pinglun1"></i>
+        <span>{{ commentCount }}</span>
+      </div>
+      <div class="operdation-bar-item">
+        <i class="iconfont icon-zhuanfa"></i>
+        <span>{{ shareCount }}</span>
+      </div>
+      <div class="operdation-bar-item">
+        <i class="iconfont icon-shoucang1"></i>
+        <span>收藏</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,6 +41,9 @@ export default {
   data() {
     return {
       url: '', // 视频url
+      likedCount: '', // 点赞数
+      commentCount: '', // 评论数
+      shareCount: '', // 转发数
     }
   },
   computed: {
@@ -65,6 +86,16 @@ export default {
         that.url = res.data.urls[0].url;
       })
     },
+    // 获取视频点赞转发评论数数据
+    videoDetailInfoGet(val) {
+      this.$api.cloudVillage.videoDetailInfoGet({
+        vid: val
+      }).then(res => {
+        this.likedCount = res.data.likedCount;
+        this.commentCount = res.data.commentCount;
+        this.shareCount = res.data.shareCount;
+      })
+    },
     // 获取推荐视频
     //recVideoGet() {
     //  this.$api.cloudVillage.recVideoGet().then(res => {
@@ -87,17 +118,10 @@ export default {
     //    console.log(res);
     //  })
     //},
-    // 获取视频点赞转发评论数数据
-    //videoDetailInfoGet(val) {
-    //  this.$api.cloudVillage.videoDetailInfoGet({
-    //    vid: val
-    //  }).then(res => {
-    //    console.log(res);
-    //  })
-    //},
   },
   created() {
     this.videoUrlGet(this.id);
+    this.videoDetailInfoGet(this.id);
   }
 }
 </script>
@@ -128,7 +152,7 @@ export default {
     width: 100vw;
     height: calc(666.66 / 375 * 100vw);
     position: absolute;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
 
     .vjs-big-play-button {
@@ -142,9 +166,41 @@ export default {
     text-align: center;
     line-height: 2rem;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .operation-bar {
+    width: 3rem;
+    height: 14.4rem;
+    position: absolute;
+    right: 0.3rem;
+    bottom: 5rem;
+
+    .operdation-bar-item {
+      width: 3rem;
+      height: 4.2rem;
+
+      .iconfont {
+        color: #fff;
+        font-size: 1.5rem;
+        display: flex;
+        width: 3rem;
+        height: 2.4rem;
+        justify-content: center;
+        align-items: center;
+      }
+
+      span {
+        display: inline-block;
+        width: 3rem;
+        height: 1.6rem;
+        font-size: 0.8rem;
+        text-align: center;
+        opacity: 0.8;
+      }
+    }
   }
 }
 </style>
