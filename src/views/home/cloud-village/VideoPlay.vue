@@ -173,21 +173,21 @@ export default {
 
   .operation-bar {
     width: 3rem;
-    height: 14.4rem;
+    height: 14.6rem;
     position: absolute;
     right: 0.3rem;
     bottom: 5rem;
 
     .operdation-bar-item {
       width: 3rem;
-      height: 4.2rem;
+      height: 3.65rem;
 
       .iconfont {
         color: #fff;
-        font-size: 1.5rem;
+        font-size: 1.35rem;
         display: flex;
         width: 3rem;
-        height: 2.4rem;
+        height: 1.5rem;
         justify-content: center;
         align-items: center;
       }
@@ -195,8 +195,8 @@ export default {
       span {
         display: inline-block;
         width: 3rem;
-        height: 1.6rem;
-        font-size: 0.8rem;
+        height: 2.15rem;
+        font-size: 0.75rem;
         text-align: center;
         opacity: 0.8;
       }
