@@ -611,7 +611,7 @@ $width-cover: 65vw;
     }
 
     .mini-record-cover-box {
-      width: 20%;
+      width: 4.6rem;
       height: 100%;
       position: relative;
 
@@ -645,7 +645,7 @@ $width-cover: 65vw;
     }
 
     .mini-text {
-      width: 54%;
+      width: calc(100% - 10.2rem);
       height: 100%;
       display: flex;
       align-items: center;
@@ -672,10 +672,10 @@ $width-cover: 65vw;
 
     .mini-play-control,
     .mini-play-list {
-      width: 13%;
+      width: 2.8rem;
       height: 100%;
       display: flex;
-      justify-content: center;
+      //justify-content: center;
       align-items: center;
     }
 
