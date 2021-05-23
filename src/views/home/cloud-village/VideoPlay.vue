@@ -91,7 +91,11 @@ export default {
       this.$api.cloudVillage.videoDetailInfoGet({
         vid: val
       }).then(res => {
-        this.likedCount = res.data.likedCount;
+        if (res.data.likedCount > 10000) {
+          this.likedCount = (res.data.likedCount / 10000).toFixed(1) + '万';
+        } else {
+          this.likedCount = res.data.likedCount;
+        }
         this.commentCount = res.data.commentCount;
         this.shareCount = res.data.shareCount;
       })
