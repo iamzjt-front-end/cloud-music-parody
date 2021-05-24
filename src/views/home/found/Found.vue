@@ -2,10 +2,8 @@
   <div id="found">
     <!-- 顶栏 -->
     <top-bar>
-      <div class="settings" slot="left">
-        <i class="iconfont icon-settings"></i>
-        <!-- todo 点击进入设置 -->
-      </div>
+      <i class="iconfont icon-settings" slot="left"></i>
+      <!-- todo 点击进入设置 -->
       <div class="search" slot="center">
         <form action="/">
           <van-search
@@ -18,10 +16,8 @@
           />
         </form>
       </div>
-      <div class="distinguish" slot="right">
-        <i class="iconfont icon-distinguish"></i>
-        <!-- todo 听歌识曲功能 -->
-      </div>
+      <i class="iconfont icon-distinguish" slot="right"></i>
+      <!-- todo 听歌识曲功能 -->
     </top-bar>
     <div class="found-content">
       <scroll ref="scroll" :data="{recSong: recSongList, charts: chartsList}">
