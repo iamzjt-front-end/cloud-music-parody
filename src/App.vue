@@ -134,10 +134,10 @@ export default {
             })
             let miniPlayer = document.querySelector('.mini-player')
             animations.runAnimation(miniPlayer, 'moveDownSpec')
-//            setTimeout(function () {
-//              animations.unregisterAnimation('moveDownSpec')
-//              miniPlayer.style.animation = ''
-//            }, 800)
+           // setTimeout(function () {
+           //   animations.unregisterAnimation('moveDownSpec')
+           //   miniPlayer.style.animation = ''
+           // }, 800)
           })
         } else {
           this.$nextTick(() => {

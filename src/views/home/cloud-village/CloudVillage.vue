@@ -72,7 +72,7 @@ export default {
     },
     // 去播放
     toPlay(val) {
-      this.$bus.$emit('audioPause');
+      this.$bus.$emit('audioPause'); // 暂停音乐
       this.$router.push({
         name: 'video-play',
         params: {
