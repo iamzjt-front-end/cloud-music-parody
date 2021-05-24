@@ -30,14 +30,16 @@
     </div>
     <div class="creator-box">
       <div class="creator-avatar">
-
+        <img :src="avatarUrl" v-show="avatarUrl">
       </div>
+      <div class="nickName">{{ nickname }}</div>
+      <div class="title">{{ title }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import {videoPlayer} from 'vue-video-player';
+import { videoPlayer } from 'vue-video-player';
 import 'video.js/dist/video-js.css';
 import TopBar from "components/TopBar";
 
@@ -52,7 +54,7 @@ export default {
       avatarUrl: '', // 头像
       identityIconUrl: '', // 头像边上的星
       nickname: '', // 作者昵称
-      description: '', // 描述
+      title: '', // 标题
     }
   },
   computed: {
@@ -119,10 +121,13 @@ export default {
       this.$api.cloudVillage.videoDetailGet({
         id: val
       }).then(res => {
-        this.avatarUrl = res.data.data.creator.avatarUrl; // 头像
-        this.identityIconUrl = res.data.data.creator.avatarDetail.identityIconUrl; // 头像边上的星
-        this.nickname = res.data.data.creator.nickname; // 作者昵称
-        this.description = res.data.data.description; // 描述
+        let videoInfo = res.data.data;
+        this.avatarUrl = videoInfo.creator.avatarUrl; // 头像
+        if (videoInfo.creator.avatarDetail) {
+          this.identityIconUrl = videoInfo.creator.avatarDetail.identityIconUrl; // 头像边上的星
+        }
+        this.nickname = videoInfo.creator.nickname; // 作者昵称
+        this.title = videoInfo.title; // 描述
       })
     },
     // 获取推荐视频
@@ -149,6 +154,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../assets/scss/mixin";
+
 #video-play {
   position: fixed;
   top: 0;
@@ -229,9 +236,47 @@ export default {
     width: 55vw;
     height: 6rem;
     position: absolute;
-    left: 0.3rem;
+    left: 1rem;
     bottom: 4.2rem;
-    background-color: pink;
+    display: flex;
+    flex-wrap: wrap;
+
+    .creator-avatar {
+      display: inline-block;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #ccc;
+      border: 2px solid #fff;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    .nickName {
+      display: inline-block;
+      width: calc(55vw - 3rem);
+      height: 2.5rem;
+      line-height: 2.5rem;
+      padding-left: 8px;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .title {
+      width: 100%;
+      height: 2.4rem;
+      margin-top: 1.1rem;
+      color: #fff;
+      opacity: 0.85;
+      line-height: 1.2rem;
+      font-size: 0.85rem;
+      @include multi-line-ellipsis(2);
+    }
   }
 }
 </style>
