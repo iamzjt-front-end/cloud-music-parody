@@ -28,6 +28,11 @@
         <span>收藏</span>
       </div>
     </div>
+    <div class="creator-box">
+      <div class="creator-avatar">
+
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,6 +49,10 @@ export default {
       likedCount: '', // 点赞数
       commentCount: '', // 评论数
       shareCount: '', // 转发数
+      avatarUrl: '', // 头像
+      identityIconUrl: '', // 头像边上的星
+      nickname: '', // 作者昵称
+      description: '', // 描述
     }
   },
   computed: {
@@ -79,11 +88,10 @@ export default {
     },
     // 获取视频url
     videoUrlGet(val) {
-      let that = this;
       this.$api.cloudVillage.videoUrlGet({
         id: val
       }).then(res => {
-        that.url = res.data.urls[0].url;
+        this.url = res.data.urls[0].url;
       })
     },
     // 获取视频点赞转发评论数数据
@@ -106,6 +114,17 @@ export default {
         this.shareCount = res.data.shareCount;
       })
     },
+    // 获取视频详情
+    videoDetailGet(val) {
+      this.$api.cloudVillage.videoDetailGet({
+        id: val
+      }).then(res => {
+        this.avatarUrl = res.data.data.creator.avatarUrl; // 头像
+        this.identityIconUrl = res.data.data.creator.avatarDetail.identityIconUrl; // 头像边上的星
+        this.nickname = res.data.data.creator.nickname; // 作者昵称
+        this.description = res.data.data.description; // 描述
+      })
+    },
     // 获取推荐视频
     //recVideoGet() {
     //  this.$api.cloudVillage.recVideoGet().then(res => {
@@ -120,17 +139,10 @@ export default {
     //    console.log(res);
     //  })
     //},
-    // 获取视频详情
-    //videoDetailGet() {
-    //  this.$api.cloudVillage.videoDetailGet({
-    //     id: ''
-    //  }).then(res => {
-    //    console.log(res);
-    //  })
-    //},
   },
   created() {
     this.videoUrlGet(this.id);
+    this.videoDetailGet(this.id);
     this.videoDetailInfoGet(this.id);
   }
 }
@@ -186,7 +198,7 @@ export default {
     height: 14.6rem;
     position: absolute;
     right: 0.3rem;
-    bottom: 5rem;
+    bottom: 2.2rem;
 
     .operdation-bar-item {
       width: 3rem;
@@ -211,6 +223,15 @@ export default {
         opacity: 0.8;
       }
     }
+  }
+
+  .creator-box {
+    width: 55vw;
+    height: 6rem;
+    position: absolute;
+    left: 0.3rem;
+    bottom: 4.2rem;
+    background-color: pink;
   }
 }
 </style>
