@@ -34,6 +34,7 @@
 import TopBar from "components/TopBar";
 import videoCard from "components/VideoCard";
 import Scroll from "components/scroll/Scroll";
+import { mapMutations } from 'vuex';
 
 export default {
   name: "CloudVillage",
@@ -51,6 +52,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['updatePlayingState']),
     // 获取视频标签列表
     videoTagGet() {
       return this.$api.cloudVillage.videoTagGet();
@@ -70,18 +72,13 @@ export default {
     },
     // 去播放
     toPlay(val) {
-      //this.$api.cloudVillage.videoUrlGet({
-      //  id: val
-      //}).then(res => {
-      //  let url = res.data.urls[0].url;
+      this.$bus.$emit('audioPause');
       this.$router.push({
         name: 'video-play',
         params: {
           id: val,
-          //url: url
         }
       });
-      //  });
     },
   },
   mounted() {

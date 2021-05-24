@@ -50,60 +50,124 @@ export default {
 
       this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
 
-      if (to.meta.index == 5) {
-        this.$nextTick(() => {
-          let animation = {
-            0: {
-              transform: 'translateY(0)'
-            },
-            60:{
-              transform: 'translateY(-40px)'
-            },
-            100: {
-              transform: 'translateY(-49px)'
+      if (from.meta.index > 5 && to.meta.index == 5) { // 从高页面到低页面  上移 （视频播放页 特殊情况）
+        if (from.meta.title == '视频播放') {
+          this.$nextTick(() => {
+            let animation = {
+              0: {
+                transform: 'translateY(50px)',
+                opacity: 0
+              },
+              60:{
+                transform: 'translateY(-25px)',
+                opacity: 0.8
+              },
+              100: {
+                transform: 'translateY(-49px)',
+                opacity: 1
+              }
             }
-          }
-          animations.registerAnimation({
-            name: 'moveUp',
-            animation,
-            presets: {
-              duration: 400,
-              easing: 'linear'
-            }
+            animations.registerAnimation({
+              name: 'moveUpSpec',
+              animation,
+              presets: {
+                duration: 400,
+                easing: 'linear'
+              }
+            })
+            let miniPlayer = document.querySelector('.mini-player')
+            animations.runAnimation(miniPlayer, 'moveUpSpec')
+            // animations.unregisterAnimation('moveUp')
+            // miniPlayer.style.animation = ''
           })
-          let miniPlayer = document.querySelector('.mini-player')
-          animations.runAnimation(miniPlayer, 'moveUp')
-          // animations.unregisterAnimation('moveUp')
-          // miniPlayer.style.animation = ''
-        })
-      } else {
-        this.$nextTick(() => {
-          let animation = {
-            0: {
-              transform: 'translateY(-49px)'
-            },
-            60:{
-              transform: 'translateY(-9px)'
-            },
-            100: {
-              transform: 'translateY(0)'
+        } else {
+          this.$nextTick(() => {
+            let animation = {
+              0: {
+                transform: 'translateY(0)'
+              },
+              60:{
+                transform: 'translateY(-40px)'
+              },
+              100: {
+                transform: 'translateY(-49px)'
+              }
             }
-          }
-          animations.registerAnimation({
-            name: 'moveDown',
-            animation,
-            presets: {
-              duration: 400,
-              easing: 'linear'
-            }
+            animations.registerAnimation({
+              name: 'moveUp',
+              animation,
+              presets: {
+                duration: 400,
+                easing: 'linear'
+              }
+            })
+            let miniPlayer = document.querySelector('.mini-player')
+            animations.runAnimation(miniPlayer, 'moveUp')
+            // animations.unregisterAnimation('moveUp')
+            // miniPlayer.style.animation = ''
           })
-          let miniPlayer = document.querySelector('.mini-player')
-          animations.runAnimation(miniPlayer, 'moveDown')
-          setTimeout(function () {
-            animations.unregisterAnimation('moveDown')
-            miniPlayer.style.animation = ''
-          }, 800)
-        })
+        }
+      } else if (to.meta.index > 5 && from.meta.index == 5) { // 从低页面到高页面  下移 （视频播放页 特殊情况）
+        if (to.meta.title == '视频播放') {
+          this.$nextTick(() => {
+            let animation = {
+              0: {
+                transform: 'translateY(-49px)',
+                opacity: 1
+              },
+              60:{
+                transform: 'translateY(25px)',
+                opacity: 0.2
+              },
+              100: {
+                transform: 'translateY(50px)',
+                opacity: 0
+              }
+            }
+            animations.registerAnimation({
+              name: 'moveDownSpec',
+              animation,
+              presets: {
+                duration: 400,
+                easing: 'linear'
+              }
+            })
+            let miniPlayer = document.querySelector('.mini-player')
+            animations.runAnimation(miniPlayer, 'moveDownSpec')
+//            setTimeout(function () {
+//              animations.unregisterAnimation('moveDownSpec')
+//              miniPlayer.style.animation = ''
+//            }, 800)
+          })
+        } else {
+          this.$nextTick(() => {
+            let animation = {
+              0: {
+                transform: 'translateY(-49px)'
+              },
+              60:{
+                transform: 'translateY(-9px)'
+              },
+              100: {
+                transform: 'translateY(0)'
+              }
+            }
+            animations.registerAnimation({
+              name: 'moveDown',
+              animation,
+              presets: {
+                duration: 400,
+                easing: 'linear'
+              }
+            })
+            let miniPlayer = document.querySelector('.mini-player')
+            animations.runAnimation(miniPlayer, 'moveDown')
+            setTimeout(function () {
+              animations.unregisterAnimation('moveDown')
+              miniPlayer.style.animation = ''
+            }, 800)
+          })
+        }
       }
     }
   },

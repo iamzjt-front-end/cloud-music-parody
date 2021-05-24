@@ -10,7 +10,7 @@ import fastclick from 'fastclick';
 fastclick.attach(document.body);
 
 Vue.prototype.$api = api; // 将api挂载到vue的原型上
-// Vue.prototype.$bus = new Vue(); // 事件总线
+Vue.prototype.$bus = new Vue(); // 事件总线
 
 // 引入Vant-UI
 import 'plugins/vant';

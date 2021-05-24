@@ -359,6 +359,18 @@ export default {
     toPlayList() {
 
     },
+    // 全局事件监听
+    globalEventsOn() {
+      // 播放视频时暂停音乐并下移隐藏
+      this.$bus.$on('audioPause', () => {
+        this.$store.commit('updatePlayingState', false);
+        this.$refs.audio.pause();
+        this.clearTime();
+      });
+    }
+  },
+  mounted() {
+    this.globalEventsOn();
   },
   watch: {
     currentSong: {
