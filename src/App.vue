@@ -55,16 +55,13 @@ export default {
           this.$nextTick(() => {
             let animation = {
               0: {
-                transform: 'translateY(50px)',
-                opacity: 0
+                transform: 'translateY(50px)'
               },
               60:{
-                transform: 'translateY(-25px)',
-                opacity: 0.8
+                transform: 'translateY(-25px)'
               },
               100: {
-                transform: 'translateY(-49px)',
-                opacity: 1
+                transform: 'translateY(-49px)'
               }
             }
             animations.registerAnimation({
@@ -112,16 +109,13 @@ export default {
           this.$nextTick(() => {
             let animation = {
               0: {
-                transform: 'translateY(-49px)',
-                opacity: 1
+                transform: 'translateY(-49px)'
               },
               60:{
-                transform: 'translateY(25px)',
-                opacity: 0.2
+                transform: 'translateY(25px)'
               },
               100: {
-                transform: 'translateY(50px)',
-                opacity: 0
+                transform: 'translateY(50px)'
               }
             }
             animations.registerAnimation({
