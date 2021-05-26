@@ -13,10 +13,6 @@ Vue.use(Router);
 const router = new Router({
     routes: [
         {
-            path: '/',
-            redirect: '/start',
-        },
-        {
             path: '/start',
             name: 'start',
             component: () => import('@/views/start/Start'),
@@ -139,21 +135,23 @@ const router = new Router({
                 index: 6
             },
         },
+        {
+            path: '/',
+            redirect: '/start',
+        },
     ]
 });
 
 // 导航守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-    if (to.path === '/password-login') {
+    let token = sessionStorage.getItem('token');
+    if (token) {
+        next();
+    } else if (to.path == '/start' || to.path == '/password-login' || to.path == '/email-login') {
         next();
     } else {
-        let token = sessionStorage.getItem('token');
-        if (token === null || token === '') {
-            next('/start');
-        } else {
-            next();
-        }
+        next('/start');
     }
 });
 

@@ -34,7 +34,7 @@ export default {
       if (val1) { // 点击同意协议
         if (val2 == 'login') {
           // console.log('登陆')
-          this.$router.push({path: '/passwordlogin'})
+          this.$router.push({path: '/password-login'})
         } else {
           // console.log('体验')
           this.$router.push({path: '/home'})

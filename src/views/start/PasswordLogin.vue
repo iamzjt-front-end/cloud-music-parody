@@ -75,7 +75,7 @@ export default {
     },
     // 邮箱登录
     toEmailLogin() {
-      this.$router.push('/emailLogin');
+      this.$router.push('/email-login');
     },
     // 注册
     toRegister() {
