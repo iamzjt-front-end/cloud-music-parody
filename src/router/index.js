@@ -13,6 +13,10 @@ Vue.use(Router);
 const router = new Router({
     routes: [
         {
+            path: '/',
+            redirect: '/start',
+        },
+        {
             path: '/start',
             name: 'start',
             component: () => import('@/views/start/Start'),
@@ -134,10 +138,6 @@ const router = new Router({
                 title: "视频播放",
                 index: 6
             },
-        },
-        {
-            path: '/',
-            redirect: '/start',
         },
     ]
 });
