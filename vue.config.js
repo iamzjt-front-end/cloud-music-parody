@@ -12,20 +12,20 @@ module.exports = {
             .set('components', resolve('src/components'))
             .set('plugins', resolve('src/plugins'))
     },
-    // devServer: {
-    //     proxy: {
-    //         '/api': {
-    //             // target: 'https://api.lk-lmusic.top', // 接口域名
-    //             target: 'http://121.41.169.239:3000', // 接口域名 - 远程服务
-    //             // target: 'http://localhost:3000', // 接口域名 - 本地服务
-    //             secure: true, // 如果是https接口，需要配置这个参数
-    //             changeOrigin: true, // 是否跨域
-    //             pathRewrite: {
-    //                 '^/api': ''
-    //             }
-    //         }
-    //     }
-    // },
+    devServer: {
+        proxy: {
+            '/api': {
+                // target: 'https://api.lk-lmusic.top', // 接口域名
+                target: 'http://121.41.169.239:3000', // 接口域名 - 远程服务
+                // target: 'http://localhost:3000', // 接口域名 - 本地服务
+                secure: true, // 如果是https接口，需要配置这个参数
+                changeOrigin: true, // 是否跨域
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
+    },
     publicPath: './',
     productionSourceMap: false,
 }
