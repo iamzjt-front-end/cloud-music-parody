@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
+
 export default {
   name: "Login",
   data() {
@@ -37,7 +39,8 @@ export default {
           this.$router.push({path: '/password-login'})
         } else {
           // console.log('体验')
-          this.$router.push({path: '/home'})
+          // this.$router.push({path: '/home'})
+          Toast('正在开发中...');
         }
       } else { // 未点击同意协议
         // todo 未同意协议多次点击 防抖处理
