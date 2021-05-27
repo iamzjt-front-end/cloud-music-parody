@@ -14,7 +14,7 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            redirect: '/start',
+            redirect: '/home',
         },
         {
             path: '/start',
@@ -145,7 +145,7 @@ const router = new Router({
 // 导航守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-    let token = sessionStorage.getItem('token');
+    let token = localStorage.getItem('token');
     if (token) {
         next();
     } else if (to.path == '/start' || to.path == '/password-login' || to.path == '/email-login') {

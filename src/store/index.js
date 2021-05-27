@@ -7,7 +7,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         // 存储token
-        token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : '',
+        token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
         playList: [], // 当前播放列表
         currentIndex: -1, // 当前播放歌曲index
         playingState: false, // 播放状态 false-暂停 true-正在播放
@@ -17,10 +17,10 @@ const store = new Vuex.Store({
         singerChartsList: [], // 歌手榜
     },
     mutations: {
-        // 修改token，sessionStorage
+        // 修改token，localStorage
         changeLogin(state, data) {
             state.token = data;
-            sessionStorage.setItem('token', data);
+            localStorage.setItem('token', data);
         },
         updatePlayList(state, data) {
             state.playList = data;

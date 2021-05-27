@@ -64,8 +64,6 @@ const errorHandle = (status, other) => {
 
 // 创建axios实例
 var instance = axios.create({timeout: 1000 * 12});
-// 设置post请求头
-// instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // axios配置允许跨域
 instance.defaults.withCredentials = true
