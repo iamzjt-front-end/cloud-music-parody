@@ -63,12 +63,10 @@ const errorHandle = (status, other) => {
 }
 
 // 创建axios实例
-var instance = axios.create({timeout: 1000 * 12});
-
-// axios配置允许跨域
-instance.defaults.withCredentials = true
-instance.defaults.crossDomain = true
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+var instance = axios.create({
+    withCredentials: true,
+    timeout: 1000 * 12
+});
 
 /**
  * 请求拦截器
@@ -81,12 +79,14 @@ instance.interceptors.request.use(
         // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码
         // 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。
         const token = store.state.token;
-        token && (config.headers.Authorization = token);
+        token && (config.headers.token = token);
         return config;
     },
     error => Promise.error(error))
 
-// 响应拦截器
+/**
+ * 响应拦截器
+ */
 instance.interceptors.response.use(
     // 请求成功
     res => res.status === 200 ? Promise.resolve(res) : Promise.reject(res),
