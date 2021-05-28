@@ -65,6 +65,7 @@ export default {
   height: 15rem;
   padding: 0.5rem 0.7rem 0 0;
   display: inline-block;
+  vertical-align: middle;
 
   .charts-item-box {
     width: 100%;
