@@ -36,7 +36,7 @@ export default {
   .img {
     width: 3rem;
     height: 3rem;
-    background-color: #fff;
+    background-color: #f5f5f5;
     border-radius: 0.4rem;
     overflow: hidden;
     vertical-align: middle;

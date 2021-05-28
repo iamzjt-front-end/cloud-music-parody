@@ -45,7 +45,7 @@ export default {
   .img {
     width: 100%;
     //height: 7rem;
-    background-color: #fff;
+    background-color: #f5f5f5;
     border-radius: 0.8rem;
     position: relative;
     // 让子元素呈现 3D 转换

@@ -493,6 +493,7 @@ $width-cover: 65vw;
         height: $width-cover;
         border-radius: 50%;
         margin: auto;
+        background-color: #ccc;
         //position: absolute;
         //top: 20%;
         //left: 17.5%;
@@ -640,7 +641,7 @@ $width-cover: 65vw;
         .mini-record-cover {
           width: 1.8rem;
           height: 1.8rem;
-          background-color: pink;
+          background-color: #ccc;
           border-radius: 50%;
           overflow: hidden;
           position: absolute;

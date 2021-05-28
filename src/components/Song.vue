@@ -40,7 +40,7 @@ export default {
   .front-cover {
     width: 3.5rem;
     height: 3.5rem;
-    background-color: rosybrown;
+    background-color: #f5f5f5;
     border-radius: 0.5rem;
     overflow: hidden;
 

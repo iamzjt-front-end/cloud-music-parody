@@ -62,7 +62,7 @@ export default {
           Toast.fail(res.data.message);
           this.password = '';
         } else if (res.data.code == 200) { // 登录成功
-          // 将用户token保存到localStorage和vuex中
+          // 将用户token保存到sessionStorage和vuex中
           this.$store.commit('changeLogin', res.data.token);
           Toast.success('登录成功');
           this.$router.push('/home');
