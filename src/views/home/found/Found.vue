@@ -350,7 +350,7 @@ export default {
     }
 
     .rec-list {
-      height: 14.25rem;
+      height: 13.5rem;
 
       .song-list {
         width: 100%;

@@ -152,14 +152,16 @@ export default {
       width: 100vw;
       height: calc(100vh - 54px - 44px);
       background-color: #fff;
-      padding: 0 calc((100vw - 22.2rem) / 2);
+      padding: 0 1rem;
       overflow: hidden;
 
       .song-list-wrapper {
+        float: left;
         padding: 5px 0;
 
         .song-list-item {
-          margin: 0 0.2rem;
+          width: calc((100vw - 2rem) / 3);
+          height: calc((100vw - 2rem) * 10 / 21);
         }
       }
     }
