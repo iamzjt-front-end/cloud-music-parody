@@ -35,11 +35,11 @@ export default {
 @import "../assets/scss/mixin";
 
 .song-list-item {
+  display: inline-block;
   width: 7rem;
   height: 10rem;
   background-color: #fff;
   padding: 0.75rem 0.2rem 0.5rem 0.2rem;
-  float: left;
   position: relative;
 
   .img {

@@ -358,6 +358,10 @@ export default {
 
         .song-list-box {
           height: 100%;
+
+          .song-list-item {
+            float: left;
+          }
         }
       }
     }

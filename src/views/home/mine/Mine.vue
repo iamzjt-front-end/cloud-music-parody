@@ -420,6 +420,7 @@ export default {
         width: 3.2rem;
         height: 3.2rem;
         background-color: #f5f5f5;
+        border-radius: 10px;
         // 让子元素呈现 3D 转换
         transform-style: preserve-3d;
         position: relative;

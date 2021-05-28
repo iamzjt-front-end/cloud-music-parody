@@ -6,24 +6,26 @@
       <h1 slot="center">歌单广场</h1>
     </top-bar>
     <!-- 标签栏 -->
-    <van-tabs ref="tabs" animated @click="toggle">
-      <van-tab v-for="(item, index) in tagList" :title="item.name" :key="index" v-model="active"
-               title-style="font-size: 16px">
-        <div class="loading" v-if="!highList.length">
-          <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
-        </div>
-        <div class="tag-content" v-if="highList.length">
-          <scroll :data="{high: highList}">
-            <div>
-              <song-list-item v-for="(item1, index1) in highList" :key="index1" @click.native="toRecList(item1)">
-                <img :src="item1.coverImgUrl" slot="img" @load="load">
-                <p slot="description">{{ item1.description }}</p>
-              </song-list-item>
-            </div>
-          </scroll>
-        </div>
-      </van-tab>
-    </van-tabs>
+    <div class="song-list-square-content">
+      <van-tabs ref="tabs" animated @click="toggle">
+        <van-tab v-for="(item, index) in tagList" :title="item.name" :key="index" v-model="active"
+                 title-style="font-size: 16px">
+          <div class="loading" v-if="!highList.length">
+            <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
+          </div>
+          <div class="tag-content" v-if="highList.length">
+            <scroll :data="{high: highList}">
+              <div class="song-list-wrapper">
+                <song-list-item v-for="(item1, index1) in highList" :key="index1" @click.native="toRecList(item1)">
+                  <img :src="item1.coverImgUrl" slot="img" @load="load">
+                  <p slot="description">{{ item1.description }}</p>
+                </song-list-item>
+              </div>
+            </scroll>
+          </div>
+        </van-tab>
+      </van-tabs>
+    </div>
   </div>
 </template>
 
@@ -75,6 +77,12 @@ export default {
     load() {
       if (!this.loading) {
         this.loading = true;
+        // this.$nextTick(() => {
+        //   let songListBox = document.querySelector('.song-list-box');
+        //   let songListItemWidth = document.querySelectorAll('.song-list-item')[0].clientWidth;
+        //   songListBox.style.width = songListItemWidth * 6 + 'px';
+        //   this.recScrollInit();
+        // })
       }
     },
     // 跳转去歌单
@@ -126,16 +134,35 @@ export default {
     }
   }
 
-  .loading {
-    padding-top: 1rem;
-    text-align: center;
-  }
+  .song-list-square-content {
+    position: fixed;
+    top: 54px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
 
-  .tag-content {
-    width: 100vw;
-    height: calc(100vh - 59px - 54px);
-    background-color: #fff;
-    padding: 0 calc((100vw - 22.2rem) / 2);
+    .loading {
+      padding-top: 1rem;
+      text-align: center;
+    }
+
+    .tag-content {
+      width: 100vw;
+      height: calc(100vh - 54px - 44px);
+      background-color: #fff;
+      padding: 0 calc((100vw - 22.2rem) / 2);
+      overflow: hidden;
+
+      .song-list-wrapper {
+        padding: 5px 0;
+
+        .song-list-item {
+          margin: 0 0.2rem;
+        }
+      }
+    }
   }
 }
 </style>
