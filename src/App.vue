@@ -14,6 +14,7 @@
 <script>
 import Player from "@/components/Player";
 import animations from 'create-keyframe-animation';
+import {mapState} from "vuex";
 
 export default {
   name: 'App',
@@ -25,6 +26,9 @@ export default {
       transitionName: 'slide-left' // 默认动画
     };
   },
+  computed: {
+    ...mapState(['fullScreen']),
+  },
   methods: {
     touchstart() {
       document.body.addEventListener('touchstart', function () {
@@ -35,6 +39,13 @@ export default {
         // 在您的css中使用:active伪类，然后添加ontouchstart=“”和onmouseover=“”到body标签。
         // <body onTouchStart="" onMouseOver=""></body>
       });
+    },
+    // tag-content 高度更新
+    tagContentHupt() {
+      let tagContents = document.querySelectorAll('.tag-content');
+      tagContents.forEach(item => {
+        item.style.height = 'calc(100vh - 54px - 44px - 95px)';
+      })
     }
   },
   mounted() {
@@ -57,7 +68,7 @@ export default {
               0: {
                 transform: 'translateY(50px)'
               },
-              60:{
+              60: {
                 transform: 'translateY(-25px)'
               },
               100: {
@@ -83,7 +94,7 @@ export default {
               0: {
                 transform: 'translateY(0)'
               },
-              60:{
+              60: {
                 transform: 'translateY(-40px)'
               },
               100: {
@@ -111,7 +122,7 @@ export default {
               0: {
                 transform: 'translateY(-49px)'
               },
-              60:{
+              60: {
                 transform: 'translateY(25px)'
               },
               100: {
@@ -128,10 +139,10 @@ export default {
             })
             let miniPlayer = document.querySelector('.mini-player')
             animations.runAnimation(miniPlayer, 'moveDownSpec')
-           // setTimeout(function () {
-           //   animations.unregisterAnimation('moveDownSpec')
-           //   miniPlayer.style.animation = ''
-           // }, 800)
+            // setTimeout(function () {
+            //   animations.unregisterAnimation('moveDownSpec')
+            //   miniPlayer.style.animation = ''
+            // }, 800)
           })
         } else {
           this.$nextTick(() => {
@@ -139,7 +150,7 @@ export default {
               0: {
                 transform: 'translateY(-49px)'
               },
-              60:{
+              60: {
                 transform: 'translateY(-9px)'
               },
               100: {
@@ -163,6 +174,49 @@ export default {
           })
         }
       }
+
+      // 动态设置 content 内容区
+      //.found-content
+      // bottom: 95px
+      // height: calc(100vh - 54px - 95px)
+      let player = document.querySelector('#player');
+      if (player.style.display != 'none' && !this.fullScreen) {
+        // 发现模块
+        if (to.name == 'found') {
+          this.$nextTick(() => {
+            let foundContent = document.querySelector('.found-content');
+            foundContent.style.bottom = '95px';
+            foundContent.style.height = 'calc(100vh - 54px - 95px)';
+            this.$bus.$emit('BScrollRefresh');
+          })
+        }
+        // 我的模块
+        if (to.name == 'mine') {
+          this.$nextTick(() => {
+            let mineContent = document.querySelector('.mine-content');
+            mineContent.style.bottom = '95px';
+            mineContent.style.height = 'calc(100vh - 54px - 95px)';
+            this.$bus.$emit('BScrollRefresh');
+          })
+        }
+        // 云村模块
+        if (to.name == 'cloud-villlage') {
+          this.$nextTick(() => {
+            let cloudVillageSquare = document.querySelector('.cloud-village-square');
+            cloudVillageSquare.style.bottom = '95px';
+            cloudVillageSquare.style.height = 'calc(100vh - 54px - 95px)';
+            this.tagContentHupt();
+            this.$bus.$emit('BScrollRefresh');
+          })
+          this.$bus.$on('videoListUpt', () => {
+            this.$nextTick(() => {
+              this.tagContentHupt();
+              this.$bus.$emit('BScrollRefresh');
+            })
+          })
+        }
+      }
+      // 歌单
     }
   },
 }

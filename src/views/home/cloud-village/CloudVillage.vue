@@ -63,6 +63,7 @@ export default {
         id: val
       }).then(res => {
         this.videoList = res.data.datas;
+        this.$bus.$emit('videoListUpt');
       });
     },
     // tab栏切换

@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import BetterScroll from 'better-scroll'
+//import BetterScroll from 'better-scroll'
+import BScroll from "@better-scroll/core";
 
 const DIRECTION_H = 'horizontal'
 const DIRECTION_V = 'vertical'
@@ -51,13 +52,14 @@ export default {
       this.initScroll()
       console.log('this.scroll', this.scroll);
     }, 2000)
+    this.BScrollRefreshOn();
   },
   methods: {
     initScroll() {
       if (!this.$refs.wrapper) {
         return
       }
-      this.scroll = new BetterScroll(this.$refs.wrapper, {
+      this.scroll = new BScroll(this.$refs.wrapper, {
         probeType: this.probeType,
         click: this.click,
         eventPassthrough: this.direction === DIRECTION_V ? DIRECTION_H : DIRECTION_V
@@ -97,6 +99,11 @@ export default {
     },
     scrollToElement() {
       this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
+    },
+    BScrollRefreshOn() {
+      this.$bus.$on('BScrollRefresh', () => {
+        this.refresh()
+      })
     }
   },
   watch: {

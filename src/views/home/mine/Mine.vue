@@ -15,7 +15,7 @@
     </top-bar>
     <div class="mine-content" ref="mineContent">
       <scroll :data="{play: playlist}" :probe-type="probeType" :listen-scroll="listenScroll" @scroll="scroll">
-        <div>
+        <div class="mine-scroll-wrapper">
           <!-- 我的 -->
           <div class="mine-home" ref="mineHome">
             <div class="left">
@@ -303,6 +303,10 @@ export default {
     width: 100%;
     background-color: #fafafa;
     //overflow: hidden;
+
+    .mine-scroll-wrapper {
+      padding-bottom: 15px;
+    }
 
     .mine-home {
       width: 100%;
