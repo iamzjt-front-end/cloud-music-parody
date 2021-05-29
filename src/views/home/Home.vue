@@ -40,6 +40,7 @@
 <script>
 import TabBar from "@/components/TabBar";
 import {Dialog} from 'vant';
+import {mapMutations} from 'vuex';
 
 export default {
   name: "Home",
@@ -55,6 +56,7 @@ export default {
     TabBar,
   },
   methods: {
+    ...mapMutations(['updatePlayList']),
     // 获取账号信息
     userAccountGet() {
       let that = this;
@@ -70,13 +72,17 @@ export default {
         title: '网易云音乐',
         message: '确定退出当前账号吗？ >_<',
       }).then(() => {
-        // 跳转到开始页 并 清掉 token
+        // popup缩回, 暂停音乐, 清空播放列表, 清掉 token 并 跳转到开始页
         this.$api.login.logout().then(res => {
           if (res.data.code == 200) {
+            this.popupShow = false;
+            this.$bus.$emit('audioPause');
+            this.$store.commit('updatePlayList', []);
+            // 此时会带来 currentSong 更新, 则需要去 player 里面给 currentSong 监听, 加一重判断
+            // Object.keys(newValue).length !== 0
+            // Object.keys  返回值：一个表示给定对象的所有可枚举属性的字符串数组
             localStorage.removeItem('token');
-            this.$router.replace({
-              path: '/start',
-            });
+            this.$router.replace({path: '/start'});
           }
         })
       }).catch(() => {

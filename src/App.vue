@@ -237,6 +237,16 @@ export default {
             this.$bus.$emit('BScrollRefresh');
           })
         }
+      } else {
+        // 发现模块
+        if (to.name == 'found') {
+          this.$nextTick(() => {
+            let foundContent = document.querySelector('.found-content');
+            foundContent.style.bottom = '50px';
+            foundContent.style.height = 'calc(100vh - 54px - 50px)';
+            this.$bus.$emit('BScrollRefresh');
+          })
+        }
       }
     }
   },
