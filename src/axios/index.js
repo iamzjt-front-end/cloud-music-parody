@@ -27,7 +27,7 @@ const toLogin = () => {
     router.replace({
         path: '/start',
         query: {
-            redirect: router.currentRoute.fullPath
+            redirect: router.currentRoute.fullPath,
         }
     });
 }
@@ -48,7 +48,15 @@ const errorHandle = (status, other) => {
         case 403:
             tip('登录过期，请重新登录');
             sessionStorage.removeItem('token');
-            store.commit('loginSuccess', null);
+            setTimeout(() => {
+                toLogin();
+            }, 1000);
+            break;
+        // 301 未登录
+        // 清除token并跳转登录页
+        case 301:
+            tip('未登录');
+            sessionStorage.removeItem('token');
             setTimeout(() => {
                 toLogin();
             }, 1000);
