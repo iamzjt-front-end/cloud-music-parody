@@ -44,7 +44,7 @@ export default {
     tagContentHupt() {
       let tagContents = document.querySelectorAll('.tag-content');
       tagContents.forEach(item => {
-        item.style.height = 'calc(100vh - 54px - 44px - 95px)';
+        item.style.height = 'calc(100vh - 54px - 44px - 50px - 2.8rem)';
       })
     }
   },
@@ -176,17 +176,14 @@ export default {
       }
 
       // 动态设置 content 内容区
-      //.found-content
-      // bottom: 95px
-      // height: calc(100vh - 54px - 95px)
       let player = document.querySelector('#player');
       if (player.style.display != 'none' && !this.fullScreen) {
         // 发现模块
         if (to.name == 'found') {
           this.$nextTick(() => {
             let foundContent = document.querySelector('.found-content');
-            foundContent.style.bottom = '95px';
-            foundContent.style.height = 'calc(100vh - 54px - 95px)';
+            foundContent.style.bottom = 'calc(50px + 2.8rem)';
+            foundContent.style.height = 'calc(100vh - 54px - 50px - 2.8rem)';
             this.$bus.$emit('BScrollRefresh');
           })
         }
@@ -194,8 +191,8 @@ export default {
         if (to.name == 'mine') {
           this.$nextTick(() => {
             let mineContent = document.querySelector('.mine-content');
-            mineContent.style.bottom = '95px';
-            mineContent.style.height = 'calc(100vh - 54px - 95px)';
+            mineContent.style.bottom = 'calc(50px + 2.8rem)';
+            mineContent.style.height = 'calc(100vh - 54px - 50px - 2.8rem)';
             this.$bus.$emit('BScrollRefresh');
           })
         }
@@ -203,8 +200,8 @@ export default {
         if (to.name == 'cloud-villlage') {
           this.$nextTick(() => {
             let cloudVillageSquare = document.querySelector('.cloud-village-square');
-            cloudVillageSquare.style.bottom = '95px';
-            cloudVillageSquare.style.height = 'calc(100vh - 54px - 95px)';
+            cloudVillageSquare.style.bottom = 'calc(50px + 2.8rem)';
+            cloudVillageSquare.style.height = 'calc(100vh - 54px - 50px - 2.8rem)';
             this.tagContentHupt();
             this.$bus.$emit('BScrollRefresh');
           })
@@ -216,7 +213,6 @@ export default {
           })
         }
       }
-      // 歌单
     }
   },
 }
