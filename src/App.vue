@@ -41,10 +41,10 @@ export default {
       });
     },
     // tag-content 高度更新
-    tagContentHupt() {
-      let tagContents = document.querySelectorAll('.tag-content');
+    tagContentHupt(ele, high) {
+      let tagContents = document.querySelectorAll(ele);
       tagContents.forEach(item => {
-        item.style.height = 'calc(100vh - 54px - 44px - 50px - 2.8rem)';
+        item.style.height = high;
       })
     }
   },
@@ -202,14 +202,39 @@ export default {
             let cloudVillageSquare = document.querySelector('.cloud-village-square');
             cloudVillageSquare.style.bottom = 'calc(50px + 2.8rem)';
             cloudVillageSquare.style.height = 'calc(100vh - 54px - 50px - 2.8rem)';
-            this.tagContentHupt();
+            this.tagContentHupt('.tag-content', 'calc(100vh - 54px - 44px - 50px - 2.8rem)');
             this.$bus.$emit('BScrollRefresh');
           })
           this.$bus.$on('videoListUpt', () => {
             this.$nextTick(() => {
-              this.tagContentHupt();
+              this.tagContentHupt('.tag-content', 'calc(100vh - 54px - 44px - 50px - 2.8rem)');
               this.$bus.$emit('BScrollRefresh');
             })
+          })
+        }
+        // 歌单广场
+        if (to.name == 'song-list-square') {
+          this.$nextTick(() => {
+            let songListSquare = document.querySelector('.song-list-square-content');
+            songListSquare.style.bottom = '2.8rem';
+            songListSquare.style.height = 'calc(100vh - 54px - 2.8rem)';
+            this.tagContentHupt('.tag-content', 'calc(100vh - 54px - 44px - 2.8rem)');
+            this.$bus.$emit('BScrollRefresh');
+          })
+          this.$bus.$on('songSquareUpt', () => {
+            this.$nextTick(() => {
+              this.tagContentHupt('.tag-content', 'calc(100vh - 54px - 44px - 2.8rem)');
+              this.$bus.$emit('BScrollRefresh');
+            })
+          })
+        }
+        // 排行榜
+        if (to.name == 'charts') {
+          this.$nextTick(() => {
+            let chartsContent = document.querySelector('.charts-content');
+            chartsContent.style.bottom = '2.8rem';
+            chartsContent.style.height = 'calc(100vh - 54px - 2.8rem)';
+            this.$bus.$emit('BScrollRefresh');
           })
         }
       }

@@ -5,7 +5,7 @@
       <i class="iconfont icon-back" slot="left" @click="back"></i>
       <h1 slot="center">排行榜</h1>
     </top-bar>
-    <div class="content">
+    <div class="charts-content">
       <scroll :data="{charts: chartsList}">
         <div>
           <!-- 榜单推荐 -->
@@ -216,7 +216,7 @@ export default {
     }
   }
 
-  .content {
+  .charts-content {
     width: 100%;
     height: calc(100vh - 54px);
     padding: 1rem 0 0 0;

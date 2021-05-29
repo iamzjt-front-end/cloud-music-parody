@@ -65,6 +65,7 @@ export default {
         before: updateTime ? updateTime : null,
       }).then(res => {
         this.highList = res.data.playlists;
+        this.$bus.$emit('songSquareUpt');
       })
       // cat: tag, 比如 " 华语 "、" 古风 " 、" 欧美 "、" 流行 ", 默认为 "全部",可从精品歌单标签列表接口获取(/playlist/highquality/tags)
       // limit: 取出歌单数量 , 默认为 20
@@ -152,7 +153,7 @@ export default {
       width: 100vw;
       height: calc(100vh - 54px - 44px);
       background-color: #fff;
-      padding: 0 1rem;
+      padding: 0 1rem 10px 1rem;
       overflow: hidden;
 
       .song-list-wrapper {
