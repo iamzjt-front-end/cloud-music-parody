@@ -22,7 +22,7 @@
       <span class="play-text">播放全部</span>
       <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
     </div>
-    <div class="recommend-song-box" v-show="perDayRecList.length">
+    <div class="recommend-song-box" ref="recommendSongBox" v-show="perDayRecList.length">
       <scroll ref="scroll" :data="{perDayRec: perDayRecList}">
         <div>
           <!-- 推荐歌曲曲目 -->
@@ -129,11 +129,13 @@ export default {
     },
     // 歌单内容区域高度更新
     songListHupt() {
+      // 分两种情况
+      // 第一种: 从 normal-player 最小化成 mini-player(刚生成) 时, 需要通过 player 的 playList(控制player的显示隐藏) 和 fullScreen 来动态设置歌单列表内容高度;
+      // 第二种: 已经有 mini-player, 并从其他页面进入歌单列表时, 需要在 mounted 时再调用一次函数;
       let player = document.querySelector('#player');
       if (player.style.display != 'none' && !this.fullScreen) {
         this.$nextTick(() => {
-          let recommendSongBox = document.querySelector('.recommend-song-box');
-          recommendSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
+          this.$refs.recommendSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
           this.$bus.$emit('BScrollRefresh');
         })
       }

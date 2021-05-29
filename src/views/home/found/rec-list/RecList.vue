@@ -27,7 +27,7 @@
       <span class="play-text">播放全部</span>
       <p class="play-length">{{ '(' + this.recList.length + ')' }}</p>
     </div>
-    <div class="rec-song-box" v-show="recList.length">
+    <div class="rec-song-box" ref="recSongBox" v-show="recList.length">
       <scroll ref="scroll" :data="{rec: recList}">
         <div>
           <div class="rec-song">
@@ -132,8 +132,7 @@ export default {
       let player = document.querySelector('#player');
       if (player.style.display != 'none' && !this.fullScreen) {
         this.$nextTick(() => {
-          let recSongBox = document.querySelector('.rec-song-box');
-          recSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
+          this.$refs.recSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
           this.$bus.$emit('BScrollRefresh');
         })
       }

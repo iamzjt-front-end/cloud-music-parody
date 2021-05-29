@@ -26,7 +26,7 @@
       <span class="play-text">播放全部</span>
       <p class="play-length">{{ '(' + this.rankList.length + ')' }}</p>
     </div>
-    <div class="rank-song-box" v-show="rankList.length">
+    <div class="rank-song-box" ref="rankSongList" v-show="rankList.length">
       <scroll ref="scroll" :data="{rank: rankList}">
         <div>
           <div class="rank-song">
@@ -131,8 +131,7 @@ export default {
       let player = document.querySelector('#player');
       if (player.style.display != 'none' && !this.fullScreen) {
         this.$nextTick(() => {
-          let rankSongBox = document.querySelector('.rank-song-box');
-          rankSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
+          this.$refs.rankSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
           this.$bus.$emit('BScrollRefresh');
         })
       }
