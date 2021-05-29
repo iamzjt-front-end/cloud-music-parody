@@ -31,6 +31,13 @@ export default {
       active: 'found',
     };
   },
+  mounted() {
+    if (this.$route.path != '/found') {
+      this.$router.replace({
+        path: '/found'
+      })
+    }
+  }
 }
 </script>
 
