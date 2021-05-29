@@ -8,6 +8,16 @@
     </div>
     <!-- tab栏 -->
     <tab-bar/>
+    <!-- 弹出层 -->
+    <van-popup v-model="popupShow" position="left" :style="{ width: '80%', height: '100%' }">
+      <div class="popup">
+        <div class="top-user-info">
+          <img :src="avatarUrl">
+          <h1>{{ nickname }}</h1>
+        </div>
+        <div class="log-out">退出登录</div>
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -16,8 +26,33 @@ import TabBar from "@/components/TabBar";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      popupShow: false, // 控制弹出层显示隐藏
+      avatarUrl: '', // 头像
+      nickname: '', // 昵称
+      userId: '', // 用户id
+    }
+  },
   components: {
     TabBar,
+  },
+  methods: {
+    // 获取账号信息
+    userAccountGet() {
+      let that = this;
+      this.$api.mine.userAccountGet().then(res => {
+        that.avatarUrl = res.data.profile.avatarUrl;
+        that.nickname = res.data.profile.nickname;
+        that.userId = res.data.profile.userId;
+      })
+    },
+  },
+  mounted() {
+    this.$bus.$on('toSetting', () => {
+      this.popupShow = true;
+    })
+    this.userAccountGet();
   }
 }
 </script>
@@ -36,6 +71,48 @@ export default {
     bottom: 50px;
     right: 0;
     z-index: 80;
+  }
+
+  .popup {
+    width: 100%;
+    height: 100%;
+
+    .top-user-info {
+      width: 100%;
+      height: 4rem;
+
+      img {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        margin: 1rem 10px 1rem 1rem;
+        border-radius: 1rem;
+        vertical-align: middle;
+        border: 1px solid #ccc;
+      }
+
+      h1 {
+        color: #2b2b2c;
+        display: inline-block;
+        width: auto;
+        height: 4rem;
+        line-height: 4rem;
+        vertical-align: middle;
+        font-size: 1rem;
+        font-weight: bolder;
+      }
+    }
+
+    .log-out {
+      margin: 0 1rem;
+      height: 3rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.08);
+      color: #2b2b2c;
+      text-align: center;
+      line-height: 3rem;
+    }
   }
 }
 </style>

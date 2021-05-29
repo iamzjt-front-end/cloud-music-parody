@@ -2,10 +2,8 @@
   <div id="mine">
     <!-- 顶栏 -->
     <top-bar>
-      <div class="settings" slot="left">
-        <i class="iconfont icon-settings"></i>
-        <!-- todo 点击进入设置 -->
-      </div>
+      <i class="iconfont icon-settings" slot="left"></i>
+      <!-- todo 点击进入设置 -->
       <div class="title" slot="center" ref="title">
         <div class="img-box">
           <img :src="avatarUrl">

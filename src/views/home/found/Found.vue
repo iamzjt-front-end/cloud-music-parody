@@ -1,7 +1,7 @@
 <template>
   <div id="found">
     <!-- 顶栏 -->
-    <top-bar>
+    <top-bar @leftClick="toSetting">
       <i class="iconfont icon-settings" slot="left"></i>
       <!-- todo 点击进入设置 -->
       <div class="search" slot="center">
@@ -251,6 +251,10 @@ export default {
         bounce: false,
         stopPropagation: false
       })
+    },
+    // 设置
+    toSetting() {
+      this.$bus.$emit('toSetting');
     }
   },
   created() {
@@ -269,7 +273,7 @@ export default {
   height: calc(100vh - 50px);
 
   .top-bar {
-    background-color: #fff;
+    background-color: #fff !important;
 
     .icon-settings, .icon-distinguish {
       color: $color-text-ddd;
