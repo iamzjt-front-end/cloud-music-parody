@@ -57,7 +57,7 @@ export default {
         // 跳转到开始页 并 清掉 token
         this.$api.login.logout().then(res => {
           if (res.data.code == 200) {
-            sessionStorage.removeItem('token');
+            localStorage.removeItem('token');
             this.$router.replace({
               path: '/start',
             });

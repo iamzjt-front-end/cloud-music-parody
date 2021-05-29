@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { videoPlayer } from 'vue-video-player';
+import {videoPlayer} from 'vue-video-player';
 import 'video.js/dist/video-js.css';
 import TopBar from "components/TopBar";
 
@@ -278,5 +278,17 @@ export default {
       @include multi-line-ellipsis(2);
     }
   }
+
+  //
+  //::v-deep .vjs-big-play-button {
+  //  border: 0;
+  //  background-color: transparent;
+  //
+  //  ::v-deep .vjs-icon-placeholder {
+  //    ::v-deep &::before {
+  //      font-size: 88px;
+  //    }
+  //  }
+  //}
 }
 </style>
