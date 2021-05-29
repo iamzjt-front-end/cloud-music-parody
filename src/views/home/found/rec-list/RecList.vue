@@ -27,7 +27,7 @@
       <span class="play-text">播放全部</span>
       <p class="play-length">{{ '(' + this.recList.length + ')' }}</p>
     </div>
-    <div class="rec-song-box" v-if="recList.length">
+    <div class="rec-song-box" v-show="recList.length">
       <scroll ref="scroll" :data="{rec: recList}">
         <div>
           <div class="rec-song">
@@ -41,7 +41,7 @@
         </div>
       </scroll>
     </div>
-    <div class="loading" v-if="!recList.length">
+    <div class="loading" v-show="!recList.length">
       <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
     </div>
   </div>
@@ -51,7 +51,7 @@
 import TopBar from "components/TopBar";
 import Song from "components/Song";
 import Scroll from "components/scroll/Scroll";
-import {mapActions} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 export default {
   name: "RecList",
@@ -70,6 +70,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['fullScreen']),
     mainImgUrl() {
       return this.$route.params.imgUrl;
     }
@@ -126,9 +127,31 @@ export default {
         index: index
       });
     },
+    // 歌单内容区域高度更新
+    songListHupt() {
+      let player = document.querySelector('#player');
+      if (player.style.display != 'none' && !this.fullScreen) {
+        this.$nextTick(() => {
+          let recSongBox = document.querySelector('.rec-song-box');
+          recSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
+          this.$bus.$emit('BScrollRefresh');
+        })
+      }
+    }
   },
   created() {
     this.recListGet();
+  },
+  mounted() {
+    this.songListHupt();
+  },
+  watch: {
+    fullScreen(newVal, oldVal) {
+      if (newVal != oldVal && newVal == false) {
+        // 更新歌单内容区域高度
+        this.songListHupt();
+      }
+    }
   }
 }
 </script>

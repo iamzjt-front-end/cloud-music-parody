@@ -22,7 +22,7 @@
       <span class="play-text">播放全部</span>
       <p class="play-length">{{ '(' + perDayRecList.length + ')' }}</p>
     </div>
-    <div class="recommend-song-box" v-if="perDayRecList.length">
+    <div class="recommend-song-box" v-show="perDayRecList.length">
       <scroll ref="scroll" :data="{perDayRec: perDayRecList}">
         <div>
           <!-- 推荐歌曲曲目 -->
@@ -37,7 +37,7 @@
         </div>
       </scroll>
     </div>
-    <div class="loading" v-if="!perDayRecList.length">
+    <div class="loading" v-show="!perDayRecList.length">
       <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
     </div>
   </div>
@@ -127,20 +127,30 @@ export default {
         index: index
       });
     },
-  },
-  created() {
-    this.perDayRecGet();
-    this.dayMonthGet();
-  },
-  watch: {
-    fullScreen(newVal, oldVal) {
-      if (newVal != oldVal && newVal == false) {
-        // 更新歌单内容区域高度
+    // 歌单内容区域高度更新
+    songListHupt() {
+      let player = document.querySelector('#player');
+      if (player.style.display != 'none' && !this.fullScreen) {
         this.$nextTick(() => {
           let recommendSongBox = document.querySelector('.recommend-song-box');
           recommendSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
           this.$bus.$emit('BScrollRefresh');
         })
+      }
+    }
+  },
+  created() {
+    this.perDayRecGet();
+    this.dayMonthGet();
+  },
+  mounted() {
+    this.songListHupt();
+  },
+  watch: {
+    fullScreen(newVal, oldVal) {
+      if (newVal != oldVal && newVal == false) {
+        // 更新歌单内容区域高度
+        this.songListHupt();
       }
     }
   }
