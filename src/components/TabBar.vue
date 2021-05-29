@@ -1,6 +1,6 @@
 <template>
   <div class="tab-bar">
-    <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
+    <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000" @change="onChange" route>
       <van-tabbar-item name="found" to="/found">
         <span>发现</span>
         <template #icon>
@@ -30,6 +30,14 @@ export default {
     return {
       active: 'found',
     };
+  },
+  methods: {
+    onChange(index) {
+      console.log(index);
+      this.$nextTick(() => {
+        this.$bus.$emit('BScrollRefresh');
+      })
+    },
   },
   mounted() {
     if (this.$route.path != '/found') {
