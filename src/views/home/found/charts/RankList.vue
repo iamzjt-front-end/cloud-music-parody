@@ -170,7 +170,7 @@ export default {
 
   .top-bar {
     color: #fff;
-    background-color: transparent;
+    background-color: transparent !important;
     position: relative;
     z-index: 81;
 
