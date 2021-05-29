@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       isChecked: false,
-      isShake: false,
     };
   },
   methods: {
