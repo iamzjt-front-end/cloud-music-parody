@@ -15,7 +15,7 @@
           <img :src="avatarUrl">
           <h1>{{ nickname }}</h1>
         </div>
-        <div class="log-out">退出登录</div>
+        <div class="log-out" @click="logout">退出登录</div>
       </div>
     </van-popup>
   </div>
@@ -23,6 +23,7 @@
 
 <script>
 import TabBar from "@/components/TabBar";
+import {Dialog} from 'vant';
 
 export default {
   name: "Home",
@@ -47,6 +48,26 @@ export default {
         that.userId = res.data.profile.userId;
       })
     },
+    // 退出登录
+    logout() {
+      Dialog.confirm({
+        title: '网易云音乐',
+        message: '确定退出当前账号吗？ >_<',
+      }).then(() => {
+        // 跳转到开始页 并 清掉 token
+        this.$api.login.logout().then(res => {
+          if (res.data.code == 200) {
+            sessionStorage.removeItem('token');
+            this.$router.replace({
+              path: '/start',
+            });
+          }
+        })
+      }).catch(() => {
+        // on cancel
+      });
+
+    }
   },
   mounted() {
     this.$bus.$on('toSetting', () => {
@@ -58,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/variable';
+@import "../../assets/scss/variable";
 
 #home {
   width: 100vw;

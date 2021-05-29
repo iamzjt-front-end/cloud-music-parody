@@ -18,6 +18,12 @@ const login = {
             params: params
         });
     },
+    // 退出登录
+    logout(params) {
+        return axios.get(`${base.baseURL}/logout`, {
+            params: params
+        });
+    }
 
     // post提交
     // articleDetail1 (params) {

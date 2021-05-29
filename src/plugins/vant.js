@@ -16,6 +16,7 @@ import {
     Tabs,
     Loading,
     Popup,
+    Dialog,
 } from 'vant';
 
 // 3.注册组件
@@ -32,3 +33,4 @@ Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Loading);
 Vue.use(Popup);
+Vue.use(Dialog);

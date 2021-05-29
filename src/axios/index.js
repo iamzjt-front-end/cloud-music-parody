@@ -26,9 +26,9 @@ const tip = msg => {
 const toLogin = () => {
     router.replace({
         path: '/start',
-        query: {
-            redirect: router.currentRoute.fullPath,
-        }
+        //query: {
+        //    redirect: router.currentRoute.fullPath, // 携带当前页面路由，以在登录页面完成登录后返回当前页面
+        //}
     });
 }
 
