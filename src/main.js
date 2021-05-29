@@ -22,6 +22,9 @@ import 'plugins/animate';
 // 引入基础样式
 import 'assets/scss/index.scss';
 
+// 解决 vant-ui 样式无法覆盖的问题
+import 'assets/scss/resetvant.scss';
+
 // 移动端调试
 //import VConsole from 'vconsole';
 
