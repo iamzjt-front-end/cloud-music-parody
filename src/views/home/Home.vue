@@ -73,9 +73,9 @@ export default {
         message: '确定退出当前账号吗？ >_<',
       }).then(() => {
         // popup缩回, 暂停音乐, 清空播放列表, 清掉 token 并 跳转到开始页
+        this.popupShow = false;
         this.$api.login.logout().then(res => {
           if (res.data.code == 200) {
-            this.popupShow = false;
             this.$bus.$emit('audioPause');
             this.$store.commit('updatePlayList', []);
             // 此时会带来 currentSong 更新, 则需要去 player 里面给 currentSong 监听, 加一重判断
