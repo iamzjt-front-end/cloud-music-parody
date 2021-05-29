@@ -1,7 +1,7 @@
 <template>
   <div id="cloud-village">
     <!-- 顶栏 -->
-    <top-bar>
+    <top-bar @leftClick="toSetting">
       <div class="settings" slot="left">
         <i class="iconfont icon-settings"></i>
         <!-- todo 点击进入设置 -->
@@ -81,6 +81,10 @@ export default {
         }
       });
     },
+    // 去设置
+    toSetting() {
+      this.$bus.$emit('toSetting');
+    }
   },
   mounted() {
     this.videoTagGet().then(res => {

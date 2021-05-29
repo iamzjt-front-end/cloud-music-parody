@@ -252,7 +252,7 @@ export default {
         stopPropagation: false
       })
     },
-    // 设置
+    // 去设置
     toSetting() {
       this.$bus.$emit('toSetting');
     }

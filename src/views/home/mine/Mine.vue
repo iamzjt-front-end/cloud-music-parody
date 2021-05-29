@@ -1,7 +1,7 @@
 <template>
   <div id="mine">
     <!-- 顶栏 -->
-    <top-bar>
+    <top-bar @leftClick="toSetting">
       <i class="iconfont icon-settings" slot="left"></i>
       <!-- todo 点击进入设置 -->
       <div class="title" slot="center" ref="title">
@@ -221,6 +221,10 @@ export default {
         this.$refs.title.style.transform = 'translateY(-25%)';
       }
     },
+    // 去设置
+    toSetting() {
+      this.$bus.$emit('toSetting');
+    }
   },
   created() {
     this.userAccountGet();
