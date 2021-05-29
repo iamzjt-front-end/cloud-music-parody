@@ -66,7 +66,6 @@ export default {
       }).catch(() => {
         // on cancel
       });
-
     }
   },
   mounted() {
