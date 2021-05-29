@@ -26,7 +26,7 @@
       <span class="play-text">播放全部</span>
       <p class="play-length">{{ '(' + this.rankList.length + ')' }}</p>
     </div>
-    <div class="rank-song-box" ref="rankSongbox" v-show="rankList.length">
+    <div class="rank-song-box" ref="rankSongBox" v-show="rankList.length">
       <scroll ref="scroll" :data="{rank: rankList}">
         <div>
           <div class="rank-song">
