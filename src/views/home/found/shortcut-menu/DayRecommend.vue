@@ -46,7 +46,7 @@
 <script>
 import TopBar from "@/components/TopBar";
 import Song from "@/components/Song";
-import {mapActions} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 import Scroll from "@/components/scroll/Scroll";
 
 export default {
@@ -64,6 +64,9 @@ export default {
       month: '',
       indexList: [],
     }
+  },
+  computed: {
+    ...mapState(['fullScreen'])
   },
   methods: {
     ...mapActions(['selectPlay']),
@@ -129,6 +132,18 @@ export default {
     this.perDayRecGet();
     this.dayMonthGet();
   },
+  watch: {
+    fullScreen(newVal, oldVal) {
+      if (newVal != oldVal && newVal == false) {
+        // 更新歌单内容区域高度
+        this.$nextTick(() => {
+          let recommendSongBox = document.querySelector('.recommend-song-box');
+          recommendSongBox.style.height = 'calc(100vh - 14.2rem - 3.4rem - 2.8rem)';
+          this.$bus.$emit('BScrollRefresh');
+        })
+      }
+    }
+  }
 }
 </script>
 
