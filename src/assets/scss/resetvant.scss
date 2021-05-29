@@ -1,32 +1,32 @@
 // 解决 vant-ui 样式无法覆盖的问题
 .van-dialog {
-  width: 250px;
-  height: 115px;
-  padding-top: 15px;
+  //width: 250px;
+  //height: 115px;
+  //padding-top: 15px;
   border-radius: 10px;
 
   .van-dialog__header {
     color: #2b2b2c;
     font-weight: bolder;
-    height: 25px;
-    padding-top: 0;
+    //height: 25px;
+    //padding-top: 0;
   }
 
-  .van-dialog__content {
-    height: 35px;
+  //.van-dialog__content {
+  //  height: 35px;
+  //
+  //  .van-dialog__message--has-title {
+  //    height: 35px;
+  //    padding: 0;
+  //  }
+  //}
 
-    .van-dialog__message--has-title {
-      height: 35px;
-      padding: 0;
-    }
-  }
-
-  .van-dialog__footer {
-    height: 40px;
-
-    .van-dialog__cancel,
-    .van-dialog__confirm {
-      height: 40px;
-    }
-  }
+  //.van-dialog__footer {
+  //  height: 40px;
+  //
+  //  .van-dialog__cancel,
+  //  .van-dialog__confirm {
+  //    height: 40px;
+  //  }
+  //}
 }
