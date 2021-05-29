@@ -15,6 +15,7 @@ import {
     Tab,
     Tabs,
     Loading,
+    Popup,
 } from 'vant';
 
 // 3.注册组件
@@ -30,3 +31,4 @@ Vue.use(Search);
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Loading);
+Vue.use(Popup);
