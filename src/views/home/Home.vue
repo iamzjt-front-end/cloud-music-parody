@@ -15,6 +15,22 @@
           <img :src="avatarUrl">
           <h1>{{ nickname }}</h1>
         </div>
+        <ul class="popup-content1">
+          <li>
+            <i class="iconfont icon-fenxiang"></i>
+            <p>分享网易云音乐</p>
+            <span class="icon-box">
+            <van-icon name="arrow"/>
+          </span>
+          </li>
+          <li>
+            <i class="iconfont icon-guanyu"></i>
+            <p>关于</p>
+            <span class="icon-box">
+            <van-icon name="arrow"/>
+          </span>
+          </li>
+        </ul>
         <div class="log-out" @click="logout">退出登录</div>
       </div>
     </van-popup>
@@ -123,13 +139,63 @@ export default {
       }
     }
 
+    .popup-content1 {
+      margin: 0 1rem 1rem 1rem;
+      height: 6rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.07);
+      color: #333334;
+
+      li {
+        width: calc(100% - 20px);
+        height: 3rem;
+        line-height: 3rem;
+        margin-left: 20px;
+        display: flex;
+
+        .iconfont {
+          margin-right: 10px;
+        }
+
+        .icon-fenxiang {
+          font-size: 14px;
+        }
+
+        .icon-guanyu {
+          font-size: 15px;
+        }
+
+        p {
+          width: calc(100% - 60px);
+          height: 3rem;
+        }
+
+        .icon-box {
+          display: inline-block;
+          width: 40px;
+          height: 3rem;
+          text-align: center;
+
+          i {
+            line-height: 3rem;
+            color: #cdcdcd;
+          }
+        }
+
+        &:nth-child(-n + 1) {
+          border-bottom: 1px solid #eee;
+        }
+      }
+    }
+
     .log-out {
       margin: 0 1rem;
       height: 3rem;
       background-color: #ffffff;
       border-radius: 10px;
-      box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.08);
-      color: #2b2b2c;
+      box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.07);
+      color: #323537;
       text-align: center;
       line-height: 3rem;
     }
