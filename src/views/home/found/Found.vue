@@ -82,13 +82,13 @@ import ChartsItem from "@/components/ChartsItem";
 import Scroll from "@/components/scroll/Scroll";
 import BScroll from '@better-scroll/core';
 import Slide from '@better-scroll/slide';
+import {mapState, mapMutations} from 'vuex';
+import {expVersionData} from "@/common/expVersionData";
 
 BScroll.use(Slide);
 
 import Vue from 'vue';
 import {Lazyload, Toast} from 'vant';
-
-import {mapMutations} from 'vuex';
 
 Vue.use(Lazyload);
 
@@ -110,6 +110,9 @@ export default {
       recSongList: [], // 推荐歌单列表
       chartsList: [], // 排行榜歌单列表
     }
+  },
+  computed: {
+    ...mapState(['expVersion']),
   },
   methods: {
     ...mapMutations(['updateChartsList', 'updateSingerChartsList']),
@@ -259,7 +262,11 @@ export default {
   },
   created() {
     this.bannerImageGet();
-    this.songListGet();
+    if (this.expVersion) { // 如果是体验版
+      this.recSongList = expVersionData.recSongList;
+    } else {
+      this.songListGet()
+    }
     this.chartsGet();
   }
 }
