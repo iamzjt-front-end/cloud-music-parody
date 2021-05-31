@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { Toast } from 'vant';
+import { mapMutations } from 'vuex';
 
 export default {
   name: "Login",
@@ -30,16 +30,15 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['updateExpVersion']),
     // 判断时否同意协议，同意以后再通过传值判断下一步做什么
     judge(val1, val2) {
       if (val1) { // 点击同意协议
         if (val2 == 'login') {
-          // console.log('登陆')
-          this.$router.push({path: '/password-login'})
+          this.$router.push({path: '/password-login'});
         } else {
-          // console.log('体验')
-          // this.$router.push({path: '/home'})
-          Toast('正在开发中...');
+          this.$store.commit('updateExpVersion', true);
+          this.$router.push({path: '/home'});
         }
       } else { // 未点击同意协议
         // todo 未同意协议多次点击 防抖处理

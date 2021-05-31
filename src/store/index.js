@@ -15,6 +15,7 @@ const store = new Vuex.Store({
         mode: playMode.sequence, // 播放模式
         chartsList: [], // 排行榜歌单
         singerChartsList: [], // 歌手榜
+        expVersion: false, // 是否是体验版
     },
     mutations: {
         // 修改token，localStorage
@@ -43,6 +44,9 @@ const store = new Vuex.Store({
         updateSingerChartsList(state, data) {
             state.singerChartsList.push(data);
         },
+        updateExpVersion(state, data) {
+            state.expVersion = (data);
+        }
     },
     getters: {
         // 当前播放歌曲
