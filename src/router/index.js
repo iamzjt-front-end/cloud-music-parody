@@ -148,7 +148,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     let expVersion = store.state.expVersion;
 
-    if (!expVersion) { // 如果是体验版，到哪都可以
+    if (expVersion) { // 如果是体验版，到哪都可以
         next();
     } else {
         let token = localStorage.getItem('token');
