@@ -11,7 +11,14 @@
     <!-- 弹出层 -->
     <van-popup v-model="popupShow" position="left" :style="{ width: '80%', height: '100%' }">
       <div class="popup">
-        <div class="top-user-info">
+        <div class="top-user-info" v-show="expVersion" @click="toLogin">
+          <img src="">
+          <h1>立即登录</h1>
+          <span class="icon-tologin">
+            <van-icon name="arrow"/>
+          </span>
+        </div>
+        <div class="top-user-info" v-show="!expVersion">
           <img :src="avatarUrl">
           <h1>{{ nickname }}</h1>
         </div>
@@ -20,18 +27,18 @@
             <i class="iconfont icon-fenxiang"></i>
             <p>分享网易云音乐</p>
             <span class="icon-box">
-            <van-icon name="arrow"/>
-          </span>
+              <van-icon name="arrow"/>
+            </span>
           </li>
           <li>
             <i class="iconfont icon-guanyu"></i>
             <p>关于</p>
             <span class="icon-box">
-            <van-icon name="arrow"/>
-          </span>
+              <van-icon name="arrow"/>
+            </span>
           </li>
         </ul>
-        <div class="log-out" @click="logout">退出登录</div>
+        <div class="log-out" v-show="!expVersion" @click="logout">退出登录</div>
       </div>
     </van-popup>
   </div>
@@ -40,7 +47,7 @@
 <script>
 import TabBar from "@/components/TabBar";
 import {Dialog} from 'vant';
-import {mapMutations} from 'vuex';
+import {mapState, mapMutations} from 'vuex';
 
 export default {
   name: "Home",
@@ -49,8 +56,11 @@ export default {
       popupShow: false, // 控制弹出层显示隐藏
       avatarUrl: '', // 头像
       nickname: '', // 昵称
-      userId: '', // 用户id
+      // userId: '', // 用户id
     }
+  },
+  computed: {
+    ...mapState(['expVersion']),
   },
   components: {
     TabBar,
@@ -63,7 +73,7 @@ export default {
       this.$api.mine.userAccountGet().then(res => {
         that.avatarUrl = res.data.profile.avatarUrl;
         that.nickname = res.data.profile.nickname;
-        that.userId = res.data.profile.userId;
+        // that.userId = res.data.profile.userId;
       })
     },
     // 退出登录
@@ -88,13 +98,22 @@ export default {
       }).catch(() => {
         // on cancel
       });
+    },
+    // 登录
+    toLogin() {
+      this.popupShow = false;
+      setTimeout(() => {
+        this.$router.push({path: '/password-login'});
+      }, 400)
     }
   },
   mounted() {
     this.$bus.$on('toSetting', () => {
       this.popupShow = true;
     })
-    this.userAccountGet();
+    if (!this.expVersion) {
+      this.userAccountGet();
+    }
   }
 }
 </script>
@@ -122,9 +141,9 @@ export default {
     .top-user-info {
       width: 100%;
       height: 4rem;
+      display: flex;
 
       img {
-        display: inline-block;
         width: 2rem;
         height: 2rem;
         margin: 1rem 10px 1rem 1rem;
@@ -135,13 +154,23 @@ export default {
 
       h1 {
         color: #2b2b2c;
-        display: inline-block;
         width: auto;
         height: 4rem;
         line-height: 4rem;
         vertical-align: middle;
         font-size: 1rem;
         font-weight: bolder;
+      }
+
+      .icon-tologin {
+        width: 20px;
+        height: 4rem;
+        text-align: center;
+
+        i {
+          line-height: 4rem;
+          color: #2b2b2c;
+        }
       }
     }
 

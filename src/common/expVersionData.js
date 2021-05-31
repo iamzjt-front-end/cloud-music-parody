@@ -1,7 +1,5 @@
 // 体验版数据
 export const expVersionData = {
-    // Home - 侧边弹出层 - 默认账号信息
-
     // 发现 - 推荐歌单专栏
     recSongList: [
         {
