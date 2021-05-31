@@ -6,8 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        // 存储token
-        token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
+        token: localStorage.getItem('token') ? localStorage.getItem('token') : '',// 存储token
         playList: [], // 当前播放列表
         currentIndex: -1, // 当前播放歌曲index
         playingState: false, // 播放状态 false-暂停 true-正在播放
@@ -15,12 +14,11 @@ const store = new Vuex.Store({
         mode: playMode.sequence, // 播放模式
         chartsList: [], // 排行榜歌单
         singerChartsList: [], // 歌手榜
-        expVersion: false, // 是否是体验版
+        expVersion: localStorage.getItem('expVersion') ? JSON.parse(localStorage.getItem('expVersion')) : '', // 是否是体验版
     },
     mutations: {
         // 修改token，localStorage
         changeLogin(state, data) {
-            state.token = data;
             localStorage.setItem('token', data);
         },
         updatePlayList(state, data) {
@@ -45,7 +43,7 @@ const store = new Vuex.Store({
             state.singerChartsList.push(data);
         },
         updateExpVersion(state, data) {
-            state.expVersion = (data);
+            localStorage.setItem('expVersion', data);
         }
     },
     getters: {
