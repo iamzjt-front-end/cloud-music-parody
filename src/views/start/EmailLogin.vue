@@ -47,7 +47,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['changeLogin', 'updateExpVersion']),
+    ...mapMutations(['changeLogin']),
     // 返回开始页面
     onClickLeft() {
       this.$router.push({path: '/passwordlogin'});
