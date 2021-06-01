@@ -36,6 +36,8 @@ export default {
       console.log(index);
       this.$nextTick(() => {
         this.$bus.$emit('BScrollRefresh');
+        // 偶尔切换tab栏的时候, 会出现better-scroll可滚动高度计算不正确的情况
+        // 那么, 每次切换tab栏的时候, 发射一个 BScrollRefresh 事件, 重新加载better-scroll
       })
     },
   },
