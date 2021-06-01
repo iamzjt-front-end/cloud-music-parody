@@ -13,10 +13,10 @@
       <van-tabs ref="tabs" animated @click="toggle">
         <van-tab v-for="(item, index) in videoTag" :title="item.name" :key="index" v-model="active"
                  title-style="font-size: 16px">
-          <div class="loading" v-if="!videoList.length">
+          <div class="loading" v-show="!videoList.length">
             <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
           </div>
-          <div class="tag-content" v-if="videoList.length">
+          <div class="tag-content" v-show="videoList.length">
             <scroll :data="{video: videoList}">
               <div class="video-card-wrapper">
                 <video-card v-for="(item, index) in videoList" :key="index" :data="item.data"

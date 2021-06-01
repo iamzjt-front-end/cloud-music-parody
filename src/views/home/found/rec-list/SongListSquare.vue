@@ -10,10 +10,10 @@
       <van-tabs ref="tabs" animated @click="toggle">
         <van-tab v-for="(item, index) in tagList" :title="item.name" :key="index" v-model="active"
                  title-style="font-size: 16px">
-          <div class="loading" v-if="!highList.length">
+          <div class="loading" v-show="!highList.length">
             <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
           </div>
-          <div class="tag-content" v-if="highList.length">
+          <div class="tag-content" v-show="highList.length">
             <scroll :data="{high: highList}">
               <div class="song-list-wrapper">
                 <song-list-item v-for="(item1, index1) in highList" :key="index1" @click.native="toRecList(item1)">

@@ -5,9 +5,9 @@
       <i class="iconfont icon-back" slot="left"></i>
     </top-bar>
     <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
-                  :options="playerOptions" v-if="this.url">
+                  :options="playerOptions" v-show="this.url">
     </video-player>
-    <div class="loading" v-if="!this.url">
+    <div class="loading" v-show="!this.url">
       <van-loading size="36px" color="#fff" text-color="#323233"></van-loading>
     </div>
     <div class="operation-bar">
