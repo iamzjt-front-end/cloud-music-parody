@@ -92,7 +92,7 @@ import {Lazyload, Toast} from 'vant';
 Vue.use(Lazyload);
 
 export default {
-  name: "found",
+  name: "Found",
   components: {
     TopBar,
     ShortcutMenu,

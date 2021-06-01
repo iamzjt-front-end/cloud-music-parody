@@ -23,7 +23,7 @@
 import { Toast } from 'vant';
 
 export default {
-  name: "Login",
+  name: "Start",
   data() {
     return {
       isChecked: false,
