@@ -49,7 +49,6 @@ export default {
       popupShow: false, // 控制弹出层显示隐藏
       avatarUrl: '', // 头像
       nickname: '', // 昵称
-      userId: '', // 用户id
     }
   },
   components: {
@@ -63,7 +62,6 @@ export default {
       this.$api.mine.userAccountGet().then(res => {
         that.avatarUrl = res.data.profile.avatarUrl;
         that.nickname = res.data.profile.nickname;
-        that.userId = res.data.profile.userId;
       })
     },
     // 退出登录
