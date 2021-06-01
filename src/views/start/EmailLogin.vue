@@ -50,7 +50,7 @@ export default {
     ...mapMutations(['changeLogin']),
     // 返回开始页面
     onClickLeft() {
-      this.$router.push({path: '/passwordlogin'});
+      this.$router.push({path: '/password-login'});
     },
     // 邮箱登录
     emailLogin() {
