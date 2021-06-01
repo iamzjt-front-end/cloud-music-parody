@@ -229,7 +229,7 @@ export default {
       this.$bus.$emit('toSetting');
     }
   },
-  created() {
+  mounted() {
     this.userAccountGet();
     this.userLevelGet();
     this.userSubcountGet();
