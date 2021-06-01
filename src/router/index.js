@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '../store'
 
 // 解决Vue-Router升级导致的Uncaught (in promise)问题
 const originalPush = Router.prototype.push
