@@ -146,19 +146,13 @@ const router = new Router({
 // 导航守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-    let expVersion = store.state.expVersion;
-
-    if (expVersion) { // 如果是体验版，到哪都可以
+    let token = localStorage.getItem('token');
+    if (token) {
+        next();
+    } else if (to.path == '/start' || to.path == '/password-login' || to.path == '/email-login') {
         next();
     } else {
-        let token = localStorage.getItem('token');
-        if (token) {
-            next();
-        } else if (to.path == '/start' || to.path == '/password-login' || to.path == '/email-login') {
-            next();
-        } else {
-            next('/start');
-        }
+        next('/start');
     }
 });
 
