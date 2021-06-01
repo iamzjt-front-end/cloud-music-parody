@@ -61,7 +61,6 @@ export default {
         if (res.data.code == 200) { // 登录成功
           // 将用户token保存到localStorage和vuex中
           this.$store.commit('changeLogin', res.data.token);
-          this.$store.commit('updateExpVersion', false); // 密码登陆不是体验版
           Toast.success('登录成功');
           this.$router.push('/home');
         } else {
