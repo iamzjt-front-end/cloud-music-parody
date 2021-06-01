@@ -65,10 +65,10 @@
                 <i class="iconfont icon-more"></i>
               </div>
             </div>
-            <div class="loading" v-show="!favoriteSongList.length">
+            <div class="loading" v-if="!favoriteSongList.length">
               <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
             </div>
-            <div class="favorite-song-content" v-show="favoriteSongList.length">
+            <div class="favorite-song-content" v-if="favoriteSongList.length">
               <favorite-song-item v-for="(item, index) in favoriteSongList" :key="index" :item="item"
                                   @click.native="toRecList(item)"/>
             </div>
@@ -229,7 +229,7 @@ export default {
       this.$bus.$emit('toSetting');
     }
   },
-  mounted() {
+  created() {
     this.userAccountGet();
     this.userLevelGet();
     this.userSubcountGet();
