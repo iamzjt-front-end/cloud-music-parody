@@ -71,16 +71,18 @@ export default {
         message: '确定退出当前账号吗？ >_<',
       }).then(() => {
         // popup缩回, 暂停音乐, 清空播放列表, 清掉 token 并 跳转到开始页
-        this.popupShow = false;
         this.$api.login.logout().then(res => {
           if (res.data.code == 200) {
+            this.popupShow = false;
             this.$bus.$emit('audioPause');
             this.$store.commit('updatePlayList', []);
             // 此时会带来 currentSong 更新, 则需要去 player 里面给 currentSong 监听, 加一重判断
             // Object.keys(newValue).length !== 0
             // Object.keys  返回值：一个表示给定对象的所有可枚举属性的字符串数组
             localStorage.removeItem('token');
-            this.$router.replace({path: '/start'});
+            setTimeout(() => { // 等待弹出层缩回去以后再跳转到开始页
+              this.$router.replace({path: '/start'});
+            }, 400)
           }
         })
       }).catch(() => {
