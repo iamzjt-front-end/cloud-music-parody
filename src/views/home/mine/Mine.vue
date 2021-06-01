@@ -17,7 +17,7 @@
           <!-- 我的 -->
           <div class="mine-home" ref="mineHome">
             <div class="left">
-              <img :src="avatarUrl">
+              <img :src="avatarUrl" v-show="avatarUrl">
             </div>
             <div class="right">
               <div class="id-and-lv">
@@ -25,7 +25,7 @@
                 <div class="icon-vip-box">
                   <i class="iconfont icon-vip"></i>
                 </div>
-                <span>{{ 'lv.' + level }}</span>
+                <span v-show="level">{{ 'lv.' + level }}</span>
               </div>
               <div class="to-my-home" @click="toMyHome">
                 <i class="iconfont icon-xiala"></i>
@@ -39,7 +39,7 @@
           <!-- 我喜欢的音乐 -->
           <div class="i-like-music">
             <div class="like-cover-img" @click="toRecList(likeSongList[0])">
-              <img :src="likeCoverImgUrl">
+              <img :src="likeCoverImgUrl" v-show="avatarUrl">
             </div>
             <div class="i-like-info" @click="toRecList(likeSongList[0])">
               <h2>我喜欢的音乐</h2>
@@ -59,13 +59,16 @@
           <div class="favorite-song-list">
             <div class="favorite-song-info">
               <div class="left">
-                收藏歌单 ({{ subPlaylistCount + '个' }})
+                收藏歌单 <span v-show="favoriteSongList.length">({{ subPlaylistCount + '个' }})</span>
               </div>
               <div class="right">
                 <i class="iconfont icon-more"></i>
               </div>
             </div>
-            <div class="favorite-song-content">
+            <div class="loading" v-show="!favoriteSongList.length">
+              <van-loading size="24px" color="#323233" text-color="#323233">加载中...</van-loading>
+            </div>
+            <div class="favorite-song-content" v-show="favoriteSongList.length">
               <favorite-song-item v-for="(item, index) in favoriteSongList" :key="index" :item="item"
                                   @click.native="toRecList(item)"/>
             </div>
@@ -514,6 +517,11 @@ export default {
       color: #636364;
       text-align: center;
       line-height: 3rem;
+    }
+
+    .loading {
+      padding-top: 1rem;
+      text-align: center;
     }
 
     .favorite-song-list {
