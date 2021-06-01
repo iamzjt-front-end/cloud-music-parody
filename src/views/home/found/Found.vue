@@ -83,7 +83,6 @@ import Scroll from "@/components/scroll/Scroll";
 import BScroll from '@better-scroll/core';
 import Slide from '@better-scroll/slide';
 import {mapState, mapMutations} from 'vuex';
-import {expVersionData} from "@/common/expVersionData";
 
 BScroll.use(Slide);
 
@@ -262,11 +261,7 @@ export default {
   },
   created() {
     this.bannerImageGet();
-    if (this.expVersion) { // 如果是体验版
-      this.recSongList = expVersionData.recSongList;
-    } else {
-      this.songListGet()
-    }
+    this.songListGet()
     this.chartsGet();
   }
 }
