@@ -53,24 +53,23 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['changeLogin', 'updateExpVersion']),
+    ...mapMutations(['changeLogin']),
     // 返回开始页面
     onClickLeft() {
       this.$router.push({path: '/start'});
     },
     // 登录
     onSubmit(values) {
+      let that = this;
       this.$api.login.passwordLogin(values).then(res => {
-        if (res.data.code == 200) { // 登录成功
+        if (res.data.code == 502) { // 密码错误
+          Toast.fail(res.data.message);
+          this.password = '';
+        } else if (res.data.code == 200) { // 登录成功
           // 将用户token保存到localStorage和vuex中
           this.$store.commit('changeLogin', res.data.token);
-          this.$store.commit('updateExpVersion', false); // 密码登陆不是体验版
           Toast.success('登录成功');
-          this.$router.push('/home');
-        } else { // 登陆错误
-          Toast.fail(res.data.message);
-          this.phone = '';
-          this.password = '';
+          that.$router.push('/home');
         }
       })
     },
