@@ -67,8 +67,12 @@ export default {
           this.$store.commit('changeLogin', res.data.token);
           Toast.success('登录成功');
           that.$router.push('/home');
-        } else { // 登陆错误
-          Toast.fail(res.data.message);
+        } else if (res.data.code == 400) { // 账号错误
+          Toast.fail('账号错误');
+          this.phone = '';
+          this.password = '';
+        } else if (res.data.code == 502) { // 密码错误
+          Toast.fail(res.data.msg);
           this.password = '';
         }
       })
