@@ -13,7 +13,7 @@
       </div>
       <div class="main-img-right">
         <h1>{{ titleName }}</h1>
-        <div class="creator">
+        <div class="creator" v-show="avatarUrl">
           <img :src="avatarUrl">
           <span>{{ nickname }}</span>
         </div>
