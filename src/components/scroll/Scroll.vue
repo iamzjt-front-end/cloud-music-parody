@@ -51,7 +51,7 @@ export default {
     setTimeout(() => { // 确保DOM渲染完毕
       this.initScroll()
       console.log('this.scroll', this.scroll);
-    }, 500)
+    }, 1200)
     this.BScrollRefreshOn();
   },
   methods: {
@@ -116,7 +116,7 @@ export default {
             timer = setTimeout(() => { // 确保DOM渲染完毕
               this.initScroll()
               console.log('this.scroll', this.scroll);
-            }, 500)
+            }, 1200)
           } else {
             this.refresh()
           }

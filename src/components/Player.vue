@@ -25,7 +25,7 @@
         <!-- 唱片封面 -->
         <div class="record-cover-box">
           <div class="record-cover" ref="recordCover">
-            <img :src="albumPicUrl" alt="" :style="{transform: musicRotate}">
+            <img :src="albumPicUrl" alt="" :style="{transform: musicRotate}" v-show="albumPicUrl">
           </div>
         </div>
         <div class="bottom">
@@ -72,7 +72,7 @@
       <div class="mini-record-cover-box">
         <div class="mini-record-cover-bg">
           <div class="mini-record-cover">
-            <img :src="albumPicUrl" alt="" :style="{transform: musicRotate}">
+            <img :src="albumPicUrl" alt="" :style="{transform: musicRotate}" v-show="albumPicUrl">
           </div>
         </div>
       </div>
@@ -493,7 +493,7 @@ $width-cover: 65vw;
         height: $width-cover;
         border-radius: 50%;
         margin: auto;
-        background-color: #ccc;
+        //background-color: #ccc;
         //position: absolute;
         //top: 20%;
         //left: 17.5%;
@@ -641,7 +641,7 @@ $width-cover: 65vw;
         .mini-record-cover {
           width: 1.8rem;
           height: 1.8rem;
-          background-color: #ccc;
+          //background-color: #ccc;
           border-radius: 50%;
           overflow: hidden;
           position: absolute;
